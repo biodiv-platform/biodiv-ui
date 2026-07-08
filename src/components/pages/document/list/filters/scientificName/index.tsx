@@ -11,7 +11,7 @@ export default function ScientificNameFilter() {
       filterKey={DOUCMENT_FILTER_KEY.scientificNames.filterKey}
       filterKeyList={DOUCMENT_FILTER_KEY}
       useIndexFilter={useDocumentFilter}
-      translateKey="filters:document_title"
+      translateKey="filters:scientific_name.title"
     />
   );
 }

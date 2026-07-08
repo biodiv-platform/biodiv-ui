@@ -12,9 +12,9 @@ function AdminComponent() {
   const handleUpdateScientificNames = async () => {
     const { success } = await axUpdateScientificNames();
     if (success) {
-      notification(t("observation:bulk_action.success"), NotificationType.Success);
+      notification(t("user:bulk_action.success"), NotificationType.Success);
     } else {
-      notification(t("observation:bulk_action.failure"), NotificationType.Error);
+      notification(t("user:bulk_action.failure"), NotificationType.Error);
     }
   };
 
