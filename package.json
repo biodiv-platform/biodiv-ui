@@ -93,7 +93,6 @@
     "react-lazyload": "^3.2.0",
     "react-leaflet": "^4.1.0",
     "react-map-gl": "^8.0.4",
-    "react-mentions": "^4.4.7",
     "react-phone-number-input": "^3.2.12",
     "react-select": "^5.5.4",
     "react-simple-wysiwyg": "^2.1.1",
@@ -136,10 +135,6 @@
     "memory-cache": "^0.2.0",
     "next-translate-plugin": "^3.2.0",
     "prettier": "^2.7.1",
-    "typescript": "^5.8.2"
-  },
-  "overrides": {
-    "react": "19.2.7",
-    "react-dom": "19.2.7"
+    "typescript": "^6.0.3"
   }
 }
