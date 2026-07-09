@@ -9,7 +9,6 @@ import TwitterIcon from "@icons/twitter";
 import { APP_VERSION } from "@static/constants";
 import { containerMaxW } from "@static/home";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import LocalLink from "../local-link";
 

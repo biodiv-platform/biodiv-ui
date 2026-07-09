@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { getFriendlyError } from "friendly-http-status";
-import React from "react";
 
 const ErrorContainer = styled.div`
   height: calc(100vh - var(--heading-height));

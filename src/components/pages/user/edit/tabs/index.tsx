@@ -1,6 +1,5 @@
 import { Box, Tabs } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import NotificationsTab from "./notifications";
 import ChangePasswordTab from "./password";

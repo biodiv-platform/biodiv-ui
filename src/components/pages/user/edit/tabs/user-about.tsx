@@ -16,7 +16,6 @@ import CheckIcon from "@icons/check";
 import { axUpdateUserAbout } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 

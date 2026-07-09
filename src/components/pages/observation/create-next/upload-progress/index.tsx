@@ -5,7 +5,7 @@ import ListIcon from "@icons/list";
 import { AssetStatus } from "@interfaces/custom";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { LuMoveRight } from "react-icons/lu";
 
 import ProgressCard from "./progress-card";

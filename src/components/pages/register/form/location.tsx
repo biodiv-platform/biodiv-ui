@@ -5,7 +5,7 @@ import { INVALID_COORDINATE } from "@static/constants";
 import { AUTOCOMPLETE_FIELDS, GMAP_LIBRARIES } from "@static/location";
 import { getMapCenter } from "@utils/location";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useController } from "react-hook-form";
 
 import { Field } from "@/components/ui/field";

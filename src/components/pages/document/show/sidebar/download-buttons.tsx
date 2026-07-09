@@ -6,7 +6,6 @@ import { isBrowser } from "@static/constants";
 import { waitForAuth } from "@utils/auth";
 import { sendFileFromResponse } from "@utils/download";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 export default function DownloadButtons({ documentPath, documentId, title }) {
   const { t } = useTranslation();

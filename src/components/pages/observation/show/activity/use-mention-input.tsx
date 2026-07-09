@@ -1,5 +1,5 @@
 // useMentionInput.ts
-import { ChangeEvent, KeyboardEvent, RefObject,useCallback, useRef, useState } from "react";
+import { ChangeEvent, KeyboardEvent, RefObject, useCallback, useRef, useState } from "react";
 
 export interface MentionUser {
   id: string | number;
@@ -53,11 +53,24 @@ function getCaretCoordinates(textarea: HTMLTextAreaElement, position: number): D
   const div = document.createElement("div");
 
   const props: (keyof CSSStyleDeclaration)[] = [
-    "boxSizing", "width", "fontFamily", "fontSize", "fontWeight",
-    "letterSpacing", "lineHeight", "paddingTop", "paddingRight",
-    "paddingBottom", "paddingLeft", "borderTopWidth", "borderRightWidth",
-    "borderBottomWidth", "borderLeftWidth", "whiteSpace", "wordWrap",
-    "overflowWrap",
+    "boxSizing",
+    "width",
+    "fontFamily",
+    "fontSize",
+    "fontWeight",
+    "letterSpacing",
+    "lineHeight",
+    "paddingTop",
+    "paddingRight",
+    "paddingBottom",
+    "paddingLeft",
+    "borderTopWidth",
+    "borderRightWidth",
+    "borderBottomWidth",
+    "borderLeftWidth",
+    "whiteSpace",
+    "wordWrap",
+    "overflowWrap"
   ];
   props.forEach((p) => {
     // style[p] is read-only typed but assignable at runtime via index signature
@@ -85,7 +98,7 @@ function getCaretCoordinates(textarea: HTMLTextAreaElement, position: number): D
   const rect = textarea.getBoundingClientRect();
   return {
     top: rect.top + top - textarea.scrollTop,
-    left: rect.left + left - textarea.scrollLeft,
+    left: rect.left + left - textarea.scrollLeft
   };
 }
 
@@ -112,7 +125,7 @@ function useDebouncedCallback<Args extends unknown[]>(
 export function useMentionInput({
   fetchSuggestions,
   trigger = "@",
-  debounceMs = 250,
+  debounceMs = 250
 }: UseMentionInputOptions): UseMentionInputResult {
   const [text, setText] = useState<string>("");
   const [suggestions, setSuggestions] = useState<MentionUser[]>([]);
@@ -209,7 +222,10 @@ export function useMentionInput({
   const buildSubmitBody = useCallback((): string => {
     const pool = [...mentions];
     const escapedTrigger = trigger.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    const re = new RegExp(`${escapedTrigger}([^\\s${escapedTrigger}]+(?:\\s[^\\s${escapedTrigger}]+)*)`, "g");
+    const re = new RegExp(
+      `${escapedTrigger}([^\\s${escapedTrigger}]+(?:\\s[^\\s${escapedTrigger}]+)*)`,
+      "g"
+    );
     return text.replace(re, (full: string, name: string) => {
       const idx = pool.findIndex((m) => m.name === name);
       if (idx === -1) return full;
@@ -238,6 +254,6 @@ export function useMentionInput({
     handleKeyDown,
     insertMention,
     buildSubmitBody,
-    reset,
+    reset
   };
 }

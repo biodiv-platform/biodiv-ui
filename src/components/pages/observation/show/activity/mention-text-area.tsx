@@ -1,14 +1,13 @@
 // MentionTextarea.jsx
 import { Box, Textarea } from "@chakra-ui/react";
-import React from "react";
 
 /**
  * Reusable mention-aware textarea. Pass in the mention hook's returned state/handlers.
  */
 export default function MentionTextarea({
-  mention,               // the object returned by useMentionInput()
-  renderSuggestion,      // (user, isHighlighted) => ReactNode
-  textareaProps = {},    // extra props forwarded to Textarea (id, height, placeholder, etc.)
+  mention, // the object returned by useMentionInput()
+  renderSuggestion, // (user, isHighlighted) => ReactNode
+  textareaProps = {} // extra props forwarded to Textarea (id, height, placeholder, etc.)
 }) {
   const {
     text,
@@ -19,7 +18,7 @@ export default function MentionTextarea({
     setHighlightIndex,
     dropdownPos,
     insertMention,
-    textareaRef,
+    textareaRef
   } = mention;
 
   return (
@@ -57,7 +56,9 @@ export default function MentionTextarea({
                 insertMention(user);
               }}
             >
-              {renderSuggestion ? renderSuggestion(user, i === highlightIndex) : `${user.name} (${user.id})`}
+              {renderSuggestion
+                ? renderSuggestion(user, i === highlightIndex)
+                : `${user.name} (${user.id})`}
             </Box>
           ))}
         </Box>

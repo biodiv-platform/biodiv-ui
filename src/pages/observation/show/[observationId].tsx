@@ -5,7 +5,6 @@ import {
   axGetTraitsByGroupId
 } from "@services/observation.service";
 import { getLanguageId } from "@utils/i18n";
-import React from "react";
 
 const ObservationShowPage = ({ observation, traits, speciesGroups }) => (
   <ObservationShowPageComponent

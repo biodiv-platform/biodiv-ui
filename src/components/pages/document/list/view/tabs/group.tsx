@@ -4,7 +4,6 @@ import useDocumentFilter from "@components/pages/document/common/use-document-fi
 import GroupPost from "@components/pages/observation/show/groups/group-post";
 import { axDocumentSaveUserGroups } from "@services/document.service";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 export default function GroupsTab({ o }) {
   const { t } = useTranslation();

@@ -3,7 +3,6 @@ import BlueLink from "@components/@core/blue-link";
 import ScientificName from "@components/@core/scientific-name";
 import { ShowActivityIbp } from "@interfaces/activity";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import LinkTag from "../../common/link-tag";
 import ACTIVITY_TYPE from "./activity-types";

@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 
@@ -40,7 +40,7 @@ export default function ElasticComponent() {
   const pageSize = 15;
   const currentPage = Math.floor((filter?.offset || 0) / pageSize) + 1;
 
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
 
   const hForm = useForm<FormValues>({
     defaultValues: {

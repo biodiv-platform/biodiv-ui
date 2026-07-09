@@ -1,7 +1,6 @@
 import { SelectInputField } from "@components/form/select";
 import { SelectMultipleInputField } from "@components/form/select-multiple";
 import { TextBoxField } from "@components/form/text";
-import React from "react";
 
 import CustomFieldOptions from "./custom-field-options";
 

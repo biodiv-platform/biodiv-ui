@@ -1,6 +1,5 @@
 import { Button, Flex, Menu, Portal } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
-import React from "react";
 import { LuChevronDown } from "react-icons/lu";
 
 const SimpleLink = ({ children, to, params }) => (

@@ -16,7 +16,7 @@ import { RESOURCE_TYPE } from "@static/constants";
 import { ACCEPTED_MIME_TYPE } from "@static/document";
 import { getDocumentURL } from "@utils/document";
 import { getDocumentFilePath, getDocumentPath } from "@utils/media";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import DocumentHeader from "./header";
 import DocumentInfo from "./info";

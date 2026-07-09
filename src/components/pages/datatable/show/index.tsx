@@ -3,7 +3,6 @@ import Activity from "@components/pages/observation/show/activity";
 import LocationInformation from "@components/pages/observation/show/sidebar/location-info";
 import { axAddDataTableComment } from "@services/datatable.service";
 import { RESOURCE_TYPE } from "@static/constants";
-import React from "react";
 
 import Group from "./group";
 import Header from "./header";

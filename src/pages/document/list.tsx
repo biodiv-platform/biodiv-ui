@@ -6,7 +6,6 @@ import { axGetListData } from "@services/document.service";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/documnet-list";
 import { absoluteUrl } from "@utils/basic";
 import { getLanguageId } from "@utils/i18n";
-import React from "react";
 
 function DocumentListPage({ documentData, initialFilterParams, nextOffset }) {
   return (

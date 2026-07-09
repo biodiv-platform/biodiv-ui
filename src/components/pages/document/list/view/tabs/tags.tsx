@@ -7,7 +7,7 @@ import EditIcon from "@icons/edit";
 import { Tags } from "@interfaces/observation";
 import { axQueryDocumentTagsByText, axUpdateDocumentTags } from "@services/document.service";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 interface ITagsTabsProps {
   tags: Tags[];

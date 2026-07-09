@@ -1,6 +1,5 @@
 import { Flex } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
-import React from "react";
 import { LuInfo } from "react-icons/lu";
 
 import {

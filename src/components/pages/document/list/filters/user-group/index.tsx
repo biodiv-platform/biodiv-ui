@@ -1,5 +1,5 @@
 import useGlobalState from "@hooks/use-global-state";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import CheckboxFilterPanel from "../shared/checkbox";
 

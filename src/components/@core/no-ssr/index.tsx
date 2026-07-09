@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
-import React from "react";
+import { Fragment } from "react";
 
-const NoSSRI = (props) => <React.Fragment>{props.children}</React.Fragment>;
+const NoSSRI = (props) => <Fragment>{props.children}</Fragment>;
 
 const NoSSR = dynamic(() => Promise.resolve(NoSSRI), {
   ssr: false

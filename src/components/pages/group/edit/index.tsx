@@ -11,7 +11,7 @@ import { axUpdateSpeciesFieldsMapping } from "@services/usergroup.service";
 import { getParsedUser, hasAccess } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { LuAtSign, LuCircleCheck, LuView } from "react-icons/lu";
 
 import EditIcon from "@/icons/edit";

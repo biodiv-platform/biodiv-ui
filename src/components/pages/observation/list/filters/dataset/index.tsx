@@ -1,7 +1,6 @@
 import CheckboxFilterPanel from "@components/pages/document/list/filters/shared/multi-select-search";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { OBSERVATION_FILTER_KEY } from "@static/observation-list";
-import React from "react";
 
 import SubAccordion from "../shared/sub-accordion";
 

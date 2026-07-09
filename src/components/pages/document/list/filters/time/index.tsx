@@ -1,5 +1,3 @@
-import React from "react";
-
 import DateRangeFilter from "../shared/date-range";
 import SubAccordion from "../shared/sub-accordion";
 

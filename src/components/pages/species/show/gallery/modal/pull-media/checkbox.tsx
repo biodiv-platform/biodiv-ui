@@ -4,7 +4,7 @@ import { getImageThumb } from "@components/pages/observation/create/form/uploade
 import useObservationCreate from "@components/pages/observation/create/form/uploader/use-observation-resources";
 import useGlobalState from "@hooks/use-global-state";
 import { getFallbackByMIME } from "@utils/media";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 

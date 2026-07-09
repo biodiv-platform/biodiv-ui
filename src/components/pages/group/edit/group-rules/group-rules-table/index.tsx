@@ -3,7 +3,6 @@ import AddIcon from "@icons/add";
 import { axRemoveUserGroupRule } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import GroupRules from "./group-rules-item";
 

@@ -3,7 +3,7 @@ import { axUploadObservationResource } from "@services/files.service";
 import { getAssetObject } from "@utils/image";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { LuTimer } from "react-icons/lu";
 
 const accept = {

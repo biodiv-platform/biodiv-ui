@@ -1,7 +1,7 @@
 import { Box, Button, HStack, Input, SimpleGrid } from "@chakra-ui/react";
 import LocalLink, { useLocalRouter } from "@components/@core/local-link";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import { LuCalendar } from "react-icons/lu";
 

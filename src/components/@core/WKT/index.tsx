@@ -1,7 +1,7 @@
 import { Input, SimpleGrid } from "@chakra-ui/react";
 import { center, feature } from "@turf/turf";
 import notification from "@utils/notification";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import wkt from "wkt";
 
 import { Field } from "@/components/ui/field";

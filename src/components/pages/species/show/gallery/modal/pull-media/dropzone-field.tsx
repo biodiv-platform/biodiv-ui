@@ -5,7 +5,7 @@ import MyUploads from "@components/pages/observation/create/form/uploader/my-upl
 import ResourcesList from "@components/pages/observation/create/form/uploader/observation-resources/resources-list";
 import useObservationCreate from "@components/pages/observation/create/form/uploader/use-observation-resources";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useController } from "react-hook-form";
 
 import { Field } from "@/components/ui/field";

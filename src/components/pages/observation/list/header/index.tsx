@@ -5,12 +5,12 @@ import { sortByOptions, viewTabs } from "@static/observation-list";
 import { waitForAuth } from "@utils/auth";
 import { format } from "indian-number-format";
 import useTranslation from "next-translate/useTranslation";
-import React, { Suspense } from "react";
+import { lazy, Suspense } from "react";
 
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 import { Switch } from "@/components/ui/switch";
 
-const DownloadObservationDataModal = React.lazy(() => import("../download-observation-modal"));
+const DownloadObservationDataModal = lazy(() => import("../download-observation-modal"));
 
 export default function ListHeader() {
   const { filter, setFilter, observationData, allMedia, addMediaToggle } = useObservationFilter();

@@ -1,7 +1,6 @@
 import User from "@components/pages/observation/show/sidebar/user";
 import { ShowDocument } from "@interfaces/document";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import CoveragePanel from "./coverage";
 import DownloadButtons from "./download-buttons";

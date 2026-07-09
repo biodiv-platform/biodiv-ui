@@ -6,7 +6,7 @@ import { getMapCenter } from "@utils/location";
 import { toPng } from "html-to-image";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import LazyLoad from "react-lazyload";
 
 import useSpecies from "../../../use-species";
@@ -30,7 +30,7 @@ interface OccuranceRecoardSpeciesFieldProps {
 const OccuranceRecoardSpeciesField = forwardRef(
   ({ valueCallback }: OccuranceRecoardSpeciesFieldProps, ref) => {
     const { species } = useSpecies();
-    const defaultViewState = React.useMemo(() => getMapCenter(3.1), []);
+    const defaultViewState = useMemo(() => getMapCenter(3.1), []);
     const { lang } = useTranslation();
     const mapContainerRef = useRef<HTMLDivElement>(null);
     const [forceLoad, setForceLoad] = useState(false);

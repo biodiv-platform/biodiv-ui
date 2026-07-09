@@ -11,7 +11,7 @@ import { STORE } from "@static/observation-create";
 import { setupDB } from "@utils/db";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { emit } from "react-gbus";
 import { useImmer } from "use-immer";
 import { useIndexedDBStore } from "use-indexeddb";

@@ -5,7 +5,6 @@ import Badge from "@components/@core/user/badge";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceRAW, getResourceThumbnail } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import {
   PopoverArrow,

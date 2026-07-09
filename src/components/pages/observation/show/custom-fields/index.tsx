@@ -2,7 +2,6 @@ import { Box } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import { CustomFieldPermission, ShowData } from "@interfaces/observation";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import CustomFieldList from "./list";
 

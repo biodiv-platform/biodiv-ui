@@ -9,7 +9,6 @@ import { DEFAULT_FILTER } from "@static/user";
 import { hasAccess } from "@utils/auth";
 import { absoluteUrl } from "@utils/basic";
 import { getLanguageId } from "@utils/i18n";
-import React from "react";
 
 function UserListPage({ userListData, initialFilterParams, isAdmin }) {
   return (

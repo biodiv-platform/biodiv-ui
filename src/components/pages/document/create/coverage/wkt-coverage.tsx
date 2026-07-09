@@ -1,6 +1,5 @@
 import WKTFieldMulti from "@components/form/wkt-multi";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 export default function WKTCoverage({
   name,

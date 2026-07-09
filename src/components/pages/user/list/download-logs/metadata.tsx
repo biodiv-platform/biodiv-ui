@@ -5,7 +5,6 @@ import { adminOrAuthor } from "@utils/auth";
 import { formatDate } from "@utils/date";
 import { getUserImage } from "@utils/media";
 import { stripSpecialCharacters, stripTags } from "@utils/text";
-import React from "react";
 import { LuDownload } from "react-icons/lu";
 
 import { ImageWithFallback } from "@/components/@core/image-with-fallback";

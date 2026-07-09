@@ -4,7 +4,7 @@ import { SubmitButton } from "@components/form/submit-button";
 import SITE_CONFIG from "@configs/site-config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LuArrowLeft } from "react-icons/lu";
 import * as Yup from "yup";

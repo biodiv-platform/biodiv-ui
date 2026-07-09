@@ -1,7 +1,7 @@
 import { BasicTable, ResponsiveContainer } from "@components/@core/table";
 import Loading from "@components/pages/common/loading";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import useDownloadLogsList from "../../common/use-download-log";

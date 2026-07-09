@@ -18,7 +18,6 @@ import { waitForAuth } from "@utils/auth";
 import { getUserImage } from "@utils/media";
 import { stripTags } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { Tooltip } from "@/components/ui/tooltip";
 

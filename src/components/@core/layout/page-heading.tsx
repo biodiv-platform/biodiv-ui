@@ -1,5 +1,5 @@
 import { Heading, HeadingProps, Stack } from "@chakra-ui/react";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 interface PageHeadingProps {
   children?: ReactNode;

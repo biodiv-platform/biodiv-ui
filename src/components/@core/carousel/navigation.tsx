@@ -1,6 +1,5 @@
 import { Carousel, IconButton } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-import React from "react";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 
 const NavigationBox = styled.div`

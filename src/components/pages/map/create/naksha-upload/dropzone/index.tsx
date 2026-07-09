@@ -2,7 +2,7 @@ import { Box, FileUpload, Flex, SimpleGrid, Tabs, Text } from "@chakra-ui/react"
 import styled from "@emotion/styled";
 import { Mq } from "mq-styled-components";
 import useTranslation from "next-translate/useTranslation";
-import React, { useCallback, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 
 import { Tooltip } from "@/components/ui/tooltip";
 

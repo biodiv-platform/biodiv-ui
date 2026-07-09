@@ -1,6 +1,5 @@
 import { Button, Heading, Text } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 export default function UploadInfo() {
   const { t } = useTranslation();

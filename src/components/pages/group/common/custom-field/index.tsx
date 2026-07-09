@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import EditCustomField from "./custom-field-edit-from";
 import AddCustomFieldForm from "./custom-field-form";

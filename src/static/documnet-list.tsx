@@ -1,5 +1,4 @@
 import SITE_CONFIG from "@configs/site-config";
-import React from "react";
 import { LuList } from "react-icons/lu";
 
 export const LIST_PAGINATION_LIMIT = 12;

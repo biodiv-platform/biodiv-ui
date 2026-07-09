@@ -1,5 +1,4 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import React from "react";
 
 import BulkMapperModal from "./bulk-mapper";
 import Filters from "./filters";

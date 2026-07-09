@@ -1,5 +1,4 @@
 import { Stack } from "@chakra-ui/react";
-import React from "react";
 
 import useGroupListFilter from "../use-group-list";
 import MultiSelect from "./multi-select";

@@ -4,7 +4,7 @@ import { Input } from "@chakra-ui/react";
 import CalendarIcon from "@icons/calendar";
 import { FORM_DATEPICKER_CHANGE } from "@static/events";
 import { formatDateRange, parseDateRange } from "@utils/date";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Flatpickr from "react-flatpickr";
 import { useListener } from "react-gbus";
 import { useController } from "react-hook-form";

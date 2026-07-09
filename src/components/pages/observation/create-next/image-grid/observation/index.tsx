@@ -4,7 +4,6 @@ import { LocationInputField } from "@components/form/location-input";
 import EditIcon from "@icons/edit";
 import { OBSERVATION_BULK_EDIT } from "@static/events";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { emit } from "react-gbus";
 import { useFormContext } from "react-hook-form";
 

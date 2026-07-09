@@ -3,7 +3,7 @@ import SITE_CONFIG from "@configs/site-config";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
 import { parseCookies, setCookie } from "nookies";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { LuChevronDown } from "react-icons/lu";
 
 import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from "@/components/ui/menu";

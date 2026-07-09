@@ -11,7 +11,7 @@ import { center as midPoint, feature } from "@turf/turf";
 import { getMapCenter } from "@utils/location";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useListener } from "react-gbus";
 import wkt from "wkt";
 

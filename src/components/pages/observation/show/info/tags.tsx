@@ -1,7 +1,7 @@
 import { Box, IconButton, useDisclosure } from "@chakra-ui/react";
 import EditIcon from "@icons/edit";
 import { Tags } from "@interfaces/observation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import LinkTag from "../../common/link-tag";
 import TagsEditor from "./tags-editor";

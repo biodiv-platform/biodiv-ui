@@ -4,7 +4,7 @@ import TraitsList from "@components/pages/observation/show/traits/traits-list";
 import useGlobalState from "@hooks/use-global-state";
 import { axGetTraitsByGroupId } from "@services/observation.service";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function TraitsTab({ o }) {
   const [traits, setTraits] = useState();

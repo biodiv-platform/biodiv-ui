@@ -7,7 +7,7 @@ import {
 } from "@components/pages/observation/create/form/recodata/scientific-name";
 import { nanoid } from "nanoid";
 import useTranslation from "next-translate/useTranslation";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 import { Tag } from "@/components/ui/tag";

@@ -4,7 +4,7 @@ import { isBrowser } from "@static/constants";
 import { LIST_PAGINATION_LIMIT } from "@static/observation-list";
 import NProgress from "nprogress";
 import { stringify } from "querystring";
-import React, { createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { useImmer } from "use-immer";
 
 const deDupeDownloadLog = (current, latest) => {

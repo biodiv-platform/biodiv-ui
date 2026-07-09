@@ -1,6 +1,5 @@
 import { IconButton } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
-import React from "react";
 
 interface SimpleActionButtonProps {
   icon;

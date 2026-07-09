@@ -5,15 +5,13 @@ import { axEsUserAutoComplete } from "@services/auth.service";
 import { ACTIVITY_UPDATED } from "@static/events";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { emit } from "react-gbus";
 
 import { Field } from "@/components/ui/field";
 
 import MentionTextarea from "./mention-text-area";
 import { useMentionInput } from "./use-mention-input";
-
-
 
 export default function Comment({ resourceId, resourceType, focusRef, commentFunc }) {
   const { t } = useTranslation();
@@ -33,7 +31,7 @@ export default function Comment({ resourceId, resourceType, focusRef, commentFun
       rootHolderId: resourceId,
       rootHolderType: resourceType,
       subRootHolderId: null,
-      subRootHolderType: null,
+      subRootHolderType: null
     });
     if (success) {
       notification("Comment Added", NotificationType.Success);
@@ -54,7 +52,9 @@ export default function Comment({ resourceId, resourceType, focusRef, commentFun
             mention={mention}
             textareaProps={{ id: "comment", name: "comment", height: "100px" }}
             renderSuggestion={(user, focused) => (
-              <div className={`user ${focused ? "focused" : ""}`}>{`${user.name} (${user.id})`}</div>
+              <div
+                className={`user ${focused ? "focused" : ""}`}
+              >{`${user.name} (${user.id})`}</div>
             )}
           />
         </Box>

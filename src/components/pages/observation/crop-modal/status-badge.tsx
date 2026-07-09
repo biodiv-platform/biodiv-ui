@@ -1,7 +1,6 @@
 import { Badge } from "@chakra-ui/react";
 import { CROP_STATUS } from "@static/constants";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 function ObservationImageStatusBadge({ status }) {
   const { t } = useTranslation();

@@ -4,7 +4,6 @@ import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink from "@components/@core/local-link";
 import SpeciesGroupBox from "@components/pages/observation/show/info/species-group";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { stickyTh } from "./common";
 interface LifeListInterface {

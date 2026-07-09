@@ -11,7 +11,6 @@ import {
   Text,
   useBreakpointValue
 } from "@chakra-ui/react";
-import React from "react";
 import { LuArrowDown, LuArrowRight, LuArrowUp } from "react-icons/lu";
 
 import { RESOURCE_SIZE } from "@/static/constants";

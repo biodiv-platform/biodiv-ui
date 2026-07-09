@@ -8,7 +8,7 @@ import {
 } from "@static/events";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { emit, useListener } from "react-gbus";
 
 import { DialogBackdrop, DialogRoot } from "@/components/ui/dialog";

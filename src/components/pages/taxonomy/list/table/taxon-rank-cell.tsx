@@ -1,6 +1,5 @@
 import { Box } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import useTaxonFilter from "../use-taxon";
 import StatusIcon from "./status-icon";

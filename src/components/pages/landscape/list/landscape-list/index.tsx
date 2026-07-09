@@ -2,7 +2,6 @@ import { Link } from "@chakra-ui/react";
 import ObservationLoading from "@components/pages/common/loading";
 import styled from "@emotion/styled";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import useLandscapeFilter from "../use-landscape-filter";

@@ -9,7 +9,7 @@ import {
 } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { Checkbox } from "@/components/ui/checkbox";
@@ -65,7 +65,7 @@ const getAllLeafNodes = (items: any[]): SelectedNode[] => {
   return leafNodes;
 };
 
-const TreeItem = React.memo(
+const TreeItem = memo(
   ({
     item,
     level,

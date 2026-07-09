@@ -1,5 +1,3 @@
-import React from "react";
-
 import ElasticComponent from "@/components/pages/manage/elastic";
 import { ObservationListProvider } from "@/components/pages/manage/elastic/use-observation-filter";
 

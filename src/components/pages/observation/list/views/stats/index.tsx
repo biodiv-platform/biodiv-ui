@@ -1,6 +1,5 @@
 import { GridItem, SimpleGrid } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
-import React from "react";
 
 import ObservationsMap from "../map";
 import LazyLoadOnScroll from "./lazy-load-on-scroll";

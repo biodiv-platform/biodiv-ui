@@ -17,7 +17,7 @@ import useGlobalState from "@hooks/use-global-state";
 import { TraitsValuePair } from "@interfaces/traits";
 import { axGetTraitsByGroupId } from "@services/observation.service";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import { useFormContext } from "react-hook-form";
 import { LuCalendar, LuChevronDown, LuChevronUp } from "react-icons/lu";

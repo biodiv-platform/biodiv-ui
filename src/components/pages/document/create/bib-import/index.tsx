@@ -1,7 +1,6 @@
 import { Button, VisuallyHidden } from "@chakra-ui/react";
 import { axParseBib } from "@services/document.service";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { useFormContext } from "react-hook-form";
 import { LuArrowUp } from "react-icons/lu";
 

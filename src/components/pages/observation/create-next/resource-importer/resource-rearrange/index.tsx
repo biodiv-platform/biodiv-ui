@@ -1,7 +1,6 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { DragDropContext } from "@hello-pangea/dnd";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import NewGroup from "./new-group";
 import { ResourceGroup } from "./resource-group";

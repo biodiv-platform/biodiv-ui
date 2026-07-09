@@ -4,7 +4,7 @@ import EditIcon from "@icons/edit";
 import { axUpdateCoverageGroup } from "@services/document.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import CoverageEdit from "./coverage-edit";
 import { CoverageShow } from "./coverage-show";

@@ -12,7 +12,6 @@ import { axFlagObservation, axUnFlagObservation } from "@services/observation.se
 import { formatDateReadableFromUTC } from "@utils/date";
 import { stripTags } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import CalendarIcon from "@/icons/calendar";
 import EditIcon from "@/icons/edit";

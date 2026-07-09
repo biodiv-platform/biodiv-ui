@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import useDocumentFilter from "@components/pages/document/common/use-document-filter";
 import { convertFeatureToPolygonString, getMapCenter, stringToFeature } from "@utils/location";
 import dynamic from "next/dynamic";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import { mapStyles } from "@/static/constants";
 

@@ -4,7 +4,6 @@ import useTaxonFilter from "@components/pages/taxonomy/list/use-taxon";
 import { Role } from "@interfaces/custom";
 import { axDeleteTaxonSynonym, axUpdateTaxonSynonym } from "@services/taxonomy.service";
 import { hasAccess } from "@utils/auth";
-import React from "react";
 
 export function TaxonSynonymsTab() {
   const { modalTaxon } = useTaxonFilter();

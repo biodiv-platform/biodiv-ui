@@ -1,6 +1,6 @@
 import { useLocalRouter } from "@components/@core/local-link";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import { Alert } from "@/components/ui/alert";
 

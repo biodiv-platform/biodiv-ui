@@ -2,7 +2,7 @@ import SITE_CONFIG from "@configs/site-config";
 import { axUnsubscribeUser } from "@services/user.service";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import UnsubscribeScreen from "./screen";
 

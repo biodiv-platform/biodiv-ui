@@ -14,7 +14,7 @@ import { DEFAULT_GROUP } from "@static/constants";
 import { getGroupImageThumb } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Field } from "@/components/ui/field";
 

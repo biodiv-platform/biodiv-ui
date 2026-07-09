@@ -2,7 +2,6 @@ import { authorizedPageSSP } from "@components/auth/auth-redirect";
 import PageEditPageComponent from "@components/pages/page/edit";
 import { Role } from "@interfaces/custom";
 import { axGetPageByID } from "@services/pages.service";
-import React from "react";
 
 export default function PageEditPage({ data }) {
   return <PageEditPageComponent page={data} />;

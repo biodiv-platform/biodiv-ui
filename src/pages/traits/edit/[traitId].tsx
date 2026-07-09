@@ -3,7 +3,6 @@ import TraitsEditComponent from "@components/pages/traits/edit";
 import { Role } from "@interfaces/custom";
 import { axGetTraitTranslationData } from "@services/traits.service";
 import { axGetLangList } from "@services/utility.service";
-import React from "react";
 
 const TraitEditPage = ({ data, languagesList }) => (
   <TraitsEditComponent data={data} languages={languagesList} />

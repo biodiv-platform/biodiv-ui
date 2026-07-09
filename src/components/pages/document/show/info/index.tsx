@@ -6,7 +6,6 @@ import { ShowDocument } from "@interfaces/document";
 import { axQueryDocumentTagsByText, axUpdateDocumentTags } from "@services/document.service";
 import { formatDateReadableFromUTC } from "@utils/date";
 import { getInjectableHTML } from "@utils/text";
-import React from "react";
 
 import { Prose } from "@/components/ui/prose";
 

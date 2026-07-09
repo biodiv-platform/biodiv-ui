@@ -1,7 +1,6 @@
 import UserLeaderboardComponent from "@components/pages/user/leaderboard";
 import { LeaderboardFilterProvider } from "@components/pages/user/leaderboard/use-leaderboard-filter";
 import { LEADERBOARD_FILTERS } from "@static/leaderboard";
-import React from "react";
 
 function UserLeaderboardPage({ initialFilterParams }) {
   return (

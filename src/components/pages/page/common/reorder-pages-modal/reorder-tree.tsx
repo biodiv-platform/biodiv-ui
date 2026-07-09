@@ -16,7 +16,8 @@ import {
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import React, { useEffect, useMemo, useState } from "react";
+import * as React from "react";
+import { useEffect, useMemo, useState } from "react";
 import { LuCircleMinus, LuCirclePlus } from "react-icons/lu";
 
 import usePages from "../sidebar/use-pages-sidebar";

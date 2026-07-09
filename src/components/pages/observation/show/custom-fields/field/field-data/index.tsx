@@ -1,5 +1,4 @@
 import { CustomFieldData } from "@interfaces/observation";
-import React from "react";
 
 import CategoricalField from "./catergorical-field";
 import FieldText from "./text";

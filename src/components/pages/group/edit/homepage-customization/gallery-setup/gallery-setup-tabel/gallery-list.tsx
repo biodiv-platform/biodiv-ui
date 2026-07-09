@@ -1,8 +1,13 @@
-import { DndItemWrapper,DndListWrapper } from "@/components/pages/common/reusable-dnd";
+import { DndItemWrapper, DndListWrapper } from "@/components/pages/common/reusable-dnd";
 
 import { GalleryItemsRow } from "./gallery-items-row";
 
-export default function GalleryListItems({ galleryList, removeGalleryItem, editGalleryItem, onSortEnd }) {
+export default function GalleryListItems({
+  galleryList,
+  removeGalleryItem,
+  editGalleryItem,
+  onSortEnd
+}) {
   return (
     <DndListWrapper items={galleryList} getItemId={(item) => item.sliderId} onSortEnd={onSortEnd}>
       <tbody>

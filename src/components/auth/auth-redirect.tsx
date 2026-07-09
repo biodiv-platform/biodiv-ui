@@ -3,7 +3,7 @@ import { Role } from "@interfaces/custom";
 import { hasAccess } from "@utils/auth";
 import { encode } from "base64-url";
 import Router from "next/router";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 export default function AuthRedirect() {
   const router = useLocalRouter();

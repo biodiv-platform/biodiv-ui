@@ -1,5 +1,4 @@
 import MapPageComponent from "@components/pages/map";
-import React from "react";
 
 export default function MapPage({ layers }) {
   return <MapPageComponent defaultLayers={layers} />;

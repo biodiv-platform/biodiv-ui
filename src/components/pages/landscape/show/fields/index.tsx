@@ -7,7 +7,7 @@ import { hasAccess } from "@utils/auth";
 import { getInjectableHTML } from "@utils/text";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import { Prose } from "@/components/ui/prose";
 
@@ -43,7 +43,7 @@ export default function LandscapeFields({ childs = [], size = "3xl", ml = 0 }: I
         }, [child]);
 
         return (
-          <React.Fragment key={child.id}>
+          <Fragment key={child.id}>
             <Box pb={6} ml={ml} hidden={!content && !canEdit && ml}>
               <Heading mb={3} size={size}>
                 {child.header}
@@ -91,7 +91,7 @@ export default function LandscapeFields({ childs = [], size = "3xl", ml = 0 }: I
               )}
             </Box>
             {child.childs.length > 0 && <LandscapeFields childs={child.childs} size="md" ml={4} />}
-          </React.Fragment>
+          </Fragment>
         );
       })}
     </div>

@@ -26,7 +26,7 @@ import { getTraitIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import { cleanSingleFact } from "@utils/tags";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import { LuCalendar } from "react-icons/lu";
 

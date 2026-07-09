@@ -1,7 +1,7 @@
 import { Button, List, useDisclosure } from "@chakra-ui/react";
 import { InfoWindow, Marker } from "@react-google-maps/api";
 import { reverseGeocode } from "@utils/location";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const CustomMarker = ({ position, setCoordinates, onTextUpdate }) => {
   const [markerRef, setMarkerRef] = useState<any>();

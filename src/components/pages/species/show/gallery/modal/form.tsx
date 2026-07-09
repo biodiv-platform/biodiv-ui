@@ -7,7 +7,6 @@ import { AssetStatus } from "@interfaces/custom";
 import { axUpdateSpeciesGalleryResources } from "@services/species.service";
 import { nanoid } from "nanoid";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 

@@ -32,7 +32,7 @@ import {
 import notification, { NotificationType } from "@utils/notification";
 import { normalizeSpeciesPayload } from "@utils/species";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LuPencil } from "react-icons/lu";
 import * as Yup from "yup";

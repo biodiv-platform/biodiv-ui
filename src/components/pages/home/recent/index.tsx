@@ -1,7 +1,6 @@
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { LuArrowRight } from "react-icons/lu";
 
 import RecentObservationList from "./list";

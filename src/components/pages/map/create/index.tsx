@@ -3,7 +3,6 @@ import { useLocalRouter } from "@components/@core/local-link";
 import useGlobalState from "@hooks/use-global-state";
 import { ENDPOINT } from "@static/constants";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { NakshaLayerUpload } from "./naksha-upload";
 

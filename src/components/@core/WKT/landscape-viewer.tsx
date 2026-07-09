@@ -7,7 +7,7 @@ import { MENU_PORTAL_TARGET } from "@static/constants";
 import { feature, pointOnFeature } from "@turf/turf";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import AsyncSelect from "react-select/async";
 import wkt from "wkt";
 

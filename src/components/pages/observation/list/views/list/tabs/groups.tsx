@@ -4,7 +4,6 @@ import useObservationFilter from "@components/pages/observation/common/use-obser
 import GroupPost from "@components/pages/observation/show/groups/group-post";
 import { axSaveUserGroups } from "@services/observation.service";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 export default function GroupsTab({ o }) {
   const { t } = useTranslation();

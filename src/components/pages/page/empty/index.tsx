@@ -3,7 +3,7 @@ import LocalLink from "@components/@core/local-link";
 import useGlobalState from "@hooks/use-global-state";
 import { axCheckUserGroupFounderOrAdmin } from "@services/usergroup.service";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { LuMoveRight } from "react-icons/lu";
 
 export default function EmptyPageComponent() {

@@ -4,7 +4,6 @@ import { TextBoxField } from "@components/form/text";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import { axEsUserAutoComplete } from "@services/auth.service";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 export default function PartyContributorsForm() {
   const { t } = useTranslation();

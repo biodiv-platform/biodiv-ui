@@ -4,7 +4,6 @@ import { ExtendedTaxonDefinition } from "@interfaces/esmodule";
 import { axSearchSpeciesByText } from "@services/esmodule.service";
 import { TAXON_BADGE_COLORS } from "@static/constants";
 import { getLocalIcon, getSuggestionIcon } from "@utils/media";
-import React from "react";
 import { components } from "react-select";
 
 import { ImageWithFallback } from "@/components/@core/image-with-fallback";

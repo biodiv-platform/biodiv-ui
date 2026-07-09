@@ -1,6 +1,6 @@
 import { Flex, Image, SimpleGrid } from "@chakra-ui/react";
 import { getTraitIcon } from "@utils/media";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 export default function SimpleTraitShow({ values, options }) {
   const finalValues = useMemo(() => {

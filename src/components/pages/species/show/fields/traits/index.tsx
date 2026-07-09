@@ -1,5 +1,5 @@
 import { TRAIT_DATA_TYPES } from "@static/trait";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import useSpeciesFields from "../use-species-field";
 import ColorTrait from "./color";

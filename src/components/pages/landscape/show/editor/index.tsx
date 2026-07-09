@@ -5,7 +5,7 @@ import CheckIcon from "@icons/check";
 import { axSaveLandscapeField, axUploadEditorResource } from "@services/landscape.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function FieldEditor({ initialContent, id, onChange, onClose }) {
   const { t } = useTranslation();

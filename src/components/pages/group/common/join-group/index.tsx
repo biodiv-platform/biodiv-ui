@@ -5,7 +5,7 @@ import { axJoinUserGroup, axLeaveUserGroup } from "@services/usergroup.service";
 import { waitForAuth } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { LuMinus } from "react-icons/lu";
 
 interface JoinUserGroupProps {

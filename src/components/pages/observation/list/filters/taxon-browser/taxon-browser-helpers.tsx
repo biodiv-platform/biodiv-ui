@@ -1,5 +1,4 @@
 import { TreeNode } from "rc-tree";
-import React from "react";
 
 const setLeaf = (treeData) => {
   const loopLeaf = (data) => {

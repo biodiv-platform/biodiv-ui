@@ -4,7 +4,6 @@ import ChevronIcon from "@icons/chevron";
 import CrossIcon from "@icons/cross";
 import { Mq } from "mq-styled-components";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { SyncInfo } from "./offline-sync";
 import SyncRow from "./sync-row";

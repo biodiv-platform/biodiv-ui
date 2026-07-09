@@ -1,6 +1,6 @@
 import { Box, Button, ButtonGroup } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import MiniGroupGalleryItem from "@/components/pages/group/edit/homepage-customization/mini-group-gallery/mini-group-gallery-item";
 import AddIcon from "@/icons/add";

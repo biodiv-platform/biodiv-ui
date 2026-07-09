@@ -16,7 +16,6 @@ import "tinymce/themes/silver/theme";
 import "tinymce/plugins/media";
 
 import { Editor } from "@tinymce/tinymce-react";
-import React from "react";
 
 interface WYSIWYGEditorProps {
   fileUploadHandler?;

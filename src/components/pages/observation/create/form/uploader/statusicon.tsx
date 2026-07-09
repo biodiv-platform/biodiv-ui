@@ -1,7 +1,6 @@
 import Tooltip from "@components/@core/tooltip";
 import { AssetStatus } from "@interfaces/custom";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 export default function StatusIcon({ type }: { type?: AssetStatus }) {
   const { t } = useTranslation();

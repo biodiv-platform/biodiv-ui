@@ -1,7 +1,6 @@
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import { ACTIONS } from "@static/constants";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { LuRepeat, LuSettings } from "react-icons/lu";
 
 export default function BulkMapperHeader({ bulkIds, handleBulkCheckbox, openBulkMappingModal }) {

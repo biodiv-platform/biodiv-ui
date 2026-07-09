@@ -1,5 +1,4 @@
 import { Box, Flex } from "@chakra-ui/react";
-import React from "react";
 
 const ImageGridContainer = ({ children }) => (
   <Flex alignItems="center" justifyContent="center">

@@ -2,7 +2,6 @@ import { Box } from "@chakra-ui/react";
 import useUserListFilter from "@components/pages/user/common/use-user-filter";
 import SITE_CONFIG from "@configs/site-config";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import {
   AccordionItem,

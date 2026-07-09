@@ -1,5 +1,4 @@
 import { Box } from "@chakra-ui/react";
-import React from "react";
 import { useController } from "react-hook-form";
 
 import { Field } from "@/components/ui/field";

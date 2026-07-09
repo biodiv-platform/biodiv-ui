@@ -1,5 +1,5 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import React, { Suspense } from "react";
+import { lazy, Suspense } from "react";
 
 import CropModal from "../crop-modal";
 import BulkMapperModal from "./bulk-mapper";
@@ -7,7 +7,7 @@ import FilterFallback from "./filters/fallback";
 import ListHeader from "./header";
 import Views from "./views";
 
-const Filters = React.lazy(() => import("./filters"));
+const Filters = lazy(() => import("./filters"));
 
 interface ObservationListPageProps {
   nextOffset: number;

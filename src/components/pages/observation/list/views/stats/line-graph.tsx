@@ -9,7 +9,7 @@ import { interpolateSpectral } from "d3-scale-chromatic";
 import { select } from "d3-selection";
 import { area, line } from "d3-shape";
 import { toPng } from "html-to-image";
-import React, { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 
 import { TraitsTooltipRenderer } from "./static-data";
 

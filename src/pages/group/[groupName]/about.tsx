@@ -13,7 +13,6 @@ import {
 import { axGetAllHabitat } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
 import { getLanguageId } from "@utils/i18n";
-import React from "react";
 
 const GroupAboutPage = (props) => <AboutGroupComponent {...props} />;
 

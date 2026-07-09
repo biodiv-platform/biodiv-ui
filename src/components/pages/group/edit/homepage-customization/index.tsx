@@ -1,5 +1,3 @@
-import React from "react";
-
 import HomePageCustomizationForm from "./form";
 
 export default function GroupHomePageCustomization({

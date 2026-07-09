@@ -1,7 +1,6 @@
 import { Box, Separator, SimpleGrid, Text } from "@chakra-ui/react";
 import { TextBoxField } from "@components/form/text";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 export default function CheckListAnnotationForm({ fields }) {
   const { t } = useTranslation();

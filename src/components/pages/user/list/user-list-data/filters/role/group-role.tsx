@@ -1,6 +1,6 @@
 import useUserFilter from "@components/pages/user/common/use-user-filter";
 import { covertToSentenceCase } from "@utils/text";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import CheckboxFilterPanel from "../shared/checkbox";
 

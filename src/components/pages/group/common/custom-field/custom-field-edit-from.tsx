@@ -10,7 +10,7 @@ import CheckIcon from "@icons/check";
 import { axcustomFieldEditDetails } from "@services/usergroup.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { FormProvider } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { LuArrowLeft } from "react-icons/lu";

@@ -1,7 +1,6 @@
 import { Flex, IconButton } from "@chakra-ui/react";
 import DeleteIcon from "@icons/delete";
 import EditIcon from "@icons/edit";
-import React from "react";
 import { RgbStringColorPicker } from "react-colorful";
 
 import {

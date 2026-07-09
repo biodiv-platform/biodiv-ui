@@ -2,7 +2,6 @@ import { Box, Button } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import CheckIcon from "@icons/check";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 const AudioControl = styled.audio`
   width: 100%;

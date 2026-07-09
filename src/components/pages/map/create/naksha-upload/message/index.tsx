@@ -1,6 +1,6 @@
 import { AlertTitle } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import { Alert } from "@/components/ui/alert";
 

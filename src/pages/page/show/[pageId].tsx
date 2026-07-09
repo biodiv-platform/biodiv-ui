@@ -1,6 +1,5 @@
 import PageShowPageComponent from "@components/pages/page/show";
 import { axGetPageByID } from "@services/pages.service";
-import React from "react";
 
 export default function PageShowPage({ data }) {
   return <PageShowPageComponent page={data} />;

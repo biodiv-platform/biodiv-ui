@@ -1,5 +1,3 @@
-import React from "react";
-
 import useSpecies from "../use-species";
 import SpeciesFieldSimpleEdit from "./field/edit";
 import FieldGroupPanel from "./field-group-panel";

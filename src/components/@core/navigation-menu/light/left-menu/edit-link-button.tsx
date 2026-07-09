@@ -3,7 +3,7 @@ import useGlobalState from "@hooks/use-global-state";
 import EditIcon from "@icons/edit";
 import { axCheckUserGroupFounderOrAdmin } from "@services/usergroup.service";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function EditLinkButton({ label }) {
   const {

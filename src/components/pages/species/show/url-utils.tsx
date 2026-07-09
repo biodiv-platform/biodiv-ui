@@ -1,7 +1,7 @@
 import { Box, ListItem } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import { Reference } from "@interfaces/species";
-import React from "react";
+import * as React from "react";
 
 // Define types for the text parts
 interface TextPart {

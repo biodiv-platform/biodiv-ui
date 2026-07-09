@@ -1,7 +1,7 @@
 import { SimpleGrid, useCheckboxGroup } from "@chakra-ui/react";
 import useDocumentFilter from "@components/pages/document/common/use-document-filter";
 import { stringToArray } from "@utils/basic";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import CustomCheckbox from "./checkbox";
 

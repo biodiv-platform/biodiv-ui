@@ -1,5 +1,4 @@
 import { Flex, SimpleGrid } from "@chakra-ui/react";
-import React from "react";
 
 export default function NumericTraitShow({ values }) {
   return (

@@ -5,7 +5,7 @@ import LocalLink, { useLocalRouter } from "@components/@core/local-link";
 import EditIcon from "@icons/edit";
 import { axDeletePageByID } from "@services/pages.service";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { LuChevronDown, LuChevronUp } from "react-icons/lu";
 
 import { PAGE_TYPES } from "../data";

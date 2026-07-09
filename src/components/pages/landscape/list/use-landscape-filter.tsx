@@ -5,7 +5,7 @@ import { isBrowser } from "@static/constants";
 import { LANDSCAPE_DEFAULT_FILTER, LANDSCAPE_LIST_PAGINATION_LIMIT } from "@static/landscape-list";
 import { stringify } from "@utils/query-string";
 import NProgress from "nprogress";
-import React, { createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { useImmer } from "use-immer";
 
 interface LandscapeFilterContextProps {

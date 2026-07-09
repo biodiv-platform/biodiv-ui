@@ -4,7 +4,6 @@ import styled from "@emotion/styled";
 import { getLocalIcon } from "@utils/media";
 import { toHumanString } from "human-readable-numbers";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 const CheckboxLabel = styled.label`
   cursor: pointer;

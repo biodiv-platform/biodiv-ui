@@ -2,7 +2,6 @@ import { Box, Image } from "@chakra-ui/react";
 import { RadioCard } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import { getLocalIcon } from "@utils/media";
-import React from "react";
 
 const CustomRadio = (props) => {
   return (

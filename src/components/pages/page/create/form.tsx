@@ -4,7 +4,6 @@ import { axCreatePage } from "@services/pages.service";
 import { dateToUTC } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { PAGE_TYPES, transformPagePayload } from "../common/data";
 import PageForm from "../common/form";

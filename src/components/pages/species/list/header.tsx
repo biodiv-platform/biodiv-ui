@@ -4,7 +4,6 @@ import ListIcon from "@icons/list";
 import { sortByOptions } from "@static/species";
 import { format } from "indian-number-format";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { LuExternalLink } from "react-icons/lu";
 
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";

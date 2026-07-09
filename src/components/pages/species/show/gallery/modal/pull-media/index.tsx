@@ -2,7 +2,6 @@ import { Box, Button, SimpleGrid, useCheckboxGroup } from "@chakra-ui/react";
 import useObservationCreate from "@components/pages/observation/create/form/uploader/use-observation-resources";
 import CheckIcon from "@icons/check";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import Checkbox from "./checkbox";
 import usePullMedia from "./use-pull-media";

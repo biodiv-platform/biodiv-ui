@@ -1,6 +1,6 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import { RadioCard } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ITraitInputProps } from "..";
 import TraitContent from "./content";

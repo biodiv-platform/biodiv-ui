@@ -1,6 +1,5 @@
 import { Box, Heading, Link, List, SimpleGrid } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { PageHeading } from "@/components/@core/layout";
 

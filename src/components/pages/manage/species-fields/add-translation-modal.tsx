@@ -1,7 +1,7 @@
 import { Box, Button, CloseButton, Dialog, Flex, Portal, Tabs, VStack } from "@chakra-ui/react";
 import { axGetLangList } from "@services/utility.service";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface AddTranslationModalProps {
   isOpen: boolean;

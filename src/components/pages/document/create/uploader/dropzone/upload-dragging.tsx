@@ -1,6 +1,5 @@
 import { Flex } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { LuArrowUp } from "react-icons/lu";
 
 export default function UploadDragging() {

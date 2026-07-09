@@ -1,5 +1,3 @@
-import React from "react";
-
 import { authorizedPageSSP } from "@/components/auth/auth-redirect";
 import GbifExportTable from "@/components/pages/dwc";
 import { DwcLogsDataProvider } from "@/components/pages/dwc/use-dwc-filter-log";

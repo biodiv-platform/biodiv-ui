@@ -5,7 +5,6 @@ import {
 import DataTableShowPageComponent from "@components/pages/datatable/show";
 import { axGetObservationByDatatableId, axGetspeciesGroups } from "@services/observation.service";
 import { LIST_PAGINATION_LIMIT } from "@static/documnet-list";
-import React from "react";
 
 const DatatableShowPage = ({ datatableShow, speciesGroups, observationData, filter }) => (
   <DataTableObservationListProvider observationData={observationData} filter={filter}>

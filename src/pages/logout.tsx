@@ -1,6 +1,6 @@
 import { useLocalRouter } from "@components/@core/local-link";
 import { removeCache, removeCookies } from "@utils/auth";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 const logout = () => {
   const router = useLocalRouter();

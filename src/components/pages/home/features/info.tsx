@@ -2,7 +2,6 @@ import { Box, Flex, Image, Link, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import { getLocalIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 export default function Info({ icon, title, link }) {
   const { t } = useTranslation();

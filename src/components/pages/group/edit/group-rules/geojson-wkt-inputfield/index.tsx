@@ -4,7 +4,7 @@ import { getMapCenter } from "@utils/location";
 import notification, { NotificationType } from "@utils/notification";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useController } from "react-hook-form";
 import { LuView } from "react-icons/lu";
 import { parse, stringify } from "wkt";
@@ -48,7 +48,7 @@ export default function GeoJsonWktParserInput({
   const { t } = useTranslation();
   const [canShow, setShow] = useState<boolean>(false);
   const [featureData, setDefaultFeatureData] = useState();
-  const defaultViewState = React.useMemo(() => getMapCenter(2), []);
+  const defaultViewState = useMemo(() => getMapCenter(2), []);
 
   const handleMapDraw = (geoJson) => {
     if (geoJson.length > 0) {

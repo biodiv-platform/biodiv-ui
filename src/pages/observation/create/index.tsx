@@ -9,7 +9,6 @@ import { axGetLicenseList } from "@services/resources.service";
 import { axGetLangList } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
 import { getLanguageId } from "@utils/i18n";
-import React from "react";
 
 const ObservationCreateNextPage = (props) => (
   <NoSSR>

@@ -1,5 +1,4 @@
 import { ObservationCreateProvider } from "@components/pages/observation/create/form/uploader/use-observation-resources";
-import React from "react";
 import { useFormContext } from "react-hook-form";
 
 import DropzoneField, { IDropzoneProps } from "./field";

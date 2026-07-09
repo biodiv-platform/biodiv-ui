@@ -11,7 +11,7 @@ import { axGetObservationMapData } from "@services/observation.service";
 import { hasAccess, waitForAuth } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LuExternalLink } from "react-icons/lu";
 import * as Yup from "yup";

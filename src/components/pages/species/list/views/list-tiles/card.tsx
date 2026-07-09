@@ -6,7 +6,7 @@ import { RESOURCE_SIZE } from "@static/constants";
 import { hasAccess } from "@utils/auth";
 import { getLocalIcon, getResourceThumbnail } from "@utils/media";
 import { getInjectableHTML, stripTags } from "@utils/text";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 import { Checkbox } from "@/components/ui/checkbox";

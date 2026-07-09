@@ -3,7 +3,7 @@ import ActivityList from "@components/pages/observation/show/activity/activity-l
 import Comment from "@components/pages/observation/show/activity/comment";
 import { axAddDocumentComment } from "@services/activity.service";
 import { RESOURCE_TYPE } from "@static/constants";
-import React, { useRef } from "react";
+import { useRef } from "react";
 
 export default function CommentsTab({ documentId }) {
   const titleRef = useRef(null);

@@ -5,7 +5,6 @@ import SpeciesGroupBox from "@components/pages/observation/show/info/species-gro
 import CheckIcon from "@icons/check";
 import CrossIcon from "@icons/cross";
 import { getUserImage } from "@utils/media";
-import React from "react";
 
 const doFilter = (data) => {
   const parsedData = parseObservationData(data);

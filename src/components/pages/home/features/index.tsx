@@ -2,7 +2,6 @@ import { Box, Heading, SimpleGrid } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import { FEATURES } from "@static/home";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import Info from "./info";
 

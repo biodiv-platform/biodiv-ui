@@ -1,5 +1,3 @@
-import React from "react";
-
 import GroupRulesRow from "./group-rules-row";
 
 const GroupRulesListItems = ({ groupRules, removeGroupRules }) => {

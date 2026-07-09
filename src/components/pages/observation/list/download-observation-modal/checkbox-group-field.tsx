@@ -1,5 +1,4 @@
 import { Checkbox, CheckboxGroup, Fieldset, Stack } from "@chakra-ui/react";
-import React from "react";
 import { useController } from "react-hook-form";
 
 interface ITextBoxProps {

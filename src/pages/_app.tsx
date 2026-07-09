@@ -15,7 +15,7 @@ import App, { AppContext } from "next/app";
 import dynamic from "next/dynamic";
 import Router from "next/router";
 import NProgress from "nprogress";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import BusProvider from "react-gbus";
 
 import Announcement from "@/components/@core/announcements";

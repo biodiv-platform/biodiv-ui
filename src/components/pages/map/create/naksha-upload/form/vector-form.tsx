@@ -6,7 +6,7 @@ import { TextBoxField } from "@components/form/text";
 import { TextAreaField } from "@components/form/textarea";
 import { LICENSES } from "naksha-components-react";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import { ACCESS, LAYER_TYPES } from "../data";
 import useLayerUpload from "../use-layer-upload";

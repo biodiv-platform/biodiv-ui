@@ -1,5 +1,4 @@
 import { DOCUMNET_ITEM_TYPE } from "@static/document";
-import React from "react";
 
 import CheckboxFilterPanel from "../shared/checkbox";
 

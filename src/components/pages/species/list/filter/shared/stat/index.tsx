@@ -1,7 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { getByPath } from "@utils/basic";
 import { toHumanString } from "human-readable-numbers";
-import React from "react";
 
 import useSpeciesList from "../../../use-species-list";
 

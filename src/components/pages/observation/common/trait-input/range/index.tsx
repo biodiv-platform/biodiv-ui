@@ -1,6 +1,6 @@
 import { Input, SimpleGrid } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Field } from "@/components/ui/field";
 import { InputGroup } from "@/components/ui/input-group";

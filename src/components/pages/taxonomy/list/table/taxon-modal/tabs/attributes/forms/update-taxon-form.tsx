@@ -15,7 +15,7 @@ import { axCheckTaxonomy, axUpdateTaxonStatus } from "@services/taxonomy.service
 import { TAXON_STATUS, TAXON_STATUS_VALUES } from "@static/taxon";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 

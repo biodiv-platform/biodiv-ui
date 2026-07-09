@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { axCheckTaxonomy, axSaveTaxonomy } from "@services/taxonomy.service";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 

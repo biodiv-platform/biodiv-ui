@@ -1,7 +1,6 @@
 import { Button } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import { DB_CONFIG } from "@static/observation-create";
-import React from "react";
 
 export default function DeveloperOptionsComponentPage() {
   const handleOnIndexedDBDelete = () => {

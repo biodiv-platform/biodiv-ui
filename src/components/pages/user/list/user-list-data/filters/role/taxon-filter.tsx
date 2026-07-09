@@ -6,7 +6,6 @@ import {
 import useUserListFilter from "@components/pages/user/common/use-user-filter";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 

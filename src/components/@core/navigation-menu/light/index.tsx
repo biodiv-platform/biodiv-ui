@@ -2,7 +2,7 @@ import { Box, useDisclosure } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { Mq } from "mq-styled-components";
 import Router from "next/router";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import PrimaryLogo from "./left-menu/logo";
 import RightMenu from "./right-menu";

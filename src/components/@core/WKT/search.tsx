@@ -9,7 +9,7 @@ import { getMapCenter } from "@utils/location";
 import debounce from "debounce-promise";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import AsyncSelect from "react-select/async";
 import wkt from "wkt";
 

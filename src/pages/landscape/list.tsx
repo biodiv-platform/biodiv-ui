@@ -3,7 +3,6 @@ import { LandscapeFilterProvider } from "@components/pages/landscape/list/use-la
 import { axGetLandscapeList } from "@services/landscape.service";
 import { LANDSCAPE_DEFAULT_FILTER } from "@static/landscape-list";
 import { LIST_PAGINATION_LIMIT } from "@static/observation-list";
-import React from "react";
 
 const LandscapeListPage = ({ landscapeData, initialFilterParams, nextOffset }) => {
   return (

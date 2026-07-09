@@ -1,6 +1,5 @@
 import { authorizedPageSSP } from "@components/auth/auth-redirect";
 import { Role } from "@interfaces/custom";
-import React from "react";
 
 import AdminComponent from "@/components/pages/manage";
 

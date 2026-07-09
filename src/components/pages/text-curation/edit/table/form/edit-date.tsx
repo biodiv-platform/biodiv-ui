@@ -3,7 +3,7 @@ import { DatePickerNextField } from "@components/form/datepicker-next";
 import { SelectInputField } from "@components/form/select";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { useFormContext } from "react-hook-form";
 
 import { DATE_FORMAT, DATE_FORMAT_OPTIONS } from "../data";

@@ -8,7 +8,7 @@ import { Role } from "@interfaces/user";
 import { axGetUserRoles, axUpdateUserPermissions } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 

@@ -1,7 +1,6 @@
 import { Box, Button, Flex, Input, InputGroup } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import { getByPath } from "@utils/basic";
-import React from "react";
 import { useFormContext } from "react-hook-form";
 
 import { Field } from "@/components/ui/field";

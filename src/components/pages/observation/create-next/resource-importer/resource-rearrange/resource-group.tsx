@@ -1,6 +1,5 @@
 import { Box, CloseButton, Flex } from "@chakra-ui/react";
 import { Droppable } from "@hello-pangea/dnd";
-import React from "react";
 
 import { Resource } from "./resource";
 

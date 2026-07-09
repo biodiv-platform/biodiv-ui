@@ -1,5 +1,4 @@
 import { Box, Skeleton, Text } from "@chakra-ui/react";
-import React from "react";
 
 export default function TableTotals({ title, count, isLoading }) {
   return (

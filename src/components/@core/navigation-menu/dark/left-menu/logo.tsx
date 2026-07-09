@@ -4,7 +4,6 @@ import SITE_CONFIG from "@configs/site-config";
 import styled from "@emotion/styled";
 import { Mq } from "mq-styled-components";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { LuCirclePlus, LuMenu, LuX } from "react-icons/lu";
 
 import useGlobalState from "@/hooks/use-global-state";

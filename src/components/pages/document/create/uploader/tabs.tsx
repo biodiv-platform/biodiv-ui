@@ -1,7 +1,7 @@
 import { Tabs } from "@chakra-ui/react";
 import { useIsMount } from "@hooks/use-is-mount";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import ExternalUrl from "../resource-url";
 import useManageDocument from "./document-upload-provider";

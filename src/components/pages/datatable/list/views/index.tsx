@@ -1,5 +1,4 @@
 import Loading from "@components/pages/common/loading";
-import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import useDataTableList from "../../common/use-datatable-filter";

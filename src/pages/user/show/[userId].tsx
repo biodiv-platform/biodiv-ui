@@ -6,7 +6,6 @@ import { axGetUserById } from "@services/user.service";
 import { axGroupListExpanded } from "@services/usergroup.service";
 import { axGetAllHabitat } from "@services/utility.service";
 import { getLanguageId } from "@utils/i18n";
-import React from "react";
 
 const UserShowPage = ({ user, groupFilter }) => (
   <GroupListFilterProvider {...groupFilter}>

@@ -4,7 +4,6 @@ import { Role } from "@interfaces/custom";
 import { axShowDataset } from "@services/curate.service";
 import { getParsedUser, hasAccess } from "@utils/auth";
 import dynamic from "next/dynamic";
-import React from "react";
 
 const CurateEditPageComponent = dynamic(() => import("@components/pages/text-curation/edit"), {
   ssr: false

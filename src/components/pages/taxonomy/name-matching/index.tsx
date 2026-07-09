@@ -17,7 +17,7 @@ import { axUploadTaxonFile } from "@services/taxonomy.service";
 import notification from "@utils/notification";
 import ExcelJS from "exceljs";
 import useTranslation from "next-translate/useTranslation";
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { LuChevronDown, LuCircleAlert } from "react-icons/lu";
 
 import { Alert } from "@/components/ui/alert";

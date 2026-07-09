@@ -5,7 +5,7 @@ import { DEFAULT_FILTER } from "@static/documnet-list";
 import { removeEmptyKeys } from "@utils/basic";
 import { stringify } from "@utils/query-string";
 import NProgress from "nprogress";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
 interface GroupListFilterContextProps {

@@ -3,7 +3,7 @@ import { axGetObservationMapData } from "@services/observation.service";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import { useMemo } from "react";
 import LazyLoad from "react-lazyload";
 
 import { mapStyles } from "@/static/constants";
@@ -41,7 +41,7 @@ export default function ClusterMap({
   borderRadius = "md"
 }: ClusterMapProps) {
   const { lang } = useTranslation();
-  const defaultViewState = React.useMemo(
+  const defaultViewState = useMemo(
     () => getMapCenter(3.1, latitude ? { latitude, longitude } : {}),
     []
   );

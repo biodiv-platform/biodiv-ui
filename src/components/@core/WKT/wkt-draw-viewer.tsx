@@ -7,7 +7,7 @@ import { getMapCenter } from "@utils/location";
 import notification from "@utils/notification";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import wkt from "wkt";
 
 import { Field } from "@/components/ui/field";
@@ -63,7 +63,7 @@ export default function WKTDrawViewer({
 }: WKTProps) {
   const WKTInputRef: any = useRef(null);
   const TitleInputRef: any = useRef(null);
-  const defaultViewState = React.useMemo(() => getMapCenter(2), []);
+  const defaultViewState = useMemo(() => getMapCenter(2), []);
   const { t } = useTranslation();
   const [geojson, setGeojson] = useState<any>();
   const mapContainerRef = useRef<HTMLDivElement>(null);

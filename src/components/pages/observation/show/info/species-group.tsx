@@ -8,7 +8,7 @@ import { SPECIES_GROUP_UPDATED } from "@static/events";
 import { getLocalIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { emit } from "react-gbus";
 import { LuCheck } from "react-icons/lu";
 import Select, { components } from "react-select";
