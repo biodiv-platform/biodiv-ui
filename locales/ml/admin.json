@@ -64,7 +64,8 @@
     "announcements_configure": "അറിയിപ്പുകൾ നിയന്ത്രിക്കുക",
     "clear_cache": "കാഷെ മായ്ക്കുക",
     "name-macthing": "പേര് പൊരുത്തപ്പെടുന്നു",
-    "notification": "പുഷ്-അറിയിപ്പ് അയയ്ക്കുക"
+    "notification": "പുഷ്-അറിയിപ്പ് അയയ്ക്കുക",
+    "update_observation_index": "നിരീക്ഷണ സൂചിക അപ്ഡേറ്റ് ചെയ്യുക"
   },
   "pages": {
     "notification": {

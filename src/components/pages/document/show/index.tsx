@@ -55,9 +55,6 @@ export default function DocumentShowComponent({
   }, [isLoggedIn]);
 
   const getDocumentType = (mimeType) => {
-    if (!document.uFile && !document.document?.externalUrl) {
-      return ACCEPTED_MIME_TYPE.PDF;
-    }
     if (document?.document?.externalUrl || mimeType.includes(ACCEPTED_MIME_TYPE.PDF)) {
       return ACCEPTED_MIME_TYPE.PDF;
     }

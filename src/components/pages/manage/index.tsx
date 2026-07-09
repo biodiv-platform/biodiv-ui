@@ -46,8 +46,8 @@ function AdminComponent() {
       ]
     },
     {
-      title: t("Elastic"),
-      items: [{ href: "/manage/elastic", label: t("Update Elastic Index") }]
+      title: t("header:menu_secondary.elastic.title"),
+      items: [{ href: "/manage/elastic", label: t("admin:links.update_observation_index") }]
     }
   ];
 

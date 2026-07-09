@@ -64,7 +64,8 @@
     "announcements_configure": "నోటిఫికేషన్‌లను నిర్వహించండి",
     "clear_cache": "క్లియర్ కాష్",
     "name-macthing": "పేరు సరిపోలిక",
-    "notification": "పుష్-నోటిఫికేషన్ను పంపండి"
+    "notification": "పుష్-నోటిఫికేషన్ను పంపండి",
+    "update_observation_index": "పరిశీలన సూచికను నవీకరించండి"
   },
   "pages": {
     "notification": {
