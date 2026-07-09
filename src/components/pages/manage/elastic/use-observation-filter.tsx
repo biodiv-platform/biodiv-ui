@@ -2,7 +2,8 @@ import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import { isBrowser } from "@static/constants";
 import NProgress from "nprogress";
 import { stringify } from "querystring";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import * as React from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
 import { axListObservation } from "@/services/observation.service";

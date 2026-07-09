@@ -3,7 +3,6 @@ import {
   onScientificNameQuery,
   ScientificNameOption
 } from "@components/pages/observation/create/form/recodata/scientific-name";
-import React from "react";
 
 export default function TaxonInputField({ label, name }) {
   const onQuery = async (q) => await onScientificNameQuery(q, "name");

@@ -1,6 +1,5 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import SpeciesLoading from "@components/pages/common/loading";
-import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import useSpeciesList from "../../use-species-list";

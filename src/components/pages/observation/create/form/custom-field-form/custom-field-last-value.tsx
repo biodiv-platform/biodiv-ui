@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import ls from "local-storage-json";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function CustomFieldLastValue({ id, name, set }) {
   const { t } = useTranslation();

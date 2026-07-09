@@ -6,7 +6,6 @@ import { TextAreaField } from "@components/form/textarea";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import { BASIS_OF_DATA, BASIS_OF_RECORD } from "@static/datatable";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 export default function PartyContributorsForm({ languages }) {
   const { t } = useTranslation();

@@ -7,7 +7,7 @@ import { hasAccess } from "@utils/auth";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import { useMemo } from "react";
 
 const NakshaMaplibreLayers: any = dynamic(
   () => import("naksha-components-react").then((mod: any) => mod.NakshaMaplibreLayers),
@@ -29,7 +29,7 @@ export default function Map() {
   const { currentGroup, isLoggedIn } = useGlobalState();
   const userGroupId = currentGroup?.id || undefined;
   const geoserverLayers: any = SITE_CONFIG.HOME.MAP || [];
-  const mapCenter = React.useMemo(() => getMapCenter(3.5), []);
+  const mapCenter = useMemo(() => getMapCenter(3.5), []);
   const canManagePublishing = isLoggedIn && hasAccess([Role.Admin]);
   const { lang } = useTranslation();
 

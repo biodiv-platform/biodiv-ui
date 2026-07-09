@@ -64,7 +64,8 @@
     "announcements_configure": "सूचनाओं का प्रबंधन करें",
     "clear_cache": "कैश को साफ़ करें",
     "name-macthing": "नाम मिलान",
-    "notification": "पुश-अधिसूचना भेजें"
+    "notification": "पुश-अधिसूचना भेजें",
+    "update_observation_index": "अवलोकन सूचकांक अद्यतन करें"
   },
   "pages": {
     "notification": {

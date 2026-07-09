@@ -4,7 +4,7 @@ import DownloadIcon from "@icons/download";
 import { axAddDownloadLog } from "@services/user.service";
 import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
-import React, { forwardRef, useImperativeHandle, useRef } from "react";
+import { forwardRef, useImperativeHandle, useRef } from "react";
 
 import LineGraph from "./line-graph";
 import useTraitsDistributionData from "./use-traits-distribution-data";

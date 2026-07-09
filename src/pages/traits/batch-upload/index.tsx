@@ -3,7 +3,6 @@ import TraitsBatchUploadComponent from "@components/pages/traits/batch-upload";
 import { Role } from "@interfaces/custom";
 import { axGetTraitNames } from "@services/traits.service";
 import { axGetLangList } from "@services/utility.service";
-import React from "react";
 
 const TraitsBatchUpload = ({ traits, languagesList }) => (
   <TraitsBatchUploadComponent traits={traits} languages={languagesList} />

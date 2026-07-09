@@ -8,7 +8,7 @@ import { isBrowser } from "@static/constants";
 import { stringify } from "@utils/query-string";
 import { getSpeciesFieldHeaders } from "@utils/species";
 import NProgress from "nprogress";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
 export interface SpeciesListData {

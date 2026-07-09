@@ -2,7 +2,6 @@ import { Link } from "@chakra-ui/react";
 import LoadingSpinner from "@components/pages/common/loading";
 import useDocumentFilter from "@components/pages/document/common/use-document-filter";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import Container from "./container";

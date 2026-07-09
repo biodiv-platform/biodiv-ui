@@ -11,7 +11,7 @@ import CarouselResourceInfo from "@components/@core/carousel/resource-info";
 import Slide, { NoSlide } from "@components/@core/carousel/slide";
 import { Thumbnail } from "@components/@core/carousel/thumbnails";
 import { ResourceType } from "@interfaces/custom";
-import React, { forwardRef, useState } from "react";
+import { forwardRef, useState } from "react";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 
 import useSpecies from "../use-species";

@@ -3,7 +3,6 @@ import BlueLink from "@components/@core/blue-link";
 import Badge from "@components/@core/user/badge";
 import { UserIbp } from "@interfaces/observation";
 import { getUserImage } from "@utils/media";
-import React from "react";
 
 import { Avatar } from "@/components/ui/avatar";
 

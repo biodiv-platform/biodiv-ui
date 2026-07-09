@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import useSpeciesList from "../../use-species-list";
 import TextFilterPanel from "./search";

@@ -5,7 +5,6 @@ import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import { OBSERVATION_BULK_EDIT_DONE } from "@static/events";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { emit } from "react-gbus";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as Yup from "yup";

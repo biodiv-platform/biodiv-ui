@@ -1,7 +1,6 @@
 import { Box, Separator, Text, VisuallyHidden } from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { useFormContext } from "react-hook-form";
 
 import CustomFieldLastValue from "./custom-field-last-value";

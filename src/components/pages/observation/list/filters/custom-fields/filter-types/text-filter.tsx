@@ -1,5 +1,3 @@
-import React from "react";
-
 import FilterCheckboxes from "../../shared/checkbox/checkboxs";
 import TextFilterInput from "../../shared/search/input";
 import { CONTENT_TYPES } from "./filter-keys";

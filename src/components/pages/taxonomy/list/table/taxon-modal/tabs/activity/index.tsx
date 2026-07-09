@@ -3,7 +3,6 @@ import Activity from "@components/pages/observation/show/activity";
 import useTaxonFilter from "@components/pages/taxonomy/list/use-taxon";
 import { axAddTaxonomyComment } from "@services/taxonomy.service";
 import { RESOURCE_TYPE } from "@static/constants";
-import React from "react";
 
 export function TaxonActivityTab() {
   const { modalTaxon } = useTaxonFilter();

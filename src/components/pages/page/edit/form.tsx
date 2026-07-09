@@ -3,7 +3,6 @@ import useGlobalState from "@hooks/use-global-state";
 import { axUpdatePage } from "@services/pages.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { transformPagePayload } from "../common/data";
 import PageForm from "../common/form";

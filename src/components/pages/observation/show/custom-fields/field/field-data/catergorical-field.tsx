@@ -3,7 +3,7 @@ import { ClearIndicator, selectStyles } from "@components/form/configs";
 import CustomFieldOption from "@components/pages/observation/create/form/custom-field-form/custom-field-options";
 import { axGetAllCustomFieldOptionsById } from "@services/usergroup.service";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Select from "react-select";
 
 import Buttons from "../buttons";

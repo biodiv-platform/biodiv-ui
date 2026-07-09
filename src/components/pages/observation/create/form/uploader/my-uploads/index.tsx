@@ -1,7 +1,6 @@
 import { Box, Button, Flex, SimpleGrid, Spinner, Text, useCheckboxGroup } from "@chakra-ui/react";
 import CheckIcon from "@icons/check";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 

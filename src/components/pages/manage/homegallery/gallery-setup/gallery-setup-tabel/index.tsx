@@ -1,6 +1,5 @@
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import GalleryListItems from "@components/pages/group/edit/homepage-customization/gallery-setup/gallery-setup-tabel/gallery-list";
-import useGlobalState from "@hooks/use-global-state";
 import AddIcon from "@icons/add";
 import CheckIcon from "@icons/check";
 import {
@@ -12,7 +11,7 @@ import {
 import notification, { NotificationType } from "@utils/notification";
 import { arrayMoveImmutable } from "array-move";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const GallerySetupTable = ({
   galleryList,
@@ -24,7 +23,6 @@ const GallerySetupTable = ({
 }) => {
   const [showReorder, setCanReorder] = useState<boolean>();
   const { t } = useTranslation();
-  const { languageId } = useGlobalState();
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
     setGalleryList(arrayMoveImmutable(galleryList, oldIndex, newIndex));
@@ -88,10 +86,8 @@ const GallerySetupTable = ({
         <GalleryListItems
           editGalleryItem={editGalleryItem}
           removeGalleryItem={removeGalleryItem}
-          helperClass="sorting-row"
           galleryList={galleryList}
           onSortEnd={onSortEnd}
-          languageId={languageId}
         />
       </table>
       <ButtonGroup gap={4} mt={4}>

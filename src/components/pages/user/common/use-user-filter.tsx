@@ -5,7 +5,7 @@ import { ACTIONS, isBrowser } from "@static/constants";
 import { LIST_PAGINATION_LIMIT } from "@static/documnet-list";
 import NProgress from "nprogress";
 import { stringify } from "querystring";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
 export interface UserListData {

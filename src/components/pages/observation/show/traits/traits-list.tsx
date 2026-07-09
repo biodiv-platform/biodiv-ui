@@ -5,7 +5,7 @@ import { axGetTraitsByGroupId } from "@services/observation.service";
 import { TRAIT_TYPES } from "@static/constants";
 import { SPECIES_GROUP_UPDATED } from "@static/events";
 import { formatDate } from "@utils/date";
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useListener } from "react-gbus";
 
 import Trait from "./trait";

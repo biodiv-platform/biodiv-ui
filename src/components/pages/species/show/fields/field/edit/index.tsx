@@ -1,5 +1,5 @@
 import { SPECIES_FIELD_UPDATE, SPECIES_FIELD_UPDATED } from "@static/events";
-import React, { useState } from "react";
+import { useState } from "react";
 import { emit, useListener } from "react-gbus";
 
 import { DialogBackdrop, DialogRoot } from "@/components/ui/dialog";

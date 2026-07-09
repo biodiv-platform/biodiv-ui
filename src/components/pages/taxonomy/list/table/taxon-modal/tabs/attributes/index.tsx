@@ -3,7 +3,6 @@ import EditIcon from "@icons/edit";
 import { Role } from "@interfaces/custom";
 import { hasAccess, waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { TaxonAttributesForm } from "./attributes-form";
 import { TaxonAttributesTable } from "./attributes-table";

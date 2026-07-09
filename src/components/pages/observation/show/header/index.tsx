@@ -25,7 +25,7 @@ import { getResourceThumbnail } from "@utils/media";
 import { stripTags } from "@utils/text";
 import { NextSeo } from "next-seo";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 interface IHeaderProps {
   o: ShowData;

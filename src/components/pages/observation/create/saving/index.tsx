@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import CheckIcon from "@icons/check";
 import { SYNC_SINGLE_OBSERVATION_DONE, SYNC_SINGLE_OBSERVATION_ERROR } from "@static/events";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useListener } from "react-gbus";
 
 import Saving from "./saving";

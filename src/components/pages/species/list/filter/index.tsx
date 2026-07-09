@@ -11,7 +11,7 @@ import {
 import BoxHeading from "@components/@core/layout/box-heading";
 import styled from "@emotion/styled";
 import useTranslation from "next-translate/useTranslation";
-import React, { Suspense } from "react";
+import { lazy, Suspense } from "react";
 
 import {
   DrawerBackdrop,
@@ -23,7 +23,7 @@ import {
 
 import ClearFilters from "./clear-filter";
 
-const FiltersList = React.lazy(() => import("./list"));
+const FiltersList = lazy(() => import("./list"));
 
 const FilterWrapper = styled.div`
   height: 100%;

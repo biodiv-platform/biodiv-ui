@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { ACCEPTED_FILE_TYPES } from "@static/observation-create";
 import { resizeMultiple } from "@utils/image";
 import useTranslation from "next-translate/useTranslation";
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { LuMoveUp, LuPlus, LuTimer } from "react-icons/lu";
 
 import useObservationCreate from "../use-observation-resources";

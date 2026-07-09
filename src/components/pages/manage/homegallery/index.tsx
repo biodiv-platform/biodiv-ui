@@ -3,7 +3,7 @@ import { PageHeading } from "@components/@core/layout";
 import HomeIcon from "@icons/home";
 import ImageIcon from "@icons/image";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import Wizard from "../../common/wizard";
 import HomePageGalleryCustomizationForm from "./form";

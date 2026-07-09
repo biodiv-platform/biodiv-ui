@@ -1,5 +1,4 @@
 import { Separator } from "@chakra-ui/react";
-import React from "react";
 
 import UpdateNameForm from "./forms/update-name-form";
 import UpdatePositionForm from "./forms/update-position-form";

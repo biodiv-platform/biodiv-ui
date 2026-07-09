@@ -1,7 +1,6 @@
 import TraitsListComponent from "@components/pages/traits/list";
 import { axGetTraitListData } from "@services/traits.service";
 import { getLanguageId } from "@utils/i18n";
-import React from "react";
 
 const traitsList = ({ data, filter }) => <TraitsListComponent data={data} filterKey={filter} />;
 

@@ -8,7 +8,7 @@ import { axGetDocumentBibFields } from "@services/document.service";
 import { getBibFieldsMeta } from "@utils/document";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
 import BibImportButton from "../bib-import";

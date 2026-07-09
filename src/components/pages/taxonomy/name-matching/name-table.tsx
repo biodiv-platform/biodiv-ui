@@ -4,7 +4,7 @@ import { axCheckSpecies } from "@services/species.service";
 import { TAXON_BADGE_COLORS } from "@static/constants";
 import { getLocalIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { LuDelete, LuPencil } from "react-icons/lu";
 
 import { Alert } from "@/components/ui/alert";

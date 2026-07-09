@@ -3,7 +3,7 @@ import AudioRecorder from "@components/@core/audio-recoarder";
 import { getAssetObject } from "@utils/image";
 import { nanoid } from "nanoid";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import AudioPlayer from "./audio-player";
 

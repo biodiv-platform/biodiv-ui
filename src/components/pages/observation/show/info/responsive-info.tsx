@@ -1,6 +1,5 @@
 import { Box, Text } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 interface ResponsiveInfoProps {
   title?;

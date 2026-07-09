@@ -2,7 +2,7 @@ import { BasicTable } from "@components/@core/table";
 import Loading from "@components/pages/common/loading";
 import { Role } from "@interfaces/custom";
 import { hasAccess } from "@utils/auth";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import useSpeciesList from "../../use-species-list";

@@ -3,7 +3,7 @@ import { ACCEPTED_FILE_TYPES, DEFAULT_TOAST } from "@static/observation-create";
 import { resizeMultiple } from "@utils/image";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useCallback, useRef } from "react";
+import { useCallback, useRef } from "react";
 
 import { toaster } from "@/components/ui/toaster";
 

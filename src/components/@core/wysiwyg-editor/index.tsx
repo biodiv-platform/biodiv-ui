@@ -1,6 +1,8 @@
 /* eslint-disable simple-import-sort/imports */
-import "tinymce/skins/ui/oxide/content.min.css";
-import "tinymce/skins/ui/oxide/skin.min.css";
+// @ts-ignore
+import "tinymce/skins/ui/oxide/content.css";
+// @ts-ignore
+import "tinymce/skins/ui/oxide/skin.css";
 
 import "tinymce/tinymce";
 import "tinymce/models/dom/model";
@@ -14,7 +16,6 @@ import "tinymce/themes/silver/theme";
 import "tinymce/plugins/media";
 
 import { Editor } from "@tinymce/tinymce-react";
-import React from "react";
 
 interface WYSIWYGEditorProps {
   fileUploadHandler?;
@@ -29,6 +30,7 @@ export default function WYSIWYGEditor({
 }: WYSIWYGEditorProps) {
   return (
     <Editor
+      licenseKey="gpl"
       {...props}
       init={{
         skin: false,

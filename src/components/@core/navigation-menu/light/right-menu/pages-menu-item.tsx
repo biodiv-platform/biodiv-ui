@@ -3,7 +3,7 @@ import LocalLink from "@components/@core/local-link";
 import useGlobalState from "@hooks/use-global-state";
 import { getPagesMenu } from "@utils/pages";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 const SubMenuLink = ({ item, onClose }) => (
   <>

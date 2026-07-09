@@ -4,13 +4,12 @@ import SITE_CONFIG from "@configs/site-config";
 import AddIcon from "@icons/add";
 import { axQueryGeoEntitiesByPlaceName } from "@services/geoentities.service";
 import { MENU_PORTAL_TARGET } from "@static/constants";
-import { feature } from "@turf/helpers";
-import pointOnFeature from "@turf/point-on-feature";
+import { feature, pointOnFeature } from "@turf/turf";
 import { getMapCenter } from "@utils/location";
 import debounce from "debounce-promise";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import AsyncSelect from "react-select/async";
 import wkt from "wkt";
 

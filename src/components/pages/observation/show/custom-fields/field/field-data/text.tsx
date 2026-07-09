@@ -1,7 +1,7 @@
 import { Text, Textarea } from "@chakra-ui/react";
 import { CustomFieldData } from "@interfaces/observation";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import Buttons from "../buttons";
 

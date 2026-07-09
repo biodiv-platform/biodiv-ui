@@ -1,5 +1,4 @@
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
-import React from "react";
 
 import CheckboxFilterPanel from "../shared/checkbox";
 import SubAccordion from "../shared/sub-accordion";

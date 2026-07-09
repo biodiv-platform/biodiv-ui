@@ -1,6 +1,5 @@
 import { Flex, SimpleGrid } from "@chakra-ui/react";
 import { formatDate } from "@utils/date";
-import React from "react";
 
 export function TraitDateShow({ values, format }) {
   return (

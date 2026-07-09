@@ -1,5 +1,5 @@
 import { Box, FileUpload } from "@chakra-ui/react";
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 
 import useManageDocument from "../document-upload-provider";
 import DocumentPreview from "./document-preview";

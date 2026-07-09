@@ -7,7 +7,6 @@ import AddIcon from "@icons/add";
 import EditIcon from "@icons/edit";
 import { axDeletePageByID } from "@services/pages.service";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import usePages from "../../common/sidebar/use-pages-sidebar";
 import { TableOfContents } from "./toc";

@@ -1,6 +1,5 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import { UserProfileData } from "@interfaces/integrator";
-import React from "react";
 
 import SideBar from "./sidebar";
 import UserEditTabs from "./tabs";

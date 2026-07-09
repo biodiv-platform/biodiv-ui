@@ -7,7 +7,7 @@ import { getFallbackByMIME, getResourceRAW, getResourceThumbnail } from "@utils/
 import notification, { NotificationType } from "@utils/notification";
 import produce from "immer";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import ReactCrop from "react-image-crop";
 
 import { ImageWithFallback } from "@/components/@core/image-with-fallback";

@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import firebaseConfig from "./firebase-config";
 
 importScripts("https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js");

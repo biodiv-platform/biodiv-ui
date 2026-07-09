@@ -2,7 +2,6 @@ import { Stack } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import { LEADERBOARD_MODULES, LEADERBOARD_STOPS } from "@static/leaderboard";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 

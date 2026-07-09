@@ -29,7 +29,7 @@ import { axCreateTrait } from "@services/traits.service";
 import { getTraitIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import Select from "react-select";
 import * as Yup from "yup";

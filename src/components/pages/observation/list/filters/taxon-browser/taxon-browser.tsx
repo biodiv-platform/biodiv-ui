@@ -4,7 +4,7 @@ import { Box, Spinner } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { axGetTaxonList } from "@services/api.service";
 import Tree from "rc-tree";
-import React, { Component } from "react";
+import { Component } from "react";
 
 import { getNewTreeData, loopLoading } from "./taxon-browser-helpers";
 import TaxonResultArrows from "./taxon-result-arrows";

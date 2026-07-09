@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const nextTranslate = require("next-translate");
+const nextTranslate = require("next-translate-plugin");
 const { SITE } = require("./src/configs/site-config");
 
 const siteUrl = new URL(SITE.SSR_URL);
@@ -8,24 +7,13 @@ const mainDomain = siteUrl.hostname;
 module.exports = nextTranslate({
   experimental: {
     optimizePackageImports: ["@chakra-ui/react"],
-    legacyBrowsers: false,
-    browsersListForSwc: true,
     nextScriptWorkers: false
   },
   images: {
+    dangerouslyAllowLocalIP: true,
     remotePatterns: [
-      // Main domain
-      {
-        protocol: siteUrl.protocol.replace(":", ""),
-        hostname: mainDomain,
-        pathname: "/**"
-      },
-      // All subdomains
-      {
-        protocol: "https",
-        hostname: `*.${mainDomain}`,
-        pathname: "/**"
-      }
+      { protocol: siteUrl.protocol.replace(":", ""), hostname: mainDomain, pathname: "/**" },
+      { protocol: "https", hostname: `*.${mainDomain}`, pathname: "/**" }
     ]
   }
-});
+}, { turbopack: true });

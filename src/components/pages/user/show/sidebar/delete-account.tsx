@@ -3,7 +3,7 @@ import { useLocalRouter } from "@components/@core/local-link";
 import { axDeleteUser } from "@services/user.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import { useRef } from "react";
 
 import {
   DialogBackdrop,
@@ -17,7 +17,7 @@ import {
 export default function DeleteAccount({ userId }) {
   const { t } = useTranslation();
   const { open, onOpen, onClose } = useDisclosure();
-  const cancelRef = React.useRef(null);
+  const cancelRef = useRef(null);
   const router = useLocalRouter();
 
   const handleOnDelete = async () => {

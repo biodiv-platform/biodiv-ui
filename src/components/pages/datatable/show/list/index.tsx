@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { BasicTable } from "@components/@core/table";
 import Loading from "@components/pages/common/loading";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import useDataTableObservation from "../../common/use-datatableObservation-filter";

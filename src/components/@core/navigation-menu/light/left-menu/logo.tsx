@@ -7,7 +7,6 @@ import { Mq } from "mq-styled-components";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { LuMenu, LuX } from "react-icons/lu";
 
 import { getLogo } from "@/utils/media";

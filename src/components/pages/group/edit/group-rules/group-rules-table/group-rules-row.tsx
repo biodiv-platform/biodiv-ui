@@ -1,7 +1,6 @@
 import { Box, Button } from "@chakra-ui/react";
 import DeleteIcon from "@icons/delete";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 const GroupRulesRow = ({ itemDetails, onDelete }) => {
   const { t } = useTranslation();

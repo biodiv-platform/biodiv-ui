@@ -2,7 +2,7 @@ import { Box, Button, FileUpload, Heading, Text, VStack } from "@chakra-ui/react
 import styled from "@emotion/styled";
 import { axUploadResource } from "@services/files.service";
 import useTranslation from "next-translate/useTranslation";
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { LuTimer } from "react-icons/lu";
 
 const DropTargetBox = styled.div`

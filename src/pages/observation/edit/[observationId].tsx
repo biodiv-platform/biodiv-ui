@@ -3,7 +3,6 @@ import ObservationEditComponent from "@components/pages/observation/edit";
 import { Role } from "@interfaces/custom";
 import { axGetObservationEditById } from "@services/observation.service";
 import { axGetLicenseList } from "@services/resources.service";
-import React from "react";
 
 const ObservationEditPage = ({ observation, observationId, licensesList }) => (
   <ObservationEditComponent

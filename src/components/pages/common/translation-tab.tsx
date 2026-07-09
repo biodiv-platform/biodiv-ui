@@ -1,6 +1,5 @@
 import { Box, Button, Flex, Tabs, useDisclosure } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import Select from "react-select";
 
 import {

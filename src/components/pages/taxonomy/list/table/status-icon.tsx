@@ -1,7 +1,6 @@
 import CircleIcon from "@icons/circle";
 import EqualsIcon from "@icons/equals";
 import { TAXON_STATUS_VALUES } from "@static/taxon";
-import React from "react";
 
 /**
  * Shows _circle_ and _equals_ icons on taxon table

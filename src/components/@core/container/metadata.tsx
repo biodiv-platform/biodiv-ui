@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import Script from "next/script";
 import { DefaultSeo } from "next-seo";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 export default function Metadata() {
   const router = useRouter();

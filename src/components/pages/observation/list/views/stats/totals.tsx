@@ -1,6 +1,6 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import TableTotals from "./table-totals";
 import useTotals from "./use-totals";

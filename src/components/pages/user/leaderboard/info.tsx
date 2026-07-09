@@ -1,6 +1,5 @@
 import { CloseButton, useDisclosure } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { Alert } from "@/components/ui/alert";
 

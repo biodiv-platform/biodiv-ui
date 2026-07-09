@@ -4,7 +4,7 @@ import { Box, Input } from "@chakra-ui/react";
 import useDocumentFilter from "@components/pages/document/common/use-document-filter";
 import dayjs from "@utils/date";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import Flatpickr from "react-flatpickr";
 
 import {

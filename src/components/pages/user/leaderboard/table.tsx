@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import useGlobalState from "@hooks/use-global-state";
 import { axGetUserLeaderboard } from "@services/esmodule.service";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { LuMoveDown } from "react-icons/lu";
 import { useSortBy, useTable } from "react-table";
 

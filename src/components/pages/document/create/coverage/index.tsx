@@ -2,7 +2,6 @@ import { Box } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import IconCheckboxField from "@components/pages/group/common/icon-checkbox-field";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import WKTCoverage from "./wkt-coverage";
 

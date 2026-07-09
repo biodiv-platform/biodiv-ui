@@ -1,6 +1,5 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import { PageUpdate } from "@interfaces/pages";
-import React from "react";
 
 import PagesSidebar from "../common/sidebar";
 import { UsePagesProvider } from "../common/sidebar/use-pages-sidebar";

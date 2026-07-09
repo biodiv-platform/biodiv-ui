@@ -4,7 +4,7 @@ import DownloadIcon from "@icons/download";
 import { axAddDownloadLog } from "@services/user.service";
 import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 
 import { toaster } from "@/components/ui/toaster";
 

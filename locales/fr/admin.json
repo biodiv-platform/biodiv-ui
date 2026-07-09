@@ -64,7 +64,8 @@
     "announcements_configure": "Gérer les notifications",
     "clear_cache": "Vider le cache",
     "name-macthing": "Nom correspondant",
-    "notification": "Envoyer une notification push"
+    "notification": "Envoyer une notification push",
+    "update_observation_index": "Mettre à jour l'indice d'observation"
   },
   "pages": {
     "notification": {

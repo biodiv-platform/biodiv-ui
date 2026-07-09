@@ -9,9 +9,8 @@ import {
 } from "@services/observation.service";
 import { DEFAULT_FILTER } from "@static/documnet-list";
 import { DEFAULT_FILTER as OBSERVATION_FILTER } from "@static/observation-list";
-import envelope from "@turf/envelope";
+import { envelope } from "@turf/turf";
 import { getLanguageId } from "@utils/i18n";
-import React from "react";
 import wkt from "wkt";
 
 export const documentsListParams = {

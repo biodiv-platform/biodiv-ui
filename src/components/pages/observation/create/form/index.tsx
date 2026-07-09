@@ -7,7 +7,7 @@ import useGlobalState from "@hooks/use-global-state";
 import CheckIcon from "@icons/check";
 import { RESOURCES_UPLOADING, SYNC_OBSERVATION } from "@static/events";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { emit, useListener } from "react-gbus";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as Yup from "yup";

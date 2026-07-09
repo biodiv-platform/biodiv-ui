@@ -3,7 +3,6 @@ import BlueLink from "@components/@core/blue-link";
 import ExternalBlueLinkList from "@components/@core/blue-link/external-list";
 import { ResponsiveInfo } from "@components/pages/observation/show/info/responsive-info";
 import { timeAgoUTC } from "@utils/date";
-import React from "react";
 
 import { UserProfileProps } from "../../";
 

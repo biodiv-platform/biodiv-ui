@@ -1,5 +1,3 @@
-import React from "react";
-
 import CheckboxFilterPanel from "../shared/checkbox";
 import SubAccordion from "../shared/sub-accordion";
 import { FLAG, IDENTIFICATION, TAXON_ID, VALIDATION } from "./filter-keys";

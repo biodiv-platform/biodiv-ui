@@ -2,7 +2,7 @@ import useGlobalState from "@hooks/use-global-state";
 import { parseUrl, stringify } from "@utils/query-string";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
-import React, { cloneElement } from "react";
+import { cloneElement } from "react";
 
 interface Props extends Omit<Omit<LinkProps, "href">, "as"> {
   href: string | undefined;

@@ -1,6 +1,6 @@
 import { Image, Stack, Text } from "@chakra-ui/react";
 import { getGroupImageThumb } from "@utils/media";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { components } from "react-select";
 
 export default function CustomFieldOption(props: any) {

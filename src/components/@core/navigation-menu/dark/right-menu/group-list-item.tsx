@@ -4,7 +4,7 @@ import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { LuArrowRight } from "react-icons/lu";
 
 const GroupListItem = () => {

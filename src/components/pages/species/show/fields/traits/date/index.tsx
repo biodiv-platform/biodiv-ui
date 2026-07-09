@@ -1,5 +1,5 @@
 import { useDisclosure } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import { TraitHeader } from "../common/trait-header";
 import { TraitDateEdit } from "./date-edit";

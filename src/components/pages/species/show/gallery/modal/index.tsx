@@ -1,7 +1,7 @@
 import { Box, Button, useDisclosure } from "@chakra-ui/react";
 import GridIcon from "@icons/grid";
 import useTranslation from "next-translate/useTranslation";
-import React, { Suspense } from "react";
+import { lazy, Suspense } from "react";
 
 import {
   DialogBackdrop,
@@ -13,8 +13,8 @@ import {
 
 import useSpecies from "../../use-species";
 
-const SpeciesGalleryForm = React.lazy(() => import("./form"));
-const SpeciesGalleryList = React.lazy(() => import("./list"));
+const SpeciesGalleryForm = lazy(() => import("./form"));
+const SpeciesGalleryList = lazy(() => import("./list"));
 
 export default function SpeciesGalleryModal({ resources, setResources }) {
   const { open, onOpen, onClose } = useDisclosure();

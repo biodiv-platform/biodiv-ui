@@ -7,7 +7,6 @@ import {
   axGetEditDocumentById
 } from "@services/document.service";
 import { axGetLicenseList } from "@services/resources.service";
-import React from "react";
 
 const DocumentEditPage = (props) =>
   props.initialDocument ? <DocumentEditPageComponent {...props} /> : null;

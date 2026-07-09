@@ -13,7 +13,7 @@ import { toKey } from "@utils/basic";
 import { formatTimeStampFromUTC, timeAgoUTC } from "@utils/date";
 import { getUserImage } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useListener } from "react-gbus";
 
 import { Avatar } from "@/components/ui/avatar";

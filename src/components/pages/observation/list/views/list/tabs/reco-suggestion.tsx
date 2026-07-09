@@ -3,7 +3,6 @@ import useObservationFilter from "@components/pages/observation/common/use-obser
 import AddSuggestion from "@components/pages/observation/show/suggestion/add-suggestion";
 import RecoSuggestion from "@components/pages/observation/show/suggestion/reco-suggestion";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 export default function RecoSuggestionTab({ o, recoUpdated }) {
   const { observationData } = useObservationFilter();

@@ -6,7 +6,7 @@ import { axGetListData } from "@services/observation.service";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 

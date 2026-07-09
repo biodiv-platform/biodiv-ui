@@ -8,7 +8,7 @@ import DeleteIcon from "@icons/delete";
 import { AssetStatus } from "@interfaces/custom";
 import { getFallbackByMIME } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";

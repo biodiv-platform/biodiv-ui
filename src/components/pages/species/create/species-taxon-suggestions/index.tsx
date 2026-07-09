@@ -1,6 +1,5 @@
 import { Box, Spinner, Tabs } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { Tag } from "@/components/ui/tag";
 

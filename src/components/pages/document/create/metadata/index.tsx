@@ -3,7 +3,6 @@ import { PageHeading } from "@components/@core/layout";
 import { TextBoxField } from "@components/form/text";
 import { META_BIB_FIELDS } from "@static/document";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 interface MetadataProps {
   bibFields;

@@ -2,7 +2,7 @@ import { Box, Carousel } from "@chakra-ui/react";
 import { axGetLicenseList } from "@services/resources.service";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface PageSliderProps {
   images?;

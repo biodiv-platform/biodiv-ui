@@ -6,7 +6,6 @@ import { SelectInputField } from "@components/form/select";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CATEGORY_TYPE } from "@static/constants";
 import { getTraitIcon } from "@utils/media";
-import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 

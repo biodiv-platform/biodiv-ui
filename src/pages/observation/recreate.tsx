@@ -1,5 +1,5 @@
 import { useLocalRouter } from "@components/@core/local-link";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 function RecreatePage() {
   const { push } = useLocalRouter();

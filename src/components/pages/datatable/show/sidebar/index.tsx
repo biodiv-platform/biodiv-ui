@@ -3,7 +3,6 @@ import ClusterMap from "@components/pages/observation/show/sidebar/cluster-map";
 import User from "@components/pages/observation/show/sidebar/user";
 import { UserIbp } from "@interfaces/observation";
 import { defaultViewState, NakshaMaplibreView } from "naksha-components-react";
-import React from "react";
 import wkt from "wkt";
 
 import { mapStyles } from "@/static/constants";

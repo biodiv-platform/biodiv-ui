@@ -1,7 +1,7 @@
 import { Badge, Button, Image, Text } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import { SyncInfo } from "./offline-sync";
 

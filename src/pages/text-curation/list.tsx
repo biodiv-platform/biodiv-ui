@@ -1,6 +1,5 @@
 import TextCurationListPage from "@components/pages/text-curation/list";
 import { axGetDataSheetInfo } from "@services/curate.service";
-import React from "react";
 
 export default function CurateListPage({ data }) {
   return <TextCurationListPage data={data} />;

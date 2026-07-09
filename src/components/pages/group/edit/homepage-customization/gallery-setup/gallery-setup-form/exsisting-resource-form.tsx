@@ -4,7 +4,6 @@ import SITE_CONFIG from "@configs/site-config";
 import { axGetObservationById } from "@services/observation.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { useFormContext } from "react-hook-form";
 
 import IconRadioField from "./icon-radio-field";

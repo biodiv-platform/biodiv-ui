@@ -5,7 +5,7 @@ import { axGetUsersByID, axUserFilterSearch } from "@services/user.service";
 import { MENU_PORTAL_TARGET } from "@static/constants";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AsyncSelect from "react-select/async";
 
 export default function UserFilterInput({ filterKey }) {

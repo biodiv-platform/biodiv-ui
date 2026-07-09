@@ -10,7 +10,7 @@ import { FORM_DATEPICKER_CHANGE } from "@static/events";
 import { parseDate } from "@utils/date";
 import { translateOptions } from "@utils/i18n";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useListener } from "react-gbus";
 import { useController } from "react-hook-form";
 

@@ -1,7 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { HsvColorPicker } from "react-colorful";
 
 import {

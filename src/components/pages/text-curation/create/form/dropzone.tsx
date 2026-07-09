@@ -4,7 +4,7 @@ import UploadInfo from "@components/pages/document/create/uploader/dropzone/uplo
 import UploadProcessing from "@components/pages/document/create/uploader/dropzone/upload-processing";
 import useGlobalState from "@hooks/use-global-state";
 import { axUploadCSVCurationResource } from "@services/files.service";
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 const ACCEPT_STRING = "text/csv";

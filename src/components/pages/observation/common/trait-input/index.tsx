@@ -1,7 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { TraitsValue } from "@interfaces/observation";
 import { TRAIT_TYPES } from "@static/constants";
-import React from "react";
 
 import MultipleCategorialTrait from "./multiple-categorical";
 import RangeTrait from "./range";

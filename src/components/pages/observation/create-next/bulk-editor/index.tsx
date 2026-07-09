@@ -1,5 +1,5 @@
 import { OBSERVATION_BULK_EDIT } from "@static/events";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useListener } from "react-gbus";
 
 import { prepareObservationData } from "../common";

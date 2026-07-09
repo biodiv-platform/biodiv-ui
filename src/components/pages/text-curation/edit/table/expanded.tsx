@@ -1,6 +1,6 @@
 import { Box, Container, SimpleGrid, Table } from "@chakra-ui/react";
 import { getInjectableHTML } from "@utils/text";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import { Prose } from "@/components/ui/prose";
 

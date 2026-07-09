@@ -8,7 +8,7 @@ import { axUserGroupDatatableUpdate } from "@services/datatable.service";
 import { axGetUserGroupList } from "@services/usergroup.service";
 import { hasAccess } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import GroupPost from "../../../observation/show/groups/group-post";
 

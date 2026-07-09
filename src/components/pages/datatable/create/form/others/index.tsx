@@ -5,7 +5,6 @@ import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import { Role } from "@interfaces/custom";
 import { hasAccess } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 export default function PartyContributorsForm() {
   const { t } = useTranslation();

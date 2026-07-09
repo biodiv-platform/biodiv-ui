@@ -2,7 +2,6 @@ import { Box, SimpleGrid } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import { stringify } from "@utils/query-string";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import LifeListTable from "./table";
 import useLifeList from "./use-life-list";

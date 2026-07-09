@@ -5,7 +5,6 @@ import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import { useRouter } from "next/router";
 import { NextSeo } from "next-seo";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { PageHeading } from "./page-heading";
 import { PageOptions } from "./page-options";

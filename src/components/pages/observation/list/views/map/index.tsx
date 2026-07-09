@@ -8,7 +8,7 @@ import { ENDPOINT, mapStyles } from "@static/constants";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import { useMemo } from "react";
 
 const onObservationGridHover = ({ feature }) => (
   <div>{feature?.properties?.count} Observations</div>
@@ -27,7 +27,7 @@ export default function ObservationsMap() {
   const { currentGroup } = useGlobalState();
   const userGroupId = currentGroup?.id || undefined;
   const geoserverLayers: any = SITE_CONFIG.HOME.MAP || [];
-  const mapCenter = React.useMemo(() => getMapCenter(3.2), []);
+  const mapCenter = useMemo(() => getMapCenter(3.2), []);
   const { t, lang } = useTranslation();
 
   const fetchGridData = async (geoProps) => {

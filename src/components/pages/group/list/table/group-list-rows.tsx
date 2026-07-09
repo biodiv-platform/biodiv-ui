@@ -1,6 +1,5 @@
 import { Flex, Image, Link, Text } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import JoinUserGroup from "../../common/join-group";
 import useGroupListFilter from "../use-group-list";

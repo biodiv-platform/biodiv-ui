@@ -64,7 +64,8 @@
     "announcements_configure": "Dhibiti arifa",
     "clear_cache": "Wazi kache",
     "name-macthing": "Jina linalofanana",
-    "notification": "Tuma Arifa ya Push"
+    "notification": "Tuma Arifa ya Push",
+    "update_observation_index": "Sasisha Kielezo cha Uchunguzi"
   },
   "pages": {
     "notification": {

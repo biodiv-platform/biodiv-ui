@@ -1,5 +1,4 @@
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import {
   DialogBackdrop,

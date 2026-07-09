@@ -65,7 +65,8 @@
     "clear_cache": "Clear cache",
     "name-macthing": "Name Matching",
     "notification": "Send Push-Notification",
-    "species_fields": "Species Fields"
+    "species_fields": "Species Fields",
+    "update_observation_index": "Update Observation Index"
   },
   "pages": {
     "notification": {

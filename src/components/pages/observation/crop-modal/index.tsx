@@ -1,7 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import useObservationFilter from "../common/use-observation-filter";
 

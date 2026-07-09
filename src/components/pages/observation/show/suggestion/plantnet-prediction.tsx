@@ -4,7 +4,7 @@ import { axGetPlantnetSuggestions } from "@services/observation.service";
 import { DEFAULT_TOAST } from "@static/observation-create";
 import { getLocalIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import {
   DialogBackdrop,
@@ -25,7 +25,7 @@ const PlantnetPrediction = ({
   onCloseImageModal,
   selectRef
 }) => {
-  const toastIdRef = React.useRef<any>();
+  const toastIdRef = useRef<any>();
   const { t } = useTranslation();
 
   const [plantnetData, setPlantNetData] = useState<any[]>([]);

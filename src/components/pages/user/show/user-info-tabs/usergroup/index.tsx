@@ -5,7 +5,7 @@ import useGroupListFilter from "@components/pages/group/list/use-group-list";
 import useGlobalState from "@hooks/use-global-state";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 export default function UserGroupListTab() {
   const { groupListData, groupJoinedStatus, userId } = useGroupListFilter();

@@ -4,7 +4,6 @@ import LocalLink from "@components/@core/local-link";
 import Tooltip from "@components/@core/tooltip";
 import EditIcon from "@icons/edit";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { LuInfo } from "react-icons/lu";
 
 import useSpecies from "../../../use-species";

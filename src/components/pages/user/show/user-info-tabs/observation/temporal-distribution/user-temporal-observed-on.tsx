@@ -5,7 +5,7 @@ import DownloadIcon from "@icons/download";
 import { axAddDownloadLog } from "@services/user.service";
 import { waitForAuth } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 import { toaster } from "@/components/ui/toaster";

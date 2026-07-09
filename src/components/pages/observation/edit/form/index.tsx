@@ -10,7 +10,6 @@ import { dateToUTC, formatDate, parseDateFromUTC } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import { nanoid } from "nanoid";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import { LuMoveRight } from "react-icons/lu";
 import * as Yup from "yup";

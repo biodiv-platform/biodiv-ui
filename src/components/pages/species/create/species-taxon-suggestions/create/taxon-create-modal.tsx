@@ -1,7 +1,6 @@
 import { Button } from "@chakra-ui/react";
 import { BasicTable, ResponsiveContainer } from "@components/@core/table";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { useFormContext } from "react-hook-form";
 import { LuMoveRight } from "react-icons/lu";
 

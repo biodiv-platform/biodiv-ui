@@ -2,7 +2,7 @@ import { AspectRatio, Box, Flex, Image, useCheckbox } from "@chakra-ui/react";
 import { SelectInputField } from "@components/form/select";
 import SITE_CONFIG from "@configs/site-config";
 import useTranslation from "next-translate/useTranslation";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { toaster } from "@/components/ui/toaster";
 

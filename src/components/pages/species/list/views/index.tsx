@@ -1,5 +1,3 @@
-import React from "react";
-
 import useSpeciesList from "../use-species-list";
 import GridView from "./list-tiles";
 import ListView from "./table";

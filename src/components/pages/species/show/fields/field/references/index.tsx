@@ -1,6 +1,6 @@
 import { Box, List, Stack } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import useSpecies from "../../../use-species";
 import SpeciesFieldHeading from "../heading";

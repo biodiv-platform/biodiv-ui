@@ -41,7 +41,7 @@ import { hasAccess } from "@utils/auth";
 import dayjs, { dateToUTC, parseDate } from "@utils/date";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   LuAtSign,

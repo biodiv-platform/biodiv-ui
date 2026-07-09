@@ -5,7 +5,7 @@ import { axRemoveCustomField, axReorderCustomField } from "@services/usergroup.s
 import notification, { NotificationType } from "@utils/notification";
 import { arrayMoveImmutable } from "array-move";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import CustomFieldListItems from "./custom-field-items";
 
@@ -81,7 +81,6 @@ const CustomFieldTable = ({
         <CustomFieldListItems
           removeCustomField={removeCustomField}
           customFieldDetails={customFieldDetails}
-          helperClass="sorting-row"
           customFieldList={customFields}
           onSortEnd={onSortEnd}
         />

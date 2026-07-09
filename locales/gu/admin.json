@@ -64,7 +64,8 @@
     "announcements_configure": "સૂચનાઓ મેનેજ કરો",
     "clear_cache": "સ્પષ્ટ કેશ",
     "name-macthing": "નામ મેચિંગ",
-    "notification": "પુશ-સૂચના મોકલો"
+    "notification": "પુશ-સૂચના મોકલો",
+    "update_observation_index": "અવલોકન અનુક્રમણિકા અપડેટ કરો"
   },
   "pages": {
     "notification": {

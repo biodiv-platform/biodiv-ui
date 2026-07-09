@@ -1,7 +1,6 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import { HomePageStats } from "@interfaces/utility";
 import { CARD_META } from "@static/home";
-import React from "react";
 
 import Card from "./card";
 

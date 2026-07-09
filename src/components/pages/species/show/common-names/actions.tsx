@@ -10,7 +10,6 @@ import {
   SPECIES_NAME_PREFERRED
 } from "@static/events";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { emit } from "react-gbus";
 
 export function CommonNameAdd() {

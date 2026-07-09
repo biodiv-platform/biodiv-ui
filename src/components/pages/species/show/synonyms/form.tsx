@@ -8,7 +8,7 @@ import CrossIcon from "@icons/cross";
 import { axGetTaxonRanks } from "@services/taxonomy.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 

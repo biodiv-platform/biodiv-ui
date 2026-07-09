@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import AddGroupRulesForm from "./group-rules-form";
 import GroupRulesTable from "./group-rules-table";

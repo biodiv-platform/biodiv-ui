@@ -2,7 +2,6 @@ import { Box, Button, Heading, Stack, useBreakpointValue, useDisclosure } from "
 import BoxHeading from "@components/@core/layout/box-heading";
 import { FilterWrapper } from "@components/pages/observation/list/filters";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import {
   DrawerBackdrop,

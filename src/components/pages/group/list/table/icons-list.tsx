@@ -1,7 +1,6 @@
 import { Image, SimpleGrid } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import { getLocalIcon } from "@utils/media";
-import React from "react";
 import { useMemo } from "react";
 
 export default function IconsList({ items, values, type }) {

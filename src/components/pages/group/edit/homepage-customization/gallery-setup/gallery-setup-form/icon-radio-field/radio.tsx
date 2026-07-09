@@ -1,7 +1,6 @@
 import { HStack, Image, RadioCard } from "@chakra-ui/react";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
-import React from "react";
 interface ITraitInputProps {
   onChange?;
   name;

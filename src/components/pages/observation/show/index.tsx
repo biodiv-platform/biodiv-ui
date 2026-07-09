@@ -15,7 +15,7 @@ import {
   axSaveUserGroups
 } from "@services/observation.service";
 import { RESOURCE_TYPE } from "@static/constants";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
 import TemporalObservedOn from "../list/views/stats/temporal-observed-on";

@@ -1,5 +1,3 @@
-import React from "react";
-
 import { AccordionRoot } from "@/components/ui/accordion";
 
 export default function SubAccordion({ children }) {

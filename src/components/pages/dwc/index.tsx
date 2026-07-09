@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { LuChevronLeft, LuChevronRight, LuDownload, LuTrash2 } from "react-icons/lu";
 
 import SITE_CONFIG from "@/configs/site-config";

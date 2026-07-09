@@ -3,7 +3,6 @@ import GridIcon from "@icons/grid";
 import ListIcon from "@icons/list";
 import StatsIcon from "@icons/stats";
 import { ObservationFilterProps } from "@interfaces/custom";
-import React from "react";
 
 export const LIST_PAGINATION_LIMIT = 8;
 

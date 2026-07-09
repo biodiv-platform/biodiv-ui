@@ -4,7 +4,7 @@ import { axSearchFilterByName } from "@services/esmodule.service";
 import { MENU_PORTAL_TARGET } from "@static/constants";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import Select, { components } from "react-select";
 import AsyncSelect from "react-select/async";
 

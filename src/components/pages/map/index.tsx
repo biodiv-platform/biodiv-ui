@@ -10,7 +10,7 @@ import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import { stringify } from "querystring";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { toaster } from "@/components/ui/toaster";
 

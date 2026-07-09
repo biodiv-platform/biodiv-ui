@@ -1,5 +1,4 @@
 import { Box } from "@chakra-ui/react";
-import React from "react";
 import DataTable from "react-data-table-component";
 
 import useCurateEdit from "../use-curate-edit";

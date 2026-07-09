@@ -8,7 +8,6 @@ import { adminOrAuthor } from "@utils/auth";
 import { formatDateReadableFromUTC } from "@utils/date";
 import { NextSeo } from "next-seo";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { LuExternalLink } from "react-icons/lu";
 
 import NoSSR from "@/components/@core/no-ssr";

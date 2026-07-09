@@ -13,7 +13,7 @@ import { forwardRedirect, setCookies } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import { NextSeo } from "next-seo";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LuArrowRight, LuChevronRight } from "react-icons/lu";
 import { isPossiblePhoneNumber } from "react-phone-number-input";

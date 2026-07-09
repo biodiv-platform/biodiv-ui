@@ -5,7 +5,6 @@ import { axUpdateCustomField } from "@services/observation.service";
 import { ACTIVITY_UPDATED } from "@static/events";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { emit } from "react-gbus";
 
 import { Field } from "@/components/ui/field";

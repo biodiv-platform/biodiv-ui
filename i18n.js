@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const { LANG } = require("./src/configs/site-config");
 
 module.exports = {

@@ -1,6 +1,5 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React from "react";
 
 import SignInForm from "./form";
 

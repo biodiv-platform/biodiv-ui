@@ -4,7 +4,7 @@ import useGlobalState from "@hooks/use-global-state";
 import MenuIcon from "@icons/menu";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 
 import { PagesList } from "./pages-list";
 import usePages from "./use-pages-sidebar";

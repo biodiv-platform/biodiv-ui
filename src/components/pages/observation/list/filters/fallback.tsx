@@ -1,6 +1,5 @@
 import { Box, GridItem, Heading, Skeleton, Spinner, useBreakpointValue } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 export default function FilterFallback() {
   const { t } = useTranslation();

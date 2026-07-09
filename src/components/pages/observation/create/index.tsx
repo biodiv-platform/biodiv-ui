@@ -2,7 +2,7 @@ import AutoSync from "@components/@core/autosync";
 import useGlobalState from "@hooks/use-global-state";
 import { isBrowser } from "@static/constants";
 import { preCacheRoutes } from "@utils/auth";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import ObservationCreateForm from "./form";
 

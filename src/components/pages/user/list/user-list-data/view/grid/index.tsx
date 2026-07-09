@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
 import { axCheckUserGroupFounderOrAdmin } from "@services/usergroup.service";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import GridViewCard from "./card";

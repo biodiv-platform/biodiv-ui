@@ -2,7 +2,6 @@ import { Badge } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import { TAXON_BADGE_COLORS } from "@static/constants";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 interface TaxonStatusBadgeProps {
   reco;

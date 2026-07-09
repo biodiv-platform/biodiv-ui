@@ -2,7 +2,6 @@ import { Badge, Box, Flex, Heading, Stack } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import HomeDescription from "@components/pages/home/description";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { parse } from "wkt";
 
 import GeoJSONPreview from "@/components/@core/map-preview/geojson";

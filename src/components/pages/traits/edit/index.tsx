@@ -24,16 +24,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useGlobalState from "@hooks/use-global-state";
 import { axUploadResource } from "@services/files.service";
 import { axUpdateTrait } from "@services/traits.service";
-import { PREVENT_CLICK_TAGS } from "@static/constants";
 import { getLocalIcon, getTraitIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import { arrayMoveImmutable } from "array-move";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LuGrip, LuX } from "react-icons/lu";
 import Select from "react-select";
-import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import * as Yup from "yup";
 
 import {
@@ -45,6 +43,8 @@ import {
   DialogRoot
 } from "@/components/ui/dialog";
 import { Field } from "@/components/ui/field";
+
+import { DndItemWrapper, DndListWrapper } from "../../common/reusable-dnd";
 
 const onQuery = (q) => onScientificNameQuery(q, "name");
 
@@ -161,117 +161,6 @@ export default function TraitsEditComponent({ data, languages }) {
     }
   }, [languageId, data]);
 
-  const SortableItem = SortableElement<{ value: number }>(({ value }) => (
-    <SimpleGrid
-      columns={{ base: 1, md: 5 }}
-      gapX={4}
-      mt={2}
-      ml={3}
-      mr={3}
-      p={2}
-      textAlign="center"
-      mb={1}
-      cursor="grab"
-      _hover={{ bg: "lightgray" }}
-    >
-      {hForm.watch(`translations[${translationSelected}].traits.dataType`) == "STRING" &&
-        hForm.watch(`translations[${translationSelected}].traits.traitTypes`) == "RANGE" && (
-          <Box
-            position="relative"
-            left={0}
-            top="50%"
-            transform="translateY(-50%)"
-            cursor="grab"
-            zIndex={2}
-          >
-            <LuGrip color="gray.500" />
-          </Box>
-        )}
-      <TextBoxField
-        name={`translations[${translationSelected}].values[${value}].value`}
-        label={
-          hForm.watch(`translations`).find((t) => t.traits.languageId == languageId) != null &&
-          hForm.watch(`translations`).filter((t) => t.traits.languageId == languageId)[0].values[
-            value
-          ].value &&
-          hForm.watch(`translations`)[translationSelected].traits.languageId != languageId
-            ? hForm.watch(`translations`).filter((t) => t.traits.languageId == languageId)[0]
-                .values[value].value
-            : t("traits:create_form.value")
-        }
-        isRequired={true}
-      />
-      <TextBoxField
-        name={`translations[${translationSelected}].values[${value}].description`}
-        label={`${t("traits:create_form.description")} ${value + 1}`}
-      />
-      <Box ml={4}>
-        <Button
-          type="button"
-          as="label"
-          cursor="pointer"
-          w="15"
-          size={"sm"}
-          // htmlFor={value}
-          height={70}
-          width={70}
-          border={"2px dashed #aaa"}
-          backgroundColor="transparent"
-        >
-          {hForm.watch(`translations[${translationSelected}].values`)[value].icon && (
-            <Image
-              boxSize="2.2rem"
-              objectFit="contain"
-              src={getTraitIcon(
-                hForm.watch(`translations[${translationSelected}].values`)[value].icon
-              )}
-              alt={hForm.watch(`translations[${translationSelected}].values`)[value].icon}
-              // ignoreFallback={true}
-              mb={2}
-            />
-          )}
-          <VisuallyHidden asChild>
-            <input type="file" id={value} accept="image/*" onChange={handleOnPhotoUpload} />
-          </VisuallyHidden>
-        </Button>
-      </Box>
-      <Box display="flex" justifyContent="center" alignItems="center">
-        {!hForm.watch(`translations[${translationSelected}].values`)[value].id &&
-          hForm.watch(`translations`)[translationSelected].traits.languageId == languageId && (
-            <Button
-              aria-label="Remove value"
-              onClick={(e) => {
-                e.stopPropagation(); // Prevent drag event
-                removeValue(value); // Call delete function
-              }}
-              size="sm"
-              colorPalette="red"
-            >
-              <LuX />
-            </Button>
-          )}
-      </Box>
-    </SimpleGrid>
-  ));
-
-  const SortableList = SortableContainer<{ items: any }>(({ items }) => {
-    return (
-      <Box>
-        {items.map((value, index) => (
-          <SortableItem key={`item-${value.id}`} index={index} value={index} />
-        ))}
-      </Box>
-    );
-  });
-
-  const shouldCancelStart = (e) => {
-    // Ignore clicks on file inputs or labels
-    return (
-      PREVENT_CLICK_TAGS.includes(e.target.tagName) ||
-      hForm.watch(`translations[${translationSelected}].traits.traitTypes`) !== "RANGE"
-    );
-  };
-
   const onSortEnd = ({ oldIndex, newIndex }) => {
     hForm.watch("translations").forEach((_, index) => {
       const newOrder = arrayMoveImmutable(
@@ -296,7 +185,7 @@ export default function TraitsEditComponent({ data, languages }) {
   };
 
   const handleOnUpdate = async (payload) => {
-    const seenLangIds: Set<number> = new Set(); // or Set<string> if IDs are strings
+    const seenLangIds: Set<number> = new Set();
     const duplicates: number[] = [];
 
     for (const translation of payload.translations) {
@@ -310,7 +199,7 @@ export default function TraitsEditComponent({ data, languages }) {
 
     if (duplicates.length > 0) {
       notification("Please remove duplicate language translations");
-      return; // stop update if duplicate found
+      return;
     }
     const query = payload.translations[0].query.map((taxan) => ({
       taxonomyDefifintionId: taxan.taxonId,
@@ -403,6 +292,11 @@ export default function TraitsEditComponent({ data, languages }) {
     }
   };
 
+  const traitValues = hForm.watch(`translations[${translationSelected}].values`) || [];
+  const canSortTraits =
+    hForm.watch(`translations[${translationSelected}].traits.dataType`) == "STRING" &&
+    hForm.watch(`translations[${translationSelected}].traits.traitTypes`) == "RANGE";
+
   return (
     <div className="container mt">
       <DialogRoot open={open} onOpenChange={onClose}>
@@ -433,16 +327,11 @@ export default function TraitsEditComponent({ data, languages }) {
                     onChange={(o: { value: number; label: string }) => {
                       setLangId(o.value);
                     }}
-                    components={{
-                      IndicatorSeparator: () => null
-                    }}
+                    components={{ IndicatorSeparator: () => null }}
                     options={languages
                       .sort((a, b) => a.name.localeCompare(b.name))
-                      .map((lang) => ({
-                        value: lang.id,
-                        label: lang.name
-                      }))}
-                    isSearchable={true} // Enables search
+                      .map((lang) => ({ value: lang.id, label: lang.name }))}
+                    isSearchable={true}
                   />
                 </Field>
               </Box>
@@ -464,9 +353,11 @@ export default function TraitsEditComponent({ data, languages }) {
           </form>
         </DialogContent>
       </DialogRoot>
+
       <Flex justify="flex-end" width="100%" mb={4} onClick={onOpen}>
         <Button colorPalette="green">{t("traits:create_form.add_translation_button")}</Button>
       </Flex>
+
       <Tabs.Root
         overflowX="auto"
         mb={4}
@@ -489,6 +380,7 @@ export default function TraitsEditComponent({ data, languages }) {
           ))}
         </Tabs.List>
       </Tabs.Root>
+
       <SimpleGrid columns={{ base: 1, md: 4 }} gap={{ base: 0, md: 4 }}>
         <GridItem className="white-box" mb={4} colSpan={{ md: 4 }}>
           <FormProvider {...hForm}>
@@ -536,6 +428,7 @@ export default function TraitsEditComponent({ data, languages }) {
                   label={t("traits:create_form.source")}
                 />
               </SimpleGrid>
+
               <SimpleGrid columns={{ base: 1, md: 2 }} gapX={4} mt={4} ml={3} mr={3}>
                 <CheckboxField
                   key={`isObservation-${translationSelected}`}
@@ -564,6 +457,7 @@ export default function TraitsEditComponent({ data, languages }) {
                   disabled={hForm.watch(`translations[${translationSelected}].traits.id`) == null}
                 />
               </SimpleGrid>
+
               <Box ml={3} mr={3}>
                 <TextAreaField
                   key={`description-${translationSelected}`}
@@ -585,16 +479,141 @@ export default function TraitsEditComponent({ data, languages }) {
                     })
                   }
                 />
+
                 {hForm.watch(`translations[${translationSelected}].traits.dataType`) ==
                   "STRING" && (
                   <Box mx="auto">
-                    <SortableList
-                      items={hForm.watch(`translations[${translationSelected}].values`)}
+                    <DndListWrapper
+                      items={traitValues}
+                      getItemId={(_, i) => `trait-${i}`}
                       onSortEnd={onSortEnd}
-                      shouldCancelStart={shouldCancelStart}
-                    />
+                    >
+                      <Box>
+                        {traitValues.map((valueItem, index) => (
+                          <DndItemWrapper key={`trait-${index}`} id={`trait-${index}`}>
+                            {({ setNodeRef, style, dragHandleProps }) => (
+                              <SimpleGrid
+                                ref={setNodeRef}
+                                style={style}
+                                columns={{ base: 1, md: 5 }}
+                                gapX={4}
+                                mt={2}
+                                ml={3}
+                                mr={3}
+                                p={2}
+                                textAlign="center"
+                                mb={1}
+                                _hover={{ bg: "lightgray" }}
+                              >
+                                {canSortTraits ? (
+                                  <Box
+                                    position="relative"
+                                    left={0}
+                                    top="50%"
+                                    transform="translateY(-50%)"
+                                    cursor="grab"
+                                    zIndex={2}
+                                    {...dragHandleProps}
+                                  >
+                                    <LuGrip color="gray.500" />
+                                  </Box>
+                                ) : (
+                                  <Box />
+                                )}
+                                <TextBoxField
+                                  name={`translations[${translationSelected}].values[${index}].value`}
+                                  label={
+                                    hForm
+                                      .watch(`translations`)
+                                      .find((t) => t.traits.languageId == languageId) != null &&
+                                    hForm
+                                      .watch(`translations`)
+                                      .filter((t) => t.traits.languageId == languageId)[0].values[
+                                      index
+                                    ]?.value &&
+                                    hForm.watch(`translations`)[translationSelected].traits
+                                      .languageId != languageId
+                                      ? hForm
+                                          .watch(`translations`)
+                                          .filter((t) => t.traits.languageId == languageId)[0]
+                                          .values[index].value
+                                      : t("traits:create_form.value")
+                                  }
+                                  isRequired={true}
+                                />
+                                <TextBoxField
+                                  name={`translations[${translationSelected}].values[${index}].description`}
+                                  label={`${t("traits:create_form.description")} ${index + 1}`}
+                                />
+                                <Box ml={4}>
+                                  <Button
+                                    type="button"
+                                    as="label"
+                                    cursor="pointer"
+                                    w="15"
+                                    size={"sm"}
+                                    height={70}
+                                    width={70}
+                                    border={"2px dashed #aaa"}
+                                    backgroundColor="transparent"
+                                  >
+                                    {hForm.watch(`translations[${translationSelected}].values`)[
+                                      index
+                                    ]?.icon && (
+                                      <Image
+                                        boxSize="2.2rem"
+                                        objectFit="contain"
+                                        src={getTraitIcon(
+                                          hForm.watch(
+                                            `translations[${translationSelected}].values`
+                                          )[index].icon
+                                        )}
+                                        alt={
+                                          hForm.watch(
+                                            `translations[${translationSelected}].values`
+                                          )[index].icon
+                                        }
+                                        mb={2}
+                                      />
+                                    )}
+                                    <VisuallyHidden asChild>
+                                      <input
+                                        type="file"
+                                        id={index.toString()}
+                                        accept="image/*"
+                                        onChange={handleOnPhotoUpload}
+                                      />
+                                    </VisuallyHidden>
+                                  </Button>
+                                </Box>
+                                <Box display="flex" justifyContent="center" alignItems="center">
+                                  {!hForm.watch(`translations[${translationSelected}].values`)[
+                                    index
+                                  ]?.id &&
+                                    hForm.watch(`translations`)[translationSelected].traits
+                                      .languageId == languageId && (
+                                      <Button
+                                        aria-label="Remove value"
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          removeValue(index);
+                                        }}
+                                        size="sm"
+                                        colorPalette="red"
+                                      >
+                                        <LuX />
+                                      </Button>
+                                    )}
+                                </Box>
+                              </SimpleGrid>
+                            )}
+                          </DndItemWrapper>
+                        ))}
+                      </Box>
+                    </DndListWrapper>
                   </Box>
                 )}
+
                 <Box mb={4}>
                   {hForm.watch(`translations[${translationSelected}].traits.languageId`) ==
                     languageId && (

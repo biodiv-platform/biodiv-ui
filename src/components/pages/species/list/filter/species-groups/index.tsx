@@ -1,6 +1,6 @@
 import { SimpleGrid, useCheckboxGroup } from "@chakra-ui/react";
 import { stringToArray } from "@utils/basic";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import useSpeciesList from "../../use-species-list";
 import CustomCheckbox from "./checkbox";

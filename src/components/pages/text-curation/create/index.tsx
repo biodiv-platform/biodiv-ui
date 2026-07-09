@@ -1,7 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { PageHeading } from "@components/@core/layout";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import TextCurationCreateForm from "./form";
 

@@ -17,7 +17,7 @@ import { INVALID_COORDINATE } from "@static/constants";
 import { forwardRedirect, setCookies } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LuMoveRight } from "react-icons/lu";
 import { isPossiblePhoneNumber } from "react-phone-number-input";

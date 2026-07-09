@@ -1,6 +1,5 @@
 import { Box } from "@chakra-ui/react";
 import { Breadcrumb } from "@chakra-ui/react";
-import React from "react";
 import { LuChevronRight } from "react-icons/lu";
 
 const CurationTaxonBreadcrumbs = ({ crumbs }) =>

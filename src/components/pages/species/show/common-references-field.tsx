@@ -3,7 +3,7 @@ import { TextBoxField } from "@components/form/text";
 import AddIcon from "@icons/add";
 import DeleteIcon from "@icons/delete";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useFieldArray } from "react-hook-form";
 
 import { Field } from "@/components/ui/field";

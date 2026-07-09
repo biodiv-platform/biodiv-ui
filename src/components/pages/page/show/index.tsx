@@ -2,7 +2,6 @@ import { GridItem, SimpleGrid } from "@chakra-ui/react";
 import Activity from "@components/pages/observation/show/activity";
 import { axAddPageComment } from "@services/pages.service";
 import { RESOURCE_TYPE } from "@static/constants";
-import React from "react";
 
 import PagesSidebar from "../common/sidebar";
 import { UsePagesProvider } from "../common/sidebar/use-pages-sidebar";

@@ -3,7 +3,6 @@ import { ResponsiveContainer } from "@components/@core/table";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import { axDeleteSpeciesSynonym, axUpdateSpeciesSynonym } from "@services/species.service";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import useSpecies from "../use-species";
 import SynonymList from "./main";

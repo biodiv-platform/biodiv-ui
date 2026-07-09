@@ -3,7 +3,7 @@ import BlurBox from "@components/@core/blur-box";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { LuArrowRight } from "react-icons/lu";
 
 const ReadMore = ({ resource, readMoreButtonText, readMoreUIType /*mini*/ }) => {

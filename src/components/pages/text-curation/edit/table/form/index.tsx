@@ -4,7 +4,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
 import { parseDate } from "@utils/date";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 

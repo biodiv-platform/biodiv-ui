@@ -1,6 +1,5 @@
 import { SimpleGrid, Text } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import useObservationCreate from "../use-observation-resources";
 import DropTarget from "./drop-target";

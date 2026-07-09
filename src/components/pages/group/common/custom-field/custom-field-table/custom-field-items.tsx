@@ -1,24 +1,37 @@
-import React from "react";
-import { SortableContainer } from "react-sortable-hoc";
+import { DndItemWrapper, DndListWrapper } from "@/components/pages/common/reusable-dnd";
 
-import CustomFieldRow from "./custom-field-row";
+import { CustomFieldRow } from "./custom-field-row";
 
-const CustomFieldListItems: any = SortableContainer(
-  ({ customFieldList, removeCustomField, customFieldDetails }) => (
-    <tbody>
-      {customFieldList.map((item, index) => (
-        <CustomFieldRow
-          key={item.customFields.id}
-          index={index}
-          onDelete={() =>
-            removeCustomField(item.customFields.authorId ? item.customFields.id : index)
-          }
-          onEdit={() => customFieldDetails(item.customFields.id)}
-          itemDetails={item}
-        />
-      ))}
-    </tbody>
-  )
-);
-
-export default CustomFieldListItems;
+export default function CustomFieldListItems({
+  customFieldList,
+  removeCustomField,
+  customFieldDetails,
+  onSortEnd
+}) {
+  return (
+    <DndListWrapper
+      items={customFieldList}
+      getItemId={(item) => item.customFields.id}
+      onSortEnd={onSortEnd}
+    >
+      <tbody>
+        {customFieldList.map((item, index) => (
+          <DndItemWrapper key={item.customFields.id} id={item.customFields.id}>
+            {({ setNodeRef, style, dragHandleProps }) => (
+              <CustomFieldRow
+                innerRef={setNodeRef}
+                style={style}
+                dragHandleProps={dragHandleProps}
+                onDelete={() =>
+                  removeCustomField(item.customFields.authorId ? item.customFields.id : index)
+                }
+                onEdit={() => customFieldDetails(item.customFields.id)}
+                itemDetails={item}
+              />
+            )}
+          </DndItemWrapper>
+        ))}
+      </tbody>
+    </DndListWrapper>
+  );
+}

@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import GallerySetupFrom from "@components/pages/group/edit/homepage-customization/gallery-setup/gallery-setup-form";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import GalleryEditForm from "./gallery-setup-form/editform";
 import GallerySetupTable from "./gallery-setup-tabel";

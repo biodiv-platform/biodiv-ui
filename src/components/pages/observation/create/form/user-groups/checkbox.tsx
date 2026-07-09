@@ -1,6 +1,5 @@
 import { Box, Flex, Image, SimpleGrid, useCheckbox, useCheckboxGroup } from "@chakra-ui/react";
 import { getGroupImageThumb } from "@utils/media";
-import React from "react";
 
 interface ITraitInputProps {
   type?: string;

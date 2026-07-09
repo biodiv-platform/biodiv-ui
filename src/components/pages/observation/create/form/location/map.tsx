@@ -1,6 +1,5 @@
 import { Box, Collapsible } from "@chakra-ui/react";
 import { GoogleMap } from "@react-google-maps/api";
-import React from "react";
 
 import Marker from "./marker";
 

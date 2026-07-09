@@ -1,7 +1,6 @@
 import SITE_CONFIG from "@configs/site-config";
 import styled from "@emotion/styled";
 import { Mq } from "mq-styled-components";
-import React from "react";
 
 import MainItems from "../../common/menu-items";
 import items from "./items";

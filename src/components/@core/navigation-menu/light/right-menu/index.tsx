@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import useGlobalState from "@hooks/use-global-state";
 import { convertToMenuFormat } from "@utils/pages";
 import { Mq } from "mq-styled-components";
-import React from "react";
 
 import MainItems from "../../common/menu-items";
 import PagesMenuItems from "../../common/pages-menu-items";

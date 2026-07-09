@@ -9,7 +9,7 @@ import { AUTOCOMPLETE_FIELDS, GEOCODE_OPTIONS, GMAP_LIBRARIES } from "@static/lo
 import { translateOptions } from "@utils/i18n";
 import { getMapCenter, reverseGeocode } from "@utils/location";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useListener } from "react-gbus";
 import { useFormContext } from "react-hook-form";
 

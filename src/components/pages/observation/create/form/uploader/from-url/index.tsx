@@ -7,7 +7,7 @@ import { ASSET_TYPES } from "@static/observation-create";
 import { getYoutubeImage } from "@utils/media";
 import { nanoid } from "nanoid";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function FromURL({ onDone, onSave }) {
   const { t } = useTranslation();

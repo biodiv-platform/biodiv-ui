@@ -2,7 +2,6 @@ import { Box } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { getInjectableHTML } from "@utils/text";
 import { Mq } from "mq-styled-components";
-import React from "react";
 
 const DescriptionBox = styled.div`
   p {

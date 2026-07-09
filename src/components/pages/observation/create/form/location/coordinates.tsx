@@ -2,7 +2,6 @@ import { Collapsible, Input } from "@chakra-ui/react";
 import { CheckboxField } from "@components/form/checkbox";
 import ErrorMessage from "@components/form/common/error-message";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { useFormContext } from "react-hook-form";
 
 import { Field } from "@/components/ui/field";

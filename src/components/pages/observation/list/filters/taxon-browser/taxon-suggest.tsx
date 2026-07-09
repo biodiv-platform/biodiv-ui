@@ -8,7 +8,7 @@ import styled from "@emotion/styled";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { axGetTaxonList, doTaxonSearch } from "@services/api.service";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LuSearch } from "react-icons/lu";
 import * as Yup from "yup";

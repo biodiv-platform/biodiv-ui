@@ -1,6 +1,6 @@
 import NotificationsActiveIcon from "@icons/notifications-active";
 import NotificationsNoneIcon from "@icons/notifications-none";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import SimpleActionButton from "./simple";
 

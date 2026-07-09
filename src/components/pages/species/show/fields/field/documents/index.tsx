@@ -1,5 +1,4 @@
 import { Box } from "@chakra-ui/react";
-import React from "react";
 
 import useSpecies from "../../../use-species";
 import DocumentItem from "./document-item";

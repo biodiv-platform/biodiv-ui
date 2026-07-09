@@ -1,5 +1,4 @@
 import { HStack, IconButton, NumberInput } from "@chakra-ui/react";
-import React from "react";
 import { useController } from "react-hook-form";
 import { LuMinus, LuPlus } from "react-icons/lu";
 

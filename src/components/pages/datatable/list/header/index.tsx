@@ -3,7 +3,6 @@ import { PageHeading } from "@components/@core/layout";
 import { sortByOptions } from "@static/datatable";
 import { format } from "indian-number-format";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 

@@ -2,7 +2,6 @@ import { IconButton } from "@chakra-ui/react";
 import { TextBoxField } from "@components/form/text";
 import styled from "@emotion/styled";
 import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LuSearch } from "react-icons/lu";
 import * as Yup from "yup";

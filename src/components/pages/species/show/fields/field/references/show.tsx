@@ -4,7 +4,7 @@ import { axRemoveSpeciesField } from "@services/species.service";
 import { SPECIES_FIELD_DELETED, SPECIES_FIELD_UPDATE } from "@static/events";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { emit } from "react-gbus";
 
 import useSpecies from "../../../use-species";

@@ -22,7 +22,7 @@ import { SubmitButton } from "@components/form/submit-button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { bulkObservationActionTabs } from "@static/observation-list";
 import useTranslation from "next-translate/useTranslation";
-import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LuCircleCheck, LuRepeat } from "react-icons/lu";
 import * as Yup from "yup";

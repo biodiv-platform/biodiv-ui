@@ -5,7 +5,7 @@ import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import { DATE_ACCURACY_OPTIONS } from "@components/pages/observation/create/form/options";
 import { translateOptions } from "@utils/i18n";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 export default function TemporalCoverage() {
   const { t } = useTranslation();

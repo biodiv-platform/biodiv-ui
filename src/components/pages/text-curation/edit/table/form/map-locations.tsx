@@ -4,7 +4,7 @@ import { Box, Collapsible } from "@chakra-ui/react";
 import { LEAFLET_MARKER_ICON } from "@static/constants";
 import L from "leaflet";
 import { LatLngBoundsExpression } from "leaflet";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { Marker, Tooltip } from "react-leaflet";
 import { MapContainer } from "react-leaflet";
 import { TileLayer } from "react-leaflet";

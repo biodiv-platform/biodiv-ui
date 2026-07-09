@@ -1,5 +1,4 @@
 import { SPECIES_FILTER_KEY } from "@static/species";
-import React from "react";
 
 import useSpeciesList from "../../use-species-list";
 import CheckboxFilterPanel from "../shared/multi-select-search";

@@ -6,7 +6,7 @@ import {
   axUploadDocumentResource
 } from "@services/files.service";
 import { RESOURCE_TYPE } from "@static/constants";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 interface ManageDocumentContextProps {
   children?;

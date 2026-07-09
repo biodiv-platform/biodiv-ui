@@ -1,7 +1,6 @@
 import { authorizedPageSSR } from "@components/auth/auth-redirect";
 import VerifyRequestComponent from "@components/pages/continue/verify-request";
 import { Role } from "@interfaces/custom";
-import React from "react";
 
 const VerifyRequestPage = ({ token, type }) => <VerifyRequestComponent token={token} type={type} />;
 

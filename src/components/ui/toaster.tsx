@@ -1,5 +1,4 @@
 "use client";
-
 import {
   createToaster,
   Portal,
@@ -8,7 +7,6 @@ import {
   Toast,
   Toaster as ChakraToaster
 } from "@chakra-ui/react";
-import * as React from "react";
 
 export const toaster = createToaster({
   placement: "top",

@@ -2,7 +2,7 @@ import { axisBottom, axisLeft } from "d3-axis";
 import { scaleBand, scaleLinear } from "d3-scale";
 import { select } from "d3-selection";
 import { toPng } from "html-to-image";
-import React, { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 
 import useResizeObserver from "./hooks/use-resize-observer";
 

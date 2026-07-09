@@ -12,7 +12,7 @@ import {
 import { DEFAULT_TOAST } from "@static/observation-create";
 import deepmerge from "deepmerge";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import { useRef } from "react";
 import { emit, useListener } from "react-gbus";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import { useImmer } from "use-immer";
@@ -40,7 +40,7 @@ const deepMergeObservations = (prev, current) => {
 };
 
 export default function ObservationCreateNextForm({ onBrowse }) {
-  const toastIdRef = React.useRef<any>();
+  const toastIdRef = useRef<any>();
   const { t } = useTranslation();
   const { currentGroup, languageId, user } = useGlobalState();
 

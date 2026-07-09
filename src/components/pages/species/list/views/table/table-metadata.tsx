@@ -6,7 +6,6 @@ import { RESOURCE_SIZE } from "@static/constants";
 import { OBSERVATION_FALLBACK } from "@static/inline-images";
 import { getResourceThumbnail } from "@utils/media";
 import { stripTags } from "@utils/text";
-import React from "react";
 
 import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 import { Checkbox } from "@/components/ui/checkbox";

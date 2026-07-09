@@ -1,7 +1,7 @@
 import { Tabs } from "@chakra-ui/react";
 import useGlobalState from "@hooks/use-global-state";
 import { adminOrAuthor } from "@utils/auth";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import { ICustomFieldsProps } from ".";
 import CustomField from "./field";

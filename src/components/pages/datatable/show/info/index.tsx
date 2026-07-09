@@ -9,7 +9,6 @@ import { DATE_ACCURACY } from "@static/constants";
 import { formatDateReadableFromUTC } from "@utils/date";
 import { covertToSentenceCase, getInjectableHTML } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { Prose } from "@/components/ui/prose";
 

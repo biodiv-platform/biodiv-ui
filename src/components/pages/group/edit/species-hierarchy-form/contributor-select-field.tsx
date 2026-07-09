@@ -1,6 +1,5 @@
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { axSpeciesContributorUserSearch } from "@services/auth.service";
-import React from "react";
 
 interface IUserSelectProps {
   name: string;

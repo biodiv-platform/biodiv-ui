@@ -1,5 +1,4 @@
 import { Box, Link } from "@chakra-ui/react";
-import React from "react";
 import { LuLink } from "react-icons/lu";
 import urlSlug from "url-slug";
 

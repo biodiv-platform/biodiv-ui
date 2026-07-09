@@ -1,7 +1,6 @@
 import { Box, CheckboxGroup, Image, Stack } from "@chakra-ui/react";
 import { getTraitIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { Checkbox } from "@/components/ui/checkbox";
 

@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { PageHeading } from "@/components/@core/layout";
 

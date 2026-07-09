@@ -3,7 +3,7 @@ import { Landscape } from "@interfaces/landscape";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import { useMemo } from "react";
 import wkt from "wkt";
 
 import { mapStyles } from "@/static/constants";
@@ -33,7 +33,7 @@ export default function LandscapeShowComponent({
   documentList
 }: LandscapeShowComponentProps) {
   const { t } = useTranslation();
-  const defaultViewState = React.useMemo(() => getMapCenter(2.8), []);
+  const defaultViewState = useMemo(() => getMapCenter(2.8), []);
 
   return (
     <div className="container mt">

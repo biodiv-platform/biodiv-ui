@@ -1,7 +1,6 @@
 import { SelectAsyncInputField } from "@components/form/select-async";
 import { axQueryDocumentTagsByText } from "@services/document.service";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 const onTagsQuery = async (q) => {
   const { data } = await axQueryDocumentTagsByText(q);

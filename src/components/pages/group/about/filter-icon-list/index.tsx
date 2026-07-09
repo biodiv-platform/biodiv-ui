@@ -1,6 +1,6 @@
 import { Box, Heading, Image, Stack } from "@chakra-ui/react";
 import { getLocalIcon } from "@utils/media";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import { Tooltip } from "@/components/ui/tooltip";
 

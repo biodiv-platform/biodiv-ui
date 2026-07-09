@@ -1,7 +1,6 @@
 import { Box, Input } from "@chakra-ui/react";
 import { googleSearch } from "@utils/search";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 export default function Search() {
   const { t, lang } = useTranslation();

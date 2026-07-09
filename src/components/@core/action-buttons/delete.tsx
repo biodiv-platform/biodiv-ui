@@ -3,7 +3,7 @@ import { useLocalRouter } from "@components/@core/local-link";
 import DeleteIcon from "@icons/delete";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import { useRef } from "react";
 
 import {
   DialogBackdrop,
@@ -36,7 +36,7 @@ export default function DeleteActionButton({
   const { t } = useTranslation();
   const router = useLocalRouter();
   const { open, onClose, onOpen } = useDisclosure();
-  const cancelRef = React.useRef(null);
+  const cancelRef = useRef(null);
 
   const handleOnDelete = async () => {
     if (deleteComment) {
