@@ -58,7 +58,12 @@ export const DatePickerNextField = ({
                   <CalendarIcon color="gray.300" />
                 </label>
               }
-              width={"full"}
+              width="full"
+              css={{
+                "& .react-datepicker-wrapper": {
+                  width: "100%"
+                }
+              }}
             >
               <DatePicker
                 ref={inputRef}
