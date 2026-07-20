@@ -101,6 +101,7 @@ export const prepareObservationData = (data) => ({
   ...data,
   observedOn: data.observedOn ? new Date(data.observedOn) : undefined,
   sGroup: data.sGroup ? Number(data.sGroup) : undefined,
+  allowExternalPublishing: data.allowExternalPublishing ?? true,
   // assigns other values to `tmp`, since they need to be re-updated via `ref` for UI Components
   tmp: {
     sci: {

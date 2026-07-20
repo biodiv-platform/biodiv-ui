@@ -100,6 +100,7 @@ export default function DataTableCreateForm({
       contributors: { label: user.name, value: user.id },
       userGroupId: currentGroup.id && currentGroup.id > 0 ? [currentGroup.id.toString()] : [],
       isVerified: false,
+      allowExternalPublishing: true,
       terms: true
     }
   });
