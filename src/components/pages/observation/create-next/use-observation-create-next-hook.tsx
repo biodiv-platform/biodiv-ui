@@ -12,7 +12,7 @@ import { getLocalIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import { clusterResources } from "@utils/observation";
 import useTranslation from "next-translate/useTranslation";
-import React, { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import { emit } from "react-gbus";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { useIndexedDBStore } from "use-indexeddb";

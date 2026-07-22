@@ -6,16 +6,16 @@ import { ObservationData } from "@interfaces/custom";
 import { actionTabs } from "@static/observation-list";
 import { Mq } from "mq-styled-components";
 import useTranslation from "next-translate/useTranslation";
-import React, { Suspense, useState } from "react";
+import { lazy, Suspense, useState } from "react";
 
 import ImageBoxComponent from "./image";
 import InfoTab from "./tabs/info";
 
-const CommentsTab = React.lazy(() => import("./tabs/comments"));
-const CustomFieldsTab = React.lazy(() => import("./tabs/custom-fields"));
-const GroupsTab = React.lazy(() => import("./tabs/groups"));
-const RecoSuggestionTab = React.lazy(() => import("./tabs/reco-suggestion"));
-const TraitsTab = React.lazy(() => import("./tabs/traits"));
+const CommentsTab = lazy(() => import("./tabs/comments"));
+const CustomFieldsTab = lazy(() => import("./tabs/custom-fields"));
+const GroupsTab = lazy(() => import("./tabs/groups"));
+const RecoSuggestionTab = lazy(() => import("./tabs/reco-suggestion"));
+const TraitsTab = lazy(() => import("./tabs/traits"));
 
 export const VerticalTabs = styled.div`
   flex-grow: 1;

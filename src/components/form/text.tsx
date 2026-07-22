@@ -1,5 +1,5 @@
 import { Input, Textarea } from "@chakra-ui/react";
-import React, { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useController } from "react-hook-form";
 
 import { Field } from "../ui/field";

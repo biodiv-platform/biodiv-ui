@@ -1,9 +1,9 @@
-import React, { Suspense } from "react";
+import { lazy, Suspense } from "react";
 
 import DraftDropzone from "./dropzone";
 import { ObservationCreateNextProvider } from "./use-observation-create-next-hook";
 
-const AutoSync = React.lazy(() => import("@components/@core/autosync"));
+const AutoSync = lazy(() => import("@components/@core/autosync"));
 
 export default function ObservationCreateNextComponent(props) {
   return (

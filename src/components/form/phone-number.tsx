@@ -1,7 +1,6 @@
 import { Box, Input } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import styled from "@emotion/styled";
-import React from "react";
 import { useController } from "react-hook-form";
 import MobileInput from "react-phone-number-input";
 

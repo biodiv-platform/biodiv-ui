@@ -1,7 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { TAXON_POSITION, TAXON_STATUS } from "@static/taxon";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import {
   AccordionItem,

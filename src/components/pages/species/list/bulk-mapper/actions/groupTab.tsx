@@ -6,7 +6,7 @@ import { axGetSpeciesList } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import useSpeciesList, { deconstructSpeciesFieldFilter } from "../../use-species-list";
 

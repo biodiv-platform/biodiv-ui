@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
-import React from "react";
+import { useMemo } from "react";
 
 import { mapStyles } from "@/static/constants";
 
@@ -29,7 +29,7 @@ export default function GeoJSONPreview({
   maxZoom,
   mb
 }: GeoJSONPreviewProps) {
-  const defaultViewState = React.useMemo(() => getMapCenter(zoom || 2.8, { maxZoom }), []);
+  const defaultViewState = useMemo(() => getMapCenter(zoom || 2.8, { maxZoom }), []);
 
   return (
     <Box position="relative" h={h} overflow="hidden" mb={mb} borderRadius="md">

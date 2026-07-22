@@ -1,6 +1,5 @@
 import { Badge as B } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
-import React from "react";
 import { LuBadgeCheck } from "react-icons/lu";
 
 const Badge = ({ isAdmin }) =>

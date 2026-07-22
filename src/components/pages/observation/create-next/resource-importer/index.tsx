@@ -2,7 +2,7 @@ import { Button, Flex } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import { OBSERVATION_IMPORT_DIALOUGE, OBSERVATION_IMPORT_RESOURCE } from "@static/events";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { emit, useListener } from "react-gbus";
 import { LuMoveRight } from "react-icons/lu";
 

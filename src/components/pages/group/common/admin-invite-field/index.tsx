@@ -2,7 +2,6 @@ import { SelectAsyncInputField } from "@components/form/select-async";
 import useGlobalState from "@hooks/use-global-state";
 import { axEsUserAutoComplete } from "@services/auth.service";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 interface ManageGroupAdministratorsFieldProps {
   name: string;

@@ -4,7 +4,7 @@ import useTaxonFilter from "@components/pages/taxonomy/list/use-taxon";
 import { Role } from "@interfaces/custom";
 import { axDeleteTaxonSynonym, axUpdateTaxonSynonym } from "@services/taxonomy.service";
 import { hasAccess } from "@utils/auth";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import Loading from "@/components/pages/common/loading";
 

@@ -1,7 +1,6 @@
 import { Box, Button, Flex, Spinner } from "@chakra-ui/react";
 import { AssetStatus } from "@interfaces/custom";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { LuCircleAlert } from "react-icons/lu";
 
 import useObservationCreateNext from "../../use-observation-create-next-hook";

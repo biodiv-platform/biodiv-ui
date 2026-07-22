@@ -1,6 +1,5 @@
 import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { FileWithType } from "../file-with-type";
 import LayerUploadForm from "../form";

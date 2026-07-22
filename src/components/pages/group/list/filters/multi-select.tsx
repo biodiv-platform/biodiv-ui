@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import CheckBoxItems from "../../common/icon-checkbox-field/checkbox";
 import useGroupListFilter from "../use-group-list";

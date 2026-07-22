@@ -65,7 +65,8 @@
     "clear_cache": "ਸਾਫ ਕੈਚੇ",
     "name-macthing": "ਨਾਮ ਮੇਲ",
     "notification": "ਪੁਸ਼-ਨੋਟੀਫਿਕੇਸ਼ਨ ਭੇਜੋ",
-    "udate_scientific_names": "ਦਸਤਾਵੇਜ਼ ਵਿਗਿਆਨਕ ਨਾਮ ਅੱਪਡੇਟ ਕਰੋ"
+    "update_observation_index": "ਨਿਰੀਖਣ ਸੂਚਕਾਂਕ ਨੂੰ ਅੱਪਡੇਟ ਕਰੋ",
+    "update_scientific_names": "ਦਸਤਾਵੇਜ਼ ਵਿਗਿਆਨਕ ਨਾਮ ਅੱਪਡੇਟ ਕਰੋ"
   },
   "pages": {
     "notification": {

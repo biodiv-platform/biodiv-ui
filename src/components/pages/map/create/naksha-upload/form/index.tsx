@@ -1,6 +1,5 @@
 import { formatDate } from "@biodiv-platform/naksha-commons";
 import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as yup from "yup";
 

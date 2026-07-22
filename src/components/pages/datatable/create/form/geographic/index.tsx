@@ -5,7 +5,7 @@ import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import { LOCATION_ACCURACY_OPTIONS } from "@components/pages/observation/create/form/options";
 import { translateOptions } from "@utils/i18n";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 export default function PartyContributorsForm({
   nameTitle = "placename",

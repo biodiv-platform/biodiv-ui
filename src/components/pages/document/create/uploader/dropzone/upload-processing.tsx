@@ -1,6 +1,5 @@
 import { Flex } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { LuClock } from "react-icons/lu";
 
 export default function UploadProcessing() {

@@ -7,7 +7,6 @@ import MailIcon from "@icons/mail";
 import PeopleIcon from "@icons/people";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 export default function SpeciesContributePageComponent() {
   const { t } = useTranslation();

@@ -2,7 +2,7 @@ import { Box, Text } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import { axGetSpeciesIdFromTaxonId } from "@services/species.service";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function SpeciesPageLink({ showTaxon }) {
   const { t } = useTranslation();

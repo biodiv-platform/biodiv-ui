@@ -2,15 +2,15 @@ import { Badge } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import { TAXON_BADGE_COLORS } from "@static/constants";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 interface TaxonStatusBadgeProps {
   reco;
   taxonId;
   crumbs;
+  name;
 }
 
-function TaxonStatusBadge({ reco, taxonId, crumbs }: TaxonStatusBadgeProps) {
+function TaxonStatusBadge({ reco, taxonId, crumbs, name }: TaxonStatusBadgeProps) {
   const { t } = useTranslation();
 
   const taxonLink = `/taxonomy/list`;
@@ -28,7 +28,7 @@ function TaxonStatusBadge({ reco, taxonId, crumbs }: TaxonStatusBadgeProps) {
       return (
         <LocalLink href={taxonLink} params={{ taxonId: lastCrumb.id, showTaxon: lastCrumb.id }}>
           <Badge colorPalette={TAXON_BADGE_COLORS.SYNONYM}>
-            {t("observation:synonym")}
+            {t("observation:synonym")+" "+name}
             {lastCrumb?.name && ` ${lastCrumb.name}`}
           </Badge>
         </LocalLink>

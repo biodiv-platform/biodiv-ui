@@ -9,7 +9,7 @@ import { getGroupImageThumb } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import CheckBoxItems from "../../create/form/user-groups/checkbox";
 import GroupBox from "./group-box";

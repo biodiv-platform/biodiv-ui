@@ -1,6 +1,6 @@
 import { axGetOpenGraphMeta } from "@services/api.service";
 import { getLinkCard, preProcessContent } from "@utils/pages";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import { Prose } from "@/components/ui/prose";
 

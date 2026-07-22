@@ -3,7 +3,6 @@ import BlueLink from "@components/@core/blue-link";
 import { getUserImage } from "@utils/media";
 import { format } from "indian-number-format";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { Avatar } from "@/components/ui/avatar";
 

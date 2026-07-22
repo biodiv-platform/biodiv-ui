@@ -5,7 +5,7 @@ import PeopleIcon from "@icons/people";
 import { axUpdateContributors } from "@services/curate.service";
 import { axUserFilterSearch } from "@services/user.service";
 import { getUserImage } from "@utils/media";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Avatar, AvatarGroup } from "@/components/ui/avatar";
 

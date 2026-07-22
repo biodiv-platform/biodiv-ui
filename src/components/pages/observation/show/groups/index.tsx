@@ -5,7 +5,7 @@ import { Role } from "@interfaces/custom";
 import { Featured, ObservationUserPermission, UserGroupIbp } from "@interfaces/observation";
 import { hasAccess } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import GroupFeature from "./group-feature";
 import GroupPost from "./group-post";

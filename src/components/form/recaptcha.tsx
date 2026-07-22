@@ -1,5 +1,4 @@
 import SITE_CONFIG from "@configs/site-config";
-import React from "react";
 import ReCaptcha from "react-google-recaptcha";
 import { useController } from "react-hook-form";
 

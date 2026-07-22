@@ -1,7 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
-import React, { useEffect, useMemo, useState } from "react";
+import * as React from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useController } from "react-hook-form";
 import { parse, stringify } from "wkt";
 

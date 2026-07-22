@@ -4,7 +4,6 @@ import BoxHeading from "@components/@core/layout/box-heading";
 import ScientificName from "@components/@core/scientific-name";
 import styled from "@emotion/styled";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 const Table = styled.table`
   tr {

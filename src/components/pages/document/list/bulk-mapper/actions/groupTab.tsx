@@ -3,7 +3,7 @@ import { useLocalRouter } from "@components/@core/local-link";
 import notification, { NotificationType } from "@utils/notification";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import CheckBoxItems from "@/components/pages/observation/create/form/user-groups/checkbox";
 import { bulkActions } from "@/components/pages/observation/list/bulk-mapper";

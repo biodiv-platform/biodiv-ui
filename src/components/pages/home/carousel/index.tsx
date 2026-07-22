@@ -1,5 +1,5 @@
 import { Box, Carousel, IconButton, SimpleGrid, useMediaQuery } from "@chakra-ui/react";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 
 import Sidebar from "./sidebar";
@@ -38,19 +38,20 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1 }) {
       {...(mini && { mt: 8, mb: 8 })}
     >
       <Box gridColumn={{ md: mini ? "1/4" : "1/3" }} position="relative">
-        {mini && (!isBig || featured.length > slidesPerView || (isMedium && featured.length > 2)) && (
-          <IconButton
-            aria-label="Next Slide"
-            onClick={() => setPage(page > 0 ? page - 1 : featured.length - 1)}
-            position="absolute"
-            top={"40%"}
-            zIndex={1}
-            colorPalette="gray"
-            size="lg"
-          >
-            <LuArrowLeft size={12} color={"white"} />
-          </IconButton>
-        )}
+        {mini &&
+          (!isBig || featured.length > slidesPerView || (isMedium && featured.length > 2)) && (
+            <IconButton
+              aria-label="Next Slide"
+              onClick={() => setPage(page > 0 ? page - 1 : featured.length - 1)}
+              position="absolute"
+              top={"40%"}
+              zIndex={1}
+              colorPalette="gray"
+              size="lg"
+            >
+              <LuArrowLeft size={12} color={"white"} />
+            </IconButton>
+          )}
         <Carousel.Root
           slideCount={featured.length}
           mx="auto"
@@ -80,20 +81,21 @@ export default function CarouselNew({ featured, mini, slidesPerView = 1 }) {
             />
           </Carousel.Control>
         </Carousel.Root>
-        {mini && (!isBig || featured.length > slidesPerView || (isMedium && featured.length > 2)) && (
-          <IconButton
-            aria-label="Next Slide"
-            onClick={() => setPage((page + 1) % featured.length)}
-            position="absolute"
-            top={"40%"}
-            zIndex={1}
-            colorPalette="gray"
-            right={0}
-            size="lg"
-          >
-            <LuArrowRight size={12} color={"white"} />
-          </IconButton>
-        )}
+        {mini &&
+          (!isBig || featured.length > slidesPerView || (isMedium && featured.length > 2)) && (
+            <IconButton
+              aria-label="Next Slide"
+              onClick={() => setPage((page + 1) % featured.length)}
+              position="absolute"
+              top={"40%"}
+              zIndex={1}
+              colorPalette="gray"
+              right={0}
+              size="lg"
+            >
+              <LuArrowRight size={12} color={"white"} />
+            </IconButton>
+          )}
         {!mini && (
           <SlideInfo
             size={featured.length}

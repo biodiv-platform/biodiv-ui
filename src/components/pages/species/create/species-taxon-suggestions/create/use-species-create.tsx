@@ -2,7 +2,7 @@ import { useLocalRouter } from "@components/@core/local-link";
 import { axCheckSpecies, axCreateSpecies } from "@services/species.service";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 interface SpeciesCreateContextProps {
   isLoading;

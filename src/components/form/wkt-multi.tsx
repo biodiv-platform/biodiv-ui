@@ -4,7 +4,7 @@ import GmapsWktLocationPicker from "@components/@core/WKT/gmaps-wkt";
 import WKTDrawViewer from "@components/@core/WKT/wkt-draw-viewer";
 import WKTList from "@components/@core/WKT/wkt-list";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useController } from "react-hook-form";
 
 import SITE_CONFIG from "@/configs/site-config";

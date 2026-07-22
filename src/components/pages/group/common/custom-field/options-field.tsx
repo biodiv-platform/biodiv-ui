@@ -3,7 +3,6 @@ import { TextBoxField } from "@components/form/text";
 import AddIcon from "@icons/add";
 import DeleteIcon from "@icons/delete";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { useController, useFieldArray } from "react-hook-form";
 
 import { Radio, RadioGroup } from "@/components/ui/radio";

@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { bulkActionTabs } from "@static/observation-list";
 import useTranslation from "next-translate/useTranslation";
-import React, { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { LuCircleCheck, LuRepeat } from "react-icons/lu";
 
 import { Tooltip } from "@/components/ui/tooltip";

@@ -4,7 +4,7 @@ import { isBrowser } from "@static/constants";
 import { LIST_PAGINATION_LIMIT } from "@static/observation-list";
 import { stringify } from "@utils/query-string";
 import NProgress from "nprogress";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
 import { DEFAULT_PARAMS } from "./use-datatableObservation-filter";

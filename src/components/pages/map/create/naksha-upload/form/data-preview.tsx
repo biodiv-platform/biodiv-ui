@@ -1,6 +1,6 @@
 import { Box, Heading } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import useLayerUpload from "../use-layer-upload";
 import DataTable from "./data-table";

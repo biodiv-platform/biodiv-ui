@@ -41,6 +41,9 @@
     "documents": {
       "title": "Documents"
     },
+    "elastic": {
+      "title": "Elastic"
+    },
     "idao": {
       "title": "IDAO"
     },

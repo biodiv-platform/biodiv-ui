@@ -1,7 +1,7 @@
 import { AspectRatio, Image, SimpleGrid } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import { getLocalIcon } from "@utils/media";
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 
 export const CoverageShow = ({ value, items, type }) => (
   <SimpleGrid columns={5} gap={4} p={4}>

@@ -2,7 +2,6 @@ import { Box, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import BoxHeading from "@components/@core/layout/box-heading";
 import { stripSpecialCharacters } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { ResponsiveInfo } from "../info/responsive-info";
 

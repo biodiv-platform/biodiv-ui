@@ -12,7 +12,6 @@ import { axGetSpeciesGroupList } from "@services/taxonomy.service";
 import { DEFAULT_SPECIES_FILTER } from "@static/species";
 import { absoluteUrl } from "@utils/basic";
 import { getLanguageId } from "@utils/i18n";
-import React from "react";
 
 function SpeciesListPage({
   listConfig,

@@ -1,5 +1,4 @@
 import { Flex, FlexProps, Separator, Text } from "@chakra-ui/react";
-import React from "react";
 
 interface IBoxHeadingProps {
   children;

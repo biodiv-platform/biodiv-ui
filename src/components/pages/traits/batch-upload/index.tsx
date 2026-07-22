@@ -22,7 +22,7 @@ import notification from "@utils/notification";
 import dayjs from "dayjs";
 import ExcelJS from "exceljs";
 import useTranslation from "next-translate/useTranslation";
-import React, { useCallback, useState } from "react";
+import { Fragment, useCallback, useState } from "react";
 import { LuCircleAlert } from "react-icons/lu";
 
 import { Alert } from "@/components/ui/alert";
@@ -468,7 +468,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
                                 <table className="table table-bordered">
                                   <tbody>
                                     {Object.entries(item).map(([key, values]) => (
-                                      <React.Fragment key={key}>
+                                      <Fragment key={key}>
                                         {key.split("|")[1] == "true" &&
                                           values != null &&
                                           typeof values === "string" &&
@@ -605,7 +605,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
                                               </td>
                                             </tr>
                                           )}
-                                      </React.Fragment>
+                                      </Fragment>
                                     ))}
                                   </tbody>
                                 </table>

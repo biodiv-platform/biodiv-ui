@@ -4,11 +4,16 @@ import useGlobalState from "@hooks/use-global-state";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { LuCheck, LuDelete, LuGripVertical, LuLink, LuPencil, LuX } from "react-icons/lu";
-import { SortableElement } from "react-sortable-hoc";
 
-const GalleryItemsRow: any = SortableElement(({ itemDetails, onDelete, onEdit }) => {
+export function GalleryItemsRow({
+  itemDetails,
+  onDelete,
+  onEdit,
+  dragHandleProps,
+  innerRef,
+  style
+}) {
   const { t } = useTranslation();
   const { moreLinks, fileName, observationId, truncated } = itemDetails;
   const translations = Object.fromEntries(
@@ -20,10 +25,12 @@ const GalleryItemsRow: any = SortableElement(({ itemDetails, onDelete, onEdit })
     : getResourceThumbnail(RESOURCE_CTX.USERGROUPS, fileName, RESOURCE_SIZE.LIST_THUMBNAIL);
 
   return (
-    <tr>
+    <tr ref={innerRef} style={style}>
       <Box as="td" w="16rem">
         <Flex align="center">
-          <LuGripVertical style={{ marginRight: "0.5rem" }} />
+          <Box as="span" cursor="grab" mr="0.5rem" display="inline-flex" {...dragHandleProps}>
+            <LuGripVertical />
+          </Box>
           {translations?.[languageId]?.title || translations?.[SITE_CONFIG.LANG.DEFAULT_ID]?.title}
         </Flex>
       </Box>
@@ -42,18 +49,10 @@ const GalleryItemsRow: any = SortableElement(({ itemDetails, onDelete, onEdit })
           </Link>
         </td>
       ) : (
-        <td>
-          {/* ml={2} */}
-          {truncated ? <LuCheck color={"blue"} /> : <LuX color={"red"} />}
-        </td>
+        <td>{truncated ? <LuCheck color={"blue"} /> : <LuX color={"red"} />}</td>
       )}
       <td>
-        <Button
-          onClick={onDelete}
-          // variant="link"
-          colorPalette="red"
-          ml={2}
-        >
+        <Button onClick={onDelete} colorPalette="red" ml={2}>
           <LuDelete />
           {t("common:delete")}
         </Button>
@@ -68,6 +67,4 @@ const GalleryItemsRow: any = SortableElement(({ itemDetails, onDelete, onEdit })
       )}
     </tr>
   );
-});
-
-export default GalleryItemsRow;
+}

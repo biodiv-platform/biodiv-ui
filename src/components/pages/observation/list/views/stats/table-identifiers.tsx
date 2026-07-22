@@ -4,7 +4,6 @@ import BoxHeading from "@components/@core/layout/box-heading";
 import LocalLink from "@components/@core/local-link";
 import { getUserImage } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { LuChevronDown } from "react-icons/lu";
 
 import { Avatar } from "@/components/ui/avatar";

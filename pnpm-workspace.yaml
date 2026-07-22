@@ -1,0 +1,8 @@
+allowBuilds:
+  next-translate-plugin: true
+  sharp: true
+  styled-components: true
+  unrs-resolver: true
+minimumReleaseAgeExclude:
+  - "@biodiv-platform/naksha-maplibre-layers@5.0.5"
+  - naksha-components-react@5.0.3

@@ -2,7 +2,6 @@ import { Box, Flex, Stack, Text } from "@chakra-ui/react";
 import { sortByOptions } from "@static/user";
 import { format } from "indian-number-format";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 

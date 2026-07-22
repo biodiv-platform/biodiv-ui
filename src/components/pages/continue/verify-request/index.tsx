@@ -1,6 +1,6 @@
 import { axVerifyTaxonPermission } from "@services/taxonomy.service";
 import { axVerifyRequest } from "@services/usergroup.service";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import Processing from "../processing";
 

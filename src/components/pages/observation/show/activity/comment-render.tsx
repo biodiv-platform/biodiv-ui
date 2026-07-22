@@ -1,6 +1,6 @@
 import { useLocalRouter } from "@components/@core/local-link";
 import { getInjectableHTML } from "@utils/text";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Prose } from "@/components/ui/prose";
 

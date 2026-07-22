@@ -2,7 +2,6 @@ import { DownloadLogsDataProvider } from "@components/pages/user/common/use-down
 import DownloadLogListComponent from "@components/pages/user/list/download-logs";
 import { axGetDownloadLogsList } from "@services/user.service";
 import { LIST_PAGINATION_LIMIT } from "@static/observation-list";
-import React from "react";
 
 const DownloadLogsList = ({ downloadLogData, initialFilterParams }) => (
   <DownloadLogsDataProvider filter={initialFilterParams} downloadLogData={downloadLogData}>

@@ -1,5 +1,3 @@
-import React from "react";
-
 import CategoricalFilter from "./categorical-filter";
 import TextFilter from "./text-filter";
 

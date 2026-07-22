@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import GallerySetupFrom from "./gallery-setup-form";
 import GalleryEditForm from "./gallery-setup-form/editform";

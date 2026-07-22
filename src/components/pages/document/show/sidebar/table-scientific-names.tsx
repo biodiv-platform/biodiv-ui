@@ -8,7 +8,7 @@ import useGlobalState from "@hooks/use-global-state";
 import { axRerunGnfinder, axUpdateScientifcNameToIsDeleted } from "@services/document.service";
 import { adminOrAuthor } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { LuRefreshCw } from "react-icons/lu";
 
 import SimpleActionButton from "@/components/@core/action-buttons/simple";

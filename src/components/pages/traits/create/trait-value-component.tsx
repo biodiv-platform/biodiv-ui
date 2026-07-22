@@ -3,7 +3,7 @@ import { TextBoxField } from "@components/form/text";
 import { axUploadResource } from "@services/files.service";
 import { getTraitIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { LuX } from "react-icons/lu";
 
 const ACCEPT_STRING = "image/jpeg, image/png, image/jpg";

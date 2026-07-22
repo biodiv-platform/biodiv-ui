@@ -1,5 +1,6 @@
 // components/LazyLoadOnScroll.tsx
-import React, { Suspense } from "react";
+import * as React from "react";
+import { Suspense } from "react";
 import { useInView } from "react-intersection-observer";
 
 export default function LazyLoadOnScroll({

@@ -1,7 +1,6 @@
 import { Button, Flex, Heading, Link, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import UploadIcon from "../media-picker/upload-icon";
 import ImageGridContainer from "./container";

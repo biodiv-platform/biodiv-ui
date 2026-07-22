@@ -4,7 +4,7 @@ import { TextBoxField } from "@components/form/text";
 import useGlobalState from "@hooks/use-global-state";
 import { getFallbackByMIME } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { LuMoveDown, LuMoveUp } from "react-icons/lu";
 
 import { ImageWithFallback } from "@/components/@core/image-with-fallback";

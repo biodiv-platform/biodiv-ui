@@ -25,7 +25,7 @@ import { getResourceThumbnail } from "@utils/media";
 import { stripTags } from "@utils/text";
 import { NextSeo } from "next-seo";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 interface IHeaderProps {
   o: ShowData;
@@ -121,6 +121,7 @@ function Header({ o, following = false }: IHeaderProps) {
               reco={o.recoIbp}
               crumbs={o.recoIbp?.breadCrumbs}
               taxonId={o.recoIbp?.taxonId}
+              name = {o.recoIbp?.acceptedName}
             />
           </Flex>
           {o.recoIbp?.commonName && (

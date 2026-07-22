@@ -4,7 +4,6 @@ import { axDownloadLandscape } from "@services/landscape.service";
 import { waitForAuth } from "@utils/auth";
 import { sendFileFromResponse } from "@utils/download";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { LuChevronUp } from "react-icons/lu";
 
 import { MenuContent, MenuRoot, MenuTrigger } from "@/components/ui/menu";

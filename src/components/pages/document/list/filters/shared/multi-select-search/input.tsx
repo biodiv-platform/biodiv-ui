@@ -2,7 +2,7 @@ import { selectStyles } from "@components/form/configs";
 import { axSearchFilterByName } from "@services/esmodule.service";
 import { MENU_PORTAL_TARGET } from "@static/constants";
 import debounce from "debounce-promise";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import Select from "react-select";
 import AsyncSelect from "react-select/async";
 

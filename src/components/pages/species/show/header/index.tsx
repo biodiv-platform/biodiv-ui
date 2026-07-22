@@ -14,7 +14,7 @@ import { hasAccess } from "@utils/auth";
 import { getLocalIcon, getResourceThumbnail } from "@utils/media";
 import { NextSeo } from "next-seo";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useListener } from "react-gbus";
 import { LuPencil, LuRefreshCw } from "react-icons/lu";
 
@@ -123,6 +123,7 @@ function SpeciesHeader({ downloadSpecies }) {
           reco={species.taxonomyDefinition}
           crumbs={species.breadCrumbs}
           taxonId={species.taxonomyDefinition.id}
+          name = {""}
         />
 
         <Box>

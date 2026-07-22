@@ -2,7 +2,7 @@ import { Input } from "@chakra-ui/react";
 import { BasicTable, ResponsiveContainer } from "@components/@core/table";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import useGroupListFilter from "../use-group-list";
 import { UserGroupListTableRows } from "./group-list-rows";

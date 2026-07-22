@@ -13,7 +13,6 @@ import { hasAccess } from "@utils/auth";
 import { absoluteUrl } from "@utils/basic";
 import { getLanguageId } from "@utils/i18n";
 import { normalizeSpeciesPayload } from "@utils/species";
-import React from "react";
 
 const SpeciesShowPage = ({ species, licensesList, permissions }) => (
   <SpeciesShowPageComponent

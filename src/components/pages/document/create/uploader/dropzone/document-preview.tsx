@@ -1,5 +1,4 @@
 import { SimpleGrid } from "@chakra-ui/react";
-import React from "react";
 
 import FilePreview from "../common/file-preview";
 import useManageDocument from "../document-upload-provider";

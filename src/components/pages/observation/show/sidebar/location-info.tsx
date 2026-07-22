@@ -3,7 +3,6 @@ import BoxHeading from "@components/@core/layout/box-heading";
 import { ObservationLocationInfo } from "@interfaces/observation";
 import { titleCase } from "@utils/basic";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 interface ILocationInformationProps {
   layerInfo: ObservationLocationInfo;

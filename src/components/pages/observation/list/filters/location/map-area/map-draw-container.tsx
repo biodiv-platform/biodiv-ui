@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { convertFeatureToPolygonString, getMapCenter, stringToFeature } from "@utils/location";
 import dynamic from "next/dynamic";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import { mapStyles } from "@/static/constants";
 const FILTER_NAME = "location";

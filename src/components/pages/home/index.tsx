@@ -5,7 +5,6 @@ import donorsList from "@static/donors";
 import partnersList from "@static/partners";
 import sponsorsList from "@static/sponsors";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import Carousel from "./carousel";
 import VerticalCarousel from "./carousel/vertical";

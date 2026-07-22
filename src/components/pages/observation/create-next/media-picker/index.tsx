@@ -2,7 +2,7 @@ import { Tabs } from "@chakra-ui/react";
 import { OBSERVATION_IMPORT_DIALOUGE } from "@static/events";
 import { clusterResources } from "@utils/observation";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { emit } from "react-gbus";
 import { useFormContext } from "react-hook-form";
 

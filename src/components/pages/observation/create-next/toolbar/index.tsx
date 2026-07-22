@@ -14,7 +14,6 @@ import { OBSERVATION_BULK_EDIT } from "@static/events";
 import notification, { NotificationType } from "@utils/notification";
 import dayjs from "dayjs";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { emit } from "react-gbus";
 import { useFormContext } from "react-hook-form";
 import { LuChevronDown, LuMenu } from "react-icons/lu";

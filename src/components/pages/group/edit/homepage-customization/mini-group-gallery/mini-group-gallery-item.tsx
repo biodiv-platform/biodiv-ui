@@ -1,7 +1,6 @@
 import { Badge, Box, Flex, Heading, IconButton } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import useGlobalState from "@/hooks/use-global-state";
 import DeleteIcon from "@/icons/delete";

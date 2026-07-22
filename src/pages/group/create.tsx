@@ -6,7 +6,6 @@ import { axGetspeciesGroups, axGetTraitsByGroupId } from "@services/observation.
 import { axGetAllCustomFields } from "@services/usergroup.service";
 import { axGetAllHabitat, axGetLangList } from "@services/utility.service";
 import { getLanguageId } from "@utils/i18n";
-import React from "react";
 
 const createGroup = ({ speciesGroups, habitats, allCustomField, traits, languagesList }) => (
   <CreateGroupPage

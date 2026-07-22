@@ -8,7 +8,7 @@ import {
   IconButtonProps
 } from "@chakra-ui/react";
 import { RecoIbp } from "@interfaces/observation";
-import React, { forwardRef, useState } from "react";
+import { forwardRef, useState } from "react";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 
 import CarouselResourceInfo from "./resource-info";

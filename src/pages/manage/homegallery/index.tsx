@@ -2,7 +2,6 @@ import { authorizedPageSSP } from "@components/auth/auth-redirect";
 import SITE_CONFIG from "@configs/site-config";
 import { Role } from "@interfaces/custom";
 import { axGetAdminHomeInfo, axGetLangList } from "@services/utility.service";
-import React from "react";
 
 import HomeComponent from "@/components/pages/manage/homegallery";
 import { getLanguageId } from "@/utils/i18n";

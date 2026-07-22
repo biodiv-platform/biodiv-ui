@@ -1,22 +1,31 @@
-import React from "react";
-import { SortableContainer } from "react-sortable-hoc";
+import { DndItemWrapper, DndListWrapper } from "@/components/pages/common/reusable-dnd";
 
-import GalleryItemRow from "./gallery-items-row";
+import { GalleryItemsRow } from "./gallery-items-row";
 
-const GalleryListItems: any = SortableContainer(
-  ({ galleryList, removeGalleryItem, editGalleryItem }) => (
-    <tbody>
-      {galleryList.map((item, index) => (
-        <GalleryItemRow
-          key={item.sliderId}
-          index={index}
-          onDelete={() => removeGalleryItem(index)}
-          onEdit={() => editGalleryItem(index)}
-          itemDetails={item}
-        />
-      ))}
-    </tbody>
-  )
-);
-
-export default GalleryListItems;
+export default function GalleryListItems({
+  galleryList,
+  removeGalleryItem,
+  editGalleryItem,
+  onSortEnd
+}) {
+  return (
+    <DndListWrapper items={galleryList} getItemId={(item) => item.sliderId} onSortEnd={onSortEnd}>
+      <tbody>
+        {galleryList.map((item, index) => (
+          <DndItemWrapper key={item.sliderId} id={item.sliderId}>
+            {({ setNodeRef, style, dragHandleProps }) => (
+              <GalleryItemsRow
+                innerRef={setNodeRef}
+                style={style}
+                dragHandleProps={dragHandleProps}
+                onDelete={() => removeGalleryItem(index)}
+                onEdit={() => editGalleryItem(index)}
+                itemDetails={item}
+              />
+            )}
+          </DndItemWrapper>
+        ))}
+      </tbody>
+    </DndListWrapper>
+  );
+}

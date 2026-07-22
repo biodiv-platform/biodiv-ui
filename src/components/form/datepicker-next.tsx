@@ -2,7 +2,6 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { Input } from "@chakra-ui/react";
 import CalendarIcon from "@icons/calendar";
-import React from "react";
 import DatePicker from "react-datepicker";
 import { Controller } from "react-hook-form";
 
@@ -59,7 +58,12 @@ export const DatePickerNextField = ({
                   <CalendarIcon color="gray.300" />
                 </label>
               }
-              width={"full"}
+              width="full"
+              css={{
+                "& .react-datepicker-wrapper": {
+                  width: "100%"
+                }
+              }}
             >
               <DatePicker
                 ref={inputRef}

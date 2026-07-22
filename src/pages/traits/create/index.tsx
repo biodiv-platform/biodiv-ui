@@ -5,7 +5,6 @@ import { Role } from "@interfaces/custom";
 import { axGetAllFieldsMeta } from "@services/species.service";
 import { axGetLangList } from "@services/utility.service";
 import { getLanguageId } from "@utils/i18n";
-import React from "react";
 
 const traitsCreate = ({ speciesField, languagesList }) => (
   <TraitsCreateComponent speciesField={speciesField} languages={languagesList} />

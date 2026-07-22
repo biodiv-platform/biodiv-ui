@@ -11,7 +11,6 @@ import { formatDateReadableFromUTC } from "@utils/date";
 import { getUserImage } from "@utils/media";
 import { getInjectableHTML } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { Avatar } from "@/components/ui/avatar";
 

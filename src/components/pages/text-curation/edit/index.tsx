@@ -1,9 +1,9 @@
 import { Spinner } from "@chakra-ui/react";
-import React, { Suspense } from "react";
+import { lazy, Suspense } from "react";
 
 import TextCurationHeader from "./header";
 
-const TextCurationTable = React.lazy(() => import("./table/table")); // Lazied to prevent SSR Hydration Error
+const TextCurationTable = lazy(() => import("./table/table")); // Lazied to prevent SSR Hydration Error
 
 export default function CurateEditPageComponent() {
   return (

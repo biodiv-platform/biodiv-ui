@@ -2,7 +2,6 @@ import { Box } from "@chakra-ui/react";
 import useDocumentFilter from "@components/pages/document/common/use-document-filter";
 import { getByPath } from "@utils/basic";
 import { toHumanString } from "human-readable-numbers";
-import React from "react";
 
 export default function FilterStat({ statKey, subStatKey }) {
   const {

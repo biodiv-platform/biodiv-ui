@@ -3,7 +3,7 @@ import { BasicTable, ResponsiveContainer } from "@components/@core/table";
 import { axSaveTaxonomy } from "@services/taxonomy.service";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { LuMoveRight } from "react-icons/lu";
 
 import { SpeciesCreateCommonTableRows } from "../common-table-rows";

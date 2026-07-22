@@ -1,6 +1,5 @@
 import { Box } from "@chakra-ui/react";
 import useOnlineStatus from "@rehooks/online-status";
-import React from "react";
 import LazyLoad from "react-lazyload";
 
 import Map from "./map";

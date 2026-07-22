@@ -4,7 +4,7 @@ import EyeIcon from "@icons/eye";
 import EyeSlashIcon from "@icons/eye-slash";
 import { SpeciesField } from "@interfaces/custom";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import urlSlug from "url-slug";
 
 import SpeciesFieldGroup from "./field";

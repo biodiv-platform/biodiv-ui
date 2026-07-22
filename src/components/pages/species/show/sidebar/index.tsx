@@ -2,7 +2,6 @@ import { GridItem } from "@chakra-ui/react";
 import TemporalObservedOn from "@components/pages/observation/list/views/stats/temporal-observed-on";
 import TraitsPerMonth from "@components/pages/observation/list/views/stats/traits-per-month";
 import useGlobalState from "@hooks/use-global-state";
-import React from "react";
 
 import useSpecies from "../use-species";
 import SpeciesRelatedObservations from "./related-observations";

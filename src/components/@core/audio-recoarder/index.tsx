@@ -2,7 +2,7 @@ import { Box, Button } from "@chakra-ui/react";
 import MicrophoneIcon from "@icons/microphone";
 import StopIcon from "@icons/stop";
 import useTranslation from "next-translate/useTranslation";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { useTimer } from "use-timer";
 
 const pad = (number) => number.toString().toString().padStart(2, "0");

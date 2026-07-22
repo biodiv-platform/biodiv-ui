@@ -6,7 +6,7 @@ import PDFIcon from "@icons/pdf";
 import VideoIcon from "@icons/video";
 import { formatTimeStampFromUTC } from "@utils/date";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const DocumentList = styled.div`
   display: flex;

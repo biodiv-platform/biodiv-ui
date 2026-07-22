@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import { useMemo } from "react";
 
 import { mapStyles } from "@/static/constants";
 
@@ -26,7 +26,7 @@ const coverageToGeoJson = (coverage) => ({
 export default function DocumentSidebarMap({ documentCoverages }) {
   const geojson = coverageToGeoJson(documentCoverages);
   const { t } = useTranslation();
-  const defaultViewState = React.useMemo(() => getMapCenter(2.8), []);
+  const defaultViewState = useMemo(() => getMapCenter(2.8), []);
 
   return (
     <Box

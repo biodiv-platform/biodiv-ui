@@ -1,6 +1,5 @@
 import { Box } from "@chakra-ui/react";
 import { MENU_PORTAL_TARGET } from "@static/constants";
-import React from "react";
 import { useController } from "react-hook-form";
 import Select, { components } from "react-select";
 

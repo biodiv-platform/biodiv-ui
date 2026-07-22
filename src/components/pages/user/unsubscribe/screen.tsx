@@ -1,5 +1,4 @@
 import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
-import React from "react";
 
 export default function UnsubscribeScreen({ onClick, icon, title, description, buttonText }) {
   return (

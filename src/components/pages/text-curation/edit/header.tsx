@@ -8,7 +8,7 @@ import { axDownloadCsv } from "@services/curate.service";
 import { axGetUsersByID } from "@services/user.service";
 import { sendFileFromResponse } from "@utils/download";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
 

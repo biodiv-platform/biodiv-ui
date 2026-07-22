@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import CheckIcon from "@icons/check";
 import { axGetLangList } from "@services/utility.service";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
+import * as React from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import { LuPlus, LuTrash2 } from "react-icons/lu";
 import ReactSelect from "react-select";

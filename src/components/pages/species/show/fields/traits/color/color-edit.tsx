@@ -3,7 +3,6 @@ import useSpecies from "@components/pages/species/show/use-species";
 import { axUpdateSpeciesTrait } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { useImmer } from "use-immer";
 
 import { TraitEditFooter } from "../common/edit-footer";

@@ -2,7 +2,6 @@ import { Box, Separator, Table } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import BoxHeading from "@components/@core/layout/box-heading";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import useSpecies from "../../use-species";
 

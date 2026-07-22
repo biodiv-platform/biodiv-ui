@@ -5,7 +5,6 @@ import useDocumentFilter from "@components/pages/document/common/use-document-fi
 import DeleteIcon from "@icons/delete";
 import { DEFAULT_FILTER } from "@static/documnet-list";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 const FILTERS_BLACKLIST = [...Object.keys(DEFAULT_FILTER), "lang", "userGroupList", "groupName"];
 

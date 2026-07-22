@@ -2,7 +2,7 @@ import { Box, Tabs } from "@chakra-ui/react";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import MyUploads from "@components/pages/observation/create/form/uploader/my-uploads";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 import { Field } from "@/components/ui/field";

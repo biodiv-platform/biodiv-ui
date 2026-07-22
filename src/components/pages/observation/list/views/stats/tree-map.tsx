@@ -5,7 +5,7 @@ import { scaleSequential } from "d3-scale";
 import { interpolateSpectral } from "d3-scale-chromatic";
 import { select } from "d3-selection";
 import { toPng } from "html-to-image";
-import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 
 import { TaxonTreeTooltipRendered } from "./static-data";
 

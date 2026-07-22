@@ -1,7 +1,6 @@
 import { IconButton } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { LuCopy, LuX } from "react-icons/lu";
 
 export const reactSelectProps = {

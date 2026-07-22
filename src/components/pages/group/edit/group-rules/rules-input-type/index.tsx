@@ -5,7 +5,7 @@ import { SelectInputField } from "@components/form/select";
 import { SelectMultipleInputField } from "@components/form/select-multiple";
 import { TraitsValue } from "@interfaces/traits";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import GeoJsonWktParserInput from "../geojson-wkt-inputfield";
 import TaxonInputField from "./taxon-filter-field";

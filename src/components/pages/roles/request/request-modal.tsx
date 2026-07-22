@@ -1,5 +1,3 @@
-import React from "react";
-
 import { DialogBackdrop, DialogRoot } from "@/components/ui/dialog";
 
 import { TaxonPermissionRequestForm } from "./form";

@@ -2,7 +2,6 @@ import { Box, List } from "@chakra-ui/react";
 import BlueLink from "@components/@core/blue-link";
 import BoxHeading from "@components/@core/layout/box-heading";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 export default function SpatialCoverage({ documentCoverage }) {
   const { t } = useTranslation();

@@ -1,7 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import {
   AccordionItem,

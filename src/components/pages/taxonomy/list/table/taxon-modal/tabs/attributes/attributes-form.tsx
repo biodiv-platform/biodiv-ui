@@ -1,5 +1,5 @@
 import { Separator } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import Loading from "@/components/pages/common/loading";
 

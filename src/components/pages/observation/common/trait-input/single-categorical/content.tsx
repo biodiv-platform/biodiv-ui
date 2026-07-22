@@ -1,7 +1,6 @@
 import { Flex, Image, Text } from "@chakra-ui/react";
 import { RadioCard } from "@chakra-ui/react";
 import { getTraitIcon } from "@utils/media";
-import React from "react";
 
 export default function TraitContent({ value, label, icon }) {
   return (

@@ -692,6 +692,7 @@ export interface RecoIbp {
   recoVoteCount?: number; // int32
   status?: string;
   userIbp?: UserIbp;
+  acceptedName?: string;
 }
 export interface RecoSet {
   taxonId?: number; // int64

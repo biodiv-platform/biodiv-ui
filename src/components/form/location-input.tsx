@@ -1,7 +1,6 @@
 import { Input } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
 import { AUTOCOMPLETE_FIELDS, GEOCODE_OPTIONS } from "@static/location";
-import React from "react";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { useController, useFormContext } from "react-hook-form";
 

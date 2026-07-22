@@ -1,5 +1,5 @@
-import { type ImageProps, Image } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { Image, type ImageProps } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
 interface FallbackImageProps extends ImageProps {
   fallbackSrc: string;

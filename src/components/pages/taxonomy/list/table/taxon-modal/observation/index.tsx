@@ -2,7 +2,6 @@ import { Box, Skeleton, Text } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import LocalLink from "@components/@core/local-link";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import useObsCount from "./use-observation-count";
 

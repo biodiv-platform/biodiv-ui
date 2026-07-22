@@ -3,7 +3,7 @@ import { FORWARD_BLACKLIST } from "@static/constants";
 import { encode } from "base64-url";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function LoginButton() {
   const { t } = useTranslation();

@@ -1,7 +1,7 @@
 import { Stack } from "@chakra-ui/react";
 import { SpeciesField } from "@interfaces/custom";
 import { SPECIES_FIELD_DELETED, SPECIES_FIELD_UPDATED } from "@static/events";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useListener } from "react-gbus";
 import { useImmer } from "use-immer";
 

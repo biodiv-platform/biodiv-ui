@@ -65,7 +65,8 @@
     "clear_cache": "कैश को साफ़ करें",
     "name-macthing": "नाम मिलान",
     "notification": "पुश-अधिसूचना भेजें",
-    "udate_scientific_names": "दस्तावेज़ वैज्ञानिक नाम अद्यतन करें"
+    "update_observation_index": "अवलोकन सूचकांक अद्यतन करें",
+    "update_scientific_names": "दस्तावेज़ वैज्ञानिक नाम अद्यतन करें"
   },
   "pages": {
     "notification": {

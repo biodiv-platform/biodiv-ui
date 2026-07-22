@@ -2,7 +2,6 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, getUserImage, RESOURCE_CTX } from "@utils/media";
-import React from "react";
 
 import { Avatar } from "@/components/ui/avatar";
 

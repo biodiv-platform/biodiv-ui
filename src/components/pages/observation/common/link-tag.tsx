@@ -1,5 +1,4 @@
 import LocalLink from "@components/@core/local-link";
-import React from "react";
 
 import { Tag } from "@/components/ui/tag";
 

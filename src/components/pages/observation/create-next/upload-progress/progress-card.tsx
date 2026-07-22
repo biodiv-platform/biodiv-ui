@@ -5,7 +5,6 @@ import useGlobalState from "@hooks/use-global-state";
 import { AssetStatus } from "@interfaces/custom";
 import { getFallbackByMIME } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 

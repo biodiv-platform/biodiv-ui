@@ -3,7 +3,6 @@ import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import { getUserImage } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { LuChevronDown } from "react-icons/lu";
 
 import { Avatar } from "@/components/ui/avatar";

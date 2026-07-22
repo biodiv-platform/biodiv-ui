@@ -3,7 +3,7 @@ import { CheckboxField } from "@components/form/checkbox";
 import { SelectInputField } from "@components/form/select";
 import { SelectAsyncInputField } from "@components/form/select-async";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 

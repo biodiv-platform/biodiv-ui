@@ -2,7 +2,6 @@ import { Box, Button, Heading, Stack, useBreakpointValue } from "@chakra-ui/reac
 import BoxHeading from "@components/@core/layout/box-heading";
 import styled from "@emotion/styled";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import {
   DrawerBackdrop,

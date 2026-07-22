@@ -1,6 +1,5 @@
 import { Tabs } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { TaxonActivityTab } from "./activity";
 import { TaxonAttributesTab } from "./attributes";

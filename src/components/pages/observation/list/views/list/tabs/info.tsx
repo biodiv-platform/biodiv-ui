@@ -12,7 +12,6 @@ import { axFlagObservation, axUnFlagObservation } from "@services/observation.se
 import { formatDateReadableFromUTC } from "@utils/date";
 import { stripTags } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import CalendarIcon from "@/icons/calendar";
 import EditIcon from "@/icons/edit";
@@ -45,6 +44,7 @@ export default function InfoTab({ o, recoUpdated, setTab }: IInfoTabProps) {
               reco={o.recoShow?.recoIbp}
               crumbs={o.recoShow?.recoIbp?.breadCrumbs}
               taxonId={o.recoShow?.recoIbp?.taxonId}
+              name={o?.recoShow?.recoIbp?.acceptedName}
             />
           </Heading>
           <Text mb={1}>{o?.recoShow?.recoIbp?.commonName}</Text>

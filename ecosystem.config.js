@@ -4,7 +4,7 @@ module.exports = {
   apps: [
     {
       name: "biodiv-ui",
-      script: "yarn",
+      script: "pnpm",
       args: "serve",
       interpreter: "none",
       instances: "max",

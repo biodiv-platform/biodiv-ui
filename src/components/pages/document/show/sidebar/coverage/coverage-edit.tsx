@@ -2,7 +2,7 @@ import { Button, ButtonGroup } from "@chakra-ui/react";
 import CheckBoxItems from "@components/pages/group/common/icon-checkbox-field/checkbox";
 import styled from "@emotion/styled";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const EditContainer = styled.div`
   padding: 1rem;

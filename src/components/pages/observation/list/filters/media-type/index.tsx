@@ -1,5 +1,3 @@
-import React from "react";
-
 import CheckboxFilterPanel from "../shared/checkbox";
 import { MEDIA_TYPES } from "./filter-keys";
 

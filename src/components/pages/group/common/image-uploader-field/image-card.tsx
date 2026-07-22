@@ -1,6 +1,6 @@
 import { CloseButton, Flex, Image } from "@chakra-ui/react";
 import { getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 export default function ResourceCard({ resource, setValue, imageSize, simpleUpload, disabled }) {
   const imageURL = useMemo(

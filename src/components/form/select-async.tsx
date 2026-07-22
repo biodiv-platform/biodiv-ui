@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { MENU_PORTAL_TARGET } from "@static/constants";
 import debounce from "debounce-promise";
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useController, useFormContext } from "react-hook-form";
 import { LuChevronDown } from "react-icons/lu";
 import { components, DropdownIndicatorProps } from "react-select";

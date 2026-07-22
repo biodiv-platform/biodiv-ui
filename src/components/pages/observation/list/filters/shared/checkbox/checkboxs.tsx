@@ -2,7 +2,7 @@ import { CheckboxGroup, Image, Input, Stack } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { getTraitIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { LuSearch } from "react-icons/lu";
 
 import { Checkbox } from "@/components/ui/checkbox";

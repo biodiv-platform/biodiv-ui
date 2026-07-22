@@ -11,7 +11,7 @@ import {
   ScientificNameOption
 } from "@components/pages/observation/create/form/recodata/scientific-name";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { components } from "react-select";

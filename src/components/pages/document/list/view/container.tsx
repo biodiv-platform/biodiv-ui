@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import { actionTabs } from "@static/documnet-list";
 import { Mq } from "mq-styled-components";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import CommentsTab from "./tabs/comments";
 import GroupTab from "./tabs/group";

@@ -1,4 +1,3 @@
-import React from "react";
 import { useController } from "react-hook-form";
 
 import { Checkbox } from "../ui/checkbox";

@@ -11,7 +11,7 @@ import {
   getYoutubeImage,
   RESOURCE_CTX
 } from "@utils/media";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import Select from "react-select";
 
 import { ImageWithFallback } from "@/components/@core/image-with-fallback";

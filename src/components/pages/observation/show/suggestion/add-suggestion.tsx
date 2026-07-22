@@ -24,7 +24,7 @@ import { axGetLangList } from "@services/utility.service";
 import { DEFAULT_GROUP, plantnetText, specRecText } from "@static/constants";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LuMenu } from "react-icons/lu";
 import * as Yup from "yup";

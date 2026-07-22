@@ -8,7 +8,7 @@ import { SPECIES_FIELD_UPDATE } from "@static/events";
 import { getParsedUser } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import Flatpickr from "react-flatpickr";
 import { emit } from "react-gbus";
 import { LuCalendar, LuCheck, LuPlus, LuX } from "react-icons/lu";

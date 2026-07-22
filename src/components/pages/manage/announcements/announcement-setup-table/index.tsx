@@ -3,7 +3,6 @@ import SITE_CONFIG from "@configs/site-config";
 import useGlobalState from "@hooks/use-global-state";
 import AddIcon from "@icons/add";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { LuCheck, LuDelete, LuPencil, LuX } from "react-icons/lu";
 
 import { axRemoveAnnouncement } from "@/services/utility.service";

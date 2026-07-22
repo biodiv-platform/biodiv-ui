@@ -1,6 +1,7 @@
 import { Box, chakra, Table } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useMemo } from "react";
+import * as React from "react";
+import { useEffect, useMemo } from "react";
 import { LuMoveDown, LuMoveUp } from "react-icons/lu";
 import { useRowSelect, useSortBy, useTable } from "react-table";
 

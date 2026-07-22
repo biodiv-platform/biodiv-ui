@@ -65,7 +65,8 @@
     "clear_cache": "ক্লিয়ার ক্যাশে",
     "name-macthing": "নাম ম্যাচিং",
     "notification": "ধাক্কা-বিজ্ঞপ্তি পাঠান",
-    "udate_scientific_names": "নথির বৈজ্ঞানিক নাম আপডেট করুন"
+    "update_observation_index": "পর্যবেক্ষণ সূচক আপডেট করুন",
+    "update_scientific_names": "নথির বৈজ্ঞানিক নাম আপডেট করুন"
   },
   "pages": {
     "notification": {

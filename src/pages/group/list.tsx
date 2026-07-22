@@ -6,7 +6,6 @@ import { axGroupListExpanded } from "@services/usergroup.service";
 import { axGetAllHabitat } from "@services/utility.service";
 import { getLanguageId } from "@utils/i18n";
 import { parse, stringify } from "@utils/query-string";
-import React from "react";
 
 const GroupListPage = (props) => (
   <GroupListFilterProvider {...props}>

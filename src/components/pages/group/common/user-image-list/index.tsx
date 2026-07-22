@@ -1,6 +1,5 @@
 import { Box, Heading, Link, Stack } from "@chakra-ui/react";
 import { getUserImage } from "@utils/media";
-import React from "react";
 
 import { Avatar } from "@/components/ui/avatar";
 

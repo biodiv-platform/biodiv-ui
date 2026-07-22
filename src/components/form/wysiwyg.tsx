@@ -1,5 +1,4 @@
 import WYSIWYGEditor from "@components/@core/wysiwyg-editor";
-import React from "react";
 import { useController } from "react-hook-form";
 
 import { Field } from "../ui/field";

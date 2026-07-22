@@ -2,7 +2,6 @@ import { Box, IconButton, Menu, Portal, useToken } from "@chakra-ui/react";
 import { getSpeciesFieldHeaders } from "@utils/species";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { LuMenu } from "react-icons/lu";
 import urlSlug from "url-slug";
 

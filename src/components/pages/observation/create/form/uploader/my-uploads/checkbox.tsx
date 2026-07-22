@@ -4,7 +4,7 @@ import useGlobalState from "@hooks/use-global-state";
 import DeleteIcon from "@icons/delete";
 import { getFallbackByMIME } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 

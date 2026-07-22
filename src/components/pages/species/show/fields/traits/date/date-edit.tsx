@@ -6,7 +6,7 @@ import CalendarIcon from "@icons/calendar";
 import { axUpdateSpeciesTrait } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import Flatpickr from "react-flatpickr";
 
 import { InputGroup } from "@/components/ui/input-group";

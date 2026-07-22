@@ -65,7 +65,8 @@
     "clear_cache": "Cache mazava",
     "name-macthing": "Anarana mifanandrify",
     "notification": "Alefaso ny fanosehana",
-    "udate_scientific_names": "Fanavaozana ny anarana siantifika Document"
+    "update_observation_index": "Fanavaozana ny Index Observation",
+    "update_scientific_names": "Fanavaozana ny anarana siantifika Document"
   },
   "pages": {
     "notification": {

@@ -5,7 +5,6 @@ import { axGetDocumentTypes } from "@services/document.service";
 import { axGetLicenseList } from "@services/resources.service";
 import { axGetSpeciesGroupList } from "@services/taxonomy.service";
 import { axGetAllHabitat } from "@services/utility.service";
-import React from "react";
 
 const DocumentCreatePage = ({ speciesGroups, habitats, documentTypes, licensesList }) => (
   <DocumentCreatePageComponent

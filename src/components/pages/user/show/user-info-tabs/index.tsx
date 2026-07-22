@@ -1,7 +1,6 @@
 import { Box, Tabs } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import UserLocationMap from "./about/user-location-map";
 import ObservationTab from "./observation";

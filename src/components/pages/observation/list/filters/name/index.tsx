@@ -1,5 +1,3 @@
-import React from "react";
-
 import CheckboxFilterPanel from "../shared/checkbox";
 import TextFilterPanel from "../shared/search";
 import SubAccordion from "../shared/sub-accordion";

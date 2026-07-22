@@ -1,6 +1,5 @@
 import { Box } from "@chakra-ui/react";
 import { RadioInputField } from "@components/form/radio";
-import React from "react";
 import { useFormContext } from "react-hook-form";
 
 import { CURATED_STATUS } from "../data";

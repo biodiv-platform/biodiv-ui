@@ -1,6 +1,5 @@
 import { Box, Button, Circle, Flex, Grid, GridItem, Icon, Text } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 export default function Wizard({ steps, currentStep, setCurrentStep }) {
   const { t } = useTranslation();

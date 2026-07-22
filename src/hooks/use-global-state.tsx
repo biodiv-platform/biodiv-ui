@@ -3,7 +3,7 @@ import { axCheckUserGroupMember } from "@services/app.service";
 import { axGetTree } from "@services/app.service";
 import { AUTHWALL } from "@static/events";
 import { getParsedUser } from "@utils/auth";
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useListener } from "react-gbus";
 import { useDeepCompareMemo } from "use-deep-compare";
 

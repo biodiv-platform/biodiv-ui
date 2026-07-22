@@ -3,7 +3,6 @@ import {
   onScientificNameAndRankQuery,
   ScientificNameOption
 } from "@components/pages/observation/create/form/recodata/scientific-name";
-import React from "react";
 import { useFormContext } from "react-hook-form";
 import { LuCheck, LuTriangleAlert } from "react-icons/lu";
 

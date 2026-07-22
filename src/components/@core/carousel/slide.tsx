@@ -3,7 +3,6 @@ import { ResourceType } from "@interfaces/custom";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getLocalIcon, getResourceRAW, getResourceThumbnail, getYouTubeEmbed } from "@utils/media";
 import { getInjectableHTML } from "@utils/text";
-import React from "react";
 
 export const NoSlide = ({ speciesGroup }) => (
   <Flex color="gray.500" w="full" justifyContent="center" pt={10}>

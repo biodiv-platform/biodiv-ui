@@ -4,7 +4,6 @@ import VideoIcon from "@icons/video";
 import { ResourceType } from "@interfaces/custom";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getResourceThumbnail, getYoutubeImage } from "@utils/media";
-import React from "react";
 
 export const Thumbnail = ({ resource }) => {
   switch (resource.type) {

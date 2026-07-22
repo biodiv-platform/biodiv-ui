@@ -2,7 +2,6 @@ import { AspectRatio, Box, IconButton } from "@chakra-ui/react";
 import { Droppable } from "@hello-pangea/dnd";
 import AddIcon from "@icons/add";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 export default function NewGroup({ onAdd }) {
   const { t } = useTranslation();

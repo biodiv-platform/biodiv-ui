@@ -1,6 +1,6 @@
 import { Spinner, useDisclosure } from "@chakra-ui/react";
 import { AUTHWALL } from "@static/events";
-import React, { Suspense, useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { emit, useListener } from "react-gbus";
 
 import {
@@ -12,7 +12,7 @@ import {
   DialogRoot
 } from "@/components/ui/dialog";
 
-const SignInForm = React.lazy(() => import("@components/pages/login/form"));
+const SignInForm = lazy(() => import("@components/pages/login/form"));
 
 export default function AuthWall() {
   const { open, onOpen, onClose } = useDisclosure();

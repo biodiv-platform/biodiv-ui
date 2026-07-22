@@ -22,7 +22,7 @@ import { ACTIVITY_UPDATED } from "@static/events";
 import { adminOrAuthor } from "@utils/auth";
 import { getUserImage } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { emit } from "react-gbus";
 import { FormProvider, useForm } from "react-hook-form";

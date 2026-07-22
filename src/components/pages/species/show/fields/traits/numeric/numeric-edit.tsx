@@ -3,7 +3,7 @@ import useSpecies from "@components/pages/species/show/use-species";
 import { axUpdateSpeciesTrait } from "@services/species.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { Field } from "@/components/ui/field";
 import { InputGroup } from "@/components/ui/input-group";

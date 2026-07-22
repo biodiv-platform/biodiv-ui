@@ -1,5 +1,4 @@
 import { covertToSentenceCase } from "@utils/text";
-import React from "react";
 
 import useSpeciesList from "../../use-species-list";
 import CheckboxFilterPanel from "../shared/checkbox";

@@ -7,7 +7,6 @@ import { axRegenerateOTP, axValidateUser } from "@services/auth.service";
 import { setCookies } from "@utils/auth";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LuArrowRight } from "react-icons/lu";
 import * as Yup from "yup";

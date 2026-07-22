@@ -9,7 +9,7 @@ import { RESOURCE_SIZE } from "@static/constants";
 import { adminOrAuthor, hasAccess } from "@utils/auth";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import { Mq } from "mq-styled-components";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { LuAudioLines, LuImage, LuVideo } from "react-icons/lu";
 

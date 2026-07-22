@@ -3,7 +3,7 @@ import useObservationFilter from "@components/pages/observation/common/use-obser
 import styled from "@emotion/styled";
 import { Role } from "@interfaces/custom";
 import { hasAccess } from "@utils/auth";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import GridViewCard from "./card";

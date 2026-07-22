@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { axCheckTaxonomy, axGetTaxonTree, axSaveTaxonomy } from "@services/taxonomy.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LuCheck, LuTriangleAlert } from "react-icons/lu";
 import * as Yup from "yup";
@@ -75,7 +75,7 @@ export function SpeciesTaxonCreateForm() {
     }
   };
 
-  const onRankChange = React.useCallback(async (taxonId, isNew, rankName) => {
+  const onRankChange = useCallback(async (taxonId, isNew, rankName) => {
     if (taxonId) {
       const { success, data } = await axGetTaxonTree(taxonId);
       if (success) {

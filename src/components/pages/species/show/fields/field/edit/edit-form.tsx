@@ -15,7 +15,7 @@ import notification, { NotificationType } from "@utils/notification";
 import { nanoid } from "nanoid";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 

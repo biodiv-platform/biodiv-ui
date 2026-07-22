@@ -5,7 +5,6 @@ import { axGetGroupHompageDetails } from "@services/usergroup.service";
 import { axGetHomeInfo } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
 import { getLanguageId } from "@utils/i18n";
-import React from "react";
 
 function index({ homeInfo }) {
   return <HomePageComponent homeInfo={homeInfo} />;

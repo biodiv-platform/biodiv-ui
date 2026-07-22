@@ -2,7 +2,6 @@ import { Box, Button, Flex } from "@chakra-ui/react";
 import { BasicTable } from "@components/@core/table";
 import styled from "@emotion/styled";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import useTaxonFilter from "../use-taxon";
 import { TaxonNameCell, TaxonRankCell } from "./taxon-rank-cell";

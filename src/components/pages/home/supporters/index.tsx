@@ -1,5 +1,4 @@
 import { Heading, Image, Link, SimpleGrid } from "@chakra-ui/react";
-import React from "react";
 
 const Supporters = ({ title, list, imagePrefix }) => (
   <>

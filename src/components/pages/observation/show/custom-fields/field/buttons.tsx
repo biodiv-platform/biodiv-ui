@@ -1,7 +1,6 @@
 import { Button, Stack } from "@chakra-ui/react";
 import CheckIcon from "@icons/check";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 export default function Buttons({ onSave, onClose }) {
   const { t } = useTranslation();

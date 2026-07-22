@@ -4,7 +4,7 @@ import { axUpdateUserImage } from "@services/user.service";
 import { getUserImage } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { Avatar } from "@/components/ui/avatar";
 

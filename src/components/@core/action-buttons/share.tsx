@@ -1,5 +1,4 @@
 import ShareIcon from "@icons/share";
-import React from "react";
 import { RWebShare } from "react-web-share";
 
 import SimpleActionButton from "./simple";

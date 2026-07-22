@@ -17,7 +17,6 @@ import { axGetAllHabitat, axGetLangList } from "@services/utility.service";
 import { absoluteUrl } from "@utils/basic";
 import { getLanguageId } from "@utils/i18n";
 import dynamic from "next/dynamic";
-import React from "react";
 
 const GroupEditPageComponent: any = dynamic(() => import("@components/pages/group/edit"), {
   ssr: false

@@ -12,7 +12,7 @@ import { isBrowser } from "@static/constants";
 import { DEFAULT_FILTER, LIST_PAGINATION_LIMIT } from "@static/documnet-list";
 import { stringify } from "@utils/query-string";
 import NProgress from "nprogress";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useImmer } from "use-immer";
 
 import { UserGroup } from "@/interfaces/observation";

@@ -6,7 +6,7 @@ import { Role } from "@interfaces/custom";
 import { hasAccess } from "@utils/auth";
 import { getTraitIcon } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { LuPencil } from "react-icons/lu";
 
 export default function TraitsShowComponent({ data }) {

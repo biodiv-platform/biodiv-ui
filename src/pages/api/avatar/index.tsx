@@ -1,6 +1,5 @@
 import Avatar from "boring-avatars";
 import type { NextApiRequest, NextApiResponse } from "next";
-import React from "react";
 import ReactDOMServer from "react-dom/server";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {

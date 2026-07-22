@@ -2,7 +2,7 @@ import { Box, Button, Checkbox, Flex, Table, Text, useCheckboxGroup } from "@cha
 import ScientificName from "@components/@core/scientific-name";
 import { yupResolver } from "@hookform/resolvers/yup";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { LuCopyCheck, LuMoveHorizontal } from "react-icons/lu";
 import * as Yup from "yup";

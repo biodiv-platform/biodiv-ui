@@ -1,5 +1,4 @@
 import { Stack, Tag } from "@chakra-ui/react";
-import React from "react";
 
 export default function WKTList({ list, onDelete, nameTitle }) {
   return list.length > 0 ? (

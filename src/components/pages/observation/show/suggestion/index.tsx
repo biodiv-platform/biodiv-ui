@@ -3,7 +3,6 @@ import BoxHeading from "@components/@core/layout/box-heading";
 import { ObservationUserPermission, ShowData } from "@interfaces/observation";
 import { ACTIVITY_UPDATED } from "@static/events";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { emit } from "react-gbus";
 import LazyLoad from "react-lazyload";
 

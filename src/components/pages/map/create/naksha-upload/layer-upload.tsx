@@ -1,5 +1,3 @@
-import React from "react";
-
 import LayerUploadDropzone from "./dropzone";
 import LayerUploadForm from "./form";
 import FormUploadMessage from "./message";

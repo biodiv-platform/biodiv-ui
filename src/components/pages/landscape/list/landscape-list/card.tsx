@@ -4,7 +4,6 @@ import { Landscape } from "@interfaces/landscape";
 import { ENDPOINT } from "@static/constants";
 import { OBSERVATION_FALLBACK } from "@static/inline-images";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 

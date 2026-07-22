@@ -7,7 +7,7 @@ import { ObservationData } from "@interfaces/custom";
 import { ObservationListPageMapper } from "@interfaces/observation";
 import { axGetCustomFieldsPermissions } from "@services/observation.service";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 
 interface ICustomFieldsTabInterface {

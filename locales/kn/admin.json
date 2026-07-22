@@ -65,7 +65,8 @@
     "clear_cache": "ಸಂಗ್ರಹ ಸಂಗ್ರಹ",
     "name-macthing": "ಹೆಸರು ಹೊಂದಾಣಿಕೆ",
     "notification": "ಪುಶ್-ಅಧಿಸೂಚನೆಯನ್ನು ಕಳುಹಿಸಿ",
-    "udate_scientific_names": "ಡಾಕ್ಯುಮೆಂಟ್ ವೈಜ್ಞಾನಿಕ ಹೆಸರುಗಳನ್ನು ನವೀಕರಿಸಿ"
+    "update_observation_index": "ವೀಕ್ಷಣೆ ಸೂಚ್ಯಂಕವನ್ನು ನವೀಕರಿಸಿ",
+    "update_scientific_names": "ಡಾಕ್ಯುಮೆಂಟ್ ವೈಜ್ಞಾನಿಕ ಹೆಸರುಗಳನ್ನು ನವೀಕರಿಸಿ"
   },
   "pages": {
     "notification": {

@@ -2,7 +2,6 @@ import UserEditPageComponent from "@components/pages/user/edit";
 import { Role } from "@interfaces/custom";
 import { axGetUserById } from "@services/user.service";
 import { adminOrAuthor, hasAccess } from "@utils/auth";
-import React from "react";
 
 import Error from "../../_error";
 

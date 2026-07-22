@@ -4,7 +4,7 @@ import { resizeForFavicon, resizeImage } from "@utils/image";
 import { getSiteResourceRAW, RESOURCE_CTX } from "@utils/media";
 import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { useController, useFormContext } from "react-hook-form";
 
 import { Field } from "@/components/ui/field";

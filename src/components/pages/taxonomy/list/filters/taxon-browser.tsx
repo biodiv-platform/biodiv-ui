@@ -15,7 +15,7 @@ import TaxonResultArrows from "@components/pages/observation/list/filters/taxon-
 import TaxonSuggest from "@components/pages/observation/list/filters/taxon-browser/taxon-suggest";
 import { axGetTaxonList } from "@services/api.service";
 import Tree from "rc-tree";
-import React, { Component } from "react";
+import { Component } from "react";
 
 import useTaxonFilter from "../use-taxon";
 

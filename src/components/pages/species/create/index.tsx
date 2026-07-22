@@ -2,7 +2,6 @@ import { Alert, List } from "@chakra-ui/react";
 import ExternalBlueLink from "@components/@core/blue-link/external";
 import { PageHeading } from "@components/@core/layout";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { CreateSpeciesPageCheck } from "./create-species-page-check";
 import { SpeciesTaxonSuggestions } from "./species-taxon-suggestions";

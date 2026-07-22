@@ -10,7 +10,7 @@ import { getLanguageNameById } from "@utils/i18n";
 import notification, { NotificationType } from "@utils/notification";
 import { getInjectableHTML } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { emit } from "react-gbus";
 import { LuChevronDown, LuChevronRight, LuInfo } from "react-icons/lu";
 

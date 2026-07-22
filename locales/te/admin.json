@@ -65,7 +65,8 @@
     "clear_cache": "క్లియర్ కాష్",
     "name-macthing": "పేరు సరిపోలిక",
     "notification": "పుష్-నోటిఫికేషన్ను పంపండి",
-    "udate_scientific_names": "డాక్యుమెంట్ శాస్త్రీయ పేర్లను నవీకరించండి"
+    "update_observation_index": "పరిశీలన సూచికను నవీకరించండి",
+    "update_scientific_names": "డాక్యుమెంట్ శాస్త్రీయ పేర్లను నవీకరించండి"
   },
   "pages": {
     "notification": {

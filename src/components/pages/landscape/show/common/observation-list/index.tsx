@@ -5,7 +5,7 @@ import { MEDIA_TYPES } from "@components/pages/observation/list/filters/media-ty
 import LifeListTable from "@components/pages/observation/list/views/stats/table";
 import useUniqueSpecies from "@components/pages/observation/list/views/stats/use-unique-species";
 import useTranslation from "next-translate/useTranslation";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import { Switch } from "@/components/ui/switch";
 

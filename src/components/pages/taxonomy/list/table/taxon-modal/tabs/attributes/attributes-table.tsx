@@ -2,7 +2,6 @@ import { Box, Heading, HStack, SimpleGrid, Spinner, Table } from "@chakra-ui/rea
 import useTaxonFilter from "@components/pages/taxonomy/list/use-taxon";
 import { getInjectableHTML } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 
 import { DocumentsLink } from "../../document";
 import { ObservationsLink } from "../../observation";

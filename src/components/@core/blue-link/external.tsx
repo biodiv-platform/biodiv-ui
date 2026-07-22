@@ -1,5 +1,5 @@
 import { LinkProps } from "@chakra-ui/react";
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 
 import BlueLink from ".";
 

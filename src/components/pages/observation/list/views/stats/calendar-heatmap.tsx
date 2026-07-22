@@ -9,7 +9,7 @@ import { interpolateBuGn } from "d3-scale-chromatic";
 import { select } from "d3-selection";
 import { toPng } from "html-to-image";
 import { useRouter } from "next/router";
-import React, { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 
 interface HeatMapChartProps {
   h?: number;

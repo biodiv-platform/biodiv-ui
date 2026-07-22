@@ -4,7 +4,7 @@ import LocalLink from "@components/@core/local-link";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getLocalIcon, getResourceThumbnail, RESOURCE_CTX } from "@utils/media";
 import useTranslation from "next-translate/useTranslation";
-import React, { useReducer } from "react";
+import { useReducer } from "react";
 
 interface ISuggestionsProps {
   list?: any[];

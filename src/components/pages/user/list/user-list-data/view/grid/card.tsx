@@ -2,7 +2,6 @@ import { Box, Image } from "@chakra-ui/react";
 import LocalLink from "@components/@core/local-link";
 import ShadowedUser from "@components/pages/common/shadowed-user";
 import { getUserImage } from "@utils/media";
-import React from "react";
 
 import { Checkbox } from "@/components/ui/checkbox";
 

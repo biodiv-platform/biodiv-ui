@@ -1,7 +1,7 @@
 import { Box, Tabs, Text } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import useTranslation from "next-translate/useTranslation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useController } from "react-hook-form";
 
 import AudioInput from "./audio-input";

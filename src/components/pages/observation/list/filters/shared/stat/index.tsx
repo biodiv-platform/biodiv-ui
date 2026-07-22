@@ -2,7 +2,6 @@ import { Box } from "@chakra-ui/react";
 import useObservationFilter from "@components/pages/observation/common/use-observation-filter";
 import { getByPath } from "@utils/basic";
 import { toHumanString } from "human-readable-numbers";
-import React from "react";
 
 export default function FilterStat({ statKey, subStatKey }) {
   const { observationData } = useObservationFilter();

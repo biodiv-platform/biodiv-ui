@@ -421,7 +421,6 @@ export default function BulkMapperModal() {
                                       <FormProvider {...hForm}>
                                         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
                                           <SelectAsyncInputField
-                                            key={JSON.stringify(hForm.watch("newTaxonId"))}
                                             name="newTaxonId"
                                             label={t("form:accepted_name")}
                                             multiple={false}

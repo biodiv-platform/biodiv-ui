@@ -1,7 +1,7 @@
 import { axUpdateDataset } from "@services/curate.service";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import React, { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 
 interface CurateEditContextProps {
   initialData;

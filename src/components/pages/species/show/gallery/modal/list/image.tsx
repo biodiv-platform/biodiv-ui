@@ -2,7 +2,6 @@ import { Box, Link, SimpleGrid, Skeleton } from "@chakra-ui/react";
 import ShadowedUser from "@components/pages/common/shadowed-user";
 import { RESOURCE_SIZE } from "@static/constants";
 import { getFallbackByMIME, getResourceRAW, getResourceThumbnail } from "@utils/media";
-import React from "react";
 
 import { ImageWithFallback } from "@/components/@core/image-with-fallback";
 

@@ -1,5 +1,4 @@
 import { Box } from "@chakra-ui/react";
-import React from "react";
 import { useWatch } from "react-hook-form";
 
 export default function SelectionCounter() {
