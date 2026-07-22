@@ -22,6 +22,7 @@ import Recodata from "./recodata";
 import TraitsPicker from "./traits";
 import Uploader from "./uploader";
 import UserGroups from "./user-groups";
+import { SwitchField } from "@/components/form/switch";
 
 export const parseDefaultCustomField = (list, currentGroup, initialValue?) => {
   if (initialValue?.length) return initialValue;
@@ -151,6 +152,7 @@ export default function ObservationCreateForm({
       userGroupId: currentGroup.id && currentGroup.id > 0 ? [currentGroup.id.toString()] : [],
       resources: [],
       terms: true,
+      allowExternalPublishing: true,
 
       customFields: parseDefaultCustomField(customFieldList, currentGroup)
     }
@@ -196,6 +198,12 @@ export default function ObservationCreateForm({
             <Box mt={4}>
               <CheckboxField name="terms" label={t("form:terms")} />
             </Box>
+
+            <SwitchField
+              name="allowExternalPublishing"
+              label={t("datatable:allow_external_publishing")}
+            />
+
             <SubmitButton leftIcon={<CheckIcon />} isDisabled={isSubmitDisabled}>
               {t("observation:add_observation")}
             </SubmitButton>

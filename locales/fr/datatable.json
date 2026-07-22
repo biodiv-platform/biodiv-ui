@@ -1,5 +1,6 @@
 {
   "add": "Ajouter une table de données",
+  "allow_external_publishing": "Autoriser la publication externe",
   "attribution": "Attribution",
   "basis_of_data": "Base de données",
   "basis_of_record": "Base d'enregistrement",

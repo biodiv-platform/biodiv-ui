@@ -16,6 +16,12 @@ export default function PartyContributorsForm() {
         <TextBoxField name="project" label={t("datatable:project")} />
         <TextBoxField name="methods" label={t("datatable:methods")} />
         {isAdmin && <SwitchField name="isVerified" label={t("datatable:is_verified")} />}
+        {isAdmin && (
+          <SwitchField
+            name="allowExternalPublishing"
+            label={t("datatable:allow_external_publishing")}
+          />
+        )}
       </Box>
     </ToggleablePanel>
   );
