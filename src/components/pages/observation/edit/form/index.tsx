@@ -18,6 +18,7 @@ import LocationPicker from "../../create/form/location";
 import Uploader from "../../create/form/uploader";
 import CheckListAnnotationForm from "./checklist-annotation";
 import DateInputs from "./date-input";
+import { SwitchField } from "@/components/form/switch";
 
 interface IObservationEditFormProps {
   observation: ObservationUpdateData;
@@ -157,6 +158,10 @@ export default function ObservationEditForm({
             </Alert.Title>
           </Alert.Root>
         </LocalLink>
+        <SwitchField
+          name="allowExternalPublishing"
+          label={t("datatable:allow_external_publishing")}
+        />
         <SubmitButton leftIcon={<CheckIcon />} mb={4}>
           {t("observation:update_observation")}
         </SubmitButton>

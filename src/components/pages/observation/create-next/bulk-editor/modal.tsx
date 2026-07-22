@@ -18,6 +18,7 @@ import TraitsPicker from "../../create/form/traits";
 import UserGroups from "../../create/form/user-groups";
 import useObservationCreateNext from "../use-observation-create-next-hook";
 import RecoInputs from "./reco-inputs";
+import { SwitchField } from "@/components/form/switch";
 
 export default function BulkEditorModal({ initialValue, applyIndex, onClose }) {
   const { t } = useTranslation();
@@ -107,6 +108,10 @@ export default function BulkEditorModal({ initialValue, applyIndex, onClose }) {
                   {sortedCFList?.length && <ObservationCustomFieldForm fields={fields} />}
                   <TraitsPicker name="facts" label={t("observation:traits")} />
                   <UserGroups name="userGroupId" label={t("observation:post_to_groups")} />
+                  <SwitchField
+                    name="allowExternalPublishing"
+                    label={t("datatable:allow_external_publishing")}
+                  />
                 </Dialog.Body>
 
                 <Dialog.Footer>
