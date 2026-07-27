@@ -9,10 +9,10 @@ export const TAXON_ROLES = [
 export const LIST_PAGINATION_LIMIT = 100;
 
 export const DEFAULT_FILTER = {
-  offset: 0,
+  offsetPath: "",
   limit: LIST_PAGINATION_LIMIT,
-  classificationId: SITE_CONFIG.TAXONOMY.CLASSIFICATION_ID,
-  taxonId: SITE_CONFIG.TAXONOMY.TAXON_ID
+  taxonId: SITE_CONFIG.TAXONOMY.TAXON_ID,
+  offsetId: -1
 };
 
 export const TAXON_STATUS_VALUES = {
@@ -48,5 +48,16 @@ export const TAXON_POSITION = [
     label: "Clean",
     value: "CLEAN",
     color: "var(--chakra-colors-green-300)"
+  }
+];
+
+export const bulkActionTabs = [
+  {
+    name: "taxon:position.title",
+    icon: "👥"
+  },
+  {
+    name: "Merge",
+    icon: "👥"
   }
 ];

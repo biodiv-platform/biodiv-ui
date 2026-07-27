@@ -44,6 +44,7 @@ export default function InfoTab({ o, recoUpdated, setTab }: IInfoTabProps) {
               reco={o.recoShow?.recoIbp}
               crumbs={o.recoShow?.recoIbp?.breadCrumbs}
               taxonId={o.recoShow?.recoIbp?.taxonId}
+              name={o?.recoShow?.recoIbp?.acceptedName}
             />
           </Heading>
           <Text mb={1}>{o?.recoShow?.recoIbp?.commonName}</Text>

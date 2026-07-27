@@ -84,6 +84,11 @@ export const DOUCMENT_FILTER_KEY = {
   title: {
     filterKey: "title",
     searchKey: "document.title"
+  },
+
+  scientificNames: {
+    filterKey: "scientificNames",
+    searchKey: "scientificNames.name"
   }
 };
 

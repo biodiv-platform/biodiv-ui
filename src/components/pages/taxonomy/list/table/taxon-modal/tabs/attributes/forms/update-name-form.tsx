@@ -9,7 +9,7 @@ import useTranslation from "next-translate/useTranslation";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
-export default function UpdateNameForm({ onDone }) {
+export default function UpdateNameForm({ onDone, setLoading }) {
   const { modalTaxon, setModalTaxon } = useTaxonFilter();
   const { t } = useTranslation();
 
@@ -26,6 +26,7 @@ export default function UpdateNameForm({ onDone }) {
   });
 
   const handleOnSubmit = async (values) => {
+    setLoading(true);
     const { success, data } = await axUpdateTaxonName({ ...values, taxonId: modalTaxon.id });
     if (success) {
       setModalTaxon(data);
@@ -34,6 +35,7 @@ export default function UpdateNameForm({ onDone }) {
     } else {
       notification(t("taxon:modal.attributes.name.error"));
     }
+    setLoading(false);
   };
 
   return (

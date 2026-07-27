@@ -22,6 +22,7 @@ export interface TaxonBrowserState {
   checkedKeys?;
   expandedKeys;
   resultsCount;
+  allResultKeys?;
 }
 
 export const TaxonBrowserContainer = styled.div`

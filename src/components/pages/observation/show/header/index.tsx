@@ -121,6 +121,7 @@ function Header({ o, following = false }: IHeaderProps) {
               reco={o.recoIbp}
               crumbs={o.recoIbp?.breadCrumbs}
               taxonId={o.recoIbp?.taxonId}
+              name = {o.recoIbp?.acceptedName}
             />
           </Flex>
           {o.recoIbp?.commonName && (

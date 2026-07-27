@@ -14,6 +14,7 @@ export default function ScientificNames({ documentId, authorId }) {
       loadMoreNames={scientficNamesData.namesData.loadMore}
       authorId={authorId}
       refreshFunc={scientficNamesData.namesData.refresh}
+      documentId={documentId}
     />
   );
 }

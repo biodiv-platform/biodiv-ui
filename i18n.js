@@ -11,7 +11,7 @@ module.exports = {
     "/group/[groupName]": ["home"],
     "/group/[groupName]/show": ["home"],
     //"rgx:/admin": ["admin", "group"],
-    "rgx:/manage": ["admin", "group"],
+    "rgx:/manage": ["admin", "group", "user"],
     "rgx:/datatable/": ["activity", "datatable", "form", "observation"],
     "rgx:/document/": ["document", "observation", "filters", "activity"],
     "rgx:/group/": ["group"],

@@ -7,7 +7,7 @@ import { PageHeading } from "@components/@core/layout";
 import ScientificName from "@components/@core/scientific-name";
 import TaxonStatusBadge from "@components/pages/common/status-badge";
 import { Role } from "@interfaces/custom";
-import { axDeleteSpecies, axFollowSpecies } from "@services/species.service";
+import { axDeleteSpecies, axDeleteSpeciesCache, axFollowSpecies } from "@services/species.service";
 import { RESOURCE_SIZE } from "@static/constants";
 import { SPECIES_NAME_PREFERRED_UPDATED } from "@static/events";
 import { hasAccess } from "@utils/auth";
@@ -16,14 +16,16 @@ import { NextSeo } from "next-seo";
 import useTranslation from "next-translate/useTranslation";
 import { useMemo, useState } from "react";
 import { useListener } from "react-gbus";
-import { LuPencil } from "react-icons/lu";
+import { LuPencil, LuRefreshCw } from "react-icons/lu";
 
+import { useLocalRouter } from "@/components/@core/local-link";
 import NoSSR from "@/components/@core/no-ssr";
 import DownloadIcon from "@/icons/download";
 
 import useSpecies from "../use-species";
 
 function SpeciesHeader({ downloadSpecies }) {
+  const router = useLocalRouter();
   const { t } = useTranslation();
   const { species, permissions, taxonEditActions } = useSpecies();
   const speciesTitle = [
@@ -78,6 +80,15 @@ function SpeciesHeader({ downloadSpecies }) {
         colorPalette="blue"
         onClick={downloadSpecies}
       />
+      <SimpleActionButton
+        icon={<LuRefreshCw />}
+        title={t("species:cache")}
+        colorPalette="blue"
+        onClick={() => {
+          axDeleteSpeciesCache(species?.species?.id);
+          router.reload();
+        }}
+      />
     </div>
   );
 
@@ -112,6 +123,7 @@ function SpeciesHeader({ downloadSpecies }) {
           reco={species.taxonomyDefinition}
           crumbs={species.breadCrumbs}
           taxonId={species.taxonomyDefinition.id}
+          name = {""}
         />
 
         <Box>

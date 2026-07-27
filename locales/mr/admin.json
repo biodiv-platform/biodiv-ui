@@ -65,7 +65,8 @@
     "clear_cache": "कॅशे साफ करा",
     "name-macthing": "नाव जुळणी",
     "notification": "पुश-सूचना पाठवा",
-    "update_observation_index": "निरीक्षण निर्देशांक अद्यतनित करा"
+    "update_observation_index": "निरीक्षण निर्देशांक अद्यतनित करा",
+    "update_scientific_names": "दस्तऐवज वैज्ञानिक नावे अद्यतनित करा"
   },
   "pages": {
     "notification": {

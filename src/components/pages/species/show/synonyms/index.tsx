@@ -21,7 +21,9 @@ export default function SpeciesSynonymsContainer() {
             updateFunc={axUpdateSpeciesSynonym}
             deleteFunc={axDeleteSpeciesSynonym}
             synonyms={species.taxonomicNames.synonyms}
-            isContributor={permissions.isContributor}
+            isContributor={
+              permissions.isContributor && species.taxonomyDefinition?.status == "ACCEPTED"
+            }
           />
         </ResponsiveContainer>
       </Box>

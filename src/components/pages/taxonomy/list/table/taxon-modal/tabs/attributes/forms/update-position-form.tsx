@@ -10,7 +10,9 @@ import useTranslation from "next-translate/useTranslation";
 import { FormProvider, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
-export default function UpdatePositionForm({ onDone }) {
+import { axDeleteSpeciesCache, axGetSpeciesIdFromTaxonId } from "@/services/species.service";
+
+export default function UpdatePositionForm({ onDone, setLoading }) {
   const { modalTaxon, setModalTaxon } = useTaxonFilter();
   const { t } = useTranslation();
 
@@ -27,14 +29,22 @@ export default function UpdatePositionForm({ onDone }) {
   });
 
   const handleOnStatusFormSubmit = async (values) => {
+    setLoading(true);
     const { success, data } = await axUpdateTaxonPosition({ ...values, taxonId: modalTaxon.id });
     if (success) {
+      const { success, data: speciesId } = await axGetSpeciesIdFromTaxonId(modalTaxon.id);
+      if (success) {
+        if (speciesId) {
+          await axDeleteSpeciesCache(speciesId);
+        }
+      }
       setModalTaxon(data);
       onDone();
       notification(t("taxon:modal.attributes.position.success"), NotificationType.Success);
     } else {
       notification(t("taxon:modal.attributes.position.error"));
     }
+    setLoading(false);
   };
 
   return (

@@ -71,6 +71,7 @@
     "success": "Document deleted successfully",
     "title": "Delete document"
   },
+  "rerun": "Rerun Scientific name finder",
   "share": "Share this document",
   "show": {
     "scientific_names_table": {

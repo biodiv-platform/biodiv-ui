@@ -58,7 +58,10 @@ export function BasicTable({
                 {
                   id: "selection",
                   Header: (props) => (
-                    <IndeterminateCheckbox {...props.getToggleAllRowsSelectedProps()} />
+                    <IndeterminateCheckbox
+                      {...props.getToggleAllRowsSelectedProps()}
+                      {...getCheckboxProps?.("header")}
+                    />
                   ),
                   Cell: ({ row }) => <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />,
                   style: { width: "16px" }
@@ -96,7 +99,9 @@ export function BasicTable({
                 {...column.getHeaderProps(column.getSortByToggleProps())}
                 isNumeric={column.isNumeric}
               >
-                {translateHeader ? t(column.Header) : column.render("Header")}
+                {translateHeader && typeof column.Header === "string"
+                  ? t(column.Header)
+                  : column.render("Header")}
                 <chakra.span pl="2">
                   {column.isSorted ? (
                     column.isSortedDesc ? (

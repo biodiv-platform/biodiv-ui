@@ -384,3 +384,23 @@ export const axUpdateSpeciesTaxonId = async (speciesId: number, newTaxonId: numb
     return { success: false, data: null };
   }
 };
+
+export const axDeleteSpeciesCache = async (speciesId) => {
+  try {
+    const { data } = await plainHttp.delete(
+      `${ENDPOINT.SPECIES}/v1/species/cache/remove/${speciesId}`
+    );
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: [] };
+  }
+};
+
+export const axReindexSpecies = async (speciesId) => {
+  try {
+    const { data } = await http.put(`${ENDPOINT.SPECIES}/v1/species/reindex/${speciesId}`);
+    return { success: true, data };
+  } catch (e) {
+    return { success: false, data: [] };
+  }
+};

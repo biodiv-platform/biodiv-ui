@@ -3,6 +3,7 @@ import useTaxonFilter from "@components/pages/taxonomy/list/use-taxon";
 import { getInjectableHTML } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
 
+import { DocumentsLink } from "../../document";
 import { ObservationsLink } from "../../observation";
 import { SpeciesPageLink } from "../../species";
 
@@ -16,9 +17,10 @@ export function TaxonAttributesTable() {
         <Heading as="h3" size="md" mb={4}>
           {t("taxon:modal.data_links.title")}
         </Heading>
-        <HStack mb={4} gap={4}>
+        <HStack mb={4} gap={2}>
           <SpeciesPageLink showTaxon={showTaxon} />
           <ObservationsLink showTaxon={showTaxon} />
+          <DocumentsLink showTaxon={showTaxon} />
         </HStack>
         <Heading as="h3" size="md" mb={4}>
           {t("common:information")}
@@ -62,6 +64,14 @@ export function TaxonAttributesTable() {
               </Table.Cell>
               <Table.Cell>{t(`taxon:hierarchy.${modalTaxon?.rank}`)}</Table.Cell>
             </Table.Row>
+            {modalTaxon?.status == "SYNONYM" && (
+              <Table.Row>
+                <Table.Cell>{"Accepted Name"}</Table.Cell>
+                <Table.Cell>
+                  {modalTaxon?.hierarchy[modalTaxon?.hierarchy?.length - 1]?.name}
+                </Table.Cell>
+              </Table.Row>
+            )}
             <Table.Row>
               <Table.Cell title={t("taxon:modal.attributes.source.desc")}>
                 {t("taxon:modal.attributes.source.title")}
@@ -98,7 +108,15 @@ export function TaxonAttributesTable() {
             {modalTaxon?.hierarchy?.map((rank) => (
               <Table.Row key={rank.rankName}>
                 <Table.Cell>{t(`taxon:hierarchy.${rank.rankName}`)}</Table.Cell>
-                <Table.Cell>{rank.name}</Table.Cell>
+                <Table.Cell
+                  style={{
+                    wordBreak: "break-word",
+                    overflowWrap: "break-word",
+                    hyphens: "auto"
+                  }}
+                >
+                  {rank.name}
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>

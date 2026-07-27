@@ -16,6 +16,18 @@ export const axSearchSpeciesByText = async (text, field) => {
   }
 };
 
+export const axSearchSpeciesByTextByRank = async (text, field, rank) => {
+  try {
+    const { data } = await plainHttp.get(`${ENDPOINT.ESMODULE}/v1/services/auto-complete/etd/er`, {
+      params: { text, field, rank }
+    });
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: [] };
+  }
+};
+
 export const axGetUserLeaderboard = async (payload, user) => {
   const authorId = user?.id || -1;
   const { time } = payload;
@@ -88,6 +100,28 @@ export const axSearchFilterByName = async (text, field, index = "eo", defaultOpt
       }, []);
     };
 
+    const formatAllResponse = () => {
+      return data
+        ?.reduce((acc, i) => {
+          const matches = i
+            ?.split(",")
+            ?.map((item) => item.trim())
+            ?.filter((item) => item.toLowerCase().includes(text.toLowerCase()));
+
+          matches?.forEach((matchVal) => {
+            if (
+              matchVal &&
+              !acc.some((existing) => existing.toLowerCase() === matchVal.toLowerCase())
+            ) {
+              acc.push(matchVal);
+            }
+          });
+
+          return acc;
+        }, [])
+        ?.sort((a, b) => a.localeCompare(b));
+    };
+
     return ["ed", "esp"].includes(index) &&
       (field === DOUCMENT_FILTER_KEY.author.searchKey ||
         field === SPECIES_FILTER_KEY.scientificName.searchKey ||
@@ -96,6 +130,8 @@ export const axSearchFilterByName = async (text, field, index = "eo", defaultOpt
         field === SPECIES_FILTER_KEY.reference.searchKey ||
         field === DOUCMENT_FILTER_KEY.tags.searchKey)
       ? formatResponse()?.map((i) => ({ value: i.trim(), label: i, text }))
+      : field === DOUCMENT_FILTER_KEY.scientificNames.searchKey
+      ? formatAllResponse()?.map((i) => ({ value: i.trim(), label: i, text }))
       : data?.map((i) => ({ value: i, label: i, text }));
   } catch (e) {
     console.error(e);

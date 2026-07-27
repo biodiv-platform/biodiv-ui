@@ -1,4 +1,13 @@
 {
+  "bulk_action": {
+    "failure": "Unable to trigger bulk action",
+    "success": "Successfully triggered  bulk action, Changes will be reflected  shortly"
+  },
+  "bulk_actions": "Bulk Actions",
+  "bulk_actions_selected": "selected",
+  "common_name": {
+    "success": "Common Names transfered successfully"
+  },
   "create": {
     "title": "Add Taxon"
   },
@@ -69,6 +78,7 @@
     },
     "common_names": "Common Names",
     "data_links": {
+      "documents": "Documents",
       "observations": "Observations",
       "species": "Species",
       "title": "Data Links"

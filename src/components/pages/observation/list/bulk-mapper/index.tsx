@@ -487,6 +487,10 @@ export default function BulkMapperModal() {
                                   options={[]}
                                   selectRef={scientificRef}
                                   openMenuOnFocus={true}
+                                  style={{
+                                    menuPortal: (base) => ({ ...base, zIndex: 10000 }),
+                                    menu: (base) => ({ ...base, zIndex: 10000 })
+                                  }}
                                 />
                               </Box>
                               <HStack m={2} justifyContent="flex-end">

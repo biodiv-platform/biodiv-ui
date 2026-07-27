@@ -34,8 +34,10 @@ interface ISelectProps {
   isRaw?;
   openMenuOnFocus?: boolean;
   portalled?: boolean;
+  rawKey?: string;
+  bg?;
+  icon?: React.ReactNode;
 }
-
 const dummyOnQuery = (q) =>
   new Promise((resolve) => {
     setTimeout(() => {
@@ -50,6 +52,28 @@ const DropdownIndicator = (props: DropdownIndicatorProps) => {
     <components.DropdownIndicator {...props}>
       <LuChevronDown />
     </components.DropdownIndicator>
+  );
+};
+
+const SingleValue = ({ children, ...props }: any) => {
+  return <components.SingleValue {...props}>{children}</components.SingleValue>;
+};
+
+const ValueContainer = ({ children, ...props }: any) => {
+  const { icon, isDisabled } = props.selectProps;
+  const hasValue = props.hasValue;
+
+  return (
+    <components.ValueContainer {...props}>
+      <Box display="flex" alignItems="center" width="100%">
+        {children}
+        {icon && hasValue && !isDisabled && (
+          <Box as="span" ml={1} display="inline-flex" alignItems="center" flexShrink={0}>
+            {icon}
+          </Box>
+        )}
+      </Box>
+    </components.ValueContainer>
   );
 };
 
@@ -75,6 +99,9 @@ export const SelectAsyncInputField = ({
   isRaw,
   openMenuOnFocus = false,
   portalled = true,
+  rawKey,
+  bg = "white!",
+  icon,
   ...props
 }: ISelectProps) => {
   const form = useFormContext();
@@ -86,17 +113,45 @@ export const SelectAsyncInputField = ({
 
   const onQueryDebounce = debounce(onQuery, debounceTime);
   const [selected, setSelected] = useState(
-    field.value ? (multiple ? field.value : isRaw ? field.value : { value: field.value }) : null
+    field.value
+      ? multiple
+        ? field.value
+        : isRaw
+        ? rawKey
+          ? { value: field.value, label: field.value }
+          : field.value
+        : { value: field.value }
+      : null
   );
 
   useEffect(() => {
-    field.onChange(multiple ? selected : selected?.value);
-    if (onChange && selected) {
-      onChange(selected);
+    const currentValue = multiple ? selected : selected?.value;
+    if (currentValue !== field.value) {
+      field.onChange(currentValue);
     }
   }, [selected]);
 
+  {
+    rawKey &&
+      useEffect(() => {
+        if (field.value) {
+          setSelected(
+            multiple
+              ? field.value
+              : isRaw
+              ? rawKey
+                ? { value: field.value, label: field.value }
+                : field.value
+              : { value: field.value }
+          );
+        } else {
+          setSelected(multiple ? [] : null);
+        }
+      }, [field.value]);
+  }
+
   const handleOnChange = (value, event) => {
+    if (onChange) onChange(value);
     eventCallback ? eventCallback(value, event, setSelected) : setSelected(value);
   };
 
@@ -117,7 +172,7 @@ export const SelectAsyncInputField = ({
       label={label}
       {...props}
     >
-      <Box width={"full"}>
+      <Box width={"full"} bg={bg}>
         <Select
           name={name}
           inputId={name}
@@ -130,7 +185,9 @@ export const SelectAsyncInputField = ({
             Option: optionComponent,
             ClearIndicator,
             DropdownIndicator,
-            IndicatorSeparator: () => null
+            IndicatorSeparator: () => null,
+            SingleValue,
+            ValueContainer
           }}
           value={selected}
           isSearchable={true}
@@ -141,7 +198,15 @@ export const SelectAsyncInputField = ({
           noOptionsMessage={() => null}
           ref={selectRef}
           openMenuOnFocus={openMenuOnFocus}
+          icon={icon}
           {...reactSelectProps}
+          styles={{
+            control: (base) => ({
+              ...base,
+              background: bg ? `var(--chakra-colors-${bg.replace(".", "-")})` : base.background
+            }),
+            ...(props.style || {})
+          }}
         />
       </Box>
       {hint && <Field color="gray.600" helperText={hint} />}

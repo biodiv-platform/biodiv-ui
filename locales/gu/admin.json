@@ -65,7 +65,8 @@
     "clear_cache": "સ્પષ્ટ કેશ",
     "name-macthing": "નામ મેચિંગ",
     "notification": "પુશ-સૂચના મોકલો",
-    "update_observation_index": "અવલોકન અનુક્રમણિકા અપડેટ કરો"
+    "update_observation_index": "અવલોકન અનુક્રમણિકા અપડેટ કરો",
+    "update_scientific_names": "દસ્તાવેજના વૈજ્ઞાનિક નામો અપડેટ કરો"
   },
   "pages": {
     "notification": {
