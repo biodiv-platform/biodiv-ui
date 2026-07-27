@@ -218,13 +218,9 @@ export const axDownloadDocument = async (documentPath, documentId, notes) => {
 
 export const axGetListData = async (params, payload = {}, index = "document", type = "_doc") => {
   try {
-    const { data } = await plainHttp.post(
-      `${ENDPOINT.DOCUMENT}/v1/services/list/${index}/${type}`,
-      payload,
-      {
-        params
-      }
-    );
+    const { data } = await plainHttp.get(`${ENDPOINT.DOCUMENT}/v1/services/list/${index}/${type}`, {
+      params: { ...params, ...payload }
+    });
 
     return { success: true, data };
   } catch (e) {
@@ -297,9 +293,7 @@ export const axRerunGnfinder = async (documentId) => {
 export const axUpdateScientificNames = async () => {
   try {
     await waitForAuth();
-    const { data } = await http.post(
-      `${ENDPOINT.DOCUMENT}/v1/services/update/names`
-    );
+    const { data } = await http.post(`${ENDPOINT.DOCUMENT}/v1/services/update/names`);
     return { success: true, data };
   } catch (e) {
     console.error(e);

@@ -8,10 +8,12 @@ import useGlobalState from "@hooks/use-global-state";
 import { axRerunGnfinder, axUpdateScientifcNameToIsDeleted } from "@services/document.service";
 import { adminOrAuthor } from "@utils/auth";
 import useTranslation from "next-translate/useTranslation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LuRefreshCw } from "react-icons/lu";
 
 import SimpleActionButton from "@/components/@core/action-buttons/simple";
+
+const RERUN_COOLDOWN_MS = 60 * 1000; // 1 minute
 
 export default function ScientificNamesTable({
   data,
@@ -26,9 +28,32 @@ export default function ScientificNamesTable({
   const [showActions, setShowActions] = useState<boolean>();
   const { isLoggedIn } = useGlobalState();
 
+  const [isRerunDisabled, setIsRerunDisabled] = useState(false);
+  const cooldownTimerRef = useRef<ReturnType<typeof setTimeout>>();
+
   useEffect(() => {
     setShowActions(adminOrAuthor(authorId));
   }, [isLoggedIn]);
+
+  // Clean up the timer if the component unmounts mid-cooldown
+  useEffect(() => {
+    return () => {
+      if (cooldownTimerRef.current) {
+        clearTimeout(cooldownTimerRef.current);
+      }
+    };
+  }, []);
+
+  const handleRerun = () => {
+    if (isRerunDisabled) return;
+
+    axRerunGnfinder(documentId);
+    setIsRerunDisabled(true);
+
+    cooldownTimerRef.current = setTimeout(() => {
+      setIsRerunDisabled(false);
+    }, RERUN_COOLDOWN_MS);
+  };
 
   return !data.isLoading ? (
     <Box className="white-box">
@@ -38,7 +63,8 @@ export default function ScientificNamesTable({
           <SimpleActionButton
             icon={<LuRefreshCw />}
             title={t("document:rerun")}
-            onClick={() => axRerunGnfinder(documentId)}
+            onClick={handleRerun}
+            disabled={isRerunDisabled}
             colorPalette="blue"
           />
         )}

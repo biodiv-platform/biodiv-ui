@@ -12,6 +12,8 @@ import { emit, useListener } from "react-gbus";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import * as Yup from "yup";
 
+import { SwitchField } from "@/components/form/switch";
+
 import { handleOnSingleObservationSubmit } from "../../create-next/common";
 import SavingObservation from "../saving";
 import ObservationCustomFieldForm from "./custom-field-form";
@@ -22,7 +24,6 @@ import Recodata from "./recodata";
 import TraitsPicker from "./traits";
 import Uploader from "./uploader";
 import UserGroups from "./user-groups";
-import { SwitchField } from "@/components/form/switch";
 
 export const parseDefaultCustomField = (list, currentGroup, initialValue?) => {
   if (initialValue?.length) return initialValue;

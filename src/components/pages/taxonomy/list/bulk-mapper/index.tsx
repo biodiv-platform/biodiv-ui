@@ -51,6 +51,7 @@ export default function BulkMapperModal() {
   const [accepted, setAccepted] = useState(true);
   const [speciesMap, setSpeciesMap] = useState<Map<number, number | null>>(new Map());
   const [selectedTaxon, setSelectedTaxon] = useState<any>(null);
+  const [dropVersion, setDropVersion] = useState(0);
   const ensureSpeciesId = async (taxonId: number) => {
     if (speciesMap.has(taxonId)) return;
     const { success, data } = await axCheckSpecies(taxonId);
@@ -160,11 +161,9 @@ export default function BulkMapperModal() {
     if (!results || results.length === 0) return;
 
     const match = results.find((r) => r.taxonId === Number(id)) || results[0];
-    const current = hForm.getValues("newTaxonId") || [];
-    hForm.setValue("newTaxonId", Array.isArray(current) ? [...current, match] : [match], {
-      shouldValidate: true,
-      shouldDirty: true
-    });
+    hForm.setValue("newTaxonId", match, { shouldValidate: true, shouldDirty: true });
+    setDropVersion((v) => v + 1);
+    setSelectedTaxon(match);
     setSelectedTaxons(selectedTaxons.filter((t) => t.id !== Number(id)));
     draggedTaxon.current = null;
   };
@@ -421,8 +420,10 @@ export default function BulkMapperModal() {
                                       <FormProvider {...hForm}>
                                         <form onSubmit={hForm.handleSubmit(handleOnSubmit)}>
                                           <SelectAsyncInputField
+                                            key={dropVersion}
                                             name="newTaxonId"
                                             label={t("form:accepted_name")}
+                                            resetOnSubmit={false}
                                             multiple={false}
                                             onQuery={(q) => onScientificNameQuery(q, "id", true)}
                                             optionComponent={ScientificNameOption}
@@ -447,7 +448,7 @@ export default function BulkMapperModal() {
                                 let mergeLabel: string | null = null;
                                 let mergeId = null;
                                 const taxonId =
-                                  hForm.watch().newTaxonId[0]?.value || selectedTaxon?.value;
+                                  hForm.watch("newTaxonId")?.value || selectedTaxon?.value;
 
                                 if (!speciesMap.has(taxonId)) {
                                   const { success, data } = await axCheckSpecies(taxonId);
@@ -456,13 +457,13 @@ export default function BulkMapperModal() {
                                   );
                                   if (data) {
                                     mergeLabel =
-                                      "hForm.watch().newTaxonId[0]?.label || selectedTaxon?.label";
+                                      hForm.watch("newTaxonId")?.label || selectedTaxon?.label;
                                     mergeId = taxonId;
                                   }
                                 } else {
                                   if (speciesMap.get(taxonId)) {
                                     mergeLabel =
-                                      hForm.watch().newTaxonId[0]?.label || selectedTaxon?.label;
+                                      hForm.watch("newTaxonId")?.label || selectedTaxon?.label;
                                     mergeId = taxonId;
                                   }
                                 }
@@ -481,7 +482,7 @@ export default function BulkMapperModal() {
                                   mergeLabel
                                     ? `This action will merge all selected taxa species page data, synonyms, common name and children into ${mergeLabel}. Are you sure you want to proceed?`
                                     : `This action will merge all selected taxa synonyms, common names and children into ${
-                                        hForm.watch().newTaxonId[0]?.label || selectedTaxon?.label
+                                        hForm.watch("newTaxonId")?.label || selectedTaxon?.label
                                       }. Are you sure you want to proceed?`
                                 ) && mergeSubmit();
                               }}

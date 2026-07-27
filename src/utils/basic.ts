@@ -48,7 +48,7 @@ export const getByPath = (obj, path) => {
     if (!obj) {
       return;
     }
-    obj = obj[level];
+    obj = obj[level.replaceAll("@@DOT@@", ".")];
   });
 
   return obj;

@@ -1,80 +1,48 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
 import { BasicTable } from "@components/@core/table";
-import styled from "@emotion/styled";
-import useTranslation from "next-translate/useTranslation";
+import { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+
+import Loading from "@/components/pages/common/loading";
+import { Role } from "@/interfaces/custom";
+import { hasAccess } from "@/utils/auth";
 
 import useTaxonFilter from "../use-taxon";
-import { TaxonNameCell, TaxonRankCell } from "./taxon-rank-cell";
-
-const TaxonBox = styled.div`
-  thead td {
-    position: sticky;
-    top: 0;
-    background: white;
-    box-shadow: 0px 0px 2px var(--chakra-colors-gray-300);
-  }
-`;
-
-const taxonListRows = [
-  {
-    Header: "Name",
-    accessor: "name",
-    Cell: TaxonNameCell,
-    style: { paddingTop: 0, paddingBottom: 0 }
-  },
-  {
-    Header: "Id",
-    accessor: "id"
-  },
-  {
-    Header: "Rank",
-    accessor: "rank",
-    Cell: TaxonRankCell
-  },
-  {
-    Header: "Status",
-    accessor: "status"
-  },
-  {
-    Header: "Position",
-    accessor: "position"
-  }
-];
+import { taxonTableMetaData } from "./table-metadata";
 
 export default function TaxonListTable() {
-  const { t } = useTranslation();
-  const { taxonListData, isLoading, setSelectedTaxons, nextPage } = useTaxonFilter();
+  const { taxonListData, setSelectedTaxons, nextPage } = useTaxonFilter();
+  const [fieldData, setFieldData] = useState<any[]>(taxonListData?.l);
+
+  const [tableMeta, setTableMeta] = useState(taxonTableMetaData(taxonListData?.l));
+
+  const canEdit = hasAccess([Role.Admin]);
+
+  useEffect(() => {
+    setFieldData(taxonListData?.l);
+    setTableMeta(taxonTableMetaData(taxonListData?.l));
+  }, [taxonListData.l.length]);
 
   return (
-    <Box
-      as={TaxonBox}
-      maxH="full"
-      w="full"
-      id="items-container"
-      overflowY="auto"
-      gridColumn={{ lg: "4/15" }}
+    <InfiniteScroll
+      dataLength={taxonListData.l.length}
+      next={nextPage}
+      hasMore={taxonListData.hasMore}
+      loader={<Loading />}
+      scrollableTarget="items-container"
     >
-      {taxonListData.l.length > 0 && (
+      {fieldData && (
         <BasicTable
-          data={taxonListData.l}
-          columns={taxonListRows}
-          isSelectable={true}
-          size="sm"
-          onSelectionChange={setSelectedTaxons}
           getCheckboxProps={(row) => (row === "header" ? { disabled: true } : {})}
+          data={fieldData || []}
+          columns={tableMeta}
+          translateHeader
+          size="sm"
+          {...(canEdit && {
+            isSelectable: true,
+            onSelectionChange: setSelectedTaxons
+          })}
         />
       )}
-      <Flex alignItems="center" justifyContent="center" p={4}>
-        <Button
-          loading={isLoading}
-          disabled={taxonListData.hasMore}
-          loadingText={t("common:loading")}
-          onClick={nextPage}
-          colorPalette="blue"
-        >
-          {t("common:load_more")}
-        </Button>
-      </Flex>
-    </Box>
+    </InfiniteScroll>
   );
 }

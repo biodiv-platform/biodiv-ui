@@ -6,9 +6,16 @@ interface SimpleActionButtonProps {
   title;
   onClick?;
   colorPalette?;
+  disabled?;
 }
 
-const SimpleActionButton = ({ icon, title, onClick, colorPalette }: SimpleActionButtonProps) => (
+const SimpleActionButton = ({
+  icon,
+  title,
+  onClick,
+  colorPalette,
+  disabled
+}: SimpleActionButtonProps) => (
   <Tooltip title={title} positioning={{ placement: "bottom" }}>
     <IconButton
       size="lg"
@@ -17,6 +24,7 @@ const SimpleActionButton = ({ icon, title, onClick, colorPalette }: SimpleAction
       colorPalette={colorPalette || "blue"}
       aria-label={title}
       onClick={onClick}
+      disabled={disabled ? true : false}
     >
       {icon}
     </IconButton>

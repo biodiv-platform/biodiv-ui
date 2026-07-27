@@ -15,7 +15,7 @@ import App, { AppContext } from "next/app";
 import dynamic from "next/dynamic";
 import Router from "next/router";
 import NProgress from "nprogress";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import BusProvider from "react-gbus";
 
 import Announcement from "@/components/@core/announcements";
@@ -57,6 +57,24 @@ function MainApp({
     Router.events.on("routeChangeError", () => NProgress.done());
   }, [Router]);
 
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+
+    const setHeight = () => {
+      document.documentElement.style.setProperty("--heading-height", `${el.offsetHeight}px`);
+    };
+
+    setHeight(); // set initial value immediately
+
+    const ro = new ResizeObserver(setHeight);
+    ro.observe(el);
+
+    return () => ro.disconnect();
+  }, [config.header]); // re-run if header is conditionally toggled per page
+
   return (
     <BusProvider>
       <ChakraProvider value={customTheme}>
@@ -67,11 +85,11 @@ function MainApp({
           <Metadata />
           <div className="content">
             {config.header && (
-              <>
+              <div ref={headerRef}>
                 <NavigationMenuDark />
                 <NavigationMenuLight />
                 <Announcement />
-              </>
+              </div>
             )}
             <div id="main">
               <Component {...pageProps} />

@@ -1,14 +1,35 @@
 import { Box, Heading, Link, List, SimpleGrid } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
+import { useEffect, useRef, useState } from "react";
 
 import { PageHeading } from "@/components/@core/layout";
 import { axUpdateScientificNames } from "@/services/document.service";
 import notification, { NotificationType } from "@/utils/notification";
 
+const UPDATE_NAMES_COOLDOWN_MS = 60 * 1000; // 1 minute
+
 function AdminComponent() {
   const { t } = useTranslation();
 
+  const [isUpdateNamesDisabled, setIsUpdateNamesDisabled] = useState(false);
+  const cooldownTimerRef = useRef<ReturnType<typeof setTimeout>>();
+
+  useEffect(() => {
+    return () => {
+      if (cooldownTimerRef.current) {
+        clearTimeout(cooldownTimerRef.current);
+      }
+    };
+  }, []);
+
   const handleUpdateScientificNames = async () => {
+    if (isUpdateNamesDisabled) return;
+
+    setIsUpdateNamesDisabled(true);
+    cooldownTimerRef.current = setTimeout(() => {
+      setIsUpdateNamesDisabled(false);
+    }, UPDATE_NAMES_COOLDOWN_MS);
+
     const { success } = await axUpdateScientificNames();
     if (success) {
       notification(t("user:bulk_action.success"), NotificationType.Success);
@@ -62,7 +83,13 @@ function AdminComponent() {
     },
     {
       title: t("header:menu_secondary.documents.title"),
-      items: [{ onClick: handleUpdateScientificNames, label: t("admin:links.update_scientific_names") }]
+      items: [
+        {
+          onClick: handleUpdateScientificNames,
+          label: t("admin:links.update_scientific_names"),
+          disabled: isUpdateNamesDisabled
+        }
+      ]
     }
   ];
 
@@ -108,9 +135,10 @@ function AdminComponent() {
                       bg: "teal"
                     }}
                     _hover={{
-                      bg: "gray.300",
-                      pl: 4
+                      bg: item.disabled ? undefined : "gray.300",
+                      pl: item.disabled ? 3 : 4
                     }}
+                    opacity={item.disabled ? 0.5 : 1}
                   >
                     {item.href ? (
                       <Link
@@ -125,9 +153,11 @@ function AdminComponent() {
                       <Link
                         as="button"
                         onClick={item.onClick}
+                        aria-disabled={item.disabled}
+                        cursor={item.disabled ? "not-allowed" : "pointer"}
                         ml={3}
                         _hover={{ textDecoration: "none" }}
-                        width = "100%"
+                        width="100%"
                       >
                         {item.label}
                       </Link>
