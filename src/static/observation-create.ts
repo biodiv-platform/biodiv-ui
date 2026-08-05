@@ -130,7 +130,8 @@ export const ACCEPTED_FILE_TYPES = {
   "image/*": [".jpg", ".jpeg", ".JPG", ".png", ".PNG"],
   "video/*": [".mp4", ".MP4", ".mov", ".MOV", ".webm", ".WEBM"],
   "audio/*": [".wav", ".mp3"],
-  "application/zip": [".zip"]
+  "application/zip": [".zip"],
+  "application/x-zip-compressed": [".zip"]
 };
 
 export const DEFAULT_TOAST: any = {
