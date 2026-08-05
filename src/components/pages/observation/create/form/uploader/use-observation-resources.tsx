@@ -114,10 +114,34 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
   const handleZipFiles = async (pendingResource) => {
     try {
       const r = await axBulkUploadObservationResource(pendingResource);
-      if (r) {
-        await deleteByID(pendingResource.id);
-        await fetchMyUploads();
-        await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.Uploaded);
+      const extractedFiles = r?.data?.files;
+
+      if (r?.data?.status && Array.isArray(extractedFiles) && extractedFiles.length > 0) {
+        const now = Date.now();
+        const newAssets = extractedFiles.map((file) => ({
+          ...file,
+          path: `/${file.hashKey}/${file.fileName}`,
+          url: null,
+          status: AssetStatus.Uploaded,
+          contributor: "",
+          caption: "",
+          rating: 0,
+          licenseId: SITE_CONFIG.LICENSE.DEFAULT,
+          isUsed: 0,
+          dateUploaded: now
+        }));
+
+        await Promise.all([...newAssets.map((a) => add(a)), deleteByID(pendingResource.id)]);
+
+        setObservationAssets((_draft) => {
+          const index = _draft.a.findIndex((o) => o.hashKey === pendingResource.hashKey);
+          if (index > -1) {
+            _draft.a.splice(index, 1);
+          }
+          _draft.a.push(...newAssets);
+        });
+
+        await reFetchAssets();
       }
     } catch (e) {
       console.error(e);
