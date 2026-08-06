@@ -17,6 +17,7 @@ const ACCEPT_STRING = Object.keys(accept).join(",");
 export default function DocumentDropzone() {
   const { selectedDocument, addDocument } = useManageDocument();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [progress, setProgress] = useState<number | undefined>(undefined);
 
   const handleFileChange = useCallback(
     async (details: { acceptedFiles: File[]; rejectedFiles: any[] }) => {
@@ -25,8 +26,10 @@ export default function DocumentDropzone() {
         return;
       }
       setIsProcessing(true);
-      await addDocument(file);
+      setProgress(undefined);
+      await addDocument(file, setProgress);
       setIsProcessing(false);
+      setProgress(undefined);
     },
     [addDocument]
   );
@@ -67,7 +70,7 @@ export default function DocumentDropzone() {
               }}
             >
               {isProcessing ? (
-                <UploadProcessing />
+                <UploadProcessing progress={progress} />
               ) : fileUpload.dragging ? (
                 <UploadDragging />
               ) : (
