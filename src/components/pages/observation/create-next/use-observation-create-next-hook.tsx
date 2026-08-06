@@ -12,7 +12,7 @@ import { getLocalIcon } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import { clusterResources } from "@utils/observation";
 import useTranslation from "next-translate/useTranslation";
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { emit } from "react-gbus";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { useIndexedDBStore } from "use-indexeddb";
@@ -89,6 +89,10 @@ export const ObservationCreateNextProvider = ({
     onPlaceSelected: console.debug,
     options: { ...GEOCODE_OPTIONS, fields: AUTOCOMPLETE_FIELDS, types: "regions" }
   });
+
+  useEffect(() => {
+    getDrafts();
+  }, []);
 
   const speciesGroupOptions = useMemo(
     () =>

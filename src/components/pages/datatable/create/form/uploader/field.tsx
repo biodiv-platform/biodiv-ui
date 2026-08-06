@@ -1,10 +1,11 @@
-import { Box, Tabs } from "@chakra-ui/react";
+import { Badge, Box, Tabs } from "@chakra-ui/react";
 import ToggleablePanel from "@components/pages/common/toggleable-panel";
 import MyUploads from "@components/pages/observation/create/form/uploader/my-uploads";
 import useTranslation from "next-translate/useTranslation";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
+import useObservationCreate from "@/components/pages/observation/create/form/uploader/use-observation-resources";
 import { Field } from "@/components/ui/field";
 
 import FieldMappingInput from "../uploader/file-uploader-field/options-field";
@@ -34,6 +35,7 @@ const DropzoneField = ({
   const form = useFormContext();
   const [tab, setTab] = useState("datatable:sheet_uploader");
   const { t } = useTranslation();
+  const { assets } = useObservationCreate();
 
   useEffect(() => {
     form.register(name);
@@ -52,6 +54,11 @@ const DropzoneField = ({
               </Tabs.Trigger>
               <Tabs.Trigger value="datatable:media_uploader">
                 ☁️ {t("datatable:media_uploader")}
+                {(assets ?? []).length > 0 && (
+                  <Badge variant="solid" colorPalette="red" borderRadius="full">
+                    {(assets ?? []).length}
+                  </Badge>
+                )}
               </Tabs.Trigger>
             </Tabs.List>
             <Tabs.Content value="datatable:sheet_uploader">
