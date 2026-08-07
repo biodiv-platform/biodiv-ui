@@ -1,10 +1,6 @@
 import SITE_CONFIG from "@configs/site-config";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
-import {
-  axBulkUploadObservationResource,
-  axListMyUploads,
-  axRemoveMyUploads
-} from "@services/files.service";
+import { axListMyUploads, axRemoveMyUploads } from "@services/files.service";
 import { EXIF_GPS_FOUND, FORM_DATEPICKER_CHANGE } from "@static/events";
 import { STORE } from "@static/observation-create";
 import { setupDB } from "@utils/db";
@@ -15,7 +11,7 @@ import { emit } from "react-gbus";
 import { useImmer } from "use-immer";
 import { useIndexedDBStore } from "use-indexeddb";
 
-import { axTusUploadObservationResource } from "@/services/tusupload.service";
+import { axTusBulkUpload, axTusUploadObservationResource } from "@/services/tusupload.service";
 
 import { MY_UPLOADS_SORT } from "../options";
 
@@ -131,12 +127,19 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
     });
   };
 
-  const handleZipFiles = async (pendingResource) => {
+  const handleZipFiles = async (pendingResource, noSave = true) => {
     try {
-      const r = await axBulkUploadObservationResource(pendingResource);
-      const extractedFiles = r?.data?.files;
+      const file = pendingResource.file || pendingResource.blob || pendingResource;
 
-      if (r?.data?.status && Array.isArray(extractedFiles) && extractedFiles.length > 0) {
+      const r = await axTusBulkUpload([file], "observation", (percent) => {
+        if (noSave) {
+          updateAssetProgress(pendingResource.hashKey, percent);
+        }
+      });
+
+      const extractedFiles = r?.files;
+
+      if (r?.status && Array.isArray(extractedFiles) && extractedFiles.length > 0) {
         const now = Date.now();
         const newAssets = extractedFiles.map((file) => ({
           ...file,
@@ -162,13 +165,19 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
         });
 
         await reFetchAssets();
+      } else {
+        await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.Pending);
       }
     } catch (e) {
       console.error(e);
+      await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.Pending);
       notification(t("observation:delete_file.error"), NotificationType.Error);
+    } finally {
+      if (noSave) {
+        updateAssetProgress(pendingResource.hashKey, undefined);
+      }
     }
   };
-
   const handleMediaFiles = async (pendingResource, noSave) => {
     try {
       const r = await axTusUploadObservationResource(pendingResource, "observation", (percent) =>

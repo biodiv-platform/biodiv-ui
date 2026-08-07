@@ -150,3 +150,56 @@ export const axTusUploadCSVCurationResource = async (file: File, onProgress?: an
   const singleRes = unwrapSingle(res);
   return singleRes?.data ?? singleRes;
 };
+
+/**
+ * TUS equivalent of handleBulkUpload.
+ * Uploads an array of files (including ZIP archives) via TUS, tracks overall
+ * progress, and flattens the returned List<MyUpload> from the backend.
+ */
+export const axTusBulkUpload = async (
+  files: File[],
+  module: string = "observation",
+  onProgress?: (overallPercent: number) => void
+): Promise<{ status: boolean; files: any[] }> => {
+  try {
+    if (!files || files.length === 0) {
+      return { status: false, files: [] };
+    }
+
+    const totalFiles = files.length;
+    const progressMap = new Array<number>(totalFiles).fill(0);
+
+    // Upload all files concurrently using tusUploadFile
+    const uploadPromises = files.map((file, index) => {
+      const hashKey = `${LOCAL_ASSET_PREFIX}${nanoid()}`;
+
+      return tusUploadFile(file, file.name, module, hashKey, (filePercent) => {
+        progressMap[index] = filePercent;
+        const overallPercent = Math.round(
+          progressMap.reduce((sum, val) => sum + val, 0) / totalFiles
+        );
+        onProgress?.(overallPercent);
+      });
+    });
+
+    const results = await Promise.all(uploadPromises);
+
+    // Each TUS result is List<MyUpload> (Array). Flatten them into a single list.
+    const allSavedFiles: any[] = [];
+    results.forEach((res) => {
+      if (Array.isArray(res)) {
+        allSavedFiles.push(...res);
+      } else if (res) {
+        allSavedFiles.push(res);
+      }
+    });
+
+    return {
+      status: allSavedFiles.length > 0,
+      files: allSavedFiles
+    };
+  } catch (error) {
+    console.error("TUS Bulk Upload Error:", error);
+    return { status: false, files: [] };
+  }
+};
