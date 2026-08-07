@@ -3,8 +3,7 @@ import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
 import {
   axBulkUploadObservationResource,
   axListMyUploads,
-  axRemoveMyUploads,
-  axUploadObservationResource
+  axRemoveMyUploads
 } from "@services/files.service";
 import { EXIF_GPS_FOUND, FORM_DATEPICKER_CHANGE } from "@static/events";
 import { STORE } from "@static/observation-create";
@@ -15,6 +14,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { emit } from "react-gbus";
 import { useImmer } from "use-immer";
 import { useIndexedDBStore } from "use-indexeddb";
+
+import { axTusUploadObservationResource } from "@/services/tusupload.service";
 
 import { MY_UPLOADS_SORT } from "../options";
 
@@ -34,6 +35,7 @@ interface ObservationCreateContextProps {
   resourcesSortBy?;
   setResourcesSortBy?;
   licensesList?;
+  uploadProgress?: Record<string, number>;
 }
 
 const ObservationCreateContext = createContext<ObservationCreateContextProps>(
@@ -44,6 +46,8 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
   const [observationAssets, setObservationAssets] = useImmer({ a: props.observationAssets || [] });
   const [assets, setAssets] = useImmer({ a: props.assets || [] });
   const [resourcesSortBy, setResourcesSortBy] = useState(MY_UPLOADS_SORT[0].value);
+
+  const [uploadProgress, setUploadProgress] = useState<Record<string, number>>({});
   const { t } = useTranslation();
   const { add, getOneByKey, getManyByKey, deleteByID, update } =
     useIndexedDBStore<IDBObservationAsset>(STORE.ASSETS);
@@ -62,7 +66,7 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
   const fetchMyUploads = async () => {
     const { data } = await axListMyUploads();
 
-    // housekeeping for expired assets
+    // Housekeeping for expired assets
     const newAssetsHashKeys = data.map((a) => a.hashKey);
     const allUnUsedAssets = await getManyByKey("isUsed", 0);
     for (const asset of allUnUsedAssets) {
@@ -96,18 +100,34 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
     fetchMyUploads();
   }, []);
 
-  const updateLocalAssetStatus = async (hashKey, status: AssetStatus) => {
+  const updateLocalAssetStatus = async (
+    hashKey: string,
+    status: AssetStatus,
+    extra: Partial<IDBObservationAsset> = {}
+  ) => {
     setAssets((_draft) => {
       const index = _draft.a.findIndex((a) => a.hashKey === hashKey);
       if (index > -1) {
-        _draft.a[index].status = status;
+        Object.assign(_draft.a[index], extra, { status });
       }
     });
     setObservationAssets((_draft) => {
       const index = _draft.a.findIndex((a) => a.hashKey === hashKey);
       if (index > -1) {
-        _draft.a[index].status = status;
+        Object.assign(_draft.a[index], extra, { status });
       }
+    });
+  };
+
+  const updateAssetProgress = (hashKey: string, progress: number | undefined) => {
+    setUploadProgress((prev) => {
+      if (progress == null) {
+        if (!(hashKey in prev)) return prev;
+        const next = { ...prev };
+        delete next[hashKey];
+        return next;
+      }
+      return { ...prev, [hashKey]: progress };
     });
   };
 
@@ -151,18 +171,31 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
 
   const handleMediaFiles = async (pendingResource, noSave) => {
     try {
-      const r = await axUploadObservationResource(pendingResource);
+      const r = await axTusUploadObservationResource(pendingResource, "observation", (percent) =>
+        noSave ? updateAssetProgress(pendingResource.hashKey, percent) : undefined
+      );
+
       if (r.success && noSave) {
+        const { hashKey, fileName, path, url, fileSize, dateUploaded } = r.data ?? {};
+        const serverFields = { hashKey, fileName, path, url, fileSize, dateUploaded };
+
         await update({
           ...pendingResource,
+          ...serverFields,
           status: AssetStatus.Uploaded
         });
-        await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.Uploaded);
+        await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.Uploaded, serverFields);
+      } else if (!r.success && noSave) {
+        await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.Pending);
       }
     } catch (e) {
       console.error(e);
       if (noSave) {
         await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.Pending);
+      }
+    } finally {
+      if (noSave) {
+        updateAssetProgress(pendingResource.hashKey, undefined);
       }
     }
   };
@@ -173,9 +206,9 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
     }
 
     if (["application/zip", "application/x-zip-compressed"].includes(pendingResource.type)) {
-      handleZipFiles(pendingResource);
+      await handleZipFiles(pendingResource);
     } else {
-      handleMediaFiles(pendingResource, noSave);
+      await handleMediaFiles(pendingResource, noSave);
     }
   };
 
@@ -187,7 +220,9 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
   };
 
   useEffect(() => {
-    assets.a.length && tryResourceSync();
+    if (assets.a.length) {
+      tryResourceSync();
+    }
   }, [assets.a.length]);
 
   const addToObservationAssets = async (hashKey) => {
@@ -227,7 +262,9 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
   const removeObservationAsset = async (hashKey) => {
     setObservationAssets((_draft) => {
       const index = _draft.a.findIndex((o) => o.hashKey === hashKey);
-      _draft.a.splice(index, 1);
+      if (index > -1) {
+        _draft.a.splice(index, 1);
+      }
     });
   };
 
@@ -237,7 +274,9 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
       await update({ ...asset, [key]: value });
     }
     setObservationAssets((_draft) => {
-      _draft.a[index][key] = value;
+      if (_draft.a[index]) {
+        _draft.a[index][key] = value;
+      }
     });
   };
 
@@ -255,7 +294,8 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
         uploadPendingResource,
         resourcesSortBy,
         setResourcesSortBy,
-        licensesList: props.licensesList
+        licensesList: props.licensesList,
+        uploadProgress
       }}
     >
       {props.children}
