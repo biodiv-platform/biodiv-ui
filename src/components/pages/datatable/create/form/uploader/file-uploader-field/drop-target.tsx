@@ -1,10 +1,11 @@
-import { Box, Button, FileUpload, Heading, Text, VStack } from "@chakra-ui/react";
-import { axUploadObservationResource } from "@services/files.service";
+import { Button, FileUpload, Heading, Text, VStack } from "@chakra-ui/react";
 import { getAssetObject } from "@utils/image";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import { useCallback, useState } from "react";
-import { LuTimer } from "react-icons/lu";
+
+import UploadProcessing from "@/components/pages/document/create/uploader/dropzone/upload-processing";
+import { axTusUploadObservationResource } from "@/services/tusupload.service";
 
 const accept = {
   "application/vnd.ms-excel": [".xls"],
@@ -29,6 +30,8 @@ export default function DropTarget({
   const [isProcessing, setIsProcessing] = useState(false);
   const { t } = useTranslation();
 
+  const [progress, setProgress] = useState<number | undefined>(undefined);
+
   const handleFileChange = useCallback(
     async (details: { acceptedFiles: File[]; rejectedFiles: any[] }) => {
       const file = details.acceptedFiles[0];
@@ -38,8 +41,14 @@ export default function DropTarget({
       }
 
       setIsProcessing(true);
+      setProgress(0);
 
-      const { success, data } = await axUploadObservationResource(getAssetObject(file), "datasets");
+      const { success, data } = await axTusUploadObservationResource(
+        getAssetObject(file),
+        "datasets",
+        (percent) => setProgress(percent)
+      );
+
       if (success) {
         setFieldMapping(data.excelJson);
         field.onChange(data.path);
@@ -50,6 +59,7 @@ export default function DropTarget({
       }
 
       setIsProcessing(false);
+      setProgress(undefined);
     },
     [field, setFieldMapping, setShowMapping, t]
   );
@@ -80,12 +90,7 @@ export default function DropTarget({
             bg={fileUpload.dragging ? "blue.50" : "transparent"}
           >
             {isProcessing ? (
-              <VStack className="fade" gap={2}>
-                <Box fontSize="2.5rem" color="gray.600">
-                  <LuTimer />
-                </Box>
-                <Text>{t("form:uploader.processing")}</Text>
-              </VStack>
+              <UploadProcessing progress={progress} />
             ) : simpleUpload ? (
               <Button as="span" colorPalette="blue" variant="outline">
                 {t("form:uploader.upload")}

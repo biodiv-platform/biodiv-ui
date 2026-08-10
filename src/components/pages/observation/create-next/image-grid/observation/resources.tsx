@@ -18,7 +18,7 @@ export default function Resources({ index, removeObservation }) {
   const resourcesName = `o.${index}.resources`;
   const resources = useFieldArray({ name: resourcesName });
   const [resourceEditor, setResourceEditor] = useState(false);
-  const { media } = useObservationCreateNext();
+  const { media, draft } = useObservationCreateNext();
   const hForm = useFormContext();
 
   const { user } = useGlobalState();
@@ -28,26 +28,47 @@ export default function Resources({ index, removeObservation }) {
 
   const handleOnRemoveResource = () => resources.remove(resourceIndex);
 
+  const currentResource = resources.fields[resourceIndex];
+
   const imgThumb = useMemo(
     () => ({
-      key: resources.fields[resourceIndex].id,
-      src: getImageThumb(resources.fields[resourceIndex], user?.id),
-      fallbackSrc: getFallbackByMIME(resources.fields[resourceIndex]?.["type"])
+      key: currentResource?.id,
+      src: currentResource ? getImageThumb(currentResource, user?.id) : "",
+      fallbackSrc: getFallbackByMIME(currentResource?.["type"])
     }),
-    [resources.fields[resourceIndex].id]
+    [currentResource?.id, user?.id]
   );
 
-  const resourceArrayValues = useWatch({ name: resourcesName });
+  const resourceArrayValues = useWatch({ name: resourcesName }) || [];
 
-  // This will update upload status
   useEffect(() => {
+    if (!resourceArrayValues.length) return;
+
     resourceArrayValues.forEach((r, idx) => {
-      const _status = media.status[r.hashKey];
-      if (_status && r.status !== _status) {
-        hForm.setValue(`${resourcesName}.${idx}.status`, _status);
+      if (!r) return;
+
+      const matchedDraft = draft.all?.find(
+        (d) => d.hashKey === r.hashKey || (r.fileName && d.fileName === r.fileName)
+      );
+
+      if (matchedDraft) {
+        if (matchedDraft.hashKey && matchedDraft.hashKey !== r.hashKey) {
+          hForm.setValue(`${resourcesName}.${idx}.hashKey`, matchedDraft.hashKey);
+        }
+        if (matchedDraft.path && matchedDraft.path !== r.path) {
+          hForm.setValue(`${resourcesName}.${idx}.path`, matchedDraft.path);
+        }
+        if (matchedDraft.status && r.status !== matchedDraft.status) {
+          hForm.setValue(`${resourcesName}.${idx}.status`, matchedDraft.status);
+        }
+      } else {
+        const _status = media.status[r.hashKey];
+        if (_status && r.status !== _status) {
+          hForm.setValue(`${resourcesName}.${idx}.status`, _status);
+        }
       }
     });
-  }, [media.status]);
+  }, [media.status, draft.all, resourceArrayValues, resourcesName, hForm]);
 
   const uploadStats = useMemo(() => {
     const _resourceStatusList = resourceArrayValues.map((r) => r.status);
@@ -56,12 +77,32 @@ export default function Resources({ index, removeObservation }) {
     const _uploaded = _resourceStatusList.filter((s) => s === AssetStatus.Uploaded).length;
     const _failed = _resourceStatusList.filter((s) => s === AssetStatus.Failed).length;
 
+    const _progress = Math.round(
+      resourceArrayValues.reduce((sum, r) => {
+        if (r.status === AssetStatus.Uploaded || r.status === AssetStatus.Failed) {
+          return sum + 100;
+        }
+
+        const currentProg = media.progress[r.hashKey];
+        if (currentProg != null) {
+          return sum + currentProg;
+        }
+
+        if (r.status === AssetStatus.InProgress) {
+          return sum + 100;
+        }
+
+        return sum + 0;
+      }, 0) / (_total || 1)
+    );
+
     return {
       children: `${_uploaded}/${_total}`,
       hidden: _uploaded + _failed === _total,
-      failed: _failed
+      failed: _failed,
+      progress: _progress
     };
-  }, [resourceArrayValues]);
+  }, [resourceArrayValues, media.progress, resources.fields.length]);
 
   return (
     <>

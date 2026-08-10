@@ -1,10 +1,6 @@
 import SITE_CONFIG from "@configs/site-config";
 import { AssetStatus, IDBObservationAsset } from "@interfaces/custom";
-import {
-  axListMyUploads,
-  axRemoveMyUploads,
-  axUploadObservationResource
-} from "@services/files.service";
+import { axListMyUploads, axRemoveMyUploads } from "@services/files.service";
 import { OBSERVATION_IMPORT_DIALOUGE } from "@static/events";
 import { AUTOCOMPLETE_FIELDS, GEOCODE_OPTIONS } from "@static/location";
 import { STORE } from "@static/observation-create";
@@ -16,6 +12,8 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { emit } from "react-gbus";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { useIndexedDBStore } from "use-indexeddb";
+
+import { axTusUploadObservationResource } from "@/services/tusupload.service";
 
 import { MY_UPLOADS_SORT } from "../create/form/options";
 
@@ -49,6 +47,7 @@ interface ObservationCreateNextContextProps {
     status;
     toggleSelection;
     sync;
+    progress;
   };
 }
 
@@ -81,6 +80,7 @@ export const ObservationCreateNextProvider = ({
   const [draftDisabled, setDraftDisabled] = useState<string[]>([]);
   const [selectedHKs, setSelectedHKs] = useState<string[]>([]);
   const [draftSortBy, setDraftSortBy] = useState(MY_UPLOADS_SORT[0].value);
+  const [mediaProgress, setMediaProgress] = useState<Record<string, number>>({});
 
   // initialising autocomplete to init google maps
   // for background reverse geocoder to work
@@ -170,29 +170,58 @@ export const ObservationCreateNextProvider = ({
     setDraftUploadStatus({ ...draftUploadStatus, [hashKey]: status });
   };
 
+  const updateMediaProgress = (hashKey: string, progress: number | undefined) => {
+    setMediaProgress((prev) => {
+      if (progress == null) {
+        if (!(hashKey in prev)) return prev;
+        const next = { ...prev };
+        delete next[hashKey];
+        return next;
+      }
+      return { ...prev, [hashKey]: progress };
+    });
+  };
+
   const uploadPendingMedia = async (pendingMedia, noSave = true) => {
     if (noSave) {
       await updateIdbMediaStatus(pendingMedia.hashKey, AssetStatus.InProgress);
     }
 
     try {
-      const r = await axUploadObservationResource(pendingMedia);
+      const r = await axTusUploadObservationResource(pendingMedia, "observation", (percent) =>
+        noSave ? updateMediaProgress(pendingMedia.hashKey, percent) : undefined
+      );
+
       if (noSave) {
-        const _status = r.success ? AssetStatus.Uploaded : AssetStatus.Failed;
+        const isSuccess = r?.success;
+        const _status = isSuccess ? AssetStatus.Uploaded : AssetStatus.Failed;
 
-        await update({
+        const serverData = isSuccess ? r.data : {};
+        const newHashKey = serverData.hashKey || pendingMedia.hashKey;
+
+        const updatedAsset = {
           ...pendingMedia,
-          blob: r.success ? undefined : pendingMedia.blob,
+          ...serverData,
+          blob: isSuccess ? undefined : pendingMedia.blob,
           status: _status
-        });
-        await updateIdbMediaStatus(pendingMedia.hashKey, _status);
+        };
 
-        return _status;
+        await update(updatedAsset);
+
+        // 1. Update status tracking in state
+        await updateIdbMediaStatus(newHashKey, _status);
+
+        return { status: _status, oldHashKey: pendingMedia.hashKey, newHashKey, serverData };
       }
     } catch (e) {
       console.error(e);
       if (noSave) {
         await updateIdbMediaStatus(pendingMedia.hashKey, AssetStatus.Failed);
+      }
+    } finally {
+      if (noSave) {
+        // 2. CLEAR PROGRESS BAR STATE SO IT DOESN'T STICK AT 100%
+        updateMediaProgress(pendingMedia.hashKey, undefined);
       }
     }
 
@@ -274,7 +303,8 @@ export const ObservationCreateNextProvider = ({
           status: draftUploadStatus,
           selected: selectedMediaList,
           toggleSelection: toggleDraftSelection,
-          sync: tryMediaSync
+          sync: tryMediaSync,
+          progress: mediaProgress
         }
       }}
     >

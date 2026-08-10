@@ -84,7 +84,7 @@ export default function OfflineSync() {
 
     try {
       for (const resource of observation.resources) {
-        await update({ ...resource, isUsed: 1 }, "hashKey");
+        await update({ ...resource, isUsed: 1 });
       }
     } catch (e) {
       console.error("updateResourceIDB", e);
