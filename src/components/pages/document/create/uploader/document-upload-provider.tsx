@@ -1,12 +1,10 @@
 import { ResourceDocument } from "@interfaces/custom";
 import { MyUpload } from "@interfaces/files";
-import {
-  axListMyUploads,
-  axRemoveMyUploads,
-  axUploadDocumentResource
-} from "@services/files.service";
+import { axListMyUploads, axRemoveMyUploads } from "@services/files.service";
 import { RESOURCE_TYPE } from "@static/constants";
 import { createContext, useContext, useEffect, useState } from "react";
+
+import { axTusUploadDocumentResource } from "@/services/tusupload.service";
 
 interface ManageDocumentContextProps {
   children?;
@@ -37,13 +35,23 @@ export const ManageDocumentContextProvider = (props: ManageDocumentContextProps)
     }
   };
 
-  const addDocument = async (file) => {
-    const resource = await axUploadDocumentResource(file);
-    setSelectedDocument({
-      resourceURL: resource.path,
-      size: resource.fileSize,
-      timestamp: Number(resource.dateUploaded)
-    });
+  const addDocument = async (file: File, onProgress?: (percent: number) => void) => {
+    const rawResource = await axTusUploadDocumentResource(file, onProgress);
+
+    const resource = Array.isArray(rawResource)
+      ? rawResource[0]
+      : Array.isArray(rawResource?.data)
+      ? rawResource.data[0]
+      : rawResource?.data ?? rawResource;
+
+    if (resource) {
+      setSelectedDocument({
+        resourceURL: resource.path || resource.resourceURL,
+        size: resource.fileSize || resource.size,
+        timestamp: Number(resource.dateUploaded) || Date.now()
+      });
+    }
+
     await listDocuments();
   };
 

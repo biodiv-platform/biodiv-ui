@@ -6,6 +6,7 @@ import useTranslation from "next-translate/useTranslation";
 import { useCallback, useRef } from "react";
 
 import { toaster } from "@/components/ui/toaster";
+import { MAX_UPLOAD_SIZE } from "@/services/tusupload.service";
 
 import ObservationCreateNextForm from "./form";
 import useObservationCreateNext from "./use-observation-create-next-hook";
@@ -70,6 +71,7 @@ export default function DraftDropzone() {
       onFileChange={handleFileChange}
       width="full"
       maxFiles={10}
+      maxFileSize={MAX_UPLOAD_SIZE}
     >
       <FileUpload.HiddenInput ref={fileUploadRef} />
 

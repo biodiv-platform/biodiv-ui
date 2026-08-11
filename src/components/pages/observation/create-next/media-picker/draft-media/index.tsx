@@ -68,7 +68,7 @@ const DraftResource = ({ resource: r }) => {
         />
       </AspectRatio>
       <Box position="absolute" bottom={0} left={0} m={4}>
-        <StatusIcon type={r.status} />
+        <StatusIcon type={r.status} progress={media.progress?.[r.hashKey]} />
       </Box>
       <IconButton
         aria-label="Delete Resource"

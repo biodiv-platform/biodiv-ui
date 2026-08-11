@@ -1,4 +1,12 @@
-import { Box, Button, ButtonGroup, Flex, SimpleGrid, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Badge,
+  Box,
+  Button,
+  ButtonGroup,
+  Flex,
+  SimpleGrid,
+  useBreakpointValue
+} from "@chakra-ui/react";
 import { SubmitButton } from "@components/form/submit-button";
 import CheckIcon from "@icons/check";
 import CheckAllIcon from "@icons/check-all";
@@ -47,7 +55,7 @@ const areValuesEqual = (val1, val2, key) => {
 };
 
 export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
-  const { setShowMediaPicker, media } = useObservationCreateNext();
+  const { setShowMediaPicker, media, draft } = useObservationCreateNext();
   const form = useFormContext();
   const { t } = useTranslation();
   const isDesktop = useBreakpointValue({ base: false, lg: true });
@@ -128,6 +136,11 @@ export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
                     <Button variant={"outline"}>
                       <ImageIcon size={"xs"} />
                       {t("observation:toolbar.import")}
+                      {(draft.all ?? []).length > 0 && (
+                        <Badge variant="solid" colorPalette="red" borderRadius="full">
+                          {(draft.all ?? []).length}
+                        </Badge>
+                      )}
                       <LuChevronDown />
                     </Button>
                   </MenuTrigger>
@@ -139,6 +152,11 @@ export default function Toolbar({ onMerge, onSplit, onRemove, onBrowse }) {
                     <MenuItem onClick={onDraftMediaOpen} value="draftMedia">
                       <CloudIcon size={"xs"} />
                       {t("form:uploader.draft")}
+                      {(draft.all ?? []).length > 0 && (
+                        <Badge variant="solid" colorPalette="red" borderRadius="full">
+                          {(draft.all ?? []).length}
+                        </Badge>
+                      )}
                     </MenuItem>
                   </MenuContent>
                 </MenuRoot>

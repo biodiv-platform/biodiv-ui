@@ -1,4 +1,4 @@
-import { Box, Tabs, Text } from "@chakra-ui/react";
+import { Badge, Box, Tabs, Text } from "@chakra-ui/react";
 import useDidUpdateEffect from "@hooks/use-did-update-effect";
 import useTranslation from "next-translate/useTranslation";
 import { useEffect, useState } from "react";
@@ -20,7 +20,7 @@ export interface IDropzoneProps {
 }
 
 const DropzoneField = ({ name, mb = 4, hidden, onTabIndexChanged }: IDropzoneProps) => {
-  const { observationAssets, addAssets } = useObservationCreate();
+  const { observationAssets, addAssets, assets } = useObservationCreate();
   const [tab, setTab] = useState("selectedMedia");
   const { t } = useTranslation();
   const { field, fieldState } = useController({ name });
@@ -59,6 +59,11 @@ const DropzoneField = ({ name, mb = 4, hidden, onTabIndexChanged }: IDropzonePro
           </Tabs.Trigger>
           <Tabs.Trigger value="draftMedia" onClick={() => setTab("draftMedia")} height={"full"}>
             ☁️ {t("form:my_uploads")}
+            {(assets ?? []).length > 0 && (
+              <Badge variant="solid" colorPalette="red" borderRadius="full">
+                {(assets ?? []).length}
+              </Badge>
+            )}
           </Tabs.Trigger>
           <Tabs.Trigger value="audio" onClick={() => setTab("audio")} height={"full"}>
             🎙️ {t("form:audio.title")}

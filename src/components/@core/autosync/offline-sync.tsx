@@ -2,7 +2,6 @@ import { useDisclosure } from "@chakra-ui/react";
 import useGlobalState from "@hooks/use-global-state";
 import { AssetStatus, IDBObservationAsset, IDBPendingObservation } from "@interfaces/custom";
 import useOnlineStatus from "@rehooks/online-status";
-import { axUploadObservationResource } from "@services/files.service";
 import { axCreateObservation } from "@services/observation.service";
 import {
   SYNC_OBSERVATION,
@@ -18,6 +17,7 @@ import { useImmer } from "use-immer";
 import { useIndexedDBStore } from "use-indexeddb";
 
 import { Alert } from "@/components/ui/alert";
+import { axTusUploadObservationResource } from "@/services/tusupload.service";
 
 import { useLocalRouter } from "../local-link";
 import SyncBox from "./syncbox";
@@ -84,7 +84,7 @@ export default function OfflineSync() {
 
     try {
       for (const resource of observation.resources) {
-        await update({ ...resource, isUsed: 1 }, "hashKey");
+        await update({ ...resource, isUsed: 1 });
       }
     } catch (e) {
       console.error("updateResourceIDB", e);
@@ -94,7 +94,7 @@ export default function OfflineSync() {
       await Promise.all(
         observation.resources
           .filter((r) => r.status !== AssetStatus.Uploaded)
-          .map(axUploadObservationResource)
+          .map((r) => axTusUploadObservationResource(r))
       );
       const { success, data } = await axCreateObservation({
         ...observation,

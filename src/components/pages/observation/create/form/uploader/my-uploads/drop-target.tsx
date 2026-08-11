@@ -6,6 +6,8 @@ import useTranslation from "next-translate/useTranslation";
 import { useCallback, useState } from "react";
 import { LuMoveUp, LuPlus, LuTimer } from "react-icons/lu";
 
+import { MAX_UPLOAD_SIZE } from "@/services/tusupload.service";
+
 import useObservationCreate from "../use-observation-resources";
 
 const DropTargetBox = styled.div`
@@ -72,6 +74,7 @@ export default function DropTarget() {
         onFileChange={handleFileChange}
         width="full"
         height="full"
+        maxFileSize={MAX_UPLOAD_SIZE}
       >
         <FileUpload.HiddenInput />
 

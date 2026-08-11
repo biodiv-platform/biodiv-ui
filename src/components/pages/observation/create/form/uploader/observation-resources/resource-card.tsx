@@ -28,7 +28,7 @@ const ImageBox = styled.div`
     height: 100%;
     width: 100%;
   }
-  svg {
+  .icon {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -70,7 +70,8 @@ export const getImageThumb = (resource, userID) => {
 };
 
 export default function ResourceCard({ resource, index }: IResourceCardProps) {
-  const { removeObservationAsset, updateObservationAsset, licensesList } = useObservationCreate();
+  const { removeObservationAsset, updateObservationAsset, licensesList, uploadProgress } =
+    useObservationCreate();
   const { user } = useGlobalState();
 
   const imageURL = useMemo(() => getImageThumb(resource, user?.id), []);
@@ -95,7 +96,7 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
           fallbackSrc={getFallbackByMIME(resource.type)}
           src={imageURL}
         />
-        <StatusIcon type={resource.status} />
+        <StatusIcon type={resource.status} progress={uploadProgress?.[resource.hashKey]} />
       </ImageBox>
       <CloseButton
         position="absolute"

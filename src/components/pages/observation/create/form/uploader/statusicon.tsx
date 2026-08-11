@@ -1,8 +1,9 @@
+import { AbsoluteCenter, ProgressCircle } from "@chakra-ui/react";
 import Tooltip from "@components/@core/tooltip";
 import { AssetStatus } from "@interfaces/custom";
 import useTranslation from "next-translate/useTranslation";
 
-export default function StatusIcon({ type }: { type?: AssetStatus }) {
+export default function StatusIcon({ type, progress }: { type?: AssetStatus; progress?: number }) {
   const { t } = useTranslation();
 
   switch (type) {
@@ -32,6 +33,22 @@ export default function StatusIcon({ type }: { type?: AssetStatus }) {
       );
 
     case AssetStatus.InProgress:
+      if (progress != null) {
+        return (
+          <Tooltip title={`${t("form:upload_status.uploading")} ${progress}%`} showArrow={true}>
+            <ProgressCircle.Root className="icon" size="sm" value={progress} colorPalette="blue">
+              <ProgressCircle.Circle>
+                <ProgressCircle.Track />
+                <ProgressCircle.Range />
+              </ProgressCircle.Circle>
+              <AbsoluteCenter>
+                <ProgressCircle.ValueText fontSize="0.55rem">{progress}%</ProgressCircle.ValueText>
+              </AbsoluteCenter>
+            </ProgressCircle.Root>
+          </Tooltip>
+        );
+      }
+
       return (
         <Tooltip title={t("form:upload_status.uploading")} showArrow={true}>
           <svg

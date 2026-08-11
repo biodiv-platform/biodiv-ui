@@ -6,6 +6,8 @@ import useTranslation from "next-translate/useTranslation";
 import { useCallback, useState } from "react";
 import { LuTimer } from "react-icons/lu";
 
+import { MAX_UPLOAD_SIZE } from "@/services/tusupload.service";
+
 import useObservationCreate from "../use-observation-resources";
 
 const ACCEPT_STRING =
@@ -82,6 +84,7 @@ export default function DropTarget({ assetsSize }) {
       width="full"
       maxFiles={10}
       style={{ gridColumn: !hasAssets ? "1/6" : "auto" }}
+      maxFileSize={MAX_UPLOAD_SIZE}
     >
       <FileUpload.HiddenInput />
 

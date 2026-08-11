@@ -43,7 +43,8 @@ const Checkbox = (props: any) => {
 
   const imageURL = useMemo(() => getImageThumb(props.asset, user?.id), []);
 
-  const { addToObservationAssets, removeObservationAsset, removeAsset } = useObservationCreate();
+  const { addToObservationAssets, removeObservationAsset, removeAsset, uploadProgress } =
+    useObservationCreate();
 
   const handleOnChange = (e) => {
     e.target.checked
@@ -82,7 +83,7 @@ const Checkbox = (props: any) => {
           >
             <DeleteIcon />
           </IconButton>
-          <StatusIcon type={props.asset.status} />
+          <StatusIcon type={props.asset.status} progress={uploadProgress?.[props.asset.hashKey]} />
           <ImageWithFallback
             style={{ filter: "none" }}
             boxSize="full"

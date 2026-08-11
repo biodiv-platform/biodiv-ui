@@ -1,4 +1,4 @@
-import { Tabs } from "@chakra-ui/react";
+import { Badge, Tabs } from "@chakra-ui/react";
 import { useIsMount } from "@hooks/use-is-mount";
 import useTranslation from "next-translate/useTranslation";
 import { useEffect, useState } from "react";
@@ -11,7 +11,7 @@ import MyDocumentUploads from "./my-uploads";
 export default function DocumentUploaderTabs({ onChange, externalUrl }) {
   const { t } = useTranslation();
   const [tabIndex, setTabIndex] = useState(externalUrl ? "externalUrl" : "selectedDocument");
-  const { selectedDocument } = useManageDocument();
+  const { selectedDocument, documentList } = useManageDocument();
   const isMount = useIsMount();
 
   useEffect(() => {
@@ -29,6 +29,11 @@ export default function DocumentUploaderTabs({ onChange, externalUrl }) {
         </Tabs.Trigger>
         <Tabs.Trigger value="draftmedia" disabled={externalUrl}>
           ☁️ {t("document:upload.my_uploads")}
+          {(documentList ?? []).length > 0 && (
+            <Badge variant="solid" colorPalette="red" borderRadius="full">
+              {(documentList ?? []).length}
+            </Badge>
+          )}
         </Tabs.Trigger>
         <Tabs.Trigger value="externalUrl">🌎{t("document:upload.url")}</Tabs.Trigger>
       </Tabs.List>
