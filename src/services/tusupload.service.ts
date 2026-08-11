@@ -8,6 +8,8 @@ import * as tus from "tus-js-client";
 // Stay comfortably under Cloudflare's 100MB proxy limit per request/chunk.
 const CHUNK_SIZE = 50 * 1024 * 1024; // 50MB
 
+export const MAX_UPLOAD_SIZE = 3 * 1024 * 1024 * 1024; // 3 GB
+
 // Files at or above this size go through tus; smaller ones keep using the
 // existing multipart POST endpoints unchanged.
 export const TUS_THRESHOLD_BYTES = 90 * 1024 * 1024; // 90MB

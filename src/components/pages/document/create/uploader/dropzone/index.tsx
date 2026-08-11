@@ -1,6 +1,8 @@
 import { Box, FileUpload } from "@chakra-ui/react";
 import { useCallback, useState } from "react";
 
+import { MAX_UPLOAD_SIZE } from "@/services/tusupload.service";
+
 import useManageDocument from "../document-upload-provider";
 import DocumentPreview from "./document-preview";
 import UploadDragging from "./upload-dragging";
@@ -43,6 +45,7 @@ export default function DocumentDropzone() {
         onFileChange={handleFileChange}
         maxFiles={1}
         width="full"
+        maxFileSize={MAX_UPLOAD_SIZE}
       >
         <FileUpload.HiddenInput />
 

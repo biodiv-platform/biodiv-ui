@@ -5,7 +5,7 @@ import useTranslation from "next-translate/useTranslation";
 import { useCallback, useState } from "react";
 
 import UploadProcessing from "@/components/pages/document/create/uploader/dropzone/upload-processing";
-import { axTusUploadObservationResource } from "@/services/tusupload.service";
+import { axTusUploadObservationResource, MAX_UPLOAD_SIZE } from "@/services/tusupload.service";
 
 const accept = {
   "application/vnd.ms-excel": [".xls"],
@@ -70,6 +70,7 @@ export default function DropTarget({
       onFileChange={handleFileChange}
       maxFiles={1}
       width="full"
+      maxFileSize={MAX_UPLOAD_SIZE}
     >
       <FileUpload.HiddenInput />
 
