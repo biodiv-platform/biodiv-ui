@@ -22,7 +22,10 @@ const NameTable = ({
   selectedColumn,
   uploadResult,
   setFinalResult,
-  setUploadResult
+  setUploadResult,
+  synonym = false,
+  cname = false,
+  hierarchy = false
 }) => {
   const [currentIndex, setCurrentIndex] = useState<number>();
   const { open, onClose, onOpen } = useDisclosure();
@@ -31,57 +34,74 @@ const NameTable = ({
     <table className="table table-bordered">
       <thead>
         <tr>
-          <th>{t("taxon:name_matching.species_name")}</th>
+          {!hierarchy && <th>{t("taxon:name_matching.species_name")}</th>}
+          {(synonym || cname || hierarchy) && <th>Source</th>}
+          {cname && <th>Language</th>}
+          {hierarchy && <th>Rank</th>}
+          {hierarchy && <th>Name</th>}
           <th>{t("taxon:name_matching.name_matches")}</th>
         </tr>
       </thead>
       <tbody>
         {finalResult &&
           finalResult.map((item, index) => (
-            <tr>
-              <td>
-                <SimpleActionButton
-                  onClick={() => {
-                    setCurrentIndex(index);
-                    onOpen();
-                  }}
-                  icon={<LuDelete />}
-                  title={"Delete Scientific Name"}
-                  colorPalette="red"
-                />
-                <DialogRoot open={open} onOpenChange={onClose}>
-                  <DialogBackdrop>
-                    <DialogContent>
-                      <DialogHeader fontSize="lg" fontWeight="bold">
-                        🗑️ {t("taxon:name_matching.delete_title")}
-                      </DialogHeader>
-                      <DialogBody>{t("taxon:name_matching.delete_description")}</DialogBody>
+            <tr key={`${item[0]}-${index}`}>
+              {!hierarchy && (
+                <td>
+                  <SimpleActionButton
+                    onClick={() => {
+                      setCurrentIndex(index);
+                      onOpen();
+                    }}
+                    icon={<LuDelete />}
+                    title={"Delete Scientific Name"}
+                    colorPalette="red"
+                  />
+                  <DialogRoot open={open} onOpenChange={onClose}>
+                    <DialogBackdrop>
+                      <DialogContent>
+                        <DialogHeader fontSize="lg" fontWeight="bold">
+                          🗑️ {t("taxon:name_matching.delete_title")}
+                        </DialogHeader>
+                        <DialogBody>{t("taxon:name_matching.delete_description")}</DialogBody>
 
-                      <DialogFooter>
-                        <Button onClick={onClose}>{t("taxon:name_matching.cancel")}</Button>
-                        <Button
-                          colorPalette="red"
-                          onClick={() => {
-                            if (currentIndex != undefined) {
-                              setUploadResult(
-                                uploadResult.filter((_, i) => i != finalResult[currentIndex][4])
-                              );
-                              setFinalResult(finalResult.filter((_, i) => i !== currentIndex));
-                              onClose();
-                            }
-                          }}
-                          ml={3}
-                        >
-                          {t("taxon:name_matching.delete")}
-                        </Button>
-                      </DialogFooter>
-                    </DialogContent>
-                  </DialogBackdrop>
-                </DialogRoot>
-                {selectedColumn !== null && item[0]?.slice(0, -1).split("|")[selectedColumn]}
-              </td>
+                        <DialogFooter>
+                          <Button onClick={onClose}>{t("taxon:name_matching.cancel")}</Button>
+                          <Button
+                            colorPalette="red"
+                            onClick={() => {
+                              if (currentIndex != undefined) {
+                                {
+                                  !cname &&
+                                    setUploadResult(
+                                      uploadResult.filter(
+                                        (_, i) => i != finalResult[currentIndex][4]
+                                      )
+                                    );
+                                }
+                                setFinalResult(finalResult.filter((_, i) => i !== currentIndex));
+                                onClose();
+                              }
+                            }}
+                            ml={3}
+                          >
+                            {t("taxon:name_matching.delete")}
+                          </Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </DialogBackdrop>
+                  </DialogRoot>
+                  {selectedColumn !== null && (synonym || cname)
+                    ? item[0].split("|")[0]
+                    : item[0]?.slice(0, -1).split("|")[selectedColumn]}
+                </td>
+              )}
+              {(synonym || cname || hierarchy) && <td>{item[0].split("|")[1]}</td>}
+              {cname && <td>{item[0].split("|")[2]}</td>}
+              {hierarchy && <td>{item[0].split("|")[2]}</td>}
+              {hierarchy && <td>{item[0].split("|")[0]}</td>}
               <td>
-                {item[3] == false && (
+                {!cname && item[3] == false && (
                   <>
                     <Text m={4}>
                       <Image
@@ -89,7 +109,6 @@ const NameTable = ({
                         objectFit="contain"
                         src={getLocalIcon(item[1]?.group_name)}
                         alt={item[1]?.group_name}
-                        // ignoreFallback={true}
                       />
                       {item[1]?.name}
                       <Badge ml={2}>{item[1]?.rank}</Badge>
@@ -138,21 +157,22 @@ const NameTable = ({
                     )}
                   </>
                 )}
-                {item[2] && item[3] == false && (
+                {!cname && item[2] && item[3] == false && (
                   <Alert bg="blue.50">
                     <Text>{t("taxon:name_matching.species_page_exist")}</Text>
                   </Alert>
                 )}
-                {!item[2] && item[3] == false && uploadResult[item[4]][1].length != 0 && (
+                {!cname && !item[2] && item[3] == false && uploadResult[item[4]][1].length != 0 && (
                   <Alert bg="red.500" color="white">
                     <Text>{t("taxon:name_matching.no_species_page")}</Text>
                   </Alert>
                 )}
-                {item[3] == true && (
+                {!cname && item[3] == true && (
                   <Box>
                     {uploadResult &&
                       uploadResult[item[4]][1].map((option) => (
                         <Box
+                          key={option["id"]}
                           padding={4}
                           _hover={{
                             bg: "lightgrey"
@@ -187,6 +207,17 @@ const NameTable = ({
                         </Box>
                       ))}
                   </Box>
+                )}
+                {cname && (
+                  <Text
+                    float="right"
+                    color={Object.entries(item[1]).length > 0 ? "green.700" : "red.700"}
+                    fontWeight="bold"
+                  >
+                    {Object.entries(item[1]).length > 0
+                      ? "Match Found"
+                      : t("taxon:name_matching.no_match")}
+                  </Text>
                 )}
               </td>
             </tr>
