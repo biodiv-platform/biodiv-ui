@@ -1,33 +1,31 @@
 import { Button } from "@chakra-ui/react";
-import SITE_CONFIG from "@configs/site-config";
+import { useGoogleLogin } from "@react-oauth/google";
 import notification from "@utils/notification";
-import GoogleLoginI from "react-google-login";
-
-const GoogleLogin: any = GoogleLoginI;
 
 export default function Oauth({ onSuccess, text, mb = 4 }) {
-  const onFailure = ({ error }) => {
-    notification(error);
-  };
+  const login = useGoogleLogin({
+    flow: "implicit",
+    onSuccess: async (tokenResponse) => {
+      try {
+        const res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+          headers: { Authorization: `Bearer ${tokenResponse.access_token}` }
+        });
+        const profile = await res.json();
+
+        onSuccess({
+          profileObj: { email: profile.email, name: profile.name },
+          tokenId: tokenResponse.access_token
+        });
+      } catch (err) {
+        notification("Google login failed");
+      }
+    },
+    onError: () => notification("Google login failed")
+  });
 
   return (
-    <GoogleLogin
-      clientId={SITE_CONFIG.TOKENS.OAUTH_GOOGLE}
-      render={(renderProps) => (
-        <Button
-          w="full"
-          mb={mb}
-          onClick={renderProps.onClick}
-          disabled={renderProps.disabled}
-          colorPalette="blue"
-        >
-          {text}
-        </Button>
-      )}
-      onAutoLoadFinished={() => null}
-      onSuccess={onSuccess}
-      onFailure={onFailure}
-      cookiePolicy="single_host_origin"
-    />
+    <Button w="full" mb={mb} onClick={() => login()} colorPalette="blue">
+      {text}
+    </Button>
   );
 }
