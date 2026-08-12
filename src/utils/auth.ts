@@ -135,9 +135,9 @@ export const waitForAuth = (): Promise<Record<string, unknown>> => {
   });
 };
 
-export const adminOrAuthor = (authorId: number | string, ctx?: any) => {
+export const adminOrAuthor = (authorId: number | string | undefined, ctx?: any) => {
   const u = getParsedUser(ctx);
-  return u?.id === authorId || hasAccess([Role.Admin], ctx);
+  return (authorId != null && u?.id === authorId) || hasAccess([Role.Admin], ctx);
 };
 
 export const CACHE_WHITELIST = ["v2", "mapbox-tiles", "workbox"];
