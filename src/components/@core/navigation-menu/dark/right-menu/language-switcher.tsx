@@ -1,6 +1,6 @@
 import { Button, Flex } from "@chakra-ui/react";
 import SITE_CONFIG from "@configs/site-config";
-import { getCookies, setCookie } from "cookies-next";
+import { getClientCookies, setClientCookie } from "@utils/auth";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
 import { useEffect } from "react";
@@ -14,7 +14,7 @@ export default function LanguageSwitcher() {
   const { lang } = useTranslation();
 
   const changeLanguage = (language: string, force?: boolean) => {
-    setCookie(LOCALE_COOKIE, language, {
+    setClientCookie(LOCALE_COOKIE, language, {
       maxAge: 100 * 24 * 60 * 60,
       path: "/"
     });
@@ -25,7 +25,7 @@ export default function LanguageSwitcher() {
   };
 
   useEffect(() => {
-    const cookies = getCookies() ?? {};
+    const cookies = getClientCookies();
     if (!cookies[LOCALE_COOKIE]) {
       changeLanguage(lang);
     }

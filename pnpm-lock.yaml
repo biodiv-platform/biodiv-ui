@@ -83,9 +83,9 @@ importers:
       boring-avatars:
         specifier: ^1.7.0
         version: 1.11.2
-      cookies-next:
-        specifier: ^6.1.1
-        version: 6.1.1(next@16.3.0(@babel/core@7.29.7)(@types/node@18.11.10)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
+      cookie:
+        specifier: ^2.0.1
+        version: 2.0.1
       d3-array:
         specifier: ^3.2.4
         version: 3.2.4
@@ -2376,15 +2376,9 @@ packages:
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
 
-  cookie@1.1.1:
-    resolution: {integrity: sha512-ei8Aos7ja0weRpFzJnEA9UHJ/7XQmqglbRwnf2ATjcB9Wq874VKH9kfjjirM6UhU2/E5fFYadylyhFldcqSidQ==}
-    engines: {node: '>=18'}
-
-  cookies-next@6.1.1:
-    resolution: {integrity: sha512-8JZBc4IN2m8xqOXyG7uicth6yH3SvynAUGSeV/FQ5lcEclzNGoR0+YCjySdn8r6keZdRyGQr4YJ8qy8F+Jq5uw==}
-    peerDependencies:
-      next: '>=15.0.0'
-      react: '>= 16.8.0'
+  cookie@2.0.1:
+    resolution: {integrity: sha512-yuToqVvRrj6pfDXREyQAAv8SkAEk/8GS3jQRTiUMm66TVtBYmqQeoEjL2Lmq8Rpo6271vH76InTChTitEAm65w==}
+    engines: {node: '>=22'}
 
   core-util-is@1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
@@ -7887,13 +7881,7 @@ snapshots:
 
   convert-source-map@2.0.0: {}
 
-  cookie@1.1.1: {}
-
-  cookies-next@6.1.1(next@16.3.0(@babel/core@7.29.7)(@types/node@18.11.10)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7):
-    dependencies:
-      cookie: 1.1.1
-      next: 16.3.0(@babel/core@7.29.7)(@types/node@18.11.10)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      react: 19.2.7
+  cookie@2.0.1: {}
 
   core-util-is@1.0.3: {}
 

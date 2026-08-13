@@ -3,12 +3,14 @@ import { Role } from "@interfaces/custom";
 import { TOKEN } from "@static/constants";
 import { AUTHWALL } from "@static/events";
 import B64URL from "base64-url";
-import { deleteCookie, getCookies, setCookie } from "cookies-next";
+import { parseCookie, stringifySetCookie } from "cookie";
 import JWTDecode from "jwt-decode";
 import { emit } from "react-gbus";
 
 /**
- * Extracts base domain name from URL (client side only)
+ * This extracts base domain name from URL
+ *
+ * @warning client side only
  */
 const getDomain = () => {
   const domain = /[a-z0-9][a-z0-9\-]*[a-z0-9]\.[a-z\.]{2,6}$/i;
@@ -23,39 +25,70 @@ const getDomain = () => {
   return pathMatched ? pathMatched[0] : "";
 };
 
-// Helper to attach Next.js context (req/res) when called in SSR
-const getSSRContext = (ctx?: any) => (ctx ? { req: ctx.req, res: ctx.res } : {});
+const setCookie = (ctx, name: string, value: string, opts: any) => {
+  const serialized = stringifySetCookie({ name, value, ...opts });
 
-export const setCookies = (tokens: any, ctx?: any) => {
+  if (ctx?.res) {
+    const existing = ctx.res.getHeader("Set-Cookie");
+    const existingArr = existing ? (Array.isArray(existing) ? existing : [existing]) : [];
+    ctx.res.setHeader("Set-Cookie", [...existingArr, serialized]);
+    return;
+  }
+
+  if (typeof document !== "undefined") {
+    document.cookie = serialized;
+  }
+};
+
+const destroyCookie = (ctx, name: string, opts: any) => {
+  setCookie(ctx, name, "", { ...opts, maxAge: 0 });
+};
+
+const parseCookies = (ctx?): Record<string, string> => {
+  const header = ctx?.req ? ctx.req.headers?.cookie || "" : document?.cookie || "";
+  return parseCookie(header) as Record<string, string>;
+};
+
+export const getClientCookies = (): Record<string, string> => {
+  return parseCookie(document?.cookie || "") as Record<string, string>;
+};
+
+export const setClientCookie = (name: string, value: string, opts: any = {}) => {
+  document.cookie = stringifySetCookie({ name, value, ...opts });
+};
+
+// sets/re-sets cookies on development mode
+export const setCookies = (tokens, ctx?) => {
   const cookieOpts = {
     maxAge: 60 * 60 * 24 * 7, // 1 Week
     path: "/",
-    domain: getDomain(),
-    ...getSSRContext(ctx)
+    domain: getDomain()
   };
 
-  setCookie(TOKEN.BATOKEN, tokens.access_token, cookieOpts);
-  setCookie(TOKEN.BRTOKEN, tokens.refresh_token, cookieOpts);
+  setCookie(ctx, TOKEN.BATOKEN, tokens.access_token, cookieOpts);
+  setCookie(ctx, TOKEN.BRTOKEN, tokens.refresh_token, cookieOpts);
 };
 
-export const removeCookies = (ctx?: any) => {
+export const removeCookies = () => {
   const cookieOpts = {
     path: "/",
-    domain: getDomain(),
-    ...getSSRContext(ctx)
+    domain: getDomain()
   };
 
-  deleteCookie(TOKEN.BATOKEN, cookieOpts);
-  deleteCookie(TOKEN.BRTOKEN, cookieOpts);
+  destroyCookie(null, TOKEN.BATOKEN, cookieOpts);
+  destroyCookie(null, TOKEN.BRTOKEN, cookieOpts);
 };
 
-export const forwardRedirect = async (forward?: string) => {
+export const forwardRedirect = async (forward?) => {
+  // remove cache
   await removeCache();
+
+  // redirect
   window.location.assign(B64URL.decode(forward || "Lw"));
 };
 
-export const getParsedUser = (ctx?: any) => {
-  const cookies = getCookies(getSSRContext(ctx));
+export const getParsedUser = (ctx?) => {
+  const cookies = parseCookies(ctx);
   const accessToken = cookies?.[TOKEN.BATOKEN];
   const refreshToken = cookies?.[TOKEN.BRTOKEN];
 
@@ -72,12 +105,12 @@ export const getParsedUser = (ctx?: any) => {
   return {};
 };
 
-export const isTokenExpired = (exp: number) => {
+export const isTokenExpired = (exp) => {
   const currentTime = Date.now() / 1000;
   return exp ? exp < currentTime : true;
 };
 
-export const hasAccess = (allowedRoles: Role[], ctx?: any): boolean => {
+export const hasAccess = (allowedRoles: Role[], ctx?): boolean => {
   const u = getParsedUser(ctx);
 
   if (allowedRoles.includes(Role.Any)) {
@@ -92,6 +125,10 @@ export const hasAccess = (allowedRoles: Role[], ctx?: any): boolean => {
   return false;
 };
 
+/**
+ * Manually unregisters running service worker(s)
+ * After this do hard redirect so service worker can reregister itself and precache routes
+ */
 export const unregisterSW = async () => {
   const registrations = await navigator.serviceWorker.getRegistrations();
   for (const registration of registrations) {
@@ -99,6 +136,9 @@ export const unregisterSW = async () => {
   }
 };
 
+/**
+ * Delete caches from browser `Cache`
+ */
 export const removeCache = async (whitelist = [] as string[]) => {
   try {
     if (process.env.NODE_ENV !== "production" || !SITE_CONFIG.OFFLINE.ACTIVE) {
@@ -128,6 +168,11 @@ export const removeCache = async (whitelist = [] as string[]) => {
   }
 };
 
+/**
+ * 🌈 On the spot authorization wrapped in a one magical promise
+ *
+ * @returns {Promise<Record<string, unknown>>}
+ */
 export const waitForAuth = (): Promise<Record<string, unknown>> => {
   return new Promise((resolve: any, reject) => {
     const u = getParsedUser();
@@ -135,15 +180,16 @@ export const waitForAuth = (): Promise<Record<string, unknown>> => {
   });
 };
 
-export const adminOrAuthor = (authorId: number | string | undefined, ctx?: any) => {
+export const adminOrAuthor = (authorId, ctx?) => {
   const u = getParsedUser(ctx);
-  return (authorId != null && u?.id === authorId) || hasAccess([Role.Admin], ctx);
+  return u?.id === authorId || hasAccess([Role.Admin], ctx);
 };
 
 export const CACHE_WHITELIST = ["v2", "mapbox-tiles", "workbox"];
+
 const CACHE_MANUAL = "v2-light-cache";
 
-export const preCacheRoutes = async (currentGroup: any) => {
+export const preCacheRoutes = async (currentGroup) => {
   try {
     const cache = await window.caches.open(CACHE_MANUAL);
     await cache.add(`${currentGroup.webAddress}/observation/create`);
