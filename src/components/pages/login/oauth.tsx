@@ -1,31 +1,39 @@
-import { Button } from "@chakra-ui/react";
-import { useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 import notification from "@utils/notification";
+import jwtDecode from "jwt-decode";
 
-export default function Oauth({ onSuccess, text, mb = 4 }) {
-  const login = useGoogleLogin({
-    flow: "implicit",
-    onSuccess: async (tokenResponse) => {
-      try {
-        const res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
-          headers: { Authorization: `Bearer ${tokenResponse.access_token}` }
-        });
-        const profile = await res.json();
+interface IGoogleClaims {
+  email: string;
+  name: string;
+}
 
-        onSuccess({
-          profileObj: { email: profile.email, name: profile.name },
-          tokenId: tokenResponse.access_token
-        });
-      } catch (err) {
-        notification("Google login failed");
-      }
-    },
-    onError: () => notification("Google login failed")
-  });
-
+export default function Oauth({ onSuccess }) {
   return (
-    <Button w="full" mb={mb} onClick={() => login()} colorPalette="blue">
-      {text}
-    </Button>
+    <GoogleLogin
+      theme="filled_blue"
+      text="signin_with"
+      shape="rectangular"
+      width="100%"
+      onSuccess={(credentialResponse) => {
+        try {
+          const credential = credentialResponse.credential;
+
+          if (!credential) {
+            notification("Google login failed: missing credential");
+            return;
+          }
+
+          const claims = jwtDecode<IGoogleClaims>(credential);
+
+          onSuccess({
+            profileObj: { email: claims.email, name: claims.name },
+            tokenId: credential
+          });
+        } catch (err) {
+          notification("Google login failed");
+        }
+      }}
+      onError={() => notification("Google login failed")}
+    />
   );
 }
