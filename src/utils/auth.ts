@@ -45,12 +45,17 @@ const destroyCookie = (ctx, name: string, opts: any) => {
 };
 
 const parseCookies = (ctx?): Record<string, string> => {
-  const header = ctx?.req ? ctx.req.headers?.cookie || "" : document?.cookie || "";
+  const header = ctx?.req
+    ? ctx.req.headers?.cookie || ""
+    : typeof document !== "undefined"
+    ? document.cookie || ""
+    : "";
   return parseCookie(header) as Record<string, string>;
 };
 
 export const getClientCookies = (): Record<string, string> => {
-  return parseCookie(document?.cookie || "") as Record<string, string>;
+  const header = typeof document !== "undefined" ? document.cookie || "" : "";
+  return parseCookie(header) as Record<string, string>;
 };
 
 export const setClientCookie = (name: string, value: string, opts: any = {}) => {
