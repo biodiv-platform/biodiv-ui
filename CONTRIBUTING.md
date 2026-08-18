@@ -13,7 +13,7 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 
 Please do this checks before submitting any pull-request
 
-- you can try running `yarn lint` for style unification
+- you can try running `pnpm lint` for style unification
 - sort your translation JSON and imports in your component to reduce chance of merge conflict use http://novicelab.org/jsonabc/
 - all files and folders are to be named `kebab-case` except in `interfaces`
 - components should be named as `PascalCase` for example `<DownloadButton />`

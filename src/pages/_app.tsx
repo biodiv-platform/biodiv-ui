@@ -8,6 +8,7 @@ import NavigationMenuLight from "@components/@core/navigation-menu/light";
 import SITE_CONFIG from "@configs/site-config";
 import { GlobalStateProvider } from "@hooks/use-global-state";
 import { UserGroupIbp } from "@interfaces/observation";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { axGroupList } from "@services/app.service";
 import { getParsedUser } from "@utils/auth";
 import { absoluteUrl } from "@utils/basic";
@@ -76,30 +77,32 @@ function MainApp({
   }, [config.header]); // re-run if header is conditionally toggled per page
 
   return (
-    <BusProvider>
-      <ChakraProvider value={customTheme}>
-        <Toaster />
-        <GlobalStateProvider
-          initialState={{ user, domain, groups, currentGroup, languageId, announcement }}
-        >
-          <Metadata />
-          <div className="content">
-            {config.header && (
-              <div ref={headerRef}>
-                <NavigationMenuDark />
-                <NavigationMenuLight />
-                <Announcement />
+    <GoogleOAuthProvider clientId={SITE_CONFIG.TOKENS.OAUTH_GOOGLE}>
+      <BusProvider>
+        <ChakraProvider value={customTheme}>
+          <Toaster />
+          <GlobalStateProvider
+            initialState={{ user, domain, groups, currentGroup, languageId, announcement }}
+          >
+            <Metadata />
+            <div className="content">
+              {config.header && (
+                <div ref={headerRef}>
+                  <NavigationMenuDark />
+                  <NavigationMenuLight />
+                  <Announcement />
+                </div>
+              )}
+              <div id="main">
+                <Component {...pageProps} />
               </div>
-            )}
-            <div id="main">
-              <Component {...pageProps} />
             </div>
-          </div>
-          {config.footer && SITE_CONFIG.FOOTER.ACTIVE && <Footer />}
-          <AuthWall />
-        </GlobalStateProvider>
-      </ChakraProvider>
-    </BusProvider>
+            {config.footer && SITE_CONFIG.FOOTER.ACTIVE && <Footer />}
+            <AuthWall />
+          </GlobalStateProvider>
+        </ChakraProvider>
+      </BusProvider>
+    </GoogleOAuthProvider>
   );
 }
 
