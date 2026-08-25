@@ -1,0 +1,55 @@
+name: Release on version bump
+
+# Runs on every push to master. It only creates a release when
+# the "version" field in package.json actually changed in that push.
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - package.json
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # need full history to diff against the previous commit
+
+      - name: Get current version from package.json
+        id: current
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Get previous version from package.json
+        id: previous
+        run: |
+          # version of package.json as it was before this push's commits
+          PREV_VERSION=$(git show "${{ github.event.before }}:package.json" 2>/dev/null | node -p "JSON.parse(require('fs').readFileSync(0,'utf8')).version" 2>/dev/null || echo "")
+          echo "version=$PREV_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Compare versions
+        id: check
+        run: |
+          if [ "${{ steps.current.outputs.version }}" != "${{ steps.previous.outputs.version }}" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create tag + GitHub Release
+        if: steps.check.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="v${{ steps.current.outputs.version }}"
+          gh release create "$TAG" \
+            --title "$TAG" \
+            --generate-notes \
+            --target "${{ github.sha }}"
