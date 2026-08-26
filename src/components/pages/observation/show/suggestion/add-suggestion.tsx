@@ -150,7 +150,13 @@ export default function AddSuggestion({
     }
   });
 
-  const onCommonNameChange = ({ sLabel, sValue, lang, langId, groupId, updateScientific }) => {
+  const onCommonNameChange = (val) => {
+    if (!val) {
+      return;
+    }
+
+    const { sLabel, sValue, lang, langId, groupId, updateScientific } = val;
+
     if (langId) {
       langRef.current.onChange(
         { value: langId, label: lang },
@@ -165,7 +171,16 @@ export default function AddSuggestion({
     }
   };
 
-  const onScientificNameChange = ({ label, value, groupId, raw, source }) => {
+  const onScientificNameChange = (val) => {
+    if (!val) {
+      hForm.setValue("scientificNameTaxonId", null);
+      hForm.setValue("taxonScientificName", null);
+      hForm.setValue("source", null);
+      return;
+    }
+
+    const { label, value, groupId, raw, source } = val;
+
     if (value === label) {
       hForm.setValue("scientificNameTaxonId", null);
     }
