@@ -4,7 +4,6 @@ import {
   FileUpload,
   Flex,
   Heading,
-  Icon,
   Spinner,
   Tabs,
   Text,
@@ -18,7 +17,7 @@ import notification from "@utils/notification";
 import ExcelJS from "exceljs";
 import useTranslation from "next-translate/useTranslation";
 import { useCallback, useMemo, useState } from "react";
-import { LuChevronDown, LuCircleAlert } from "react-icons/lu";
+import { LuChevronDown } from "react-icons/lu";
 
 import { Alert } from "@/components/ui/alert";
 import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from "@/components/ui/menu";
@@ -95,8 +94,8 @@ export default function NameMatchingComponent({ ranks }) {
   const matchStats = useMemo(() => {
     const extractName = ([key]: [string, any]) =>
       activeTab == "names"
-        ? key.slice(0, -1).split("|")[selectedColumn ? selectedColumn : 0]
-        : key.split("|")[0];
+        ? key.slice(0, -1).split("#")[selectedColumn ? selectedColumn : 0]
+        : key.split("#")[0];
     const dedupe = (arr: [string, any][]) =>
       arr
         .map((item) => [item[0], extractName(item)] as [string, string])
@@ -168,7 +167,12 @@ export default function NameMatchingComponent({ ranks }) {
               }
             ]
           : []),
-        ...(synonym || cname || hierarchy ? [{ header: "Source", key: "Source" }] : []),
+        ...(synonym || cname || hierarchy
+          ? [
+              { header: "Source", key: "Source" },
+              { header: "Index", key: "Index" }
+            ]
+          : []),
         ...(hierarchy
           ? [
               { header: "Rank", key: "Rank" },
@@ -182,7 +186,10 @@ export default function NameMatchingComponent({ ranks }) {
         ...(!cname
           ? [
               { header: "GroupName", key: "GroupName" },
-              { header: "SpeciesId", key: "SpeciesId" }
+              { header: "SpeciesId", key: "SpeciesId" },
+              { header: "MatchedStatus", key: "MatchedStatus" },
+              { header: "MatchedPosition", key: "MatchedPosition" },
+              { header: "Hierarchy", key: "Hierarchy" }
             ]
           : [{ header: "Language", key: "Language" }])
       ];
@@ -200,7 +207,7 @@ export default function NameMatchingComponent({ ranks }) {
           if (synonym === false && cname === false && hierarchy === false) {
             for (let i = 0; i < headers.length; i++) {
               if (i != selectedColumn) {
-                row[headers[i]] = name[0].slice(0, -1).split("|")[i];
+                row[headers[i]] = name[0].slice(0, -1).split("#")[i];
               }
             }
           }
@@ -208,44 +215,64 @@ export default function NameMatchingComponent({ ranks }) {
             row[cname ? "CommonName" : "ScientificName"] = cname
               ? Object.entries(name[1]).length > 0
                 ? name[1]["name"]
-                : name[0].split("|")[0]
+                : name[0].split("#")[0]
               : name[1]["name"];
           }
           row[cname ? "CommonNameId" : "TaxonConceptId"] = name[1]["id"];
           if (!cname) {
             row["GroupName"] = name[1]["group_name"];
             row["SpeciesId"] = name[2];
+            row["MatchedStatus"] = name[1]["status"];
+            row["MatchedPosition"] = name[1]["position"];
+            const hierarchy = name[1]["hierarchy"];
+
+            const hier = Array.isArray(hierarchy)
+              ? hierarchy
+                  .map((item) => `${item.taxon_rank}:${item.taxon_name}#${item.taxon_id}`)
+                  .join("|")
+              : "";
+
+            row["Hierarchy"] = hier;
           } else {
             row["Language"] =
-              Object.entries(name[1]).length > 0 ? name[1]["lang"] : name[0].split("|")[2];
+              Object.entries(name[1]).length > 0 ? name[1]["lang"] : name[0].split("#")[2];
           }
           if (synonym || cname || hierarchy) {
             row["Source"] =
-              Object.entries(name[1]).length > 0 ? name[1]["source"] : name[0].split("|")[1];
+              Object.entries(name[1]).length > 0 ? name[1]["source"] : name[0].split("#")[1];
+            row["Index"] = synonym ? name[0].split("#")[2] : name[0].split("#")[3];
           }
           if (hierarchy) {
-            row["Rank"] = name[0].split("|")[2];
-            row["Name"] = name[0].split("|")[0];
+            row["Rank"] = name[0].split("#")[2];
+            row["Name"] = name[0].split("#")[0];
           }
-          worksheet.addRow(row);
+          if (cname && Object.entries(name[1]).length > 0 && filter != "Unmatched") {
+            worksheet.addRow(row);
+          } else if (cname && filter != "Matched") {
+            worksheet.addRow(row);
+          } else if (!cname) {
+            worksheet.addRow(row);
+          }
         } else if (name[1] == undefined && filter != "Matched") {
           const row: Record<string, any> = {};
           if (synonym === false && hierarchy === false) {
             for (let i = 0; i < headers.length; i++) {
               if (i != selectedColumn) {
-                row[headers[i]] = name[0].slice(0, -1).split("|")[i];
+                row[headers[i]] = name[0].slice(0, -1).split("#")[i];
               }
             }
-            row["ScientificName"] = name[0].slice(0, -1).split("|")[
+            row["ScientificName"] = name[0].slice(0, -1).split("#")[
               selectedColumn ? selectedColumn : 0
             ];
           } else if (hierarchy) {
-            row["Source"] = name[0].split("|")[1];
-            row["Rank"] = name[0].split("|")[2];
-            row["Name"] = name[0].split("|")[0];
+            row["Source"] = name[0].split("#")[1];
+            row["Index"] = name[0].split("#")[3];
+            row["Rank"] = name[0].split("#")[2];
+            row["Name"] = name[0].split("#")[0];
           } else {
-            row["ScientificName"] = name[0].split("|")[0];
-            row["Source"] = name[0].split("|")[1];
+            row["ScientificName"] = name[0].split("#")[0];
+            row["Source"] = name[0].split("#")[1];
+            row["Index"] = synonym ? name[0].split("#")[2] : name[0].split("#")[3];
           }
           worksheet.addRow(row);
         }
@@ -498,23 +525,6 @@ export default function NameMatchingComponent({ ranks }) {
               </Flex>
             </Flex>
             <Box mb={4}>
-              {matchStats.unmatched.length != 0 && (
-                <Box bg="red.500" color="white" p={4} borderRadius="md" boxShadow="md" mb={4}>
-                  <Text fontSize="md" fontWeight="bold">
-                    <Icon w={5} h={5} mr={4}>
-                      <LuCircleAlert />
-                    </Icon>
-                    {t("taxon:name_matching.warning_text")}
-                  </Text>
-                  {matchStats.unmatched.map(([key]) => (
-                    <Box ml={9} key={key}>
-                      {selectedColumn != null && activeTab == "names"
-                        ? key.slice(0, -1).split("|")[selectedColumn ? selectedColumn : 0]
-                        : key.split("|")[0]}
-                    </Box>
-                  ))}
-                </Box>
-              )}
               <Box mb={4} width="100%">
                 <NativeSelectRoot maxW="10rem" ml="auto">
                   <NativeSelectField
@@ -523,8 +533,12 @@ export default function NameMatchingComponent({ ranks }) {
                   >
                     <option value="All">{t("taxon:name_matching.all_filter")}</option>
                     <option value="Matched">{t("taxon:name_matching.matched_filter")}</option>
-                    <option value="Single Matched">{"Single Matched"}</option>
-                    <option value="Multiple Matched">{"Multiple Matched"}</option>
+                    {activeTab != "cname" && (
+                      <option value="Single Matched">{"Single Matched"}</option>
+                    )}
+                    {activeTab != "cname" && (
+                      <option value="Multiple Matched">{"Multiple Matched"}</option>
+                    )}
                     <option value="Unmatched">{t("taxon:name_matching.unmatched_filter")}</option>
                   </NativeSelectField>
                 </NativeSelectRoot>

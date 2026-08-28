@@ -30,6 +30,16 @@ const NameTable = ({
   const [currentIndex, setCurrentIndex] = useState<number>();
   const { open, onClose, onOpen } = useDisclosure();
   const { t } = useTranslation();
+
+  const getRowBg = (item) => {
+    if (cname) {
+      return Object.entries(item[1]).length > 0 ? "green.50" : "red.50";
+    }
+    const matchCount = uploadResult[item[4]]?.[1]?.length ?? 0;
+    if (matchCount === 0) return "red.50";
+    if (matchCount === 1) return "green.50";
+    return "yellow.50"; // multiple matches / ambiguous
+  };
   return (
     <table className="table table-bordered">
       <thead>
@@ -45,7 +55,7 @@ const NameTable = ({
       <tbody>
         {finalResult &&
           finalResult.map((item, index) => (
-            <tr key={`${item[0]}-${index}`}>
+            <tr key={`${item[0]}-${index}`} style={{ backgroundColor: `var(--chakra-colors-${getRowBg(item).replace(".", "-")})` }}>
               {!hierarchy && (
                 <td>
                   <SimpleActionButton
@@ -92,14 +102,14 @@ const NameTable = ({
                     </DialogBackdrop>
                   </DialogRoot>
                   {selectedColumn !== null && (synonym || cname)
-                    ? item[0].split("|")[0]
-                    : item[0]?.slice(0, -1).split("|")[selectedColumn]}
+                    ? item[0].split("#")[0]
+                    : item[0]?.slice(0, -1).split("#")[selectedColumn]}
                 </td>
               )}
-              {(synonym || cname || hierarchy) && <td>{item[0].split("|")[1]}</td>}
-              {cname && <td>{item[0].split("|")[2]}</td>}
-              {hierarchy && <td>{item[0].split("|")[2]}</td>}
-              {hierarchy && <td>{item[0].split("|")[0]}</td>}
+              {(synonym || cname || hierarchy) && <td>{item[0].split("#")[1]}</td>}
+              {cname && <td>{item[0].split("#")[2]}</td>}
+              {hierarchy && <td>{item[0].split("#")[2]}</td>}
+              {hierarchy && <td>{item[0].split("#")[0]}</td>}
               <td>
                 {!cname && item[3] == false && (
                   <>

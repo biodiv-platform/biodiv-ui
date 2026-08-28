@@ -153,7 +153,7 @@ export const WeekDays = ["Sat", "Fri", "Thu", "Wed", "Tue", "Mon", "Sun"];
 
 export const PREVENT_CLICK_TAGS = ["INPUT", "LABEL", "BUTTON"];
 
-export const REQUIRED_COLUMNS = ["ScientificName", "TaxonConceptId", "SpeciesId", "Contributor"];
+export const REQUIRED_COLUMNS = ["ScientificName", "TaxonConceptId", "SpeciesId"];
 
 export const CATEGORY_TYPE = [
   { label: "All", value: "All" },

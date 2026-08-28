@@ -239,3 +239,37 @@ export const axTaxonomyList = async (params) => {
     return { success: false, data: {} };
   }
 };
+
+export const axUploadBatchFile = async (formData) => {
+  try {
+    const { data } = await plainHttp.post(
+      `${ENDPOINT.TAXONOMY}/v1/taxonomy/upload/assign`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data" // Important for file uploads
+        }
+      }
+    );
+    return { success: true, data, error: null };
+  } catch (e) {
+    return { success: false, data: {}, error: e };
+  }
+};
+
+export const axBatchUpload = async (payload) => {
+  try {
+    const { data } = await plainHttp.post(
+      `${ENDPOINT.TAXONOMY}/v1/taxonomy/batchUpload`,
+      payload,
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    );
+    return { success: true, data, error: null };
+  } catch (e) {
+    return { success: false, data: {}, error: e };
+  }
+};
