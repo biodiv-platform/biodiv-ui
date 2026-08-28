@@ -38,7 +38,13 @@ export default function Recodata({ index }) {
   const commonRef: any = useRef(null);
   const [commonNameOptions, setCommonNameOptions] = useState<any[]>([]);
 
-  const onCommonNameChange = ({ sLabel, sValue, lang, langId, groupId, updateScientific }) => {
+  const onCommonNameChange = (val) => {
+    if (!val) {
+      return;
+    }
+
+    const { sLabel, sValue, lang, langId, groupId, updateScientific } = val;
+
     if (langId) {
       form.setValue(`o.${index}.obsvLanguageId`, { value: langId, label: lang });
     }
@@ -50,11 +56,20 @@ export default function Recodata({ index }) {
     }
   };
 
-  const onScientificNameChange = ({ label, value, groupId, raw }) => {
+  const onScientificNameChange = (val) => {
+    if (!val) {
+      form.setValue(`o.${index}.scientificNameTaxonId`, null);
+      form.setValue(`o.${index}.taxonScientificName`, null);
+      form.setValue(`o.${index}.acceptedId`, null);
+      return;
+    }
+
+    const { label, value, groupId, raw } = val;
     const acceptedNameId =
       Array.isArray(raw?.accepted_ids) && raw.accepted_ids.length > 0
         ? raw.accepted_ids[0]
         : raw?.id;
+
     if (value === label) {
       form.setValue(`o.${index}.scientificNameTaxonId`, null);
     }
@@ -63,7 +78,6 @@ export default function Recodata({ index }) {
       if (raw?.common_names) {
         setCommonNameOptions(raw.common_names.map((cn) => getCommonNameOption(cn, raw, false)));
       }
-
       form.setValue(`o.${index}.sGroup`, groupId);
     }
     form.setValue(`o.${index}.acceptedId`, acceptedNameId);
