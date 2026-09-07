@@ -23,11 +23,13 @@ async function tusUploadFile(
   fileName: string,
   module: string,
   hash: string,
-  onProgress?: (percent: number) => void
+  onProgress?: (percent: number) => void,
+  endpoint: string = `${ENDPOINT.FILES}/upload/tus`,
+  extraMetadata: Record<string, string> = {}
 ): Promise<any> {
   return new Promise((resolve, reject) => {
     const upload = new tus.Upload(blob, {
-      endpoint: `${ENDPOINT.FILES}/upload/tus`,
+      endpoint,
       chunkSize: CHUNK_SIZE,
       retryDelays: [0, 3000, 5000, 10000, 20000],
       removeFingerprintOnSuccess: true,
@@ -35,7 +37,8 @@ async function tusUploadFile(
         filename: fileName,
         filetype: blob.type,
         module,
-        hash
+        hash,
+        ...extraMetadata
       },
       onBeforeRequest: async (req) => {
         const token = await getBearerToken();
@@ -204,4 +207,35 @@ export const axTusBulkUpload = async (
     console.error("TUS Bulk Upload Error:", error);
     return { status: false, files: [] };
   }
+};
+
+/**
+ * Uploads one layer file (shp/dbf/shx/prj/csv/tif/sld). `hash` is shared across
+ * every file in one layer-upload attempt so naksha-integrator can land them in
+ * the same directory; `fileRole` tells it which piece this file is.
+ */
+export const axTusUploadLayerFile = async (
+  file: File,
+  hash: string,
+  fileRole: string,
+  onProgress?: (percent: number) => void
+) => {
+  return tusUploadFile(
+    file,
+    file.name,
+    "layer",
+    hash,
+    onProgress,
+    `${ENDPOINT.NAKSHA}/layer/upload/tus`,
+    { fileRole }
+  );
+};
+
+/**
+ * Called once, after all required files for the attempt have finished
+ * uploading and the form has been filled in. Sends only JSON — no file bytes.
+ */
+export const axFinalizeLayerUpload = async (hash: string, metadata: any) => {
+  const { data } = await http.post(`${ENDPOINT.NAKSHA}/layer/upload/${hash}`, metadata);
+  return data;
 };

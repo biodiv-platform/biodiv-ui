@@ -1,11 +1,26 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { nanoid } from "nanoid";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { useImmer } from "use-immer";
+
+import { axFinalizeLayerUpload, axTusUploadLayerFile } from "@/services/tusupload.service";
 
 import { RASTER_FILE_TYPES } from "./data";
 
 export enum MapFileType {
   raster = "RASTER",
   vector = "VECTOR"
+}
+
+export enum FileUploadStatus {
+  Idle = "idle",
+  Uploading = "uploading",
+  Done = "done",
+  Error = "error"
+}
+
+export interface FileUploadState {
+  status: FileUploadStatus;
+  percent: number;
 }
 
 export interface LayerUploadProps {
@@ -29,13 +44,27 @@ interface LayerUploadContextProps extends LayerUploadProps {
   shapeFiles;
   updateMapFile: (fileType, file, meta?) => void;
 
+  fileUploadState: Record<string, FileUploadState>;
+  canSubmit: boolean;
+
   uploadStatus;
   uploadLayer: (payload) => void;
 }
 
 const LayerUploadContext = createContext<LayerUploadContextProps>({} as LayerUploadContextProps);
 
+// Which file roles are mandatory before submit is allowed, per file type.
+const REQUIRED_ROLES: Record<MapFileType, string[]> = {
+  [MapFileType.vector]: ["shp", "dbf", "shx"],
+  [MapFileType.raster]: ["tif"]
+};
+
 export const LayerUploadProvider = (props: LayerUploadProps) => {
+  // One id per upload attempt — shared across every file so naksha-integrator
+  // can land them together and correlate them at submit time. Regenerated
+  // whenever the file-type tab is switched (old files are abandoned).
+  const hashRef = useRef(nanoid());
+
   const [canContinue, setCanContinue] = useState(false);
   const [screen, setScreen] = useState(0);
   const [uploadStatus, setUploadStatus] = useState<boolean | null>(null);
@@ -52,8 +81,10 @@ export const LayerUploadProvider = (props: LayerUploadProps) => {
     sld: { file: null, meta: {} }
   });
 
+  const [fileUploadState, setFileUploadState] = useImmer<Record<string, FileUploadState>>({});
+
   useEffect(() => {
-    if (shapeFiles.dbf.file && shapeFiles.dbf.file && shapeFiles.shx.file) {
+    if (shapeFiles.dbf.file && shapeFiles.shp.file && shapeFiles.shx.file) {
       setCanContinue(true);
     }
 
@@ -63,6 +94,9 @@ export const LayerUploadProvider = (props: LayerUploadProps) => {
   }, [shapeFiles, rasterFiles]);
 
   const changeMapFileType = (val) => {
+    // Abandon any in-flight/completed uploads for the old tab and start fresh —
+    // naksha-integrator will sweep the orphaned directory on its own schedule.
+    hashRef.current = nanoid();
     setShapeFiles({
       dbf: { file: null, meta: {} },
       shp: { file: null, meta: {} },
@@ -72,8 +106,38 @@ export const LayerUploadProvider = (props: LayerUploadProps) => {
       tif: { file: null, meta: {} },
       sld: { file: null, meta: {} }
     });
+    setFileUploadState({});
     setMapFileType(val);
   };
+
+  // Kicks off the tus upload for one file the moment it's dropped. Runs fully
+  // in parallel with the local shp/dbf parsing that populates the form below —
+  // neither one waits on the other.
+  const startFileUpload = (fileRole: string, file: File) => {
+    setFileUploadState((draft) => {
+      draft[fileRole] = { status: FileUploadStatus.Uploading, percent: 0 };
+    });
+
+    axTusUploadLayerFile(file, hashRef.current, fileRole, (percent) => {
+      setFileUploadState((draft) => {
+        if (draft[fileRole]) {
+          draft[fileRole].percent = percent;
+        }
+      });
+    })
+      .then(() => {
+        setFileUploadState((draft) => {
+          draft[fileRole] = { status: FileUploadStatus.Done, percent: 100 };
+        });
+      })
+      .catch((e) => {
+        console.error(e);
+        setFileUploadState((draft) => {
+          draft[fileRole] = { status: FileUploadStatus.Error, percent: 0 };
+        });
+      });
+  };
+
   const updateMapFile = (fileType, file, meta = {}) => {
     if (RASTER_FILE_TYPES.TIF.includes(fileType) || RASTER_FILE_TYPES.SLD.includes(fileType)) {
       setRasterFiles((_draft) => {
@@ -84,36 +148,20 @@ export const LayerUploadProvider = (props: LayerUploadProps) => {
         _draft[fileType] = { file, meta };
       });
     }
+    if (file) {
+      startFileUpload(fileType, file);
+    }
   };
+
+  // True once every mandatory file for the current tab has finished uploading.
+  const canSubmit = REQUIRED_ROLES[mapFileType].every(
+    (role) => fileUploadState[role]?.status === FileUploadStatus.Done
+  );
 
   const uploadLayer = async (metadata) => {
     setScreen(2);
     try {
-      const formData: any = new FormData();
-      const mapFiles = mapFileType === MapFileType.raster ? rasterFiles : shapeFiles;
-      //FormData append order must be maintained as below for both vector and raster file to successfully upload
-      formData.append(
-        "metadata",
-        new File([JSON.stringify(metadata)], "metadata.json", {
-          type: "application/json",
-          lastModified: new Date().getTime()
-        })
-      );
-      Object.keys(mapFiles)
-        .sort()
-        .map((type) => {
-          if (mapFiles?.[type]?.file) {
-            formData.append(type, mapFiles?.[type]?.file);
-          }
-        });
-
-      const response = await fetch(props.nakshaEndpoint, {
-        method: "POST",
-        body: formData,
-        headers: { Authorization: props.bearerToken }
-      });
-      const data = await response.json();
-
+      const data = await axFinalizeLayerUpload(hashRef.current, metadata);
       props.callback(true, data);
       setUploadStatus(true);
     } catch (e) {
@@ -137,6 +185,9 @@ export const LayerUploadProvider = (props: LayerUploadProps) => {
         rasterFiles,
         shapeFiles,
         updateMapFile,
+
+        fileUploadState,
+        canSubmit,
 
         mapFileType,
         setMapFileType: changeMapFileType,
