@@ -19,7 +19,15 @@ import notification, { NotificationType } from "@utils/notification";
 import ExcelJS from "exceljs";
 import useTranslation from "next-translate/useTranslation";
 import { Fragment, useCallback, useState } from "react";
-import { LuChevronDown, LuChevronRight, LuRepeat, LuTag } from "react-icons/lu";
+import {
+  LuChevronDown,
+  LuChevronRight,
+  LuMinus,
+  LuPlus,
+  LuRefreshCw,
+  LuRepeat,
+  LuTag
+} from "react-icons/lu";
 
 import { Alert } from "@/components/ui/alert";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -29,6 +37,77 @@ import ColumnMapper from "../../traits/common/column-mapper";
 
 const ACCEPT_STRING =
   "application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+// Central mapping so the action badge looks identical everywhere it's used
+// (main row, synonyms, common names).
+const ACTION_BADGE: Record<string, { label: string; colorPalette: string; icon: any }> = {
+  CREATE: { label: "Create", colorPalette: "green", icon: LuPlus },
+  UPDATE: { label: "Update", colorPalette: "blue", icon: LuRefreshCw },
+  NOOP: { label: "No change", colorPalette: "gray", icon: LuMinus },
+  ERROR: { label: "Error", colorPalette: "red", icon: LuMinus }
+};
+
+type FieldChange = { field: string; oldValue: string; newValue: string };
+
+function ActionBadge({
+  action,
+  changes,
+  size = "sm"
+}: {
+  action: string;
+  changes?: FieldChange[];
+  size?: "sm" | "xs";
+}) {
+  const config = ACTION_BADGE[action] ?? ACTION_BADGE.NOOP;
+  const hasChanges = action === "UPDATE" && changes && changes.length > 0;
+
+  const badge = (
+    <Badge
+      colorPalette={config.colorPalette}
+      variant="subtle"
+      borderRadius="full"
+      display="inline-flex"
+      alignItems="center"
+      gap={1}
+      px={2}
+      py={0.5}
+      fontSize={size === "xs" ? "10px" : "xs"}
+      cursor={hasChanges ? "default" : undefined}
+    >
+      <Icon as={config.icon} boxSize={3} />
+      {config.label}
+      {hasChanges && ` \u00b7 ${changes!.length}`}
+    </Badge>
+  );
+
+  if (!hasChanges) return badge;
+
+  return (
+    <Tooltip.Root openDelay={150}>
+      <Tooltip.Trigger asChild>{badge}</Tooltip.Trigger>
+      <Tooltip.Positioner>
+        <Tooltip.Content>
+          <VStack align="stretch" gap={1}>
+            {changes!.map((change, i) => (
+              <HStack key={i} gap={2} fontSize="xs" whiteSpace="nowrap">
+                <Text color="gray.300" flexShrink={0}>
+                  {change.field}:
+                </Text>
+                <Text color="gray.400" textDecoration="line-through">
+                  {change.oldValue || "—"}
+                </Text>
+                <Icon as={LuChevronRight} boxSize={3} color="gray.400" />
+                <Text color="green.300" fontWeight="medium">
+                  {change.newValue || "—"}
+                </Text>
+              </HStack>
+            ))}
+          </VStack>
+        </Tooltip.Content>
+      </Tooltip.Positioner>
+    </Tooltip.Root>
+  );
+}
 
 function SubRowGroup({ label, icon, items }: { label: string; icon: any; items: string[] }) {
   const [open, setOpen] = useState(false);
@@ -50,14 +129,16 @@ function SubRowGroup({ label, icon, items }: { label: string; icon: any; items: 
       </Collapsible.Trigger>
       <Collapsible.Content>
         <VStack align="stretch" gap={0} mt={2} borderLeft="2px solid" borderColor="gray.200" pl={2}>
-          {items.map((it, i) => (
-            <HStack key={i} justify="space-between" py={1} fontSize="xs">
-              <Text color="gray.600">{it.split("|")[0]}</Text>
-              <Text color={it.split("|")[1] == "null" ? "green.600" : "gray.600"}>
-                {it.split("|")[1] == "null" ? "CREATE" : "NOOP"}
-              </Text>
-            </HStack>
-          ))}
+          {items.map((it, i) => {
+            const [name, matchedId] = it.split("|");
+            const action = matchedId === "null" ? "CREATE" : "NOOP";
+            return (
+              <HStack key={i} justify="space-between" py={1.5} fontSize="xs">
+                <Text color="gray.700">{name}</Text>
+                <ActionBadge action={action} size="xs" />
+              </HStack>
+            );
+          })}
         </VStack>
       </Collapsible.Content>
     </Collapsible.Root>
@@ -97,21 +178,6 @@ export default function TaxonomyBatchUploadComponent() {
   const [headersMapping, setHeadersMapping] = useState<string[]>([]);
   const { open: isOpen1, onOpen: onOpen1, onClose: onClose1 } = useDisclosure();
   const [currentStep, setCurrentStep] = useState(1);
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "CREATE":
-        return "green.700";
-      case "UPDATE":
-        return "orange.700"; // Chakra uses "orange" not "amber"
-      case "NOOP":
-        return "gray.600";
-      case "ERROR":
-        return "red.700";
-      default:
-        return "gray.600";
-    }
-  };
 
   const options = [
     "ScientificName",
@@ -249,7 +315,10 @@ export default function TaxonomyBatchUploadComponent() {
 
   const buildAcceptedPayload = useCallback(() => {
     return uploadResult
-      .filter((item: any) => item["action"] === "CREATE" || item["action"] === "NOOP" || item["action"] === "UPDATE")
+      .filter(
+        (item: any) =>
+          item["action"] === "CREATE" || item["action"] === "NOOP" || item["action"] === "UPDATE"
+      )
       .map((item: any) => ({
         scientificName: item["scientificName"],
         status: item["status"],
@@ -355,99 +424,85 @@ export default function TaxonomyBatchUploadComponent() {
         <>
           <Box mb={4}>
             <Box mb={4} width="100%">
-              <table className="table table-bordered">
-                <thead>
-                  <tr>
-                    {<th>{t("taxon:name_matching.species_name")}</th>}
-                    {<th>Status</th>}
-                    {<th>Position</th>}
-                    {<th>Hierarchy</th>}
-                    {<th>Action</th>}
-                  </tr>
-                </thead>
-                <tbody>
-                  {uploadResult &&
-                    uploadResult.map((item, index) => (
-                      <tr style={{ borderWidth: "2px" }} key={index}>
-                        <td>
-                          <Box m={2}>
-                            {item["scientificName"]}
-                            {item["speciesId"] != null && (
-                              <Box mt={2}>
-                                <Text color={"blue.700"} fontWeight={"bold"}>
-                                  {t("taxon:name_matching.species_page_exist")}
-                                </Text>
-                              </Box>
-                            )}
-                            {item["synonyms"] && item["synonyms"].length > 0 && (
-                              <SubRowGroup
-                                label="Synonyms"
-                                icon={LuRepeat}
-                                items={item["synonyms"]}
-                              />
-                            )}
-                            {item["commonNames"] && item["commonNames"].length > 0 && (
-                              <SubRowGroup
-                                label="Common names"
-                                icon={LuTag}
-                                items={item["commonNames"]}
-                              />
-                            )}
+              <VStack align="stretch" gap={3}>
+                {uploadResult &&
+                  uploadResult.map((item, index) => {
+                    const hierarchyNodes = item["hierarchy"]?.split(";").filter(Boolean) ?? [];
+                    const changes:FieldChange[] = [];
+                    if (item["status"].includes("#")) {
+                      changes.push({ field: "Status", oldValue: item["status"].split("#")[0], newValue: item["status"].split("#")[1] });
+                    }
+                    if (item["position"].includes("#")) {
+                      changes.push({ field: "Position", oldValue: item["position"].split("#")[0], newValue: item["position"].split("#")[1] });
+                    }
+
+                    return (
+                      <Box
+                        key={index}
+                        borderWidth="1px"
+                        borderColor="gray.200"
+                        borderRadius="lg"
+                        p={4}
+                      >
+                        <Flex justify="space-between" align="flex-start" gap={3}>
+                          <Box>
+                            <Text fontWeight="medium">{item["scientificName"]}</Text>
                           </Box>
-                        </td>
-                        <td>
-                          <Badge ml={2} colorPalette={TAXON_BADGE_COLORS[item["status"]]}>
-                            {item["status"]}
-                          </Badge>
-                        </td>
-                        <td>
-                          <Badge ml={2} colorPalette={TAXON_BADGE_COLORS[item["position"]]}>
-                            {item["position"]}
-                          </Badge>
-                        </td>
-                        <td>
-                          <HStack gap={0} wrap="wrap">
-                            {item["hierarchy"]
-                              ?.split(";")
-                              .filter(Boolean)
-                              .map((node, i, arr) => {
-                                const [rank, rest] = node.split(":");
-                                const [name, id] = rest?.split("#") ?? [];
-                                return (
-                                  <Fragment key={i}>
-                                    <Tooltip.Root>
-                                      <Tooltip.Trigger asChild>
-                                        <Text as="span" cursor="default">
-                                          {name}
-                                        </Text>
-                                      </Tooltip.Trigger>
-                                      <Tooltip.Positioner>
-                                        <Tooltip.Content>
-                                          {rank}: {name} #{id}
-                                        </Tooltip.Content>
-                                      </Tooltip.Positioner>
-                                    </Tooltip.Root>
-                                    {i < arr.length - 1 && (
-                                      <Icon as={LuChevronRight} boxSize={3} mx={1} />
-                                    )}
-                                  </Fragment>
-                                );
-                              })}
+                          <HStack gap={1.5} flexShrink={0}>
+                            <Badge colorPalette={TAXON_BADGE_COLORS[item["status"].split("#")[0]]}>
+                              {item["status"].split("#")[0]}
+                            </Badge>
+                            <Badge
+                              colorPalette={TAXON_BADGE_COLORS[item["position"].split("#")[0]]}
+                            >
+                              {item["position"].split("#")[0]}
+                            </Badge>
+                            <ActionBadge action={item["action"]} changes={changes}/>
                           </HStack>
-                        </td>
-                        <td>
-                          <Text
-                            float="right"
-                            color={getStatusColor(item["action"])}
-                            fontWeight="bold"
-                          >
-                            {item["action"]}
-                          </Text>
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
+                        </Flex>
+
+                        {hierarchyNodes.length > 0 && (
+                          <HStack gap={0} wrap="wrap" fontSize="sm" color="gray.500">
+                            {hierarchyNodes.map((node, i, arr) => {
+                              const [rank, rest] = node.split(":");
+                              const [name, id] = rest?.split("#") ?? [];
+                              return (
+                                <Fragment key={i}>
+                                  <Tooltip.Root>
+                                    <Tooltip.Trigger asChild>
+                                      <Text as="span" cursor="default">
+                                        {name}
+                                      </Text>
+                                    </Tooltip.Trigger>
+                                    <Tooltip.Positioner>
+                                      <Tooltip.Content>
+                                        {rank}: {name} #{id}
+                                      </Tooltip.Content>
+                                    </Tooltip.Positioner>
+                                  </Tooltip.Root>
+                                  {i < arr.length - 1 && (
+                                    <Icon as={LuChevronRight} boxSize={3} mx={1} />
+                                  )}
+                                </Fragment>
+                              );
+                            })}
+                          </HStack>
+                        )}
+
+                        {item["synonyms"] && item["synonyms"].length > 0 && (
+                          <SubRowGroup label="Synonyms" icon={LuRepeat} items={item["synonyms"]} />
+                        )}
+                        {item["commonNames"] && item["commonNames"].length > 0 && (
+                          <SubRowGroup
+                            label="Common names"
+                            icon={LuTag}
+                            items={item["commonNames"]}
+                          />
+                        )}
+                      </Box>
+                    );
+                  })}
+              </VStack>
               <Box mt={4}>
                 <Checkbox
                   checked={termsAccepted}
