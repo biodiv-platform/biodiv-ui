@@ -231,11 +231,13 @@ export const axTusUploadLayerFile = async (
   );
 };
 
-/**
- * Called once, after all required files for the attempt have finished
- * uploading and the form has been filled in. Sends only JSON — no file bytes.
- */
-export const axFinalizeLayerUpload = async (hash: string, metadata: any) => {
-  const { data } = await http.post(`${ENDPOINT.NAKSHA}/layer/upload/${hash}`, metadata);
-  return data;
+export const axFinalizeLayerUpload = async (
+  hash: string,
+  metadata: any,
+  onStatus?: (message: string) => void
+) => {
+  const finalizeUrl = `${ENDPOINT.NAKSHA}/layer/upload/${hash}`;
+  await http.post(finalizeUrl, metadata);
+  onStatus?.("Importing layer\u2026 this can take a while for large files");
+  return pollForResult(finalizeUrl, 600); // up to ~5 min at 500ms/poll
 };
