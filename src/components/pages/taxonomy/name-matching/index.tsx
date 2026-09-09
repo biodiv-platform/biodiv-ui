@@ -189,7 +189,9 @@ export default function NameMatchingComponent({ ranks }) {
               { header: "SpeciesId", key: "SpeciesId" },
               { header: "MatchedStatus", key: "MatchedStatus" },
               { header: "MatchedPosition", key: "MatchedPosition" },
-              { header: "Hierarchy", key: "Hierarchy" }
+              { header: "Hierarchy", key: "Hierarchy" },
+              { header: "MatchedRank", key: "MatchedRank" },
+              { header: "MatchedAcceptedId", key: "MatchedAcceptedId" },
             ]
           : [{ header: "Language", key: "Language" }])
       ];
@@ -224,6 +226,7 @@ export default function NameMatchingComponent({ ranks }) {
             row["SpeciesId"] = name[2];
             row["MatchedStatus"] = name[1]["status"];
             row["MatchedPosition"] = name[1]["position"];
+            row["MatchedRank"] = name[1]["rank"];
             const hierarchy = name[1]["hierarchy"];
 
             const hier = Array.isArray(hierarchy)

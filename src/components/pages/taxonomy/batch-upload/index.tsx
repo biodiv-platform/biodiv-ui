@@ -52,15 +52,19 @@ type FieldChange = { field: string; oldValue: string; newValue: string };
 function ActionBadge({
   action,
   changes,
+  error,
   size = "sm"
 }: {
   action: string;
   changes?: FieldChange[];
+  error?: string;
   size?: "sm" | "xs";
 }) {
   const config = ACTION_BADGE[action] ?? ACTION_BADGE.NOOP;
   const hasChanges = action === "UPDATE" && changes && changes.length > 0;
-
+  const hasError = action === "ERROR" && !!error;
+  const hasTooltip = hasChanges || hasError;
+ 
   const badge = (
     <Badge
       colorPalette={config.colorPalette}
@@ -72,44 +76,60 @@ function ActionBadge({
       px={2}
       py={0.5}
       fontSize={size === "xs" ? "10px" : "xs"}
-      cursor={hasChanges ? "default" : undefined}
+      cursor={hasTooltip ? "default" : undefined}
     >
       <Icon as={config.icon} boxSize={3} />
       {config.label}
       {hasChanges && ` \u00b7 ${changes!.length}`}
     </Badge>
   );
-
-  if (!hasChanges) return badge;
-
+ 
+  if (!hasTooltip) return badge;
+ 
   return (
     <Tooltip.Root openDelay={150}>
       <Tooltip.Trigger asChild>{badge}</Tooltip.Trigger>
       <Tooltip.Positioner>
-        <Tooltip.Content>
-          <VStack align="stretch" gap={1}>
-            {changes!.map((change, i) => (
-              <HStack key={i} gap={2} fontSize="xs" whiteSpace="nowrap">
-                <Text color="gray.300" flexShrink={0}>
-                  {change.field}:
-                </Text>
-                <Text color="gray.400" textDecoration="line-through">
-                  {change.oldValue || "—"}
-                </Text>
-                <Icon as={LuChevronRight} boxSize={3} color="gray.400" />
-                <Text color="green.300" fontWeight="medium">
-                  {change.newValue || "—"}
-                </Text>
-              </HStack>
-            ))}
-          </VStack>
+        <Tooltip.Content maxW="280px">
+          {hasError ? (
+            <Text fontSize="xs" whiteSpace="normal">
+              {error}
+            </Text>
+          ) : (
+            <VStack align="stretch" gap={1}>
+              {changes!.map((change, i) => (
+                <HStack key={i} gap={2} fontSize="xs" whiteSpace="nowrap">
+                  <Text color="gray.300" flexShrink={0}>
+                    {change.field}:
+                  </Text>
+                  <Text color="gray.400" textDecoration="line-through">
+                    {change.oldValue || "—"}
+                  </Text>
+                  <Icon as={LuChevronRight} boxSize={3} color="gray.400" />
+                  <Text color="green.300" fontWeight="medium">
+                    {change.newValue || "—"}
+                  </Text>
+                </HStack>
+              ))}
+            </VStack>
+          )}
         </Tooltip.Content>
       </Tooltip.Positioner>
     </Tooltip.Root>
   );
 }
 
-function SubRowGroup({ label, icon, items }: { label: string; icon: any; items: string[] }) {
+function SubRowGroup({
+  label,
+  icon,
+  items,
+  synonym
+}: {
+  label: string;
+  icon: any;
+  items: string[];
+  synonym: boolean;
+}) {
   const [open, setOpen] = useState(false);
   return (
     <Collapsible.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
@@ -130,12 +150,41 @@ function SubRowGroup({ label, icon, items }: { label: string; icon: any; items: 
       <Collapsible.Content>
         <VStack align="stretch" gap={0} mt={2} borderLeft="2px solid" borderColor="gray.200" pl={2}>
           {items.map((it, i) => {
-            const [name, matchedId] = it.split("|");
-            const action = matchedId === "null" ? "CREATE" : "NOOP";
+            const [name, matchedId, status] = it.split("|");
+            const action =
+              matchedId === "null"
+                ? synonym && it.split("|")[4] == "null"
+                  ? "ERROR"
+                  : "CREATE"
+                : status.startsWith("#")
+                ? "UPDATE"
+                : "NOOP";
+            const changes: FieldChange[] = [];
+            if (status.startsWith("#")) {
+              changes.push({
+                field: "Status",
+                oldValue: "ACCEPTED",
+                newValue: "SYNONYM"
+              });
+            }
             return (
-              <HStack key={i} justify="space-between" py={1.5} fontSize="xs">
-                <Text color="gray.700">{name}</Text>
-                <ActionBadge action={action} size="xs" />
+              <HStack key={i} justify="space-between" py={1.5} fontSize="small">
+                <Text>
+                  {name}
+                  {synonym && (
+                    <Box>
+                      <Badge
+                        mr={2}
+                        colorPalette={
+                          TAXON_BADGE_COLORS[status.startsWith("#") ? status.slice(1) : status]
+                        }
+                      >
+                        {status.startsWith("#") ? status.slice(1) : status}
+                      </Badge>
+                    </Box>
+                  )}
+                </Text>
+                <ActionBadge action={action} size="xs" changes={changes} error={action=="ERROR"?"Cannot create synonym without rank name":undefined}/>
               </HStack>
             );
           })}
@@ -189,7 +238,8 @@ export default function TaxonomyBatchUploadComponent() {
     "Status",
     "Position",
     "Contributor",
-    "Rank"
+    "Rank",
+    "AcceptedId"
   ];
   const { t } = useTranslation();
 
@@ -304,6 +354,13 @@ export default function TaxonomyBatchUploadComponent() {
         formData.append("Rank", columnMapping.filter(([, i]) => i === "Rank")[0][0].toString());
       }
 
+      if (columnMapping.filter(([, i]) => i === "AcceptedId").length > 0) {
+        formData.append(
+          "AcceptedId",
+          columnMapping.filter(([, i]) => i === "AcceptedId")[0][0].toString()
+        );
+      }
+
       const { success, data } = await axUploadBatchFile(formData);
       onClose1();
       if (success) {
@@ -358,7 +415,7 @@ export default function TaxonomyBatchUploadComponent() {
   return (
     <Box p={4}>
       <Alert status="info" borderRadius="md" mb={4} alignItems="top">
-        {t("traits:trait_matching.description")}
+        {t("taxon:batch_upload.description")}
       </Alert>
       {currentStep == 1 && (
         <FileUpload.Root
@@ -428,12 +485,20 @@ export default function TaxonomyBatchUploadComponent() {
                 {uploadResult &&
                   uploadResult.map((item, index) => {
                     const hierarchyNodes = item["hierarchy"]?.split(";").filter(Boolean) ?? [];
-                    const changes:FieldChange[] = [];
+                    const changes: FieldChange[] = [];
                     if (item["status"].includes("#")) {
-                      changes.push({ field: "Status", oldValue: item["status"].split("#")[0], newValue: item["status"].split("#")[1] });
+                      changes.push({
+                        field: "Status",
+                        oldValue: item["status"].split("#")[0],
+                        newValue: item["status"].split("#")[1]
+                      });
                     }
                     if (item["position"].includes("#")) {
-                      changes.push({ field: "Position", oldValue: item["position"].split("#")[0], newValue: item["position"].split("#")[1] });
+                      changes.push({
+                        field: "Position",
+                        oldValue: item["position"].split("#")[0],
+                        newValue: item["position"].split("#")[1]
+                      });
                     }
 
                     return (
@@ -446,18 +511,23 @@ export default function TaxonomyBatchUploadComponent() {
                       >
                         <Flex justify="space-between" align="flex-start" gap={3}>
                           <Box>
-                            <Text fontWeight="medium">{item["scientificName"]}</Text>
+                            <Text fontWeight="medium">
+                              {item["scientificName"]}{" "}
+                              <Badge
+                                mr={2}
+                                colorPalette={TAXON_BADGE_COLORS[item["status"].split("#")[0]]}
+                              >
+                                {item["status"].split("#")[0]}
+                              </Badge>
+                              <Badge
+                                colorPalette={TAXON_BADGE_COLORS[item["position"].split("#")[0]]}
+                              >
+                                {item["position"].split("#")[0]}
+                              </Badge>
+                            </Text>
                           </Box>
                           <HStack gap={1.5} flexShrink={0}>
-                            <Badge colorPalette={TAXON_BADGE_COLORS[item["status"].split("#")[0]]}>
-                              {item["status"].split("#")[0]}
-                            </Badge>
-                            <Badge
-                              colorPalette={TAXON_BADGE_COLORS[item["position"].split("#")[0]]}
-                            >
-                              {item["position"].split("#")[0]}
-                            </Badge>
-                            <ActionBadge action={item["action"]} changes={changes}/>
+                            <ActionBadge action={item["action"]} changes={changes} error={item["taxonId"]=="null"?"Cannot create without rank or insufficient hierarchy":undefined}/>
                           </HStack>
                         </Flex>
 
@@ -490,13 +560,19 @@ export default function TaxonomyBatchUploadComponent() {
                         )}
 
                         {item["synonyms"] && item["synonyms"].length > 0 && (
-                          <SubRowGroup label="Synonyms" icon={LuRepeat} items={item["synonyms"]} />
+                          <SubRowGroup
+                            label="Synonyms"
+                            icon={LuRepeat}
+                            items={item["synonyms"]}
+                            synonym={true}
+                          />
                         )}
                         {item["commonNames"] && item["commonNames"].length > 0 && (
                           <SubRowGroup
                             label="Common names"
                             icon={LuTag}
                             items={item["commonNames"]}
+                            synonym={false}
                           />
                         )}
                       </Box>

@@ -1,4 +1,7 @@
 {
+  "batch_upload": {
+    "description": "Please upload a spreadsheet that includes a main sheet with columns labeled TaxonConceptID and ScientificName, along with separate sheets for Synonyms, Common Names, and Hierarchy. It's important that the order of column headers in every tab remains unchanged, as our processing pipeline relies on this exact structure to correctly determine whether each record should be treated as an UPDATE, ERROR, CREATE, or NOOP."
+  },
   "bulk_action": {
     "failure": "Unable to trigger bulk action",
     "success": "Successfully triggered  bulk action, Changes will be reflected  shortly"
@@ -93,7 +96,7 @@
     "delete": "Delete",
     "delete_description": "Are you sure you want to delete this scientific name?",
     "delete_title": "Delete Scientific Name",
-    "description": "This functionality allows you to match a list of provided names to the portal's taxonomy. To validate scientific names, upload a spreadsheet (.xlsx) containing one column with valid scientific names. The system will display matches to the provided names. Select a match and download the resulting sheet, which will include a TaxonConceptId column.",
+    "description": "This functionality allows you to match a list of provided names to the portal's taxonomy. To validate scientific names, upload a spreadsheet (.xlsx) containing one column with valid scientific names. The system will display matches to the provided names, synonyms, common names and hierarchy. Select a match and download the resulting sheet, which will include a TaxonConceptId column.Please note that only unmatched names hierarchy will only be shown on the hierarchy tab.",
     "download_button": "Download As",
     "download_csv": "Comma Seperated Values (.csv)",
     "download_excel": "Microsoft Excel (.xlsx)",
