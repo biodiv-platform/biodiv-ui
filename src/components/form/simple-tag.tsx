@@ -8,13 +8,20 @@ interface TagsFieldProps {
   label: string;
   hint?: string;
   mb?;
+  required?: boolean;
 }
 
-export default function TagsField({ name, label, hint, mb }: TagsFieldProps) {
+export default function TagsField({ name, label, hint, mb, required }: TagsFieldProps) {
   const { field, fieldState } = useController({ name });
 
   return (
-    <Field invalid={!!fieldState.error} mb={mb || 4} htmlFor={name} label={label}>
+    <Field
+      invalid={!!fieldState.error}
+      mb={mb || 4}
+      htmlFor={name}
+      label={label}
+      required={required}
+    >
       <TagsInput name={field.name} onChange={field.onChange} onBlur={field.onBlur} />
       <Field children={fieldState?.error?.message} />
       {hint && <Field color="gray.600">{hint}</Field>}
