@@ -47,6 +47,8 @@ interface LayerUploadContextProps extends LayerUploadProps {
   fileUploadState: Record<string, FileUploadState>;
   canSubmit: boolean;
 
+  resetFiles: () => void;
+
   uploadStatus;
   uploadLayer: (payload) => void;
 }
@@ -93,9 +95,7 @@ export const LayerUploadProvider = (props: LayerUploadProps) => {
     }
   }, [shapeFiles, rasterFiles]);
 
-  const changeMapFileType = (val) => {
-    // Abandon any in-flight/completed uploads for the old tab and start fresh —
-    // naksha-integrator will sweep the orphaned directory on its own schedule.
+  const resetFiles = () => {
     hashRef.current = nanoid();
     setShapeFiles({
       dbf: { file: null, meta: {} },
@@ -107,6 +107,13 @@ export const LayerUploadProvider = (props: LayerUploadProps) => {
       sld: { file: null, meta: {} }
     });
     setFileUploadState({});
+    setCanContinue(false);
+  };
+
+  const changeMapFileType = (val) => {
+    // Abandon any in-flight/completed uploads for the old tab and start fresh —
+    // naksha-integrator will sweep the orphaned directory on its own schedule.
+    resetFiles();
     setMapFileType(val);
   };
 
@@ -188,6 +195,8 @@ export const LayerUploadProvider = (props: LayerUploadProps) => {
 
         fileUploadState,
         canSubmit,
+
+        resetFiles,
 
         mapFileType,
         setMapFileType: changeMapFileType,

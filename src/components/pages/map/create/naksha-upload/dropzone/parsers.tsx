@@ -11,7 +11,9 @@ export const parseSHP = (file, update) => {
       ...meta,
 
       // if unknown types are identified it will fallback to manual selection
-      type: LAYER_TYPES.includes(meta.type.toUpperCase()) ? meta.type : undefined
+      type: LAYER_TYPES.map((i) => i.value).includes(meta.type.toUpperCase())
+        ? meta.type
+        : undefined
     });
   };
   readerShp.readAsArrayBuffer(file);
@@ -44,6 +46,8 @@ export const parseDBF = (file, update) => {
 };
 
 export const parseDefault = (file: File, update) => {
-  const extension = file.name.split(".").pop();
-  update(extension, file, {});
+  const extension = file.name.split(".").pop()?.toLowerCase();
+  if (extension) {
+    update(extension, file, {});
+  }
 };
