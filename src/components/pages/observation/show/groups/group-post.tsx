@@ -9,7 +9,7 @@ import { getGroupImageThumb } from "@utils/media";
 import notification, { NotificationType } from "@utils/notification";
 import debounce from "debounce-promise";
 import useTranslation from "next-translate/useTranslation";
-import { useEffect, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import CheckBoxItems from "../../create/form/user-groups/checkbox";
 import GroupBox from "./group-box";
@@ -24,8 +24,10 @@ interface IGroupPostProps {
 
 const defaultGridColumns = [1, 1, 2, 3];
 
+const EMPTY_GROUPS: UserGroupIbp[] = [];
+
 export default function GroupPost({
-  groups = [],
+  groups = EMPTY_GROUPS,
   selectedDefault,
   resourceId,
   saveUserGroupsFunc,
@@ -39,16 +41,15 @@ export default function GroupPost({
   const { open, onToggle, onClose } = useDisclosure();
   const editButtonRef: any = useRef(null);
 
-  const [filterGroups, setFilterGroups] = useState(groups);
+  const [query, setQuery] = useState("");
 
-  useEffect(() => {
-    setFilterGroups(groups);
-  }, [groups]);
+  const filterGroups = useMemo(() => {
+    if (!query) return groups;
+    return groups?.filter((i) => i.name?.toLowerCase().match(query));
+  }, [groups, query]);
 
   const onQuery = debounce((e) => {
-    setFilterGroups(
-      groups?.filter((i) => i.name?.toLowerCase().match(e.target.value.toLowerCase()))
-    );
+    setQuery(e.target.value.toLowerCase());
   }, 200);
 
   const handleOnSave = async () => {
