@@ -1,8 +1,9 @@
-import { Box, Button, Flex, Heading } from "@chakra-ui/react";
+import { Box, Flex, Heading } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
 
 import { FileWithType } from "../file-with-type";
-import LayerUploadForm from "../form";
+import RasterUploadForm from "../form/raster-form";
+import { VectorFormFields } from "../form/vector-form";
 import useLayerUpload, {
   FileUploadState,
   FileUploadStatus,
@@ -60,14 +61,18 @@ const SingleFile = ({
   ) : null;
 
 export default function FilePreview() {
-  const { shapeFiles, mapFileType, rasterFiles, canContinue, fileUploadState, setScreen } =
-    useLayerUpload();
+  const { shapeFiles, mapFileType, rasterFiles, fileUploadState } = useLayerUpload();
   const { t } = useTranslation();
 
-  const fileType = rasterFiles.tif.file ? rasterFiles : shapeFiles;
+  const hasRasterFile = Boolean(rasterFiles.tif.file);
+  const hasVectorFile = Boolean(
+    shapeFiles.shp.file || shapeFiles.dbf.file || shapeFiles.shx.file
+  );
+  const fileType = mapFileType === MapFileType.raster ? rasterFiles : shapeFiles;
+
   return (
-    <Flex h="100%" gridColumn="6/8" direction="column" justifyContent="space-between">
-      <Box>
+    <Box gridColumn={{ base: "1", md: "6/8" }} h="100%" overflowY="auto" pl={{ md: 2 }}>
+      <Box mb={4}>
         <Heading as="h2" size="md" mb={2}>
           📄 {t("map:your_files")}
         </Heading>
@@ -81,19 +86,8 @@ export default function FilePreview() {
             />
           ))}
       </Box>
-      {mapFileType === MapFileType.raster && rasterFiles.tif.file ? (
-        <LayerUploadForm />
-      ) : (
-        <Button
-          w="100%"
-          colorPalette="blue"
-          size="lg"
-          disabled={!canContinue}
-          onClick={() => setScreen(1)}
-        >
-          {t("map:continue")}
-        </Button>
-      )}
-    </Flex>
+      {mapFileType === MapFileType.raster && hasRasterFile && <RasterUploadForm />}
+      {mapFileType === MapFileType.vector && hasVectorFile && <VectorFormFields />}
+    </Box>
   );
 }

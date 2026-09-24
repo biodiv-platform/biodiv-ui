@@ -21,8 +21,11 @@
   "tags": "Tags",
   "title_column": "Title Column",
   "upload_error": "Error Uploading Layer",
+  "upload_in_progress": "Uploading files... You can fill in the form on the right. Preview will appear once upload completes.",
   "upload_progress": "Uploading Layer...",
   "upload_success": "Layer was uploaded successfully",
+  "uploading_files": "Uploading Files...",
   "url": "URL",
-  "your_files": "Your Files"
+  "your_files": "Your Files",
+  "change_files": "Change Files"
 }
