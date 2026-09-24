@@ -199,9 +199,14 @@ export default function AddSuggestion({
   }, [hForm.register]);
 
   const handleOnSubmit = async (values) => {
-    if (values.taxonCommonName || values.taxonScientificName) {
+    const payload = { ...values };
+
+    if (payload.scientificNameTaxonId === payload.taxonScientificName) {
+      payload.scientificNameTaxonId = null;
+    }
+    if (payload.taxonCommonName || payload.taxonScientificName) {
       const { success, data } = await axRecoSuggest(observationId, {
-        ...values,
+        ...payload,
         confidence: "CERTAIN",
         recoComment: ""
       });
