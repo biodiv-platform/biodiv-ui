@@ -2,6 +2,7 @@ import { Box, FileUpload } from "@chakra-ui/react";
 import { useCallback, useState } from "react";
 
 import { MAX_UPLOAD_SIZE } from "@/services/tusupload.service";
+import { withFileValidation } from "@/utils/upload-guard";
 
 import useManageDocument from "../document-upload-provider";
 import DocumentPreview from "./document-preview";
@@ -42,7 +43,7 @@ export default function DocumentDropzone() {
 
       <FileUpload.Root
         accept={ACCEPT_STRING}
-        onFileChange={handleFileChange}
+        onFileChange={withFileValidation(handleFileChange, "document")}
         maxFiles={1}
         width="full"
         maxFileSize={MAX_UPLOAD_SIZE}

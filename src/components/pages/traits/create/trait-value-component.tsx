@@ -6,6 +6,8 @@ import useTranslation from "next-translate/useTranslation";
 import { useCallback } from "react";
 import { LuX } from "react-icons/lu";
 
+import { withFileValidation } from "@/utils/upload-guard";
+
 const ACCEPT_STRING = "image/jpeg, image/png, image/jpg";
 
 export default function TraitsValueComponent({
@@ -59,7 +61,11 @@ export default function TraitsValueComponent({
       </GridItem>
 
       <Box display="flex" alignItems="flex-end" pb={1}>
-        <FileUpload.Root accept={ACCEPT_STRING} onFileChange={handleFileChange} maxFiles={1}>
+        <FileUpload.Root
+          accept={ACCEPT_STRING}
+          onFileChange={withFileValidation(handleFileChange, "image")}
+          maxFiles={1}
+        >
           <FileUpload.HiddenInput />
           <FileUpload.Dropzone
             asChild
@@ -74,25 +80,23 @@ export default function TraitsValueComponent({
             cursor="pointer"
             bg="white"
           >
-            <FileUpload.Trigger asChild>
-              <Box width="full" height="full">
-                {valueObj[translationSelected].values[index].icon ? (
-                  <Flex width="full" height="full" align="center" justify="center">
-                    <img
-                      src={getTraitIcon(valueObj[translationSelected].values[index].icon)}
-                      alt="Trait Value Icon Preview"
-                      style={{ width: "40px", height: "40px", objectFit: "cover" }}
-                    />
-                  </Flex>
-                ) : (
-                  <Flex width="full" height="full" align="center" justify="center">
-                    <Text fontSize="lg" color="gray.400">
-                      +
-                    </Text>
-                  </Flex>
-                )}
-              </Box>
-            </FileUpload.Trigger>
+            <Box width="full" height="full">
+              {valueObj[translationSelected].values[index].icon ? (
+                <Flex width="full" height="full" align="center" justify="center">
+                  <img
+                    src={getTraitIcon(valueObj[translationSelected].values[index].icon)}
+                    alt="Trait Value Icon Preview"
+                    style={{ width: "40px", height: "40px", objectFit: "cover" }}
+                  />
+                </Flex>
+              ) : (
+                <Flex width="full" height="full" align="center" justify="center">
+                  <Text fontSize="lg" color="gray.400">
+                    +
+                  </Text>
+                </Flex>
+              )}
+            </Box>
           </FileUpload.Dropzone>
         </FileUpload.Root>
       </Box>

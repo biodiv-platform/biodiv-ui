@@ -6,6 +6,7 @@ import { useCallback, useState } from "react";
 
 import UploadProcessing from "@/components/pages/document/create/uploader/dropzone/upload-processing";
 import { axTusUploadObservationResource, MAX_UPLOAD_SIZE } from "@/services/tusupload.service";
+import { withFileValidation } from "@/utils/upload-guard";
 
 const accept = {
   "application/vnd.ms-excel": [".xls"],
@@ -67,7 +68,7 @@ export default function DropTarget({
   return (
     <FileUpload.Root
       accept={ACCEPT_STRING}
-      onFileChange={handleFileChange}
+      onFileChange={withFileValidation(handleFileChange, "spreadsheet")}
       maxFiles={1}
       width="full"
       maxFileSize={MAX_UPLOAD_SIZE}

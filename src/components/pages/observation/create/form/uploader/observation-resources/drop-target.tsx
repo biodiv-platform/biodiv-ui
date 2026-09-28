@@ -7,6 +7,7 @@ import { useCallback, useState } from "react";
 import { LuTimer } from "react-icons/lu";
 
 import { MAX_UPLOAD_SIZE } from "@/services/tusupload.service";
+import { withFileValidation } from "@/utils/upload-guard";
 
 import useObservationCreate from "../use-observation-resources";
 
@@ -80,7 +81,7 @@ export default function DropTarget({ assetsSize }) {
   return (
     <FileUpload.Root
       accept={ACCEPT_STRING}
-      onFileChange={handleFileChange}
+      onFileChange={withFileValidation(handleFileChange, "observation")}
       width="full"
       maxFiles={10}
       style={{ gridColumn: !hasAssets ? "1/6" : "auto" }}

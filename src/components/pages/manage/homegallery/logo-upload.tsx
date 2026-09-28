@@ -8,10 +8,28 @@ import { useCallback, useState } from "react";
 import { useController, useFormContext } from "react-hook-form";
 
 import { Field } from "@/components/ui/field";
+import { withFileValidation } from "@/utils/upload-guard";
 
 import { Container, ITPageGalleryFieldProps } from "../../page/common/form/gallery-field";
 
 const ACCEPT_STRING = "image/png";
+
+const clearImageCache = async () => {
+  try {
+    const response = await fetch("/api/memory-cache/clear");
+    if (!response.ok) {
+      console.error("Failed to clear image cache");
+    }
+  } catch (error) {
+    console.error("Image cache clear request failed:", error);
+  }
+};
+
+const safeClearCache = () => {
+  clearImageCache().catch((err) => {
+    console.error("Cache clear failed:", err);
+  });
+};
 
 export const LogoField = ({
   helpText,
@@ -27,25 +45,8 @@ export const LogoField = ({
   const { field } = useController({ name });
 
   const [isProcessing, setIsProcessing] = useState(false);
-  const [imageVersion, setImageVersion] = useState(Date.now());
+  const [imageVersion, setImageVersion] = useState(() => Date.now());
   const { formState } = useFormContext();
-
-  const clearImageCache = async () => {
-    try {
-      const response = await fetch("/api/memory-cache/clear");
-      if (!response.ok) {
-        console.error("Failed to clear image cache");
-      }
-    } catch (error) {
-      console.error("Image cache clear request failed:", error);
-    }
-  };
-
-  const safeClearCache = () => {
-    clearImageCache().catch((err) => {
-      console.error("Cache clear failed:", err);
-    });
-  };
 
   const handleFileChange = useCallback(
     async (details: { acceptedFiles: File[]; rejectedFiles: any[] }) => {
@@ -148,7 +149,7 @@ export const LogoField = ({
           ) : (
             <FileUpload.Root
               accept={ACCEPT_STRING}
-              onFileChange={handleFileChange}
+              onFileChange={withFileValidation(handleFileChange, "image")}
               maxFiles={1}
               width="full"
               height="full"

@@ -23,6 +23,7 @@ import { LuChevronDown, LuCircleAlert } from "react-icons/lu";
 import { Alert } from "@/components/ui/alert";
 import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from "@/components/ui/menu";
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
+import { withFileValidation } from "@/utils/upload-guard";
 
 import NameTable from "./name-table";
 
@@ -79,9 +80,9 @@ export default function NameMatchingComponent() {
           }
         }
         row["ScientificName"] = name[1]["name"];
-        (row["TaxonConceptId"] = name[1]["id"]),
-          (row["GroupName"] = name[1]["group_name"]),
-          (row["SpeciesId"] = name[2]);
+        row["TaxonConceptId"] = name[1]["id"];
+        row["GroupName"] = name[1]["group_name"];
+        row["SpeciesId"] = name[2];
         worksheet.addRow(row);
       } else if (name[1] == undefined && filter != "Matched") {
         const row = {};
@@ -212,7 +213,7 @@ export default function NameMatchingComponent() {
         {currentStep == 1 && !isLoading && (
           <FileUpload.Root
             accept={ACCEPT_STRING}
-            onFileChange={handleFileChange}
+            onFileChange={withFileValidation(handleFileChange, "spreadsheet")}
             maxFiles={1}
             width="full"
           >
