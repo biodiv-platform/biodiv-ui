@@ -158,7 +158,13 @@ const PDF_THREATS: Pattern[] = [
   { name: "a /Launch action", re: /\/Launch\b/ },
   { name: "an embedded file", re: /\/EmbeddedFile\b/ },
   { name: "rich media (Flash/3D) content", re: /\/RichMedia\b/ },
-  { name: "a remote-goto action", re: /\/GoToE\b/ }
+  { name: "a remote-goto action", re: /\/GoToE\b/ },
+  // Catches JS smuggled outside the spec's own JS mechanisms (e.g. a PDF.js FontMatrix
+  // parser-exploit payload hidden inside a string literal/array rather than a /JS action).
+  {
+    name: "JavaScript-like code embedded in the document",
+    re: /\b(?:window|document)\s*\.|\beval\s*\(|\bFunction\s*\(|\balert\s*\(/
+  }
 ];
 
 /** XML (SLD, PRJ-XML …): XXE / entity-expansion payloads */
@@ -771,6 +777,21 @@ export const ZIP_ENTRY_PRESETS: Partial<Record<FilePreset, readonly string[]>> =
   observation: ["jpg", "jpeg", "png", "mp4", "mov", "webm", "wav", "mp3", "csv", "txt"]
 };
 
+/* -------------------------------------------------------------------------- */
+/*                                 File-name checks                           */
+/* -------------------------------------------------------------------------- */
+
+const validateFileName = (name: string): string | null => {
+  if (!name || name.length > 255) return "The file name is empty or too long.";
+  if (/[\u0000-\u001f\u007f]/.test(name)) return "The file name contains control characters.";
+  if (/[\\/]/.test(name)) return "The file name contains path separators.";
+  if (/[\u200b-\u200f\u202a-\u202e\u2066-\u2069\ufeff]/.test(name)) {
+    return "The file name contains hidden or direction-changing characters.";
+  }
+  if (name !== name.trim() || name.endsWith(".")) return "The file name ends with a space or dot.";
+  return null;
+};
+
 const formatSize = (bytes: number) =>
   bytes >= MB ? `${Math.round(bytes / MB)} MB` : `${Math.max(1, Math.round(bytes / KB))} KB`;
 
@@ -798,6 +819,10 @@ export async function validateFile(
   try {
     const fileName = options.fileName ?? file.name ?? "";
     const fullScanLimit = options.fullScanLimit ?? 50 * MB;
+
+    // 1. name
+    const nameProblem = validateFileName(fileName);
+    if (nameProblem) return fail("INVALID_FILE_NAME", nameProblem);
 
     // basic size
     if (file.size === 0) return fail("EMPTY_FILE", `"${fileName}" is empty.`);
