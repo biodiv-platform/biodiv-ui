@@ -95,7 +95,7 @@ const ImagePicker = (props: any) => {
           options={organOptions}
           onChangeCallback={handleOrganSelect}
           placeholder={t("observation:plantnet.select_plant_organ")}
-          shouldPortal={true}
+          shouldPortal={false}
           selectRef={langRef}
         />
       </label>

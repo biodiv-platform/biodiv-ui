@@ -25,7 +25,13 @@ export default function RecoInputs() {
   const [commonNameOptions, setCommonNameOptions] = useState<any[]>([]);
   const { licensesList } = useObservationCreateNext();
 
-  const onCommonNameChange = ({ sLabel, sValue, lang, langId, groupId, updateScientific }) => {
+  const onCommonNameChange = (val) => {
+    if (!val) {
+      return;
+    }
+
+    const { sLabel, sValue, lang, langId, groupId, updateScientific } = val;
+
     if (langId) {
       form.setValue("obsvLanguageId", { value: langId, label: lang });
     }
@@ -37,7 +43,15 @@ export default function RecoInputs() {
     }
   };
 
-  const onScientificNameChange = ({ label, value, groupId, raw }) => {
+  const onScientificNameChange = (val) => {
+    if (!val) {
+      form.setValue("scientificNameTaxonId", null);
+      form.setValue("taxonScientificName", null);
+      return;
+    }
+
+    const { label, value, groupId, raw } = val;
+
     if (value === label) {
       form.setValue("scientificNameTaxonId", null);
     }
@@ -46,7 +60,6 @@ export default function RecoInputs() {
       if (raw?.common_names) {
         setCommonNameOptions(raw.common_names.map((cn) => getCommonNameOption(cn, raw, false)));
       }
-
       form.setValue("sGroup", groupId);
     }
   };
@@ -76,6 +89,10 @@ export default function RecoInputs() {
         onChange={onCommonNameChange}
         selectRef={commonRef}
         mb={2}
+        style={{
+          menuPortal: (base) => ({ ...base, zIndex: 10000 }),
+          menu: (base) => ({ ...base, zIndex: 10000 })
+        }}
       />
       <SelectAsyncInputField
         name="scientificNameTaxonId"
@@ -86,6 +103,10 @@ export default function RecoInputs() {
         onChange={onScientificNameChange}
         selectRef={scientificRef}
         mb={2}
+        style={{
+          menuPortal: (base) => ({ ...base, zIndex: 10000 }),
+          menu: (base) => ({ ...base, zIndex: 10000 })
+        }}
       />
       <SelectInputField
         mb={2}

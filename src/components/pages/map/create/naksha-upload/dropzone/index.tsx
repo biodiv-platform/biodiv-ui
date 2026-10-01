@@ -7,6 +7,7 @@ import { useCallback, useMemo } from "react";
 import { Tooltip } from "@/components/ui/tooltip";
 
 import { FILE_TYPES, RASTER_FILE_TYPES } from "../data";
+import { VectorPreviewAndDescriptions } from "../form/vector-form";
 import useLayerUpload, { MapFileType } from "../use-layer-upload";
 import FilePreview from "./file-preview";
 import { parseDBF, parseDefault, parseSHP } from "./parsers";
@@ -72,15 +73,19 @@ export const VerticalTabs = styled.div`
 `;
 
 export default function LayerUploadDropzone() {
-  const { updateMapFile, mapFileType, setMapFileType } = useLayerUpload();
+  const { updateMapFile, mapFileType, setMapFileType, canSubmit, shapeFiles } = useLayerUpload();
   const { t } = useTranslation();
+
+  const isVectorUploading =
+    !canSubmit && Boolean(shapeFiles.shp.file || shapeFiles.dbf.file || shapeFiles.shx.file);
 
   const handleFileChange = useCallback(
     async (details: { acceptedFiles: File[]; rejectedFiles: any[] }) => {
       for (const file of details.acceptedFiles) {
-        if (file.name.endsWith(FILE_TYPES.DBF)) {
+        const lowerName = file.name.toLowerCase();
+        if (lowerName.endsWith(FILE_TYPES.DBF.toLowerCase())) {
           parseDBF(file, updateMapFile);
-        } else if (file.name.endsWith(FILE_TYPES.SHP)) {
+        } else if (lowerName.endsWith(FILE_TYPES.SHP.toLowerCase())) {
           parseSHP(file, updateMapFile);
         } else {
           parseDefault(file, updateMapFile);
@@ -135,49 +140,58 @@ export default function LayerUploadDropzone() {
           {Object.keys(MapFileType).map((index) => (
             <Tabs.Content value={index} h="inherit" key={index}>
               <SimpleGrid columns={{ base: 1, md: 7 }} gap={4} h="100%">
-                <FileUpload.Root
-                  accept={acceptString}
-                  onFileChange={handleFileChange}
-                  maxFiles={30}
-                  gridColumn="1/6"
-                  h="100%"
-                >
-                  <FileUpload.HiddenInput />
+                {index === "vector" && canSubmit && shapeFiles.dbf.meta?.keys?.length ? (
+                  <VectorPreviewAndDescriptions />
+                ) : (
+                  <FileUpload.Root
+                    accept={acceptString}
+                    onFileChange={handleFileChange}
+                    maxFiles={30}
+                    gridColumn={{ base: "1", md: "1/6" }}
+                    h="100%"
+                  >
+                    <FileUpload.HiddenInput />
 
-                  <FileUpload.Context>
-                    {(fileUpload) => (
-                      <FileUpload.Dropzone
-                        width="full"
-                        h="100%"
-                        bg={fileUpload.dragging ? "blue.50" : "gray.50"}
-                        border="1px dashed"
-                        borderColor={fileUpload.dragging ? "blue.500" : "gray.300"}
-                        borderRadius="md"
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        cursor="pointer"
-                        p={4}
-                      >
-                        <Box textAlign="center">
-                          {fileUpload.dragging ? (
-                            <Box color="blue.500" fontWeight="bold">
-                              {t("map:drag_active")}
-                            </Box>
-                          ) : (
-                            <>
-                              {t("map:drop_message")}
-                              <br />
-                              <Text color="gray.500" mt={1}>
-                                {allowedExtensions.join(", ")} {t("map:only")}
-                              </Text>
-                            </>
-                          )}
-                        </Box>
-                      </FileUpload.Dropzone>
-                    )}
-                  </FileUpload.Context>
-                </FileUpload.Root>
+                    <FileUpload.Context>
+                      {(fileUpload) => (
+                        <FileUpload.Dropzone
+                          width="full"
+                          h="100%"
+                          bg={fileUpload.dragging ? "blue.50" : "gray.50"}
+                          border="1px dashed"
+                          borderColor={fileUpload.dragging ? "blue.500" : "gray.300"}
+                          borderRadius="md"
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="center"
+                          cursor="pointer"
+                          p={4}
+                        >
+                          <Box textAlign="center">
+                            {fileUpload.dragging ? (
+                              <Box color="blue.500" fontWeight="bold">
+                                {t("map:drag_active")}
+                              </Box>
+                            ) : (
+                              <>
+                                {t("map:drop_message")}
+                                <br />
+                                <Text color="gray.500" mt={1}>
+                                  {allowedExtensions.join(", ")} {t("map:only")}
+                                </Text>
+                                {index === "vector" && isVectorUploading && (
+                                  <Text color="blue.600" mt={2} fontSize="sm">
+                                    {t("map:upload_in_progress")}
+                                  </Text>
+                                )}
+                              </>
+                            )}
+                          </Box>
+                        </FileUpload.Dropzone>
+                      )}
+                    </FileUpload.Context>
+                  </FileUpload.Root>
+                )}
 
                 <FilePreview />
               </SimpleGrid>

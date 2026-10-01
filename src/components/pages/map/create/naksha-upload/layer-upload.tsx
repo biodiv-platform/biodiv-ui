@@ -1,4 +1,3 @@
-import LayerUploadDropzone from "./dropzone";
 import LayerUploadForm from "./form";
 import FormUploadMessage from "./message";
 import useLayerUpload from "./use-layer-upload";
@@ -8,8 +7,6 @@ export default function LayerUpload() {
 
   switch (screen) {
     case 0:
-      return <LayerUploadDropzone />;
-
     case 1:
       return <LayerUploadForm />;
 

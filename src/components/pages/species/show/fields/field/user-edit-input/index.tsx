@@ -33,6 +33,10 @@ const UserSelectField = ({ name, label, mb, isRequired }: IUserSelectProps) => {
       label={label}
       isRequired={isRequired}
       mb={mb}
+      style={{
+        menuPortal: (base) => ({ ...base, zIndex: 10000 }),
+        menu: (base) => ({ ...base, zIndex: 10000 })
+      }}
     />
   );
 };

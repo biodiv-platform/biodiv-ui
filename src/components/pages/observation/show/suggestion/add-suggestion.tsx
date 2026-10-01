@@ -150,7 +150,13 @@ export default function AddSuggestion({
     }
   });
 
-  const onCommonNameChange = ({ sLabel, sValue, lang, langId, groupId, updateScientific }) => {
+  const onCommonNameChange = (val) => {
+    if (!val) {
+      return;
+    }
+
+    const { sLabel, sValue, lang, langId, groupId, updateScientific } = val;
+
     if (langId) {
       langRef.current.onChange(
         { value: langId, label: lang },
@@ -165,7 +171,16 @@ export default function AddSuggestion({
     }
   };
 
-  const onScientificNameChange = ({ label, value, groupId, raw, source }) => {
+  const onScientificNameChange = (val) => {
+    if (!val) {
+      hForm.setValue("scientificNameTaxonId", null);
+      hForm.setValue("taxonScientificName", null);
+      hForm.setValue("source", null);
+      return;
+    }
+
+    const { label, value, groupId, raw, source } = val;
+
     if (value === label) {
       hForm.setValue("scientificNameTaxonId", null);
     }
@@ -184,9 +199,14 @@ export default function AddSuggestion({
   }, [hForm.register]);
 
   const handleOnSubmit = async (values) => {
-    if (values.taxonCommonName || values.taxonScientificName) {
+    const payload = { ...values };
+
+    if (payload.scientificNameTaxonId === payload.taxonScientificName) {
+      payload.scientificNameTaxonId = null;
+    }
+    if (payload.taxonCommonName || payload.taxonScientificName) {
       const { success, data } = await axRecoSuggest(observationId, {
-        ...values,
+        ...payload,
         confidence: "CERTAIN",
         recoComment: ""
       });

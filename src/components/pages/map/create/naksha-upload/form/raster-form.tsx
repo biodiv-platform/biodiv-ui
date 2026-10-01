@@ -13,7 +13,7 @@ import useLayerUpload from "../use-layer-upload";
 export default function RasterUploadForm() {
   const { t } = useTranslation();
 
-  const { canContinue } = useLayerUpload();
+  const { canContinue, canSubmit } = useLayerUpload();
 
   const licenseOptions = useMemo(
     () => Object.keys(LICENSES).map((l) => ({ label: l, value: l })),
@@ -24,36 +24,39 @@ export default function RasterUploadForm() {
       <Heading size="md" mb={4}>
         🗺️ {t("map:layer_information")}
       </Heading>
-      <TextBoxField name="layerName" label={t("map:name")} />
+      <TextBoxField name="layerName" label={t("map:name")} isRequired />
 
       <SelectInputField
         name="layerType"
         options={LAYER_TYPES.filter((i) => i.value === "RASTER")}
         label={t("map:layer_type")}
         shouldPortal={true}
+        isRequired
       />
-      <TextBoxField name="createdBy" label={t("map:created_by")} />
-      <TextBoxField name="attribution" label={t("map:attribution")} />
+      <TextBoxField name="createdBy" label={t("map:created_by")} isRequired />
+      <TextBoxField name="attribution" label={t("map:attribution")} isRequired />
       <TextBoxField name="url" label={t("map:url")} />
       <TextBoxField name="pdfLink" label={t("map:pdf_link")} />
-      <TagsField name="tags" label={t("map:tags")} hint="Press enter to add tags" />
+      <TagsField name="tags" label={t("map:tags")} hint="Press enter to add tags" required />
       <SelectInputField
         name="license"
         options={licenseOptions}
         label={t("map:license")}
         shouldPortal={true}
+        isRequired
       />
-      <TextBoxField name="createdDate" label={t("map:created_date")} type="date" />
+      <TextBoxField name="createdDate" label={t("map:created_date")} type="date" isRequired />
       <SelectInputField
         name="downloadAccess"
         options={ACCESS}
         label={t("map:download_access")}
         shouldPortal={true}
+        isRequired
       />
-      <TextAreaField name="layerDescription" label={t("map:description")} />
+      <TextAreaField name="layerDescription" label={t("map:description")} isRequired />
 
-      <Button disabled={!canContinue} colorPalette="blue" type="submit">
-        {t("map:create")}
+      <Button disabled={!canContinue || !canSubmit} colorPalette="blue" type="submit">
+        {canSubmit ? t("map:create") : t("map:uploading_files")}
       </Button>
     </Stack>
   );

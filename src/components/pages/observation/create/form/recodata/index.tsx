@@ -23,7 +23,13 @@ export default function Recodata({ languages }: IRecodataProps) {
   const langRef: any = useRef(null);
   const [commonNameOptions, setCommonNameOptions] = useState<any[]>([]);
 
-  const onCommonNameChange = ({ sLabel, sValue, lang, langId, groupId, updateScientific }) => {
+  const onCommonNameChange = (val) => {
+    if (!val) {
+      return;
+    }
+
+    const { sLabel, sValue, lang, langId, groupId, updateScientific } = val;
+
     if (langId) {
       langRef.current.onChange(
         { value: langId, label: lang },
@@ -38,11 +44,20 @@ export default function Recodata({ languages }: IRecodataProps) {
     }
   };
 
-  const onScientificNameChange = ({ label, value, groupId, raw }) => {
+  const onScientificNameChange = (val) => {
+    if (!val) {
+      form.setValue("scientificNameTaxonId", null);
+      form.setValue("taxonScientificName", null);
+      form.setValue("acceptedId", null);
+      return;
+    }
+
+    const { label, value, groupId, raw } = val;
     const acceptedNameId =
       Array.isArray(raw?.accepted_ids) && raw.accepted_ids.length > 0
         ? raw.accepted_ids[0]
         : raw?.id;
+
     if (value === label) {
       form.setValue("scientificNameTaxonId", null);
     }
@@ -53,7 +68,6 @@ export default function Recodata({ languages }: IRecodataProps) {
       }
       form.setValue("sGroup", groupId);
     }
-
     form.setValue("acceptedId", acceptedNameId);
   };
 

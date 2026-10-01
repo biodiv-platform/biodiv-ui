@@ -65,14 +65,21 @@ const ValueContainer = ({ children, ...props }: any) => {
 
   return (
     <components.ValueContainer {...props}>
-      <Box display="flex" alignItems="center" width="100%">
-        {children}
-        {icon && hasValue && !isDisabled && (
-          <Box as="span" ml={1} display="inline-flex" alignItems="center" flexShrink={0}>
-            {icon}
-          </Box>
-        )}
-      </Box>
+      {children}
+      {icon && hasValue && !isDisabled && (
+        <Box
+          as="span"
+          position="absolute"
+          right={2}
+          top="50%"
+          transform="translateY(-50%)"
+          display="inline-flex"
+          alignItems="center"
+          flexShrink={0}
+        >
+          {icon}
+        </Box>
+      )}
     </components.ValueContainer>
   );
 };

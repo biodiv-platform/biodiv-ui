@@ -166,7 +166,7 @@ export const axGetGroupEditInfoByGroupId = async (groupId, ctx) => {
 export const axGetGroupAdministratorsByGroupId = async (groupId) => {
   try {
     const { data } = await plainHttp.get(
-      `${ENDPOINT.USERGROUP}/v1/group/adminstration/members/${groupId}`
+      `${ENDPOINT.USERGROUP}/v1/group/manage/members/${groupId}`
     );
     return { success: true, data };
   } catch (e) {

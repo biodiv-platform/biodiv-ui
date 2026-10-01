@@ -131,7 +131,13 @@ export default function BulkMapperModal() {
   const langRef: any = useRef(null);
   const scientificRef: any = useRef(null);
 
-  const onCommonNameChange = ({ sLabel, sValue, lang, langId, groupId, updateScientific }) => {
+  const onCommonNameChange = (val) => {
+    if (!val) {
+      return;
+    }
+
+    const { sLabel, sValue, lang, langId, groupId, updateScientific } = val;
+
     if (langId) {
       langRef.current.onChange(
         { value: langId, label: lang },
@@ -251,7 +257,16 @@ export default function BulkMapperModal() {
     }
   };
 
-  const onScientificNameChange = ({ label, value, groupId, raw, source }) => {
+  const onScientificNameChange = (val) => {
+    if (!val) {
+      hForm.setValue("scientificNameTaxonId", null);
+      hForm.setValue("taxonScientificName", null);
+      hForm.setValue("source", null);
+      return;
+    }
+
+    const { label, value, groupId, raw, source } = val;
+
     if (value === label) {
       hForm.setValue("scientificNameTaxonId", null);
     }
@@ -461,7 +476,11 @@ export default function BulkMapperModal() {
                                 <SelectAsyncInputField
                                   name="taxonCommonName"
                                   label={t("observation:common_name")}
-                                  style={{ gridColumn: "1/3" }}
+                                  style={{
+                                    gridColumn: "1/3",
+                                    menuPortal: (base) => ({ ...base, zIndex: 10000 }),
+                                    menu: (base) => ({ ...base, zIndex: 10000 })
+                                  }}
                                   onQuery={onCommonNameQuery}
                                   options={commonNameOptions}
                                   optionComponent={CommonNameOption}

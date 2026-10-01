@@ -3,8 +3,8 @@ import { Role } from "@interfaces/custom";
 import { TOKEN } from "@static/constants";
 import { AUTHWALL } from "@static/events";
 import B64URL from "base64-url";
+import { parseCookie, stringifySetCookie } from "cookie";
 import JWTDecode from "jwt-decode";
-import { destroyCookie, parseCookies, setCookie } from "nookies";
 import { emit } from "react-gbus";
 
 /**
@@ -25,12 +25,56 @@ const getDomain = () => {
   return pathMatched ? pathMatched[0] : "";
 };
 
+const setCookie = (ctx, name: string, value: string, opts: any) => {
+  const serialized = stringifySetCookie({ name, value, ...opts });
+
+  if (ctx?.res) {
+    const existing = ctx.res.getHeader("Set-Cookie");
+    const existingArr = existing ? (Array.isArray(existing) ? existing : [existing]) : [];
+    ctx.res.setHeader("Set-Cookie", [...existingArr, serialized]);
+    return;
+  }
+
+  if (typeof document !== "undefined") {
+    document.cookie = serialized;
+  }
+};
+
+const destroyCookie = (ctx, name: string, opts: any) => {
+  setCookie(ctx, name, "", { ...opts, maxAge: 0 });
+};
+
+const parseCookies = (ctx?): Record<string, string> => {
+  const header = ctx?.req
+    ? ctx.req.headers?.cookie || ""
+    : typeof document !== "undefined"
+    ? document.cookie || ""
+    : "";
+  return parseCookie(header) as Record<string, string>;
+};
+
+export const getClientCookies = (): Record<string, string> => {
+  const header = typeof document !== "undefined" ? document.cookie || "" : "";
+  return parseCookie(header) as Record<string, string>;
+};
+
+export const setClientCookie = (name: string, value: string, opts: any = {}) => {
+  document.cookie = stringifySetCookie({ name, value, ...opts });
+};
+
 // sets/re-sets cookies on development mode
 export const setCookies = (tokens, ctx?) => {
+  const isHttps =
+    typeof window !== "undefined"
+      ? window.location.protocol === "https:"
+      : process.env.NODE_ENV === "production";
+
   const cookieOpts = {
     maxAge: 60 * 60 * 24 * 7, // 1 Week
     path: "/",
-    domain: getDomain()
+    domain: getDomain(),
+    sameSite: "Lax" as const,
+    secure: isHttps
   };
 
   setCookie(ctx, TOKEN.BATOKEN, tokens.access_token, cookieOpts);
@@ -47,12 +91,62 @@ export const removeCookies = () => {
   destroyCookie(null, TOKEN.BRTOKEN, cookieOpts);
 };
 
+/**
+ * Validates that a post-login redirect target is a same-origin, relative
+ * path within the portal, never an absolute URL or protocol-relative URL.
+ *
+ * This is the control that prevents open-redirect / phishing attacks where
+ * an attacker crafts a link like `/login?forward=<base64 of https://evil.com>`
+ * (or a `javascript:` URL) to have a victim redirected off-portal, or have
+ * script executed, immediately after a successful sign-in.
+ *
+ * A safe value must:
+ *  - start with a single "/" (a root-relative path), and
+ *  - NOT start with "//" or "/\" (protocol-relative URLs like //evil.com
+ *    are treated by browsers as absolute and navigate off-origin), and
+ *  - NOT contain a scheme (e.g. "javascript:", "data:", "https:") anywhere
+ *    before the first "/", which would otherwise be interpreted as a URL
+ *    rather than a path.
+ *
+ * @param {string} decoded
+ * @returns {boolean}
+ */
+export const isSafeRedirectPath = (decoded: string): boolean => {
+  if (typeof decoded !== "string" || decoded.length === 0) {
+    return false;
+  }
+
+  // Must be root-relative ("/something"), not scheme-relative ("//host" or "/\host")
+  if (!decoded.startsWith("/") || decoded.startsWith("//") || decoded.startsWith("/\\")) {
+    return false;
+  }
+
+  // Reject anything that resolves to a different origin or a non-http(s)
+  // scheme (javascript:, data:, vbscript:, etc.) when parsed by the browser.
+  try {
+    const resolved = new URL(decoded, window.location.origin);
+    return resolved.origin === window.location.origin;
+  } catch {
+    return false;
+  }
+};
+
 export const forwardRedirect = async (forward?) => {
   // remove cache
   await removeCache();
 
-  // redirect
-  window.location.assign(B64URL.decode(forward || "Lw"));
+  let target = "/";
+  try {
+    const decoded = B64URL.decode(forward || "Lw");
+    if (isSafeRedirectPath(decoded)) {
+      target = decoded;
+    }
+  } catch {
+    target = "/";
+  }
+
+  // redirect - always same-origin, relative path only
+  window.location.assign(target);
 };
 
 export const getParsedUser = (ctx?) => {
