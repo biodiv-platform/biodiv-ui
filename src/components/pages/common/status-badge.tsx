@@ -24,9 +24,9 @@ function TaxonStatusBadge({ reco, taxonId, crumbs, name }: TaxonStatusBadgeProps
       );
 
     case "SYNONYM":
-      const [lastCrumb] = crumbs?.slice(-1) || [{ name: null }];
+      const [lastCrumb] = crumbs?.slice(-1) || [{ name: null, id:null }];
       return (
-        <LocalLink href={taxonLink} params={{ taxonId: lastCrumb.id, showTaxon: lastCrumb.id }}>
+        <LocalLink href={taxonLink} params={{ taxonId: lastCrumb?.id, showTaxon: lastCrumb?.id }}>
           <Badge colorPalette={TAXON_BADGE_COLORS.SYNONYM}>
             {t("observation:synonym")+" "+name}
             {lastCrumb?.name && ` ${lastCrumb.name}`}

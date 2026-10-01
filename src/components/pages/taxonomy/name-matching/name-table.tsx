@@ -16,6 +16,14 @@ import {
   DialogHeader,
   DialogRoot
 } from "@/components/ui/dialog";
+import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
+
+type MatchAction = "match" | "update";
+
+const ACTION_OPTIONS: { value: MatchAction; label: string }[] = [
+  { value: "match", label: "Match" },
+  { value: "update", label: "Update" }
+];
 
 const NameTable = ({
   finalResult,
@@ -25,11 +33,29 @@ const NameTable = ({
   setUploadResult,
   synonym = false,
   cname = false,
-  hierarchy = false
+  hierarchy = false,
+  getAction = undefined,
+  onActionChange = undefined,
+  canUpdate = undefined
+}: {
+  finalResult: any[];
+  selectedColumn: number | null;
+  uploadResult: any[];
+  setFinalResult: (value: any) => void;
+  setUploadResult: (value: any) => void;
+  synonym?: boolean;
+  cname?: boolean;
+  hierarchy?: boolean;
+  getAction?: (row: any) => MatchAction;
+  onActionChange?: (row: any, action: MatchAction) => void;
+  canUpdate?: (row: any) => boolean;
 }) => {
   const [currentIndex, setCurrentIndex] = useState<number>();
   const { open, onClose, onOpen } = useDisclosure();
   const { t } = useTranslation();
+
+  // Action column only shows when the parent passes both handlers (Given Names tab)
+  const showAction = Boolean(getAction && onActionChange);
 
   const getRowBg = (item) => {
     if (cname) {
@@ -50,12 +76,18 @@ const NameTable = ({
           {hierarchy && <th>Rank</th>}
           {hierarchy && <th>Name</th>}
           <th>{t("taxon:name_matching.name_matches")}</th>
+          {showAction && <th>Action</th>}
         </tr>
       </thead>
       <tbody>
         {finalResult &&
           finalResult.map((item, index) => (
-            <tr key={`${item[0]}-${index}`} style={{ backgroundColor: `var(--chakra-colors-${getRowBg(item).replace(".", "-")})` }}>
+            <tr
+              key={`${item[0]}-${index}`}
+              style={{
+                backgroundColor: `var(--chakra-colors-${getRowBg(item).replace(".", "-")})`
+              }}
+            >
               {!hierarchy && (
                 <td>
                   <SimpleActionButton
@@ -103,7 +135,7 @@ const NameTable = ({
                   </DialogRoot>
                   {selectedColumn !== null && (synonym || cname)
                     ? item[0].split("#")[0]
-                    : item[0]?.slice(0, -1).split("#")[selectedColumn]}
+                    : item[0]?.slice(0, -1).split("#")[selectedColumn ? selectedColumn : 0]}
                 </td>
               )}
               {(synonym || cname || hierarchy) && <td>{item[0].split("#")[1]}</td>}
@@ -230,6 +262,30 @@ const NameTable = ({
                   </Text>
                 )}
               </td>
+              {showAction && (
+                <td style={{ verticalAlign: "middle", whiteSpace: "nowrap" }}>
+                  <NativeSelectRoot
+                    size="sm"
+                    minW="7rem"
+                    bg="white"
+                    disabled={canUpdate ? !canUpdate(item) : false}
+                  >
+                    <NativeSelectField
+                      aria-label="Action"
+                      value={getAction!(item)}
+                      onChange={(e) => onActionChange!(item, e.currentTarget.value as MatchAction)}
+                    >
+                      {ACTION_OPTIONS.filter(
+                        ({ value }) => value !== "update" || !canUpdate || canUpdate(item)
+                      ).map(({ value, label }) => (
+                        <option key={value} value={value}>
+                          {label}
+                        </option>
+                      ))}
+                    </NativeSelectField>
+                  </NativeSelectRoot>
+                </td>
+              )}
             </tr>
           ))}
       </tbody>

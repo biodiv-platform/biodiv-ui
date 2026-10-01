@@ -33,8 +33,14 @@ type TaxonData = {
   position: string;
 };
 
+export type MatchAction = "match" | "update";
+
 const ACCEPT_STRING =
   "application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+// Key used for the Source column in the Given Names sheet.
+// Prefixed so it never collides with an uploaded column that is also named "Source".
+const SOURCE_COLUMN_KEY = "__source";
 
 // Pure helpers — no hooks, no component state — safe at module scope
 const updateColumnMapping = (
@@ -89,6 +95,8 @@ export default function NameMatchingComponent({ ranks }) {
   const [columnMapping, setColumnMapping] = useState<[number, string][]>([]);
   const [activeTab, setActiveTab] = useState("names");
   const [filter, setFilter] = useState<string>("Matched");
+  // Per-record action for Given Names, keyed by upload index + row key
+  const [rowActions, setRowActions] = useState<Record<string, MatchAction>>({});
   const { t } = useTranslation();
 
   const matchStats = useMemo(() => {
@@ -145,8 +153,47 @@ export default function NameMatchingComponent({ ranks }) {
   const headerMatchMap = useMemo(() => buildHeaderMatchMap(ranks), [ranks]);
   const [currentStep, setCurrentStep] = useState(1);
 
+  const getRowActionKey = (row: [string, TaxonData, any, boolean, number]) =>
+    `${row[4]}|${row[0]}`;
+
+  // Name from the uploaded file for a Given Names row
+  const getUploadedName = useCallback(
+    (row: [string, TaxonData, any, boolean, number]) =>
+      row[0].slice(0, -1).split("#")[selectedColumn ? selectedColumn : 0] ?? "",
+    [selectedColumn]
+  );
+
+  // Update is only allowed when there is a match and its name differs from the uploaded name
+  const canUpdate = useCallback(
+    (row: [string, TaxonData, any, boolean, number]) => {
+      const matchedName = row[1]?.name;
+      if (!matchedName) return false;
+      return (
+        getUploadedName(row).trim().toLowerCase() !== matchedName.trim().toLowerCase()
+      );
+    },
+    [getUploadedName]
+  );
+
+  // Falls back to "match" if the row is no longer eligible (e.g. a different match was picked)
+  const getRowAction = useCallback(
+    (row: [string, TaxonData, any, boolean, number]): MatchAction =>
+      canUpdate(row) ? (rowActions[getRowActionKey(row)] ?? "match") : "match",
+    [rowActions, canUpdate]
+  );
+
+  const setRowAction = useCallback(
+    (row: [string, TaxonData, any, boolean, number], value: MatchAction) =>
+      setRowActions((prev) => ({ ...prev, [getRowActionKey(row)]: value })),
+    []
+  );
+
   const importAsExcel = async () => {
     const workbook = new ExcelJS.Workbook();
+
+    // Given Names only: Source holds the uploaded name when the record's action is Update
+    const getSourceValue = (name) =>
+      getRowAction(name) === "update" ? getUploadedName(name) : "";
 
     // Helper to build one sheet, reused for names/synonyms/cname
     const buildNameSheet = (
@@ -189,18 +236,39 @@ export default function NameMatchingComponent({ ranks }) {
               { header: "SpeciesId", key: "SpeciesId" },
               { header: "MatchedStatus", key: "MatchedStatus" },
               { header: "MatchedPosition", key: "MatchedPosition" },
+              ...(!synonym && !cname && !hierarchy
+                ? [
+                    { header: "MatchedRank", key: "MatchedRank" },
+                    { header: "MatchedAcceptedId", key: "MatchedAcceptedId" },
+                    { header: "TargetStatus", key: "TargetStatus" },
+                    { header: "TargetPosition", key: "TargetPosition" },
+                    { header: "TargetRank", key: "TargetRank" },
+                    { header: "TargetAcceptedId", key: "TargetAcceptedId" }
+                  ]
+                : []),
               { header: "Hierarchy", key: "Hierarchy" },
-              { header: "MatchedRank", key: "MatchedRank" },
-              { header: "MatchedAcceptedId", key: "MatchedAcceptedId" },
+              // Given Names only: Source comes right after Hierarchy
+              ...(!synonym && !cname && !hierarchy
+                ? [{ header: "Source", key: SOURCE_COLUMN_KEY }]
+                : [])
             ]
-          : [{ header: "Language", key: "Language" }])
+          : [{ header: "Language", key: "Language" }]),
+        ...(synonym
+          ? [
+              { header: "Rank", key: "Rank" },
+              { header: "AcceptedId", key: "AcceptedId" }
+            ]
+          : [])
       ];
 
       if (synonym === false && cname === false && hierarchy === false) {
         const newColumns = headers
           .filter((_, index) => index !== selectedColumn)
           .map((header) => ({ header, key: header }));
-        worksheet.columns = [...worksheet.columns, ...newColumns];
+        worksheet.columns = [
+          ...worksheet.columns,
+          ...newColumns
+        ];
       }
 
       data.forEach((name) => {
@@ -220,13 +288,24 @@ export default function NameMatchingComponent({ ranks }) {
                 : name[0].split("#")[0]
               : name[1]["name"];
           }
+          if (!synonym && !cname && !hierarchy) {
+            row["MatchedRank"] = name[1]["rank"];
+            row["MatchedAcceptedId"] = Array.isArray(name[1]["acceptedId"])
+              ? name[1]["acceptedId"].join(",")
+              : "";
+          }
+          if (synonym) {
+            row["Rank"] = name[1]["rank"];
+            row["AcceptedId"] = Array.isArray(name[1]["acceptedId"])
+              ? name[1]["acceptedId"].join(",")
+              : "";
+          }
           row[cname ? "CommonNameId" : "TaxonConceptId"] = name[1]["id"];
           if (!cname) {
             row["GroupName"] = name[1]["group_name"];
             row["SpeciesId"] = name[2];
             row["MatchedStatus"] = name[1]["status"];
             row["MatchedPosition"] = name[1]["position"];
-            row["MatchedRank"] = name[1]["rank"];
             const hierarchy = name[1]["hierarchy"];
 
             const hier = Array.isArray(hierarchy)
@@ -249,6 +328,9 @@ export default function NameMatchingComponent({ ranks }) {
             row["Rank"] = name[0].split("#")[2];
             row["Name"] = name[0].split("#")[0];
           }
+          if (!synonym && !cname && !hierarchy) {
+            row[SOURCE_COLUMN_KEY] = getSourceValue(name);
+          }
           if (cname && Object.entries(name[1]).length > 0 && filter != "Unmatched") {
             worksheet.addRow(row);
           } else if (cname && filter != "Matched") {
@@ -267,6 +349,9 @@ export default function NameMatchingComponent({ ranks }) {
             row["ScientificName"] = name[0].slice(0, -1).split("#")[
               selectedColumn ? selectedColumn : 0
             ];
+            if (!cname) {
+              row[SOURCE_COLUMN_KEY] = getSourceValue(name);
+            }
           } else if (hierarchy) {
             row["Source"] = name[0].split("#")[1];
             row["Index"] = name[0].split("#")[3];
@@ -320,6 +405,7 @@ export default function NameMatchingComponent({ ranks }) {
       }
     });
     formData.append("hierarchy", rankMap.slice(1));
+    setRowActions({});
 
     setLoading(true);
 
@@ -392,7 +478,7 @@ export default function NameMatchingComponent({ ranks }) {
       }
 
       if (targetFile) {
-        setFile(targetFile); // ← runs first, as you wanted
+        setFile(targetFile);
 
         try {
           const workbook = new ExcelJS.Workbook();
@@ -403,7 +489,6 @@ export default function NameMatchingComponent({ ranks }) {
           const firstRow = worksheet.getRow(1);
           const extractedHeaders: string[] = [];
 
-          // headerMatchMap is just read here via closure — no hook call
           firstRow.eachCell((cell, colNumber) => {
             if (cell.value) {
               const cellValue = cell.value.toString();
@@ -426,12 +511,11 @@ export default function NameMatchingComponent({ ranks }) {
         notification("No file selected!");
       }
     },
-    [onOpen1, headerMatchMap] // ← add headerMatchMap here
+    [onOpen1, headerMatchMap]
   );
 
   return (
     <Box p={4}>
-      {/* Progress Bar */}
       <Alert status="info" borderRadius="md" mb={4} alignItems="top">
         {t("taxon:name_matching.description")}
       </Alert>
@@ -568,6 +652,9 @@ export default function NameMatchingComponent({ ranks }) {
                         uploadResult={uploadResult}
                         setFinalResult={setFinalResult}
                         setUploadResult={setUploadResult}
+                        getAction={getRowAction}
+                        onActionChange={setRowAction}
+                        canUpdate={canUpdate}
                       />
                     )}
                     {filter == "Single Matched" && (
@@ -580,6 +667,9 @@ export default function NameMatchingComponent({ ranks }) {
                         uploadResult={uploadResult}
                         setFinalResult={setFinalResult}
                         setUploadResult={setUploadResult}
+                        getAction={getRowAction}
+                        onActionChange={setRowAction}
+                        canUpdate={canUpdate}
                       />
                     )}
                     {filter == "Multiple Matched" && (
@@ -592,6 +682,9 @@ export default function NameMatchingComponent({ ranks }) {
                         uploadResult={uploadResult}
                         setFinalResult={setFinalResult}
                         setUploadResult={setUploadResult}
+                        getAction={getRowAction}
+                        onActionChange={setRowAction}
+                        canUpdate={canUpdate}
                       />
                     )}
                     {filter == "All" && (
@@ -601,6 +694,9 @@ export default function NameMatchingComponent({ ranks }) {
                         uploadResult={uploadResult}
                         setFinalResult={setFinalResult}
                         setUploadResult={setUploadResult}
+                        getAction={getRowAction}
+                        onActionChange={setRowAction}
+                        canUpdate={canUpdate}
                       />
                     )}
                     {filter == "Unmatched" && (
@@ -610,6 +706,9 @@ export default function NameMatchingComponent({ ranks }) {
                         uploadResult={uploadResult}
                         setFinalResult={setFinalResult}
                         setUploadResult={setUploadResult}
+                        getAction={getRowAction}
+                        onActionChange={setRowAction}
+                        canUpdate={canUpdate}
                       />
                     )}
                   </Tabs.Content>
