@@ -22,6 +22,7 @@ import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 
 import { Field } from "@/components/ui/field";
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
+import { withFileValidation } from "@/utils/upload-guard";
 
 type DragProps = {
   isDragActive?: boolean;
@@ -156,7 +157,7 @@ export const PageGalleryField = ({
       <Box id={name} width={"full"} p={2}>
         <FileUpload.Root
           accept={ACCEPT_STRING}
-          onFileChange={handleFileChange}
+          onFileChange={withFileValidation(handleFileChange, "image")}
           maxFiles={10}
           disabled={disabled || isProcessing}
           width="full"

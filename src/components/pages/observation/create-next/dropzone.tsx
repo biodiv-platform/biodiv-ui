@@ -7,6 +7,7 @@ import { useCallback, useRef } from "react";
 
 import { toaster } from "@/components/ui/toaster";
 import { MAX_UPLOAD_SIZE } from "@/services/tusupload.service";
+import { withFileValidation } from "@/utils/upload-guard";
 
 import ObservationCreateNextForm from "./form";
 import useObservationCreateNext from "./use-observation-create-next-hook";
@@ -68,7 +69,7 @@ export default function DraftDropzone() {
   return (
     <FileUpload.Root
       accept={ACCEPT_STRING}
-      onFileChange={handleFileChange}
+      onFileChange={withFileValidation(handleFileChange, "observation")}
       width="full"
       maxFiles={10}
       maxFileSize={MAX_UPLOAD_SIZE}

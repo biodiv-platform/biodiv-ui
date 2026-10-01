@@ -5,6 +5,7 @@ import useTranslation from "next-translate/useTranslation";
 import { useCallback, useMemo } from "react";
 
 import { Tooltip } from "@/components/ui/tooltip";
+import { withFileValidation } from "@/utils/upload-guard";
 
 import { FILE_TYPES, RASTER_FILE_TYPES } from "../data";
 import { VectorPreviewAndDescriptions } from "../form/vector-form";
@@ -145,7 +146,7 @@ export default function LayerUploadDropzone() {
                 ) : (
                   <FileUpload.Root
                     accept={acceptString}
-                    onFileChange={handleFileChange}
+                    onFileChange={withFileValidation(handleFileChange, "layer")}
                     maxFiles={30}
                     gridColumn={{ base: "1", md: "1/6" }}
                     h="100%"
