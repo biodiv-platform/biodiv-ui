@@ -349,6 +349,7 @@ export default function NameMatchingComponent({ ranks }) {
             row["ScientificName"] = name[0].slice(0, -1).split("#")[
               selectedColumn ? selectedColumn : 0
             ];
+            row["TaxonConceptId"] = "CREATE";
             if (!cname) {
               row[SOURCE_COLUMN_KEY] = getSourceValue(name);
             }

@@ -830,9 +830,7 @@ export default function TaxonomyBatchUploadComponent() {
                               baseAction={item["originalAction"] ?? item["action"]}
                               changes={changes}
                               error={
-                                item["taxonId"] == "null"
-                                  ? "Cannot create without rank or insufficient hierarchy"
-                                  : undefined
+                                item["error"]
                               }
                               onChange={(value) => {
                                 setUploadResult((prev) =>
