@@ -5,7 +5,7 @@ import useTranslation from "next-translate/useTranslation";
 import { useCallback, useMemo } from "react";
 
 import { Tooltip } from "@/components/ui/tooltip";
-import { withFileValidation } from "@/utils/upload-guard";
+import { useValidatedFileUpload } from "@/utils/upload-guard";
 
 import { FILE_TYPES, RASTER_FILE_TYPES } from "../data";
 import { VectorPreviewAndDescriptions } from "../form/vector-form";
@@ -115,6 +115,12 @@ export default function LayerUploadDropzone() {
     return allowedExtensions.join(",");
   }, [allowedExtensions]);
 
+  const { fileUpload } = useValidatedFileUpload(
+    { accept: acceptString, maxFiles: 30 },
+    handleFileChange,
+    "layer"
+  );
+
   return (
     <VerticalTabs>
       <Tabs.Root
@@ -144,10 +150,8 @@ export default function LayerUploadDropzone() {
                 {index === "vector" && canSubmit && shapeFiles.dbf.meta?.keys?.length ? (
                   <VectorPreviewAndDescriptions />
                 ) : (
-                  <FileUpload.Root
-                    accept={acceptString}
-                    onFileChange={withFileValidation(handleFileChange, "layer")}
-                    maxFiles={30}
+                  <FileUpload.RootProvider
+                    value={fileUpload}
                     gridColumn={{ base: "1", md: "1/6" }}
                     h="100%"
                   >
@@ -191,7 +195,7 @@ export default function LayerUploadDropzone() {
                         </FileUpload.Dropzone>
                       )}
                     </FileUpload.Context>
-                  </FileUpload.Root>
+                  </FileUpload.RootProvider>
                 )}
 
                 <FilePreview />

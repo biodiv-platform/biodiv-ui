@@ -550,6 +550,22 @@ const isZipHead = (h: Uint8Array) => startsWith(h, [0x50, 0x4b, 0x03, 0x04]);
 const isoBmff = (h: Uint8Array) =>
   h.length >= 12 && ["ftyp", "moov", "mdat", "free", "wide", "skip"].includes(ascii(h, 4, 8));
 
+/**
+ * .mp4 and .mov share the same box-structured container (ISO-BMFF / QuickTime), so a box-shape
+ * check alone can't tell them apart — a .mov renamed to .mp4 would still "look like" an mp4. To
+ * actually distinguish them we read the ftyp box's major brand (e.g. "qt  " for QuickTime,
+ * "isom"/"mp42"/"MSNV" for MP4) and match it to the claimed extension.
+ */
+const QUICKTIME_BRANDS = ["qt  "];
+const MP4_BRANDS = ["isom", "iso2", "mp41", "mp42", "avc1", "M4V ", "M4A ", "MSNV", "3gp4", "3gp5"];
+
+const isoBmffBrand = (h: Uint8Array, allowed: readonly string[]): boolean => {
+  if (!isoBmff(h)) return false;
+  if (ascii(h, 4, 8) !== "ftyp" || h.length < 16) return true; // no ftyp box to check (rare) → fall back to shape check
+  const brand = ascii(h, 8, 12);
+  return allowed.includes(brand);
+};
+
 const TEXT_MIMES = ["text/plain", "text/csv", "application/csv", "application/vnd.ms-excel"];
 
 const FILE_TYPES: Record<string, FileTypeDef> = {
@@ -592,13 +608,13 @@ const FILE_TYPES: Record<string, FileTypeDef> = {
   mp4: {
     mimes: ["video/mp4", "video/x-m4v"],
     detectedMime: "video/mp4",
-    sniff: isoBmff,
+    sniff: (h) => isoBmffBrand(h, MP4_BRANDS),
     inspect: inspectMedia
   },
   mov: {
     mimes: ["video/quicktime", "video/mp4"],
     detectedMime: "video/quicktime",
-    sniff: isoBmff,
+    sniff: (h) => isoBmffBrand(h, QUICKTIME_BRANDS),
     inspect: inspectMedia
   },
   webm: {

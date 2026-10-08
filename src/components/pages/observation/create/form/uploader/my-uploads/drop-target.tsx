@@ -88,31 +88,29 @@ export default function DropTarget() {
           width="full"
           minH="auto"
         >
-          <FileUpload.Trigger asChild>
-            <DropTargetBox>
-              {isProcessing ? (
-                <div className="fade">
-                  <LuTimer />
-                  <span>{t("form:uploader.processing")}</span>
-                </div>
-              ) : (
-                <FileUpload.Context>
-                  {(fileUpload) =>
-                    fileUpload.dragging ? (
-                      <div className="fade">
-                        <LuMoveUp />
-                        <span>{t("form:uploader.label_release")}</span>
-                      </div>
-                    ) : (
-                      <Text my={2} color="gray.500">
-                        <LuPlus />
-                      </Text>
-                    )
-                  }
-                </FileUpload.Context>
-              )}
-            </DropTargetBox>
-          </FileUpload.Trigger>
+          <DropTargetBox>
+            {isProcessing ? (
+              <div className="fade">
+                <LuTimer />
+                <span>{t("form:uploader.processing")}</span>
+              </div>
+            ) : (
+              <FileUpload.Context>
+                {(fileUpload) =>
+                  fileUpload.dragging ? (
+                    <div className="fade">
+                      <LuMoveUp />
+                      <span>{t("form:uploader.label_release")}</span>
+                    </div>
+                  ) : (
+                    <Text my={2} color="gray.500">
+                      <LuPlus />
+                    </Text>
+                  )
+                }
+              </FileUpload.Context>
+            )}
+          </DropTargetBox>
         </FileUpload.Dropzone>
       </FileUpload.Root>
     </AspectRatio>
