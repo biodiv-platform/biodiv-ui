@@ -7,6 +7,8 @@ import { axUploadCSVCurationResource } from "@services/files.service";
 import { useCallback, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
+import { withFileValidation } from "@/utils/upload-guard";
+
 const ACCEPT_STRING = "text/csv";
 
 export default function CSVDropzoneComponent({ name, setHeaders }) {
@@ -41,7 +43,7 @@ export default function CSVDropzoneComponent({ name, setHeaders }) {
     <Box mb={4}>
       <FileUpload.Root
         accept={ACCEPT_STRING}
-        onFileChange={handleFileChange}
+        onFileChange={withFileValidation(handleFileChange, "csv")}
         maxFiles={1}
         width="full"
       >

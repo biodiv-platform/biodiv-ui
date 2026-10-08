@@ -27,11 +27,21 @@ import { LuCircleAlert } from "react-icons/lu";
 
 import { Alert } from "@/components/ui/alert";
 import { Checkbox } from "@/components/ui/checkbox";
+import { withFileValidation } from "@/utils/upload-guard";
 
 import ColumnMapper from "../common/column-mapper";
 
 const ACCEPT_STRING =
   "application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+const options = [
+  "ScientificName",
+  "TaxonConceptId",
+  "SpeciesId",
+  "Attribution",
+  "Contributor",
+  "License"
+];
 
 export default function TraitsBatchUpload({ traits, languages }) {
   function groupByLanguageId(list) {
@@ -63,15 +73,6 @@ export default function TraitsBatchUpload({ traits, languages }) {
   const [failedUpload, setFailedUpload] = useState(0);
   const [showstats, setshowstats] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
-
-  const options = [
-    "ScientificName",
-    "TaxonConceptId",
-    "SpeciesId",
-    "Attribution",
-    "Contributor",
-    "License"
-  ];
   const { t } = useTranslation();
 
   const handleFileChange = useCallback(
@@ -300,7 +301,7 @@ export default function TraitsBatchUpload({ traits, languages }) {
       {currentStep == 1 && (
         <FileUpload.Root
           accept={ACCEPT_STRING}
-          onFileChange={handleFileChange}
+          onFileChange={withFileValidation(handleFileChange, "spreadsheet")}
           maxFiles={1}
           width="full"
         >

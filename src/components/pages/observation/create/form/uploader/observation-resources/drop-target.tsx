@@ -1,12 +1,13 @@
 import { Box, Button, FileUpload, Heading, Text, VStack } from "@chakra-ui/react";
 import { ACCEPTED_FILE_TYPES } from "@static/observation-create";
 import { resizeMultiple } from "@utils/image";
-import notification from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import { useCallback, useState } from "react";
 import { LuTimer } from "react-icons/lu";
 
+import { CloseButton } from "@/components/ui/close-button";
 import { MAX_UPLOAD_SIZE } from "@/services/tusupload.service";
+import { useValidatedFileUpload } from "@/utils/upload-guard";
 
 import useObservationCreate from "../use-observation-resources";
 
@@ -24,15 +25,8 @@ export default function DropTarget({ assetsSize }) {
 
   const handleFileChange = useCallback(
     async (details: { acceptedFiles: File[]; rejectedFiles: any[] }) => {
-      const { acceptedFiles, rejectedFiles } = details;
-
-      if (rejectedFiles && rejectedFiles.length > 0) {
-        rejectedFiles.forEach((file) => {
-          const ext = "." + file.name.substring(file.name.lastIndexOf(".") + 1);
-          notification(`${ext} format not supported`);
-        });
-        return;
-      }
+      // rejected files are listed under the dropzone with their reason
+      const { acceptedFiles } = details;
 
       if (acceptedFiles.length > 0) {
         setIsProcessing(true);
@@ -47,6 +41,13 @@ export default function DropTarget({ assetsSize }) {
       }
     },
     [addAssets]
+  );
+
+  const { fileUpload, rejections, dismissRejection } = useValidatedFileUpload(
+    { accept: ACCEPT_STRING, maxFiles: 10, maxFileSize: MAX_UPLOAD_SIZE },
+    handleFileChange,
+    "observation",
+    { notify: false }
   );
 
   const hasAssets = !!assetsSize;
@@ -78,13 +79,10 @@ export default function DropTarget({ assetsSize }) {
   }
 
   return (
-    <FileUpload.Root
-      accept={ACCEPT_STRING}
-      onFileChange={handleFileChange}
+    <FileUpload.RootProvider
+      value={fileUpload}
       width="full"
-      maxFiles={10}
       style={{ gridColumn: !hasAssets ? "1/6" : "auto" }}
-      maxFileSize={MAX_UPLOAD_SIZE}
     >
       <FileUpload.HiddenInput />
 
@@ -126,7 +124,34 @@ export default function DropTarget({ assetsSize }) {
           </VStack>
         </FileUpload.DropzoneContent>
       </FileUpload.Dropzone>
-      <FileUpload.List />
-    </FileUpload.Root>
+
+      {rejections.length > 0 && (
+        <FileUpload.ItemGroup>
+          {rejections.map((r) => (
+            <FileUpload.Item
+              key={r.id}
+              file={r.file}
+              borderColor="red.300"
+              bg="red.50"
+              _dark={{ borderColor: "red.800", bg: "red.950" }}
+            >
+              <FileUpload.ItemPreview />
+              <FileUpload.ItemContent minW={0}>
+                <FileUpload.ItemName truncate />
+                <Text fontSize="xs" color="red.600" _dark={{ color: "red.300" }}>
+                  {r.message}
+                </Text>
+              </FileUpload.ItemContent>
+              <CloseButton
+                size="2xs"
+                variant="ghost"
+                aria-label="Dismiss"
+                onClick={() => dismissRejection(r.id)}
+              />
+            </FileUpload.Item>
+          ))}
+        </FileUpload.ItemGroup>
+      )}
+    </FileUpload.RootProvider>
   );
 }

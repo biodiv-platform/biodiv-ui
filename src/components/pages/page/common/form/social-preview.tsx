@@ -8,6 +8,7 @@ import { useCallback, useState } from "react";
 import { useController, useFormContext } from "react-hook-form";
 
 import { Field } from "@/components/ui/field";
+import { withFileValidation } from "@/utils/upload-guard";
 
 import { Container, ITPageGalleryFieldProps } from "./gallery-field";
 
@@ -112,7 +113,7 @@ export const SocialPreviewField = ({
           ) : (
             <FileUpload.Root
               accept={ACCEPT_STRING}
-              onFileChange={handleFileChange}
+              onFileChange={withFileValidation(handleFileChange, "image")}
               maxFiles={1}
               width="full"
               height="full"

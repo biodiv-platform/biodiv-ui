@@ -5,6 +5,8 @@ import useTranslation from "next-translate/useTranslation";
 import { useCallback, useState } from "react";
 import { LuTimer } from "react-icons/lu";
 
+import { withFileValidation } from "@/utils/upload-guard";
+
 const DropTargetBox = styled.div`
   border: 2px dashed var(--chakra-colors-gray-300);
   border-radius: 0.5rem;
@@ -84,7 +86,7 @@ export default function DropTarget({
           <VStack className="fade" width="full" gap={2}>
             <FileUpload.Root
               accept={ACCEPT_STRING}
-              onFileChange={handleFileChange}
+              onFileChange={withFileValidation(handleFileChange, "image")}
               maxFiles={1}
               width="full"
               alignItems="center"

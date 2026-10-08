@@ -7,6 +7,7 @@ import { useCallback, useState } from "react";
 import { LuMoveUp, LuPlus, LuTimer } from "react-icons/lu";
 
 import { MAX_UPLOAD_SIZE } from "@/services/tusupload.service";
+import { withFileValidation } from "@/utils/upload-guard";
 
 import useObservationCreate from "../use-observation-resources";
 
@@ -71,7 +72,7 @@ export default function DropTarget() {
     <AspectRatio ratio={1}>
       <FileUpload.Root
         accept={ACCEPT_STRING}
-        onFileChange={handleFileChange}
+        onFileChange={withFileValidation(handleFileChange, "observation")}
         width="full"
         height="full"
         maxFileSize={MAX_UPLOAD_SIZE}
@@ -87,31 +88,29 @@ export default function DropTarget() {
           width="full"
           minH="auto"
         >
-          <FileUpload.Trigger asChild>
-            <DropTargetBox>
-              {isProcessing ? (
-                <div className="fade">
-                  <LuTimer />
-                  <span>{t("form:uploader.processing")}</span>
-                </div>
-              ) : (
-                <FileUpload.Context>
-                  {(fileUpload) =>
-                    fileUpload.dragging ? (
-                      <div className="fade">
-                        <LuMoveUp />
-                        <span>{t("form:uploader.label_release")}</span>
-                      </div>
-                    ) : (
-                      <Text my={2} color="gray.500">
-                        <LuPlus />
-                      </Text>
-                    )
-                  }
-                </FileUpload.Context>
-              )}
-            </DropTargetBox>
-          </FileUpload.Trigger>
+          <DropTargetBox>
+            {isProcessing ? (
+              <div className="fade">
+                <LuTimer />
+                <span>{t("form:uploader.processing")}</span>
+              </div>
+            ) : (
+              <FileUpload.Context>
+                {(fileUpload) =>
+                  fileUpload.dragging ? (
+                    <div className="fade">
+                      <LuMoveUp />
+                      <span>{t("form:uploader.label_release")}</span>
+                    </div>
+                  ) : (
+                    <Text my={2} color="gray.500">
+                      <LuPlus />
+                    </Text>
+                  )
+                }
+              </FileUpload.Context>
+            )}
+          </DropTargetBox>
         </FileUpload.Dropzone>
       </FileUpload.Root>
     </AspectRatio>

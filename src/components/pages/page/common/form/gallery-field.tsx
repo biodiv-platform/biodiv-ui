@@ -22,6 +22,7 @@ import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 
 import { Field } from "@/components/ui/field";
 import { NativeSelectField, NativeSelectRoot } from "@/components/ui/native-select";
+import { useValidatedFileUpload } from "@/utils/upload-guard";
 
 type DragProps = {
   isDragActive?: boolean;
@@ -127,6 +128,12 @@ export const PageGalleryField = ({
     [append, t]
   );
 
+  const { fileUpload } = useValidatedFileUpload(
+    { accept: ACCEPT_STRING, maxFiles: 10, disabled: disabled || isProcessing },
+    handleFileChange,
+    "image"
+  );
+
   const handleOnRemove = (item, index) => {
     remove(index);
 
@@ -154,13 +161,7 @@ export const PageGalleryField = ({
 
       {/* Dropzone */}
       <Box id={name} width={"full"} p={2}>
-        <FileUpload.Root
-          accept={ACCEPT_STRING}
-          onFileChange={handleFileChange}
-          maxFiles={10}
-          disabled={disabled || isProcessing}
-          width="full"
-        >
+        <FileUpload.RootProvider value={fileUpload} width="full">
           <FileUpload.HiddenInput />
 
           <FileUpload.Context>
@@ -180,7 +181,7 @@ export const PageGalleryField = ({
               </FileUpload.Dropzone>
             )}
           </FileUpload.Context>
-        </FileUpload.Root>
+        </FileUpload.RootProvider>
       </Box>
 
       {/* Preview */}

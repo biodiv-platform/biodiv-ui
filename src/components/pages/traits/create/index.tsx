@@ -43,6 +43,7 @@ import {
   DialogRoot
 } from "@/components/ui/dialog";
 import { Field } from "@/components/ui/field";
+import { withFileValidation } from "@/utils/upload-guard";
 
 import TraitsValueComponent from "./trait-value-component";
 
@@ -454,7 +455,11 @@ export default function TraitsCreateComponent({ speciesField, languages }) {
               />
             </Box>
 
-            <FileUpload.Root accept={ACCEPT_STRING} onFileChange={handleFileChange} maxFiles={1}>
+            <FileUpload.Root
+              accept={ACCEPT_STRING}
+              onFileChange={withFileValidation(handleFileChange, "image")}
+              maxFiles={1}
+            >
               <FileUpload.HiddenInput />
               <FileUpload.Dropzone
                 asChild
@@ -469,27 +474,25 @@ export default function TraitsCreateComponent({ speciesField, languages }) {
                 cursor="pointer"
                 bg="white"
               >
-                <FileUpload.Trigger asChild>
-                  <Box width="full" height="full">
-                    {hForm.watch(`translations[${translationSelected}].traits.icon`) ? (
-                      <Flex width="full" height="full" align="center" justify="center">
-                        <img
-                          src={getTraitIcon(
-                            hForm.watch(`translations[${translationSelected}].traits.icon`)
-                          )}
-                          alt="Icon Preview"
-                          style={{ height: "70px", width: "70px", objectFit: "cover" }}
-                        />
-                      </Flex>
-                    ) : (
-                      <Flex width="full" height="full" align="center" justify="center">
-                        <Text fontSize="2xl" color="gray.400">
-                          +
-                        </Text>
-                      </Flex>
-                    )}
-                  </Box>
-                </FileUpload.Trigger>
+                <Box width="full" height="full">
+                  {hForm.watch(`translations[${translationSelected}].traits.icon`) ? (
+                    <Flex width="full" height="full" align="center" justify="center">
+                      <img
+                        src={getTraitIcon(
+                          hForm.watch(`translations[${translationSelected}].traits.icon`)
+                        )}
+                        alt="Icon Preview"
+                        style={{ height: "70px", width: "70px", objectFit: "cover" }}
+                      />
+                    </Flex>
+                  ) : (
+                    <Flex width="full" height="full" align="center" justify="center">
+                      <Text fontSize="2xl" color="gray.400">
+                        +
+                      </Text>
+                    </Flex>
+                  )}
+                </Box>
               </FileUpload.Dropzone>
             </FileUpload.Root>
 

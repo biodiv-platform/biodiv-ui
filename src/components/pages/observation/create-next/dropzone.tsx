@@ -7,6 +7,7 @@ import { useCallback, useRef } from "react";
 
 import { toaster } from "@/components/ui/toaster";
 import { MAX_UPLOAD_SIZE } from "@/services/tusupload.service";
+import { useValidatedFileUpload } from "@/utils/upload-guard";
 
 import ObservationCreateNextForm from "./form";
 import useObservationCreateNext from "./use-observation-create-next-hook";
@@ -29,7 +30,7 @@ export default function DraftDropzone() {
       const { acceptedFiles, rejectedFiles } = details;
 
       if (rejectedFiles && rejectedFiles.length > 0) {
-        rejectedFiles.forEach((file) => {
+        rejectedFiles.forEach(({ file }) => {
           const resourceTypeFileFormat = "." + file.name.substring(file.name.lastIndexOf(".") + 1);
           notification(resourceTypeFileFormat + " format not supported");
         });
@@ -65,14 +66,14 @@ export default function DraftDropzone() {
     [draft, t]
   );
 
+  const { fileUpload } = useValidatedFileUpload(
+    { accept: ACCEPT_STRING, maxFiles: 10, maxFileSize: MAX_UPLOAD_SIZE },
+    handleFileChange,
+    "observation"
+  );
+
   return (
-    <FileUpload.Root
-      accept={ACCEPT_STRING}
-      onFileChange={handleFileChange}
-      width="full"
-      maxFiles={10}
-      maxFileSize={MAX_UPLOAD_SIZE}
-    >
+    <FileUpload.RootProvider value={fileUpload} width="full">
       <FileUpload.HiddenInput ref={fileUploadRef} />
 
       <FileUpload.Context>
@@ -92,6 +93,6 @@ export default function DraftDropzone() {
           </FileUpload.Dropzone>
         )}
       </FileUpload.Context>
-    </FileUpload.Root>
+    </FileUpload.RootProvider>
   );
 }
