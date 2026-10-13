@@ -35,7 +35,7 @@
     "@turf/turf": "^6.5.0",
     "array-move": "^4.0.0",
     "auto-toc": "^0.0.6",
-    "axios": "^1.18.0",
+    "axios": "^1.20.0",
     "base64-url": "^2.3.3",
     "blockhash-core": "^0.1.0",
     "blueimp-load-image": "^5.16.0",
