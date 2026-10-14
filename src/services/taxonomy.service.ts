@@ -259,7 +259,7 @@ export const axUploadBatchFile = async (formData) => {
 
 export const axBatchUpload = async (payload) => {
   try {
-    const { data } = await plainHttp.post(
+    const { data } = await http.post(
       `${ENDPOINT.TAXONOMY}/v1/taxonomy/batchUpload`,
       payload,
       {
