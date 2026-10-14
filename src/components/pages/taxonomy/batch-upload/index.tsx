@@ -106,7 +106,8 @@ function getMainRowChanges(item: any): FieldChange[] {
   const fields: [string, string][] = [
     ["Status", "status"],
     ["Position", "position"],
-    ["Name", "scientificName"]
+    ["Name", "scientificName"],
+    ["AcceptedId", "acceptedId"]
   ];
   fields.forEach(([label, key]) => {
     const value: string = item[key] ?? "";
@@ -123,6 +124,36 @@ function canCreateSpecies(item: any): boolean {
   return !item["speciesId"] || item["speciesId"] === "CREATE";
 }
 
+function CountBubble({
+  count,
+  colorPalette,
+  icon,
+  label
+}: {
+  count: number;
+  colorPalette: string;
+  icon: any;
+  label: string;
+}) {
+  if (!count) return null;
+  return (
+    <Badge
+      colorPalette={colorPalette}
+      variant="solid"
+      size="xs"
+      borderRadius="full"
+      px={1.5}
+      minW={4}
+      justifyContent="center"
+      title={`${count} to ${label}`}
+      aria-label={`${count} to ${label}`}
+    >
+      <Icon as={icon} boxSize={2.5} />
+      {count}
+    </Badge>
+  );
+}
+
 // Sub-row format: name|matchedId|status|...|rankName|acceptedId
 // Synonyms:     CREATE (new) / UPDATE (status or accepted taxon changes) / NOOP / ERROR (no rank name)
 // Common names: CREATE (new) / NOOP (already exists) — they are never updated.
@@ -131,10 +162,10 @@ function getSubRowComputedAction(it: string, synonym: boolean, acceptedId): stri
   const [, matchedId, status] = parts;
 
   if (!synonym) {
-    return matchedId === "null" ? "CREATE" : "NOOP";
+    return matchedId === "CREATE" ? "CREATE" : "NOOP";
   }
 
-  if (matchedId === "null") {
+  if (matchedId === "CREATE") {
     return parts[4] == "null" ? "ERROR" : "CREATE";
   }
   return status.startsWith("#") || Number(parts[5]) !== Number(acceptedId) ? "UPDATE" : "NOOP";
@@ -165,14 +196,7 @@ function ChangesTooltip({ changes }: { changes: FieldChange[] }) {
       positioning={{ placement: "bottom-end", overflowPadding: 8 }}
     >
       <Tooltip.Trigger asChild>
-        <HStack
-          as="button"
-          gap={1}
-          fontSize="xs"
-          color="gray.500"
-          cursor="default"
-          flexShrink={0}
-        >
+        <HStack as="button" gap={1} fontSize="xs" color="gray.500" cursor="default" flexShrink={0}>
           <Icon as={LuChevronRight} boxSize={3} />
           {changes!.length} change{changes!.length !== 1 ? "s" : ""}
         </HStack>
@@ -303,9 +327,7 @@ function ActionDropdown({
 
   return (
     <HStack gap={2}>
-      {hasChanges && (
-        <ChangesTooltip changes={changes!} />
-      )}
+      {hasChanges && <ChangesTooltip changes={changes!} />}
 
       <Select.Root
         collection={options}
@@ -355,6 +377,17 @@ function SubRowGroup({
 }) {
   const [open, setOpen] = useState(false);
 
+  const counts = useMemo(() => {
+    let create = 0;
+    let update = 0;
+    items.forEach((it) => {
+      const action = getSubRowComputedAction(it, synonym, acceptedId);
+      if (action === "CREATE") create++;
+      else if (action === "UPDATE") update++;
+    });
+    return { create, update };
+  }, [items, synonym, acceptedId]);
+
   return (
     <Collapsible.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
       <Collapsible.Trigger asChild>
@@ -363,6 +396,14 @@ function SubRowGroup({
           <Text>
             {label} ({items.length})
           </Text>
+          <CountBubble count={counts.create} colorPalette="green" icon={LuPlus} label="create" />
+          {/* Common names are never updated, so this only ever shows for synonyms */}
+          <CountBubble
+            count={counts.update}
+            colorPalette="blue"
+            icon={LuRefreshCw}
+            label="update"
+          />
           <Icon
             as={LuChevronDown}
             boxSize={3}
@@ -656,11 +697,14 @@ export default function TaxonomyBatchUploadComponent() {
         status: item["status"],
         position: item["position"],
         hierarchy: item["hierarchy"],
-        synonyms: (item["synonyms"] || [])
-          .filter((syn: string) => syn.split("|")[1] === "null")
-          .map((syn: string) => syn),
+        rank: item["rank"],
+        acceptedId: item["acceptedId"],
+        synonyms: (item["synonyms"] || []).filter((syn: string) => {
+          const action = getSubRowComputedAction(syn, true, item["taxonId"]);
+          return action === "CREATE" || action === "UPDATE";
+        }),
         commonNames: (item["commonNames"] || [])
-          .filter((cn: string) => cn.split("|")[1] === "null")
+          .filter((cn: string) => cn.split("|")[1] === "CREATE")
           .map((cn: string) => cn),
         taxonId: item["taxonId"],
         speciesId: canCreateSpecies(item)
@@ -829,9 +873,7 @@ export default function TaxonomyBatchUploadComponent() {
                               action={item["action"]}
                               baseAction={item["originalAction"] ?? item["action"]}
                               changes={changes}
-                              error={
-                                item["error"]
-                              }
+                              error={item["error"]}
                               onChange={(value) => {
                                 setUploadResult((prev) =>
                                   prev.map((row, i) =>

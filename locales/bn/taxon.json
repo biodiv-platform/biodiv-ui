@@ -97,6 +97,7 @@
     "download_button": "হিসাবে ডাউনলোড",
     "download_csv": "কমা পৃথক পৃথক মান (.csv)",
     "download_excel": "মাইক্রোসফ্ট এক্সেল (.xlsx)",
+    "format": "প্রতিশব্দ বিন্যাস: একাধিক নাম | দিয়ে আলাদা করুন \n(যেমন, Felis tigris | Tigris regalis) , সাধারণ নামের বিন্যাস: ভাষা ব্যবহার করুন : নাম, দ্বারা পৃথক করা | \n(যেমন, ইংরেজি: Tiger | হিন্দি: Bagh)",
     "matched_filter": "মেলে",
     "multiple_matches": "ম্যাচ পাওয়া গেছে",
     "name_matches": "নাম ম্যাচ",

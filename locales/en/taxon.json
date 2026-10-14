@@ -100,6 +100,7 @@
     "download_button": "Download As",
     "download_csv": "Comma Seperated Values (.csv)",
     "download_excel": "Microsoft Excel (.xlsx)",
+    "format": "Synonyms format: Separate multiple names with | (e.g., Felis tigris | Tigris regalis) ,   Common names format: Use Language : Name, separated by | (e.g., English : Tiger | Hindi : Bagh)",
     "matched_filter": "Matched",
     "multiple_matches": "Matches Found",
     "name_matches": "Name Matches",

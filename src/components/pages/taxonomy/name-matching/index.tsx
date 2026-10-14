@@ -94,7 +94,7 @@ export default function NameMatchingComponent({ ranks }) {
   const [selectedColumn, setSelectedColumn] = useState<number | null>(null);
   const [columnMapping, setColumnMapping] = useState<[number, string][]>([]);
   const [activeTab, setActiveTab] = useState("names");
-  const [filter, setFilter] = useState<string>("Matched");
+  const [filter, setFilter] = useState<string>("All");
   // Per-record action for Given Names, keyed by upload index + row key
   const [rowActions, setRowActions] = useState<Record<string, MatchAction>>({});
   const { t } = useTranslation();
@@ -153,8 +153,7 @@ export default function NameMatchingComponent({ ranks }) {
   const headerMatchMap = useMemo(() => buildHeaderMatchMap(ranks), [ranks]);
   const [currentStep, setCurrentStep] = useState(1);
 
-  const getRowActionKey = (row: [string, TaxonData, any, boolean, number]) =>
-    `${row[4]}|${row[0]}`;
+  const getRowActionKey = (row: [string, TaxonData, any, boolean, number]) => `${row[4]}|${row[0]}`;
 
   // Name from the uploaded file for a Given Names row
   const getUploadedName = useCallback(
@@ -168,9 +167,7 @@ export default function NameMatchingComponent({ ranks }) {
     (row: [string, TaxonData, any, boolean, number]) => {
       const matchedName = row[1]?.name;
       if (!matchedName) return false;
-      return (
-        getUploadedName(row).trim().toLowerCase() !== matchedName.trim().toLowerCase()
-      );
+      return getUploadedName(row).trim().toLowerCase() !== matchedName.trim().toLowerCase();
     },
     [getUploadedName]
   );
@@ -178,7 +175,7 @@ export default function NameMatchingComponent({ ranks }) {
   // Falls back to "match" if the row is no longer eligible (e.g. a different match was picked)
   const getRowAction = useCallback(
     (row: [string, TaxonData, any, boolean, number]): MatchAction =>
-      canUpdate(row) ? (rowActions[getRowActionKey(row)] ?? "match") : "match",
+      canUpdate(row) ? rowActions[getRowActionKey(row)] ?? "match" : "match",
     [rowActions, canUpdate]
   );
 
@@ -192,8 +189,7 @@ export default function NameMatchingComponent({ ranks }) {
     const workbook = new ExcelJS.Workbook();
 
     // Given Names only: Source holds the uploaded name when the record's action is Update
-    const getSourceValue = (name) =>
-      getRowAction(name) === "update" ? getUploadedName(name) : "";
+    const getSourceValue = (name) => (getRowAction(name) === "update" ? getUploadedName(name) : "");
 
     // Helper to build one sheet, reused for names/synonyms/cname
     const buildNameSheet = (
@@ -236,6 +232,7 @@ export default function NameMatchingComponent({ ranks }) {
               { header: "SpeciesId", key: "SpeciesId" },
               { header: "MatchedStatus", key: "MatchedStatus" },
               { header: "MatchedPosition", key: "MatchedPosition" },
+              { header: "MatchedHierarchy", key: "MatchedHierarchy" },
               ...(!synonym && !cname && !hierarchy
                 ? [
                     { header: "MatchedRank", key: "MatchedRank" },
@@ -246,8 +243,6 @@ export default function NameMatchingComponent({ ranks }) {
                     { header: "TargetAcceptedId", key: "TargetAcceptedId" }
                   ]
                 : []),
-              { header: "Hierarchy", key: "Hierarchy" },
-              // Given Names only: Source comes right after Hierarchy
               ...(!synonym && !cname && !hierarchy
                 ? [{ header: "Source", key: SOURCE_COLUMN_KEY }]
                 : [])
@@ -265,10 +260,7 @@ export default function NameMatchingComponent({ ranks }) {
         const newColumns = headers
           .filter((_, index) => index !== selectedColumn)
           .map((header) => ({ header, key: header }));
-        worksheet.columns = [
-          ...worksheet.columns,
-          ...newColumns
-        ];
+        worksheet.columns = [...worksheet.columns, ...newColumns];
       }
 
       data.forEach((name) => {
@@ -314,10 +306,13 @@ export default function NameMatchingComponent({ ranks }) {
                   .join("|")
               : "";
 
-            row["Hierarchy"] = hier;
+            row["MatchedHierarchy"] = hier;
           } else {
             row["Language"] =
               Object.entries(name[1]).length > 0 ? name[1]["lang"] : name[0].split("#")[2];
+            if (Object.entries(name[1]).length == 0) {
+              row["CommonNameId"] = "CREATE";
+            }
           }
           if (synonym || cname || hierarchy) {
             row["Source"] =
@@ -350,6 +345,8 @@ export default function NameMatchingComponent({ ranks }) {
               selectedColumn ? selectedColumn : 0
             ];
             row["TaxonConceptId"] = "CREATE";
+            row["TargetStatus"] = "ACCEPTED";
+            row["TargetPosition"] = "RAW";
             if (!cname) {
               row[SOURCE_COLUMN_KEY] = getSourceValue(name);
             }
@@ -358,10 +355,15 @@ export default function NameMatchingComponent({ ranks }) {
             row["Index"] = name[0].split("#")[3];
             row["Rank"] = name[0].split("#")[2];
             row["Name"] = name[0].split("#")[0];
+            row["TaxonConceptId"] = "CREATE";
           } else {
             row["ScientificName"] = name[0].split("#")[0];
             row["Source"] = name[0].split("#")[1];
             row["Index"] = synonym ? name[0].split("#")[2] : name[0].split("#")[3];
+            row["TaxonConceptId"] = "CREATE";
+            if (synonym){
+              row["AcceptedId"] = finalResult[name[0].split("#")[2]-1][1]["id"]
+            }
           }
           worksheet.addRow(row);
         }
@@ -519,6 +521,8 @@ export default function NameMatchingComponent({ ranks }) {
     <Box p={4}>
       <Alert status="info" borderRadius="md" mb={4} alignItems="top">
         {t("taxon:name_matching.description")}
+
+        {t("taxon:name_matching.format")}
       </Alert>
       <Box mt={6} p={4} borderWidth={1} borderRadius="md" bg="gray.50">
         {isLoading && <Spinner></Spinner>}
