@@ -362,31 +362,58 @@ function ActionDropdown({
   );
 }
 
+// Action + error reason for a sub-row, taking the parent name into account.
+// If the parent name is in an ERROR state, anything that would have been
+// created or updated becomes an ERROR instead (it won't be submitted).
+function getSubRowState(
+  it: string,
+  synonym: boolean,
+  acceptedId,
+  parentError: boolean
+): { action: string; error?: string } {
+  const computed = getSubRowComputedAction(it, synonym, acceptedId);
+  const kind = synonym ? "synonym" : "common name";
+
+  if (parentError && (computed === "CREATE" || computed === "UPDATE")) {
+    const verb = computed === "CREATE" ? "create" : "update";
+    return { action: "ERROR", error: `Cannot ${verb} ${kind}: given name has an error` };
+  }
+  if (computed === "ERROR") {
+    return { action: "ERROR", error: "Cannot create synonym without rank name" };
+  }
+  return { action: computed };
+}
+
 function SubRowGroup({
   label,
   icon,
   items,
   synonym,
-  acceptedId
+  acceptedId,
+  parentError = false
 }: {
   label: string;
   icon: any;
   items: string[];
   synonym: boolean;
   acceptedId;
+  // True when the given (main) name is in an ERROR state.
+  parentError?: boolean;
 }) {
   const [open, setOpen] = useState(false);
 
   const counts = useMemo(() => {
     let create = 0;
     let update = 0;
+    let error = 0;
     items.forEach((it) => {
-      const action = getSubRowComputedAction(it, synonym, acceptedId);
+      const { action } = getSubRowState(it, synonym, acceptedId, parentError);
       if (action === "CREATE") create++;
       else if (action === "UPDATE") update++;
+      else if (action === "ERROR") error++;
     });
-    return { create, update };
-  }, [items, synonym, acceptedId]);
+    return { create, update, error };
+  }, [items, synonym, acceptedId, parentError]);
 
   return (
     <Collapsible.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
@@ -404,6 +431,12 @@ function SubRowGroup({
             icon={LuRefreshCw}
             label="update"
           />
+          <CountBubble
+            count={counts.error}
+            colorPalette="red"
+            icon={ACTION_BADGE.ERROR.icon}
+            label="fail"
+          />
           <Icon
             as={LuChevronDown}
             boxSize={3}
@@ -416,7 +449,7 @@ function SubRowGroup({
         <VStack align="stretch" gap={0} mt={2} borderLeft="2px solid" borderColor="gray.200" pl={2}>
           {items.map((it, i) => {
             const [name, , status] = it.split("|");
-            const action = getSubRowComputedAction(it, synonym, acceptedId);
+            const { action, error } = getSubRowState(it, synonym, acceptedId, parentError);
             const changes = getSubRowChanges(it, synonym, acceptedId);
             return (
               <HStack key={i} justify="space-between" py={1.5} fontSize="small">
@@ -435,11 +468,7 @@ function SubRowGroup({
                     </Box>
                   )}
                 </Text>
-                <ActionBadge
-                  action={action}
-                  changes={changes}
-                  error={action == "ERROR" ? "Cannot create synonym without rank name" : undefined}
-                />
+                <ActionBadge action={action} changes={changes} error={error} />
               </HStack>
             );
           })}
@@ -608,6 +637,8 @@ export default function TaxonomyBatchUploadComponent() {
   );
 
   // Counts of what will be created / updated. Respects user overrides on sub-rows.
+  // Names in an ERROR state are not submitted (see buildAcceptedPayload), so
+  // nothing tied to them — species page, synonyms, common names — is counted.
   const getChangeSummary = useCallback(() => {
     let namesCreate = 0;
     let namesUpdate = 0;
@@ -617,10 +648,12 @@ export default function TaxonomyBatchUploadComponent() {
     let speciesCreate = 0;
 
     uploadResult.forEach((item: any) => {
+      // Skip errored names entirely: no species page, synonyms or common names.
+      if (item["action"] === "ERROR") return;
+
       if (item["action"] === "CREATE") namesCreate++;
       if (item["action"] === "UPDATE") namesUpdate++;
-      // Only rows that are actually submitted (not ERROR) can create a species page.
-      if (item["action"] !== "ERROR" && isSpeciesSelected(item)) speciesCreate++;
+      if (isSpeciesSelected(item)) speciesCreate++;
 
       (item["synonyms"] || []).forEach((syn: string) => {
         const action = getSubRowComputedAction(syn, true, item["taxonId"]);
@@ -809,6 +842,11 @@ export default function TaxonomyBatchUploadComponent() {
                   uploadResult.map((item, index) => {
                     const hierarchyNodes = item["hierarchy"]?.split(";").filter(Boolean) ?? [];
                     const changes = getMainRowChanges(item);
+                    let acceptedId = item["acceptedId"] && item["acceptedId"].includes("#")?item["acceptedId"].split("#")[1]:item["acceptedId"]
+                    const status = item["status"].includes("#")?item["status"].split("#")[1]:item["status"]
+                    if (item["status"].split("#").length>2){
+                      acceptedId = item["status"].split("#")[2];
+                    }
 
                     return (
                       <Box
@@ -925,7 +963,8 @@ export default function TaxonomyBatchUploadComponent() {
                             icon={LuRepeat}
                             items={item["synonyms"]}
                             synonym={true}
-                            acceptedId={item["taxonId"]}
+                            acceptedId={status=="ACCEPTED"?item["taxonId"]:acceptedId}
+                            parentError={item["action"] === "ERROR"}
                           />
                         )}
                         {item["commonNames"] && item["commonNames"].length > 0 && (
@@ -935,6 +974,7 @@ export default function TaxonomyBatchUploadComponent() {
                             items={item["commonNames"]}
                             synonym={false}
                             acceptedId={item["taxonId"]}
+                            parentError={item["action"] === "ERROR"}
                           />
                         )}
                       </Box>

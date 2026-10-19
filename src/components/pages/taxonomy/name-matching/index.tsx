@@ -33,7 +33,10 @@ type TaxonData = {
   position: string;
 };
 
-export type MatchAction = "match" | "update";
+type ResultRow = [string, TaxonData, any | null, boolean, number];
+
+// "create" ignores the match and exports the row as unmatched (TaxonConceptId = CREATE)
+export type MatchAction = "match" | "update" | "create";
 
 const ACCEPT_STRING =
   "application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
@@ -41,6 +44,16 @@ const ACCEPT_STRING =
 // Key used for the Source column in the Given Names sheet.
 // Prefixed so it never collides with an uploaded column that is also named "Source".
 const SOURCE_COLUMN_KEY = "__source";
+
+// Filters that only make sense for tabs with taxon matches (not Common names)
+const TAXON_ONLY_FILTERS = ["Single Matched", "Multiple Matched"];
+
+// Options for the separate status filter (matched taxon status)
+const STATUS_FILTERS = [
+  { value: "All", label: "All statuses" },
+  { value: "ACCEPTED", label: "Accepted" },
+  { value: "SYNONYM", label: "Synonym" }
+];
 
 // Pure helpers — no hooks, no component state — safe at module scope
 const updateColumnMapping = (
@@ -73,20 +86,54 @@ const buildHeaderMatchMap = (ranks: { name: string }[]) => {
   return map;
 };
 
+const hasStatus = (value: TaxonData | undefined, status: string) =>
+  (value?.status ?? "").toUpperCase() === status;
+
+// Applies the selected filter to a Given Names / Synonyms / Hierarchy result list
+const filterTaxonRows = (
+  rows: ResultRow[],
+  rawResult: [string, TaxonData[]][],
+  filter: string
+): ResultRow[] => {
+  const matchCount = (idx: number) => rawResult[idx]?.[1]?.length ?? 0;
+  switch (filter) {
+    case "Matched":
+      return rows.filter(([, value, , , idx]) => value != undefined && matchCount(idx) > 0);
+    case "Single Matched":
+      return rows.filter(([, value, , , idx]) => value != undefined && matchCount(idx) === 1);
+    case "Multiple Matched":
+      return rows.filter(([, value, , , idx]) => value != undefined && matchCount(idx) > 1);
+    case "Unmatched":
+      return rows.filter(([, value]) => value == undefined);
+    default:
+      return rows;
+  }
+};
+
+// Applies the status filter on top of the match filter; "All" keeps every row
+const filterByStatus = (rows: ResultRow[], statusFilter: string): ResultRow[] =>
+  statusFilter === "All" ? rows : rows.filter(([, value]) => hasStatus(value, statusFilter));
+
+// Common names have no status / match count, so only All / Matched / Unmatched apply
+const filterCnameRows = (rows: [string, any][], filter: string) => {
+  switch (filter) {
+    case "Matched":
+      return rows.filter(([, value]) => value != undefined && Object.keys(value).length > 0);
+    case "Unmatched":
+      return rows.filter(([, value]) => value == undefined || Object.keys(value).length === 0);
+    default:
+      return rows;
+  }
+};
+
 export default function NameMatchingComponent({ ranks }) {
   const [uploadResult, setUploadResult] = useState<[string, TaxonData[]][]>([]);
-  const [finalResult, setFinalResult] = useState<
-    [string, TaxonData, any | null, boolean, number][]
-  >([]);
+  const [finalResult, setFinalResult] = useState<ResultRow[]>([]);
   const [synonymResult, setSynonymResult] = useState<[string, TaxonData[]][]>([]);
-  const [finalSynonymResult, setFinalSynonymResult] = useState<
-    [string, TaxonData, any | null, boolean, number][]
-  >([]);
+  const [finalSynonymResult, setFinalSynonymResult] = useState<ResultRow[]>([]);
   const [cnameResult, setCnameResult] = useState<[string, TaxonData[]][]>([]);
   const [hierResult, setHierResult] = useState<[string, TaxonData[]][]>([]);
-  const [finalHierResult, setFinalHierResult] = useState<
-    [string, TaxonData, any | null, boolean, number][]
-  >([]);
+  const [finalHierResult, setFinalHierResult] = useState<ResultRow[]>([]);
   const { open: isOpen1, onOpen: onOpen1, onClose: onClose1 } = useDisclosure();
   const [headers, setHeaders] = useState<string[]>([]);
   const [isLoading, setLoading] = useState(false);
@@ -95,6 +142,7 @@ export default function NameMatchingComponent({ ranks }) {
   const [columnMapping, setColumnMapping] = useState<[number, string][]>([]);
   const [activeTab, setActiveTab] = useState("names");
   const [filter, setFilter] = useState<string>("All");
+  const [statusFilter, setStatusFilter] = useState<string>("All");
   // Per-record action for Given Names, keyed by upload index + row key
   const [rowActions, setRowActions] = useState<Record<string, MatchAction>>({});
   const { t } = useTranslation();
@@ -153,18 +201,17 @@ export default function NameMatchingComponent({ ranks }) {
   const headerMatchMap = useMemo(() => buildHeaderMatchMap(ranks), [ranks]);
   const [currentStep, setCurrentStep] = useState(1);
 
-  const getRowActionKey = (row: [string, TaxonData, any, boolean, number]) => `${row[4]}|${row[0]}`;
+  const getRowActionKey = (row: ResultRow) => `${row[4]}|${row[0]}`;
 
   // Name from the uploaded file for a Given Names row
   const getUploadedName = useCallback(
-    (row: [string, TaxonData, any, boolean, number]) =>
-      row[0].slice(0, -1).split("#")[selectedColumn ? selectedColumn : 0] ?? "",
+    (row: ResultRow) => row[0].slice(0, -1).split("#")[selectedColumn ? selectedColumn : 0] ?? "",
     [selectedColumn]
   );
 
   // Update is only allowed when there is a match and its name differs from the uploaded name
   const canUpdate = useCallback(
-    (row: [string, TaxonData, any, boolean, number]) => {
+    (row: ResultRow) => {
       const matchedName = row[1]?.name;
       if (!matchedName) return false;
       return getUploadedName(row).trim().toLowerCase() !== matchedName.trim().toLowerCase();
@@ -172,18 +219,33 @@ export default function NameMatchingComponent({ ranks }) {
     [getUploadedName]
   );
 
-  // Falls back to "match" if the row is no longer eligible (e.g. a different match was picked)
+  // Create is allowed whenever there is a match to override
+  const canCreate = useCallback((row: ResultRow) => !!row[1], []);
+
+  // Falls back to "match" if the row is no longer eligible for the chosen action
   const getRowAction = useCallback(
-    (row: [string, TaxonData, any, boolean, number]): MatchAction =>
-      canUpdate(row) ? rowActions[getRowActionKey(row)] ?? "match" : "match",
-    [rowActions, canUpdate]
+    (row: ResultRow): MatchAction => {
+      const action = rowActions[getRowActionKey(row)] ?? "match";
+      if (action === "update") return canUpdate(row) ? "update" : "match";
+      if (action === "create") return canCreate(row) ? "create" : "match";
+      return "match";
+    },
+    [rowActions, canUpdate, canCreate]
   );
 
   const setRowAction = useCallback(
-    (row: [string, TaxonData, any, boolean, number], value: MatchAction) =>
+    (row: ResultRow, value: MatchAction) =>
       setRowActions((prev) => ({ ...prev, [getRowActionKey(row)]: value })),
     []
   );
+
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    // Common names don't support the taxon-only filters
+    if (value === "common" && TAXON_ONLY_FILTERS.includes(filter)) {
+      setFilter("All");
+    }
+  };
 
   const importAsExcel = async () => {
     const workbook = new ExcelJS.Workbook();
@@ -264,7 +326,11 @@ export default function NameMatchingComponent({ ranks }) {
       }
 
       data.forEach((name) => {
-        if (name[1] && filter != "Unmatched") {
+        const isGivenNames = !synonym && !cname && !hierarchy;
+        // Given Names rows marked "create" are exported as unmatched
+        const treatAsUnmatched = isGivenNames && getRowAction(name) === "create";
+
+        if (name[1] && !treatAsUnmatched && filter != "Unmatched") {
           const row: Record<string, any> = {};
           if (synonym === false && cname === false && hierarchy === false) {
             for (let i = 0; i < headers.length; i++) {
@@ -333,7 +399,7 @@ export default function NameMatchingComponent({ ranks }) {
           } else if (!cname) {
             worksheet.addRow(row);
           }
-        } else if (name[1] == undefined && filter != "Matched") {
+        } else if ((name[1] == undefined || treatAsUnmatched) && filter != "Matched") {
           const row: Record<string, any> = {};
           if (synonym === false && hierarchy === false) {
             for (let i = 0; i < headers.length; i++) {
@@ -361,8 +427,8 @@ export default function NameMatchingComponent({ ranks }) {
             row["Source"] = name[0].split("#")[1];
             row["Index"] = synonym ? name[0].split("#")[2] : name[0].split("#")[3];
             row["TaxonConceptId"] = "CREATE";
-            if (synonym){
-              row["AcceptedId"] = finalResult[name[0].split("#")[2]-1][1]["id"]
+            if (synonym) {
+              row["AcceptedId"] = finalResult[name[0].split("#")[2] - 1][1]["id"];
             }
           }
           worksheet.addRow(row);
@@ -433,10 +499,7 @@ export default function NameMatchingComponent({ ranks }) {
         );
         const synonymData = await Promise.all(
           Object.entries(data.synonym).map(
-            async (
-              [key, value]: [string, TaxonData[]],
-              objindex
-            ): Promise<[string, TaxonData, any, boolean, number]> => {
+            async ([key, value]: [string, TaxonData[]], objindex): Promise<ResultRow> => {
               const { success, data } = await axCheckSpecies(value[0]?.id);
               if (success) {
                 return [key, value[0], data, false, objindex];
@@ -447,10 +510,7 @@ export default function NameMatchingComponent({ ranks }) {
         );
         const hierData = await Promise.all(
           Object.entries(data.hierarchy).map(
-            async (
-              [key, value]: [string, TaxonData[]],
-              objindex
-            ): Promise<[string, TaxonData, any, boolean, number]> => {
+            async ([key, value]: [string, TaxonData[]], objindex): Promise<ResultRow> => {
               const { success, data } = await axCheckSpecies(value[0]?.id);
               if (success) {
                 return [key, value[0], data, false, objindex];
@@ -459,7 +519,7 @@ export default function NameMatchingComponent({ ranks }) {
             }
           )
         );
-        setFinalResult(processedData);
+        setFinalResult(processedData as ResultRow[]);
         setFinalSynonymResult(synonymData);
         setFinalHierResult(hierData);
         setLoading(false);
@@ -618,25 +678,45 @@ export default function NameMatchingComponent({ ranks }) {
             </Flex>
             <Box mb={4}>
               <Box mb={4} width="100%">
-                <NativeSelectRoot maxW="10rem" ml="auto">
-                  <NativeSelectField
-                    value={filter}
-                    onChange={(e) => setFilter(e?.currentTarget?.value)}
-                  >
-                    <option value="All">{t("taxon:name_matching.all_filter")}</option>
-                    <option value="Matched">{t("taxon:name_matching.matched_filter")}</option>
-                    {activeTab != "cname" && (
-                      <option value="Single Matched">{"Single Matched"}</option>
-                    )}
-                    {activeTab != "cname" && (
-                      <option value="Multiple Matched">{"Multiple Matched"}</option>
-                    )}
-                    <option value="Unmatched">{t("taxon:name_matching.unmatched_filter")}</option>
-                  </NativeSelectField>
-                </NativeSelectRoot>
+                <Flex justifyContent="flex-end" gap={2}>
+                  {activeTab != "common" && (
+                    <NativeSelectRoot maxW="10rem">
+                      <NativeSelectField
+                        aria-label="Status filter"
+                        value={statusFilter}
+                        onChange={(e) => setStatusFilter(e?.currentTarget?.value)}
+                      >
+                        {STATUS_FILTERS.map(({ value, label }) => (
+                          <option key={value} value={value}>
+                            {label}
+                          </option>
+                        ))}
+                      </NativeSelectField>
+                    </NativeSelectRoot>
+                  )}
+                  <NativeSelectRoot maxW="10rem">
+                    <NativeSelectField
+                      aria-label="Match filter"
+                      value={filter}
+                      onChange={(e) => setFilter(e?.currentTarget?.value)}
+                    >
+                      <option value="All">{t("taxon:name_matching.all_filter")}</option>
+                      <option value="Matched">{t("taxon:name_matching.matched_filter")}</option>
+                      {activeTab != "common" && (
+                        <option value="Single Matched">{"Single Matched"}</option>
+                      )}
+                      {activeTab != "common" && (
+                        <option value="Multiple Matched">{"Multiple Matched"}</option>
+                      )}
+                      <option value="Unmatched">
+                        {t("taxon:name_matching.unmatched_filter")}
+                      </option>
+                    </NativeSelectField>
+                  </NativeSelectRoot>
+                </Flex>
                 <Tabs.Root
                   value={activeTab}
-                  onValueChange={(details) => setActiveTab(details.value)}
+                  onValueChange={(details) => handleTabChange(details.value)}
                   lazyMount={true}
                   variant={"line"}
                 >
@@ -647,236 +727,60 @@ export default function NameMatchingComponent({ ranks }) {
                     <Tabs.Trigger value="hierarchy">{"Hierarchy"}</Tabs.Trigger>
                   </Tabs.List>
                   <Tabs.Content value="names">
-                    {filter == "Matched" && (
-                      <NameTable
-                        finalResult={finalResult.filter(([, value, , , uploadIdx]) => {
-                          if (value == undefined) return false;
-                          return uploadResult[uploadIdx]?.[1]?.length > 0;
-                        })}
-                        selectedColumn={selectedColumn}
-                        uploadResult={uploadResult}
-                        setFinalResult={setFinalResult}
-                        setUploadResult={setUploadResult}
-                        getAction={getRowAction}
-                        onActionChange={setRowAction}
-                        canUpdate={canUpdate}
-                      />
-                    )}
-                    {filter == "Single Matched" && (
-                      <NameTable
-                        finalResult={finalResult.filter(([, value, , , uploadIdx]) => {
-                          if (value == undefined) return false;
-                          return uploadResult[uploadIdx]?.[1]?.length === 1;
-                        })}
-                        selectedColumn={selectedColumn}
-                        uploadResult={uploadResult}
-                        setFinalResult={setFinalResult}
-                        setUploadResult={setUploadResult}
-                        getAction={getRowAction}
-                        onActionChange={setRowAction}
-                        canUpdate={canUpdate}
-                      />
-                    )}
-                    {filter == "Multiple Matched" && (
-                      <NameTable
-                        finalResult={finalResult.filter(([, value, , , uploadIdx]) => {
-                          if (value == undefined) return false;
-                          return uploadResult[uploadIdx]?.[1]?.length > 1;
-                        })}
-                        selectedColumn={selectedColumn}
-                        uploadResult={uploadResult}
-                        setFinalResult={setFinalResult}
-                        setUploadResult={setUploadResult}
-                        getAction={getRowAction}
-                        onActionChange={setRowAction}
-                        canUpdate={canUpdate}
-                      />
-                    )}
-                    {filter == "All" && (
-                      <NameTable
-                        finalResult={finalResult}
-                        selectedColumn={selectedColumn}
-                        uploadResult={uploadResult}
-                        setFinalResult={setFinalResult}
-                        setUploadResult={setUploadResult}
-                        getAction={getRowAction}
-                        onActionChange={setRowAction}
-                        canUpdate={canUpdate}
-                      />
-                    )}
-                    {filter == "Unmatched" && (
-                      <NameTable
-                        finalResult={finalResult.filter(([, value, ,]) => value == undefined)}
-                        selectedColumn={selectedColumn}
-                        uploadResult={uploadResult}
-                        setFinalResult={setFinalResult}
-                        setUploadResult={setUploadResult}
-                        getAction={getRowAction}
-                        onActionChange={setRowAction}
-                        canUpdate={canUpdate}
-                      />
-                    )}
+                    <NameTable
+                      key={`${filter}|${statusFilter}`}
+                      finalResult={filterByStatus(
+                        filterTaxonRows(finalResult, uploadResult, filter),
+                        statusFilter
+                      )}
+                      selectedColumn={selectedColumn}
+                      uploadResult={uploadResult}
+                      setFinalResult={setFinalResult}
+                      setUploadResult={setUploadResult}
+                      getAction={getRowAction}
+                      onActionChange={setRowAction}
+                      canUpdate={canUpdate}
+                      canCreate={canCreate}
+                    />
                   </Tabs.Content>
                   <Tabs.Content value="synonyms">
-                    {filter == "Matched" && (
-                      <NameTable
-                        finalResult={finalSynonymResult.filter(([, value, , , uploadIdx]) => {
-                          if (value == undefined) return false;
-                          return synonymResult[uploadIdx]?.[1]?.length > 0;
-                        })}
-                        selectedColumn={selectedColumn}
-                        uploadResult={synonymResult}
-                        setFinalResult={setFinalSynonymResult}
-                        setUploadResult={setSynonymResult}
-                        synonym={true}
-                      />
-                    )}
-                    {filter == "Single Matched" && (
-                      <NameTable
-                        finalResult={finalSynonymResult.filter(([, value, , , uploadIdx]) => {
-                          if (value == undefined) return false;
-                          return synonymResult[uploadIdx]?.[1]?.length === 1;
-                        })}
-                        selectedColumn={selectedColumn}
-                        uploadResult={synonymResult}
-                        setFinalResult={setFinalSynonymResult}
-                        setUploadResult={setSynonymResult}
-                        synonym={true}
-                      />
-                    )}
-                    {filter == "Multiple Matched" && (
-                      <NameTable
-                        finalResult={finalSynonymResult.filter(([, value, , , uploadIdx]) => {
-                          if (value == undefined) return false;
-                          return synonymResult[uploadIdx]?.[1]?.length > 1;
-                        })}
-                        selectedColumn={selectedColumn}
-                        uploadResult={synonymResult}
-                        setFinalResult={setFinalSynonymResult}
-                        setUploadResult={setSynonymResult}
-                        synonym={true}
-                      />
-                    )}
-                    {filter == "All" && (
-                      <NameTable
-                        finalResult={finalSynonymResult}
-                        selectedColumn={selectedColumn}
-                        uploadResult={synonymResult}
-                        setFinalResult={setFinalSynonymResult}
-                        setUploadResult={setSynonymResult}
-                        synonym={true}
-                      />
-                    )}
-                    {filter == "Unmatched" && (
-                      <NameTable
-                        finalResult={finalSynonymResult.filter(
-                          ([, value, ,]) => value == undefined
-                        )}
-                        selectedColumn={selectedColumn}
-                        uploadResult={synonymResult}
-                        setFinalResult={setFinalSynonymResult}
-                        setUploadResult={setSynonymResult}
-                        synonym={true}
-                      />
-                    )}
+                    <NameTable
+                      key={`${filter}|${statusFilter}`}
+                      finalResult={filterByStatus(
+                        filterTaxonRows(finalSynonymResult, synonymResult, filter),
+                        statusFilter
+                      )}
+                      selectedColumn={selectedColumn}
+                      uploadResult={synonymResult}
+                      setFinalResult={setFinalSynonymResult}
+                      setUploadResult={setSynonymResult}
+                      synonym={true}
+                    />
                   </Tabs.Content>
                   <Tabs.Content value="common">
-                    {filter == "Matched" && (
-                      <NameTable
-                        finalResult={cnameResult.filter(([, value]) => {
-                          if (value == undefined) return false;
-                          return Object.keys(value).length > 0;
-                        })}
-                        selectedColumn={selectedColumn}
-                        uploadResult={uploadResult}
-                        setFinalResult={setCnameResult}
-                        setUploadResult={setUploadResult}
-                        cname={true}
-                      />
-                    )}
-                    {filter == "All" && (
-                      <NameTable
-                        finalResult={cnameResult}
-                        selectedColumn={selectedColumn}
-                        uploadResult={uploadResult}
-                        setFinalResult={setCnameResult}
-                        setUploadResult={setUploadResult}
-                        cname={true}
-                      />
-                    )}
-                    {filter == "Unmatched" && (
-                      <NameTable
-                        finalResult={cnameResult.filter(
-                          ([, value]) => value == undefined || Object.keys(value).length === 0
-                        )}
-                        selectedColumn={selectedColumn}
-                        uploadResult={uploadResult}
-                        setFinalResult={setCnameResult}
-                        setUploadResult={setUploadResult}
-                        cname={true}
-                      />
-                    )}
+                    <NameTable
+                      key={filter}
+                      finalResult={filterCnameRows(cnameResult, filter)}
+                      selectedColumn={selectedColumn}
+                      uploadResult={uploadResult}
+                      setFinalResult={setCnameResult}
+                      setUploadResult={setUploadResult}
+                      cname={true}
+                    />
                   </Tabs.Content>
                   <Tabs.Content value="hierarchy">
-                    {filter == "Matched" && (
-                      <NameTable
-                        finalResult={finalHierResult.filter(([, value, , , uploadIdx]) => {
-                          if (value == undefined) return false;
-                          return hierResult[uploadIdx]?.[1]?.length > 0;
-                        })}
-                        selectedColumn={selectedColumn}
-                        uploadResult={hierResult}
-                        setFinalResult={setFinalHierResult}
-                        setUploadResult={setHierResult}
-                        hierarchy={true}
-                      />
-                    )}
-                    {filter == "Single Matched" && (
-                      <NameTable
-                        finalResult={finalHierResult.filter(([, value, , , uploadIdx]) => {
-                          if (value == undefined) return false;
-                          return hierResult[uploadIdx]?.[1]?.length === 1;
-                        })}
-                        selectedColumn={selectedColumn}
-                        uploadResult={hierResult}
-                        setFinalResult={setFinalHierResult}
-                        setUploadResult={setHierResult}
-                        hierarchy={true}
-                      />
-                    )}
-                    {filter == "Multiple Matched" && (
-                      <NameTable
-                        finalResult={finalHierResult.filter(([, value, , , uploadIdx]) => {
-                          if (value == undefined) return false;
-                          return hierResult[uploadIdx]?.[1]?.length > 1;
-                        })}
-                        selectedColumn={selectedColumn}
-                        uploadResult={hierResult}
-                        setFinalResult={setFinalHierResult}
-                        setUploadResult={setHierResult}
-                        hierarchy={true}
-                      />
-                    )}
-                    {filter == "All" && (
-                      <NameTable
-                        finalResult={finalHierResult}
-                        selectedColumn={selectedColumn}
-                        uploadResult={hierResult}
-                        setFinalResult={setFinalHierResult}
-                        setUploadResult={setHierResult}
-                        hierarchy={true}
-                      />
-                    )}
-                    {filter == "Unmatched" && (
-                      <NameTable
-                        finalResult={finalHierResult.filter(([, value, ,]) => value == undefined)}
-                        selectedColumn={selectedColumn}
-                        uploadResult={hierResult}
-                        setFinalResult={setFinalHierResult}
-                        setUploadResult={setHierResult}
-                        hierarchy={true}
-                      />
-                    )}
+                    <NameTable
+                      key={`${filter}|${statusFilter}`}
+                      finalResult={filterByStatus(
+                        filterTaxonRows(finalHierResult, hierResult, filter),
+                        statusFilter
+                      )}
+                      selectedColumn={selectedColumn}
+                      uploadResult={hierResult}
+                      setFinalResult={setFinalHierResult}
+                      setUploadResult={setHierResult}
+                      hierarchy={true}
+                    />
                   </Tabs.Content>
                 </Tabs.Root>
               </Box>
