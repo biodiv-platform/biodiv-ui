@@ -84,28 +84,12 @@ export const removeCookies = () => {
   destroyCookie(null, TOKEN.BRTOKEN, cookieOpts);
 };
 
-export const getSafeRedirect = (decoded: string, fallback = "/"): string => {
-  try {
-    if (!decoded.startsWith("/") || decoded.startsWith("//") || decoded.includes("\\")) {
-      return fallback;
-    }
-    const url = new URL(decoded, window.location.origin);
-    if (url.origin !== window.location.origin) return fallback;
-    return url.href;
-  } catch {
-    return fallback;
-  }
-};
-
 export const forwardRedirect = async (forward?) => {
+  // remove cache
   await removeCache();
-  let target = "/";
-  try {
-    target = getSafeRedirect(B64URL.decode(forward || "Lw"));
-  } catch {
-    target = "/";
-  }
-  window.location.assign(target);
+
+  // redirect
+  window.location.assign(B64URL.decode(forward || "Lw"));
 };
 
 export const getParsedUser = (ctx?) => {
