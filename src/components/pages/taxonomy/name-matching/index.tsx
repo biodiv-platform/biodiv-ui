@@ -292,6 +292,9 @@ export default function NameMatchingComponent({ ranks }) {
           ? [
               { header: "GroupName", key: "GroupName" },
               { header: "SpeciesId", key: "SpeciesId" },
+              ...(!synonym && !cname && !hierarchy
+                ? [{ header: "MatchedName", key: "MatchedName" }]
+                : []),
               { header: "MatchedStatus", key: "MatchedStatus" },
               { header: "MatchedPosition", key: "MatchedPosition" },
               { header: "MatchedHierarchy", key: "MatchedHierarchy" },
@@ -302,14 +305,15 @@ export default function NameMatchingComponent({ ranks }) {
                     { header: "TargetStatus", key: "TargetStatus" },
                     { header: "TargetPosition", key: "TargetPosition" },
                     { header: "TargetRank", key: "TargetRank" },
-                    { header: "TargetAcceptedId", key: "TargetAcceptedId" }
+                    { header: "TargetAcceptedId", key: "TargetAcceptedId" },
+                    { header: "NameAction", key: "NameAction" }
                   ]
-                : []),
-              ...(!synonym && !cname && !hierarchy
-                ? [{ header: "Source", key: SOURCE_COLUMN_KEY }]
-                : [])
+                : [{ header: "TargetPosition", key: "TargetPosition" }])
             ]
-          : [{ header: "Language", key: "Language" }]),
+          : [
+              { header: "Language", key: "Language" },
+              { header: "TargetPrefferedCommonName", key: "TargetPrefferedCommonName" }
+            ]),
         ...(synonym
           ? [
               { header: "Rank", key: "Rank" },
@@ -344,6 +348,8 @@ export default function NameMatchingComponent({ ranks }) {
               ? Object.entries(name[1]).length > 0
                 ? name[1]["name"]
                 : name[0].split("#")[0]
+              : !synonym && !hierarchy
+              ? getUploadedName(name)
               : name[1]["name"];
           }
           if (!synonym && !cname && !hierarchy) {
@@ -364,6 +370,8 @@ export default function NameMatchingComponent({ ranks }) {
             row["SpeciesId"] = name[2];
             row["MatchedStatus"] = name[1]["status"];
             row["MatchedPosition"] = name[1]["position"];
+            row["MatchedName"] = name[1]["name"];
+            row["NameAction"] = getRowAction(name);
             const hierarchy = name[1]["hierarchy"];
 
             const hier = Array.isArray(hierarchy)
@@ -382,7 +390,7 @@ export default function NameMatchingComponent({ ranks }) {
           }
           if (synonym || cname || hierarchy) {
             row["Source"] =
-              Object.entries(name[1]).length > 0 ? name[1]["source"] : name[0].split("#")[1];
+              Object.entries(name[1]).length > 0 && !hierarchy ? name[1]["source"] : name[0].split("#")[1];
             row["Index"] = synonym ? name[0].split("#")[2] : name[0].split("#")[3];
           }
           if (hierarchy) {
@@ -410,12 +418,13 @@ export default function NameMatchingComponent({ ranks }) {
             row["ScientificName"] = name[0].slice(0, -1).split("#")[
               selectedColumn ? selectedColumn : 0
             ];
+            if (cname){
             row["TaxonConceptId"] = "CREATE";
+            }else{
+              row["NameAction"] = "create"
+            }
             row["TargetStatus"] = "ACCEPTED";
             row["TargetPosition"] = "RAW";
-            if (!cname) {
-              row[SOURCE_COLUMN_KEY] = getSourceValue(name);
-            }
           } else if (hierarchy) {
             row["Source"] = name[0].split("#")[1];
             row["Index"] = name[0].split("#")[3];
@@ -708,9 +717,7 @@ export default function NameMatchingComponent({ ranks }) {
                       {activeTab != "common" && (
                         <option value="Multiple Matched">{"Multiple Matched"}</option>
                       )}
-                      <option value="Unmatched">
-                        {t("taxon:name_matching.unmatched_filter")}
-                      </option>
+                      <option value="Unmatched">{t("taxon:name_matching.unmatched_filter")}</option>
                     </NativeSelectField>
                   </NativeSelectRoot>
                 </Flex>
