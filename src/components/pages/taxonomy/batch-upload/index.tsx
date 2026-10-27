@@ -24,13 +24,17 @@ import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
 import { Fragment, useCallback, useMemo, useState } from "react";
 import {
+  LuArrowRight,
   LuChevronDown,
   LuChevronRight,
   LuCopyCheck,
+  LuFileCheck,
+  LuFilePlus,
   LuMinus,
   LuPlus,
   LuRefreshCw,
   LuRepeat,
+  LuStar,
   LuTag
 } from "react-icons/lu";
 
@@ -42,7 +46,7 @@ const ACCEPT_STRING =
   "application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
 // Central mapping so the action badge looks identical everywhere it's used
-// (main row, synonyms, common names).
+// (main row, synonyms, common names, confirm dialog).
 const ACTION_BADGE: Record<string, { label: string; colorPalette: string; icon: any }> = {
   CREATE: { label: "Create", colorPalette: "green", icon: LuPlus },
   UPDATE: { label: "Update", colorPalette: "blue", icon: LuRefreshCw },
@@ -90,15 +94,163 @@ type UploadRow = {
   originalAction?: string;
   taxonId: string | number | null;
   speciesId?: string | number | null;
-  synonyms?: string[];
-  commonNames?: string[];
+  synonyms?: string[] | null;
+  commonNames?: string[] | null;
+  // taxonId -> new hierarchy string ("rank:Name#id;rank:Name#id;...")
+  updateHier?: Record<string, string> | null;
+  // Position changes on taxa in the row's hierarchy: "Name|id|OLD#NEW"
+  positionHier?: string[] | null;
   [key: string]: any;
 };
 
+// One parsed positionHier entry. `raw` is the original string, sent back as-is.
+type PositionChange = {
+  id: string;
+  name: string;
+  oldValue: string;
+  newValue: string;
+  raw: string;
+};
+
+type HierarchyNode = { rank: string; name: string; id: string };
+
+// One entry per updateHier key. The last node is the taxon being moved;
+// the rest is its new parent path.
+type HierarchyUpdate = {
+  id: string;
+  action: string;
+  target: HierarchyNode;
+  parents: HierarchyNode[];
+};
+
 // ---------------------------------------------------------------------------
-// Shared helpers — used by both the row UI and the confirmation dialog so the
-// two always agree on what's being created / updated.
+// Shared helpers — used by both the row UI, the confirmation dialog and the
+// submit payload so they always agree on what's being created / updated.
 // ---------------------------------------------------------------------------
+
+// "rank:Name#id;rank:Name#id" -> nodes. Handles null and the literal "null".
+function parseHierarchy(hier?: string | null): HierarchyNode[] {
+  if (!hier || hier === "null") return [];
+  return hier
+    .split(";")
+    .filter(Boolean)
+    .map((node) => {
+      const colon = node.indexOf(":");
+      const rank = colon === -1 ? "" : node.slice(0, colon);
+      const rest = colon === -1 ? node : node.slice(colon + 1);
+      const hash = rest.lastIndexOf("#");
+      return hash === -1
+        ? { rank, name: rest, id: "" }
+        : { rank, name: rest.slice(0, hash), id: rest.slice(hash + 1) };
+    });
+}
+
+// Rows that will actually be submitted as a change (respects the dropdown).
+const isSubmittedChange = (r: UploadRow) => r.action === "CREATE" || r.action === "UPDATE";
+
+// taxonId -> index of the latest row that updates its hierarchy.
+// Rows switched to "No change" or in ERROR don't count, and neither do
+// empty / "null" hierarchy strings, so they can't shadow a real update.
+function getLatestHierOwners(rows: UploadRow[]): Map<string, number> {
+  const owners = new Map<string, number>();
+  rows.forEach((r, rowIndex) => {
+    if (!isSubmittedChange(r) || !r.updateHier) return;
+    Object.entries(r.updateHier).forEach(([id, hier]) => {
+      if (parseHierarchy(hier).length > 0) owners.set(id, rowIndex);
+    });
+  });
+  return owners;
+}
+
+// The row's updateHier with only the entries this row is the latest owner of.
+// Older rows that touched the same taxon drop that entry.
+function getLatestUpdateHier(
+  row: UploadRow,
+  rowIndex: number,
+  owners: Map<string, number>
+): Record<string, string> | null {
+  if (!isSubmittedChange(row) || !row.updateHier) return null;
+  const entries = Object.entries(row.updateHier).filter(([id]) => owners.get(id) === rowIndex);
+  return entries.length > 0 ? Object.fromEntries(entries) : null;
+}
+
+// Hierarchy updates shown in the confirm dialog — exactly what will be sent.
+function getHierarchyUpdates(rows: UploadRow[]): HierarchyUpdate[] {
+  const owners = getLatestHierOwners(rows);
+  return rows.flatMap((r, rowIndex) =>
+    Object.entries(getLatestUpdateHier(r, rowIndex, owners) ?? {}).map(([id, hier]) => {
+      const nodes = parseHierarchy(hier);
+      return {
+        id,
+        action: r.action,
+        target: nodes[nodes.length - 1],
+        parents: nodes.slice(0, -1)
+      };
+    })
+  );
+}
+
+// "164709.0" and "164709" refer to the same taxon.
+function normId(id: any): string {
+  const s = String(id ?? "").trim();
+  const n = Number(s);
+  return s !== "" && Number.isFinite(n) ? String(n) : s;
+}
+
+// "Proboscidea|164709|WORKING#RAW" -> { name, id, oldValue, newValue }.
+// Entries without an "old#new" position aren't changes and are skipped.
+function parsePositionHier(entry: string): PositionChange | null {
+  const parts = entry.split("|");
+  if (parts.length < 3) return null;
+  const position = parts[parts.length - 1];
+  if (!position.includes("#")) return null;
+  const [oldValue, newValue] = position.split("#");
+  return {
+    id: normId(parts[parts.length - 2]),
+    name: parts.slice(0, -2).join("|"),
+    oldValue,
+    newValue,
+    raw: entry
+  };
+}
+
+// Position changes for one row. Errored rows aren't submitted, so they have none.
+function getRowPositionChanges(row: UploadRow): PositionChange[] {
+  if (row.action === "ERROR") return [];
+  return (row.positionHier ?? [])
+    .map(parsePositionHier)
+    .filter((c): c is PositionChange => c !== null);
+}
+
+// taxonId -> index of the latest row that changes its position. Several rows
+// can share an ancestor (e.g. same order), so only one of them sends it.
+function getLatestPositionOwners(rows: UploadRow[]): Map<string, number> {
+  const owners = new Map<string, number>();
+  rows.forEach((r, rowIndex) => {
+    getRowPositionChanges(r).forEach((c) => owners.set(c.id, rowIndex));
+  });
+  return owners;
+}
+
+// The row's position changes that this row is the latest owner of (deduped by id).
+function getOwnedPositionChanges(
+  row: UploadRow,
+  rowIndex: number,
+  owners: Map<string, number>
+): PositionChange[] {
+  const seen = new Set<string>();
+  return getRowPositionChanges(row).filter((c) => {
+    if (owners.get(c.id) !== rowIndex || seen.has(c.id)) return false;
+    seen.add(c.id);
+    return true;
+  });
+}
+
+// Position updates shown in the confirm dialog — exactly what will be sent.
+function getPositionUpdates(rows: UploadRow[]): PositionChange[] {
+  const owners = getLatestPositionOwners(rows);
+  return rows.flatMap((r, rowIndex) => getOwnedPositionChanges(r, rowIndex, owners));
+}
 
 // Main-row field diffs ("old#new" encoded values).
 function getMainRowChanges(item: any): FieldChange[] {
@@ -154,8 +306,12 @@ function CountBubble({
   );
 }
 
-// Sub-row format: name|matchedId|status|...|rankName|acceptedId
-// Synonyms:     CREATE (new) / UPDATE (status or accepted taxon changes) / NOOP / ERROR (no rank name)
+// Synonym format:     name|matchedId|status|position|rankName|acceptedId
+//   status:   "SYNONYM", or "#SYNONYM" when an accepted name becomes a synonym
+//   position: "WORKING", or "RAW#WORKING" (old#new) when the position changes
+// Common name format: name|matchedId|language|preferred
+//   preferred: "true" / "false" (may be "null" or missing)
+// Synonyms:     CREATE (new) / UPDATE (status, position or accepted taxon changes) / NOOP / ERROR (no rank name)
 // Common names: CREATE (new) / NOOP (already exists) — they are never updated.
 function getSubRowComputedAction(it: string, synonym: boolean, acceptedId): string {
   const parts = it.split("|");
@@ -168,7 +324,10 @@ function getSubRowComputedAction(it: string, synonym: boolean, acceptedId): stri
   if (matchedId === "CREATE") {
     return parts[4] == "null" ? "ERROR" : "CREATE";
   }
-  return status.startsWith("#") || Number(parts[5]) !== Number(acceptedId) ? "UPDATE" : "NOOP";
+  const positionChanged = (parts[3] ?? "").includes("#");
+  return status.startsWith("#") || positionChanged || Number(parts[5]) !== Number(acceptedId)
+    ? "UPDATE"
+    : "NOOP";
 }
 
 function getSubRowChanges(it: string, synonym: boolean, acceptedId): FieldChange[] {
@@ -176,9 +335,14 @@ function getSubRowChanges(it: string, synonym: boolean, acceptedId): FieldChange
   if (!synonym) return [];
   const parts = it.split("|");
   const status = parts[2] ?? "";
+  const position = parts[3] ?? "";
   const changes: FieldChange[] = [];
   if (status.startsWith("#")) {
     changes.push({ field: "Status", oldValue: "ACCEPTED", newValue: "SYNONYM" });
+  }
+  if (position.includes("#")) {
+    const [oldValue, newValue] = position.split("#");
+    changes.push({ field: "Position", oldValue, newValue });
   }
   if (synonym && Number(parts[5]) !== Number(acceptedId)) {
     changes.push({ field: "AcceptedId", oldValue: parts[5], newValue: String(acceptedId) });
@@ -186,81 +350,62 @@ function getSubRowChanges(it: string, synonym: boolean, acceptedId): FieldChange
   return changes;
 }
 
-// "N changes" trigger that reveals the field-level diff on hover/focus.
-// Shared by the main-row dropdown and the read-only sub-row badge.
-function ChangesTooltip({ changes }: { changes: FieldChange[] }) {
+// Finds the diff for one field, or undefined when that field isn't changing.
+function findChange(changes: FieldChange[], field: string): FieldChange | undefined {
+  return changes.find((c) => c.field === field);
+}
+
+// A tag that shows its value, or — when `change` is given — the change itself
+// inside the tag: "ACCEPTED → SYNONYM", with the old value struck through.
+// Status / position tags take their colour from TAXON_BADGE_COLORS (using the
+// new value when it changes); labelled tags like "Accepted ID" stay gray.
+function ValueBadge({
+  value,
+  change,
+  label
+}: {
+  value?: string;
+  change?: FieldChange;
+  label?: string;
+}) {
+  const shown = change ? change.newValue : value;
+  const colorPalette = label ? "gray" : TAXON_BADGE_COLORS[shown ?? ""];
+
   return (
-    <Tooltip.Root
-      openDelay={150}
-      interactive
-      positioning={{ placement: "bottom-end", overflowPadding: 8 }}
+    <Badge
+      colorPalette={colorPalette}
+      mr={2}
+      maxW="full"
+      whiteSpace="normal"
+      overflowWrap="anywhere"
+      borderWidth={change ? "1px" : undefined}
+      borderStyle={change ? "dashed" : undefined}
+      borderColor={change ? "currentColor" : undefined}
+      title={change ? `${change.field}: ${change.oldValue || "—"} → ${change.newValue || "—"}` : undefined}
     >
-      <Tooltip.Trigger asChild>
-        <HStack as="button" gap={1} fontSize="xs" color="gray.500" cursor="default" flexShrink={0}>
-          <Icon as={LuChevronRight} boxSize={3} />
-          {changes!.length} change{changes!.length !== 1 ? "s" : ""}
-        </HStack>
-      </Tooltip.Trigger>
-      <Tooltip.Positioner>
-        {/* Width follows the screen on small devices and is capped on larger
-            ones; long values wrap, and very long lists scroll. */}
-        <Tooltip.Content
-          maxW={{ base: "calc(100vw - 16px)", sm: "360px" }}
-          maxH="60vh"
-          overflowY="auto"
-          px={3}
-          py={2}
-        >
-          <VStack align="stretch" gap={2}>
-            {changes!.map((change, i) => (
-              <Box key={i} fontSize="xs" minW={0}>
-                <Text color="gray.300" fontWeight="semibold" mb={0.5}>
-                  {change.field}
-                </Text>
-                <Flex wrap="wrap" align="center" columnGap={1.5} rowGap={0.5} minW={0}>
-                  <Text
-                    color="gray.400"
-                    textDecoration="line-through"
-                    wordBreak="break-word"
-                    overflowWrap="anywhere"
-                    minW={0}
-                  >
-                    {change.oldValue || "—"}
-                  </Text>
-                  <Icon as={LuChevronRight} boxSize={3} color="gray.400" flexShrink={0} />
-                  <Text
-                    color="green.300"
-                    fontWeight="medium"
-                    wordBreak="break-word"
-                    overflowWrap="anywhere"
-                    minW={0}
-                  >
-                    {change.newValue || "—"}
-                  </Text>
-                </Flex>
-              </Box>
-            ))}
-          </VStack>
-        </Tooltip.Content>
-      </Tooltip.Positioner>
-    </Tooltip.Root>
+      {label && (
+        <Text as="span" fontWeight="normal" opacity={0.8}>
+          {label}
+        </Text>
+      )}
+      {change && (
+        <>
+          <Text as="span" textDecoration="line-through" opacity={0.6}>
+            {change.oldValue || "—"}
+          </Text>
+          <Icon as={LuArrowRight} boxSize={3} flexShrink={0} />
+        </>
+      )}
+      {shown || "—"}
+    </Badge>
   );
 }
 
 // Read-only action indicator for synonyms and common names. Same badge look
-// as ACTION_BADGE everywhere; UPDATE rows also show the "N changes" diff,
-// and ERROR rows show the reason next to the badge.
-function ActionBadge({
-  action,
-  changes,
-  error
-}: {
-  action: string;
-  changes?: FieldChange[];
-  error?: string;
-}) {
+// as ACTION_BADGE everywhere; ERROR rows show the reason next to the badge.
+// Field changes are shown inside the row's own tags (see <ValueBadge />).
+function ActionBadge({ action, error }: { action: string; error?: string }) {
   const config = ACTION_BADGE[action] ?? ACTION_BADGE.NOOP;
-  const hasChanges = action === "UPDATE" && changes && changes.length > 0;
 
   return (
     <HStack gap={2} flexShrink={0}>
@@ -269,7 +414,6 @@ function ActionBadge({
           {error}
         </Text>
       )}
-      {hasChanges && <ChangesTooltip changes={changes!} />}
       <Badge colorPalette={config.colorPalette} size="sm">
         <Icon as={config.icon} boxSize={3} />
         {config.label}
@@ -278,27 +422,76 @@ function ActionBadge({
   );
 }
 
+// Explicit, labelled control for "create a species page for this name".
+// Rows that already have a page show a read-only badge instead; errored
+// rows are never submitted, so their toggle is disabled with the reason.
+function SpeciesPageToggle({
+  item,
+  checked,
+  onToggle
+}: {
+  item: UploadRow;
+  checked: boolean;
+  onToggle: () => void;
+}) {
+  if (!canCreateSpecies(item)) {
+    return (
+      <Badge colorPalette="gray" variant="subtle" size="sm">
+        <Icon as={LuFileCheck} boxSize={3} />
+        Species page exists
+      </Badge>
+    );
+  }
+
+  const disabled = item.action === "ERROR";
+  const isOn = checked && !disabled;
+
+  return (
+    <Box
+      display="inline-flex"
+      borderWidth="1px"
+      borderRadius="md"
+      px={2}
+      py={1}
+      borderColor={isOn ? "blue.300" : "gray.200"}
+      bg={isOn ? "blue.50" : undefined}
+      opacity={disabled ? 0.6 : 1}
+      title={disabled ? "Species page can't be created: this name has an error" : undefined}
+    >
+      <Checkbox
+        size="sm"
+        colorPalette="blue"
+        checked={isOn}
+        disabled={disabled}
+        onCheckedChange={onToggle}
+        aria-label={`Create species page for ${item.scientificName.split("#")[0]}`}
+      >
+        <HStack gap={1}>
+          <Icon as={LuFilePlus} boxSize={3.5} color={isOn ? "blue.600" : "gray.500"} />
+          <Text fontSize="sm">Create species page</Text>
+        </HStack>
+      </Checkbox>
+    </Box>
+  );
+}
+
 // Editable action control for a main row: a dropdown pre-selected to the
 // incoming action (CREATE / UPDATE / NOOP) that the user can change,
 // unless the row is in an error state — then it's replaced by a
-// disabled control plus the error reason. Hovering the change count
-// (when the incoming action is UPDATE) reveals the field-level diff.
+// disabled control plus the error reason.
 function ActionDropdown({
   action,
   baseAction,
-  changes,
   error,
   onChange
 }: {
   action: string;
   // The row's original action; decides which options are offered.
   baseAction: string;
-  changes?: FieldChange[];
   error?: string;
   onChange: (value: string) => void;
 }) {
   const isError = action === "ERROR";
-  const hasChanges = action === "UPDATE" && changes && changes.length > 0;
   const options = getActionOptions(baseAction);
   const onlyOneOption = options.items.length <= 1;
 
@@ -327,8 +520,6 @@ function ActionDropdown({
 
   return (
     <HStack gap={2}>
-      {hasChanges && <ChangesTooltip changes={changes!} />}
-
       <Select.Root
         collection={options}
         value={[action]}
@@ -448,33 +639,73 @@ function SubRowGroup({
       <Collapsible.Content>
         <VStack align="stretch" gap={0} mt={2} borderLeft="2px solid" borderColor="gray.200" pl={2}>
           {items.map((it, i) => {
-            const [name, , status] = it.split("|");
+            const [name, , status, rawPosition] = it.split("|");
+            // Common names: 4th field is the preferred flag.
+            const isPreferred = !synonym && (rawPosition ?? "").trim().toLowerCase() === "true";
             const { action, error } = getSubRowState(it, synonym, acceptedId, parentError);
-            const changes = getSubRowChanges(it, synonym, acceptedId);
+            // Only show changes inside the tags when they'll actually be applied.
+            const changes =
+              action === "UPDATE" ? getSubRowChanges(it, synonym, acceptedId) : [];
+            const statusChange = findChange(changes, "Status");
+            const positionChange = findChange(changes, "Position");
+            const acceptedIdChange = findChange(changes, "AcceptedId");
+            // Without an applied change, show the current (old) position.
+            const position =
+              rawPosition && rawPosition !== "null" ? rawPosition.split("#")[0] : "";
             return (
-              <HStack key={i} justify="space-between" py={1.5} fontSize="small">
-                <Text>
+              <HStack key={i} justify="space-between" align="flex-start" gap={2} py={1.5} fontSize="small">
+                <Text minW={0} wordBreak="break-word">
                   {name}
                   {synonym && (
                     <Box>
-                      <Badge
-                        mr={2}
-                        colorPalette={
-                          TAXON_BADGE_COLORS[status.startsWith("#") ? status.slice(1) : status]
-                        }
-                      >
-                        {status.startsWith("#") ? status.slice(1) : status}
+                      <ValueBadge
+                        value={status.startsWith("#") ? status.slice(1) : status}
+                        change={statusChange}
+                      />
+                      {(position || positionChange) && (
+                        <ValueBadge value={position} change={positionChange} />
+                      )}
+                      {acceptedIdChange && (
+                        <ValueBadge label="Accepted ID" change={acceptedIdChange} />
+                      )}
+                    </Box>
+                  )}
+                  {isPreferred && (
+                    <Box>
+                      <Badge colorPalette="yellow" mr={2}>
+                        <Icon as={LuStar} boxSize={3} />
+                        Preferred
                       </Badge>
                     </Box>
                   )}
                 </Text>
-                <ActionBadge action={action} changes={changes} error={error} />
+                <ActionBadge action={action} error={error} />
               </HStack>
             );
           })}
         </VStack>
       </Collapsible.Content>
     </Collapsible.Root>
+  );
+}
+
+// Breadcrumb of the new parent path; hovering a node shows its rank and id.
+function HierarchyBreadcrumb({ nodes }: { nodes: HierarchyNode[] }) {
+  return (
+    <Flex wrap="wrap" align="center" columnGap={1} rowGap={0.5} fontSize="xs" color="gray.500">
+      {nodes.map((n, j, arr) => (
+        <Fragment key={j}>
+          <Text
+            as="span"
+            title={`${n.rank}: ${n.name}${n.id ? ` #${n.id}` : ""}`}
+            overflowWrap="anywhere"
+          >
+            {n.name}
+          </Text>
+          {j < arr.length - 1 && <Icon as={LuChevronRight} boxSize={3} flexShrink={0} />}
+        </Fragment>
+      ))}
+    </Flex>
   );
 }
 
@@ -494,12 +725,16 @@ function ConfirmUploadDialog({
   open,
   onOpenChange,
   summary,
+  hierarchyUpdates,
+  positionUpdates,
   isSubmitting,
   onConfirm
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   summary: ChangeSummary | null;
+  hierarchyUpdates: HierarchyUpdate[];
+  positionUpdates: PositionChange[];
   isSubmitting: boolean;
   onConfirm: () => void;
 }) {
@@ -508,7 +743,8 @@ function ConfirmUploadDialog({
         { label: "Names", create: summary.namesCreate, update: summary.namesUpdate },
         { label: "Species pages", create: summary.speciesCreate },
         { label: "Synonyms", create: summary.synonymsCreate, update: summary.synonymsUpdate },
-        { label: "Common names", create: summary.commonNamesCreate }
+        { label: "Common names", create: summary.commonNamesCreate },
+        { label: "Hierarchy positions", update: positionUpdates.length }
       ]
     : [];
 
@@ -580,6 +816,86 @@ function ConfirmUploadDialog({
                 ))}
               </VStack>
 
+              {hierarchyUpdates.length > 0 && (
+                <Box mt={4}>
+                  <Text fontSize="sm" fontWeight="semibold" mb={2}>
+                    Hierarchy updates ({hierarchyUpdates.length})
+                  </Text>
+                  <VStack align="stretch" gap={2}>
+                    {hierarchyUpdates.map((u) => {
+                      const badge = ACTION_BADGE[u.action] ?? ACTION_BADGE.NOOP;
+                      return (
+                        <Box key={u.id} borderWidth="1px" borderRadius="md" px={3} py={2}>
+                          <HStack justify="space-between" align="flex-start" gap={2} mb={1}>
+                            <Text
+                              fontSize="sm"
+                              fontWeight="medium"
+                              minW={0}
+                              wordBreak="break-word"
+                              title={`${u.target.rank}: ${u.target.name}${
+                                u.target.id ? ` #${u.target.id}` : ""
+                              }`}
+                            >
+                              {u.target.name}
+                              {u.target.rank && (
+                                <Text as="span" ml={1.5} fontSize="xs" color="gray.500">
+                                  ({u.target.rank})
+                                </Text>
+                              )}
+                            </Text>
+                            <Badge colorPalette={badge.colorPalette} size="sm" flexShrink={0}>
+                              <Icon as={badge.icon} boxSize={3} />
+                              {badge.label}
+                            </Badge>
+                          </HStack>
+                          {u.parents.length > 0 && <HierarchyBreadcrumb nodes={u.parents} />}
+                        </Box>
+                      );
+                    })}
+                  </VStack>
+                </Box>
+              )}
+
+              {positionUpdates.length > 0 && (
+                <Box mt={4}>
+                  <Text fontSize="sm" fontWeight="semibold" mb={2}>
+                    Position updates ({positionUpdates.length})
+                  </Text>
+                  <VStack align="stretch" gap={2}>
+                    {positionUpdates.map((p) => (
+                      <HStack
+                        key={p.id}
+                        justify="space-between"
+                        align="flex-start"
+                        gap={2}
+                        borderWidth="1px"
+                        borderRadius="md"
+                        px={3}
+                        py={2}
+                      >
+                        <Text
+                          fontSize="sm"
+                          fontWeight="medium"
+                          minW={0}
+                          wordBreak="break-word"
+                        >
+                          {p.name}
+                        </Text>
+                        <Box flexShrink={0}>
+                          <ValueBadge
+                            change={{
+                              field: "Position",
+                              oldValue: p.oldValue,
+                              newValue: p.newValue
+                            }}
+                          />
+                        </Box>
+                      </HStack>
+                    ))}
+                  </VStack>
+                </Box>
+              )}
+
               <Text fontSize="sm" mt={4}>
                 Are you sure you want to proceed?
               </Text>
@@ -636,6 +952,43 @@ export default function TaxonomyBatchUploadComponent() {
     [selectAll, excludedIds]
   );
 
+  // Toggles species page creation for one row, in whichever mode is active.
+  const toggleSpecies = useCallback(
+    (index: number, id: any) => {
+      if (selectAll) {
+        setExcludedIds((prev) => {
+          const next = new Set(prev);
+          if (next.has(id)) {
+            next.delete(id);
+          } else {
+            next.add(id);
+          }
+          return next;
+        });
+      } else {
+        setUploadResult((prev) =>
+          prev.map((row, i) =>
+            i === index
+              ? { ...row, speciesId: row["speciesId"] === "CREATE" ? null : "CREATE" }
+              : row
+          )
+        );
+      }
+    },
+    [selectAll]
+  );
+
+  // Rows that could get a species page (no page yet, not in error) and how
+  // many of them are currently selected — shown in the toolbar.
+  const speciesEligible = useMemo(
+    () => uploadResult.filter((r) => canCreateSpecies(r) && r.action !== "ERROR"),
+    [uploadResult]
+  );
+  const speciesSelectedCount = useMemo(
+    () => speciesEligible.filter(isSpeciesSelected).length,
+    [speciesEligible, isSpeciesSelected]
+  );
+
   // Counts of what will be created / updated. Respects user overrides on sub-rows.
   // Names in an ERROR state are not submitted (see buildAcceptedPayload), so
   // nothing tied to them — species page, synonyms, common names — is counted.
@@ -685,6 +1038,14 @@ export default function TaxonomyBatchUploadComponent() {
     () => (confirmOpen ? getChangeSummary() : null),
     [confirmOpen, getChangeSummary]
   );
+  const hierarchyUpdates = useMemo(
+    () => (confirmOpen ? getHierarchyUpdates(uploadResult) : []),
+    [confirmOpen, uploadResult]
+  );
+  const positionUpdates = useMemo(
+    () => (confirmOpen ? getPositionUpdates(uploadResult) : []),
+    [confirmOpen, uploadResult]
+  );
   const { onOpen: onOpen1 } = useDisclosure();
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -720,25 +1081,38 @@ export default function TaxonomyBatchUploadComponent() {
   );
 
   const buildAcceptedPayload = useCallback(() => {
+    // Computed over ALL rows (before filtering) so indexes line up.
+    const owners = getLatestHierOwners(uploadResult);
+    const positionOwners = getLatestPositionOwners(uploadResult);
+
     return uploadResult
+      .map((item, rowIndex) => ({ item, rowIndex }))
       .filter(
-        (item: any) =>
+        ({ item }) =>
           item["action"] === "CREATE" || item["action"] === "NOOP" || item["action"] === "UPDATE"
       )
-      .map((item: any) => ({
+      .map(({ item, rowIndex }) => ({
         scientificName: item["scientificName"],
         status: item["status"],
         position: item["position"],
         hierarchy: item["hierarchy"],
         rank: item["rank"],
         acceptedId: item["acceptedId"],
+        // Only the latest hierarchy change per taxon is sent; older rows drop it.
+        // NOOP rows always send null.
+        updateHier: getLatestUpdateHier(item, rowIndex, owners),
+        // Each ancestor's position change is sent once, from the latest row that has it.
+        positionHier: (() => {
+          const owned = getOwnedPositionChanges(item, rowIndex, positionOwners);
+          return owned.length > 0 ? owned.map((c) => c.raw) : null;
+        })(),
         synonyms: (item["synonyms"] || []).filter((syn: string) => {
           const action = getSubRowComputedAction(syn, true, item["taxonId"]);
           return action === "CREATE" || action === "UPDATE";
         }),
-        commonNames: (item["commonNames"] || [])
-          .filter((cn: string) => cn.split("|")[1] === "CREATE")
-          .map((cn: string) => cn),
+        commonNames: (item["commonNames"] || []).filter(
+          (cn: string) => cn.split("|")[1] === "CREATE"
+        ),
         taxonId: item["taxonId"],
         speciesId: canCreateSpecies(item)
           ? isSpeciesSelected(item)
@@ -759,6 +1133,8 @@ export default function TaxonomyBatchUploadComponent() {
         setConfirmOpen(false);
         setCurrentStep(1);
         setUploadResult([]);
+        setSelectAll(false);
+        setExcludedIds(new Set());
         setFile(null);
       } else {
         notification("Error while creating taxonomy");
@@ -826,25 +1202,50 @@ export default function TaxonomyBatchUploadComponent() {
         <>
           <Box mb={4}>
             <Box mb={4} width="100%">
-              <Button
-                variant={"outline"}
-                size="xs"
-                colorPalette="blue"
-                onClick={() => {
-                  setSelectAll(true);
-                }}
-              >
-                <LuCopyCheck />
-                Select All
-              </Button>
+              <HStack justify="space-between" wrap="wrap" gap={2} mb={3}>
+                <HStack gap={1.5} fontSize="sm" color="gray.600">
+                  <Icon as={LuFilePlus} boxSize={4} />
+                  <Text>
+                    {speciesSelectedCount} of {speciesEligible.length} species pages selected
+                  </Text>
+                </HStack>
+                <Button
+                  variant="outline"
+                  size="xs"
+                  colorPalette="blue"
+                  disabled={speciesEligible.length === 0}
+                  onClick={() => {
+                    setSelectAll((prev) => !prev);
+                    setExcludedIds(new Set());
+                  }}
+                >
+                  <LuCopyCheck />
+                  {selectAll ? "Undo select all" : "Create pages for all"}
+                </Button>
+              </HStack>
               <VStack align="stretch" gap={3}>
                 {uploadResult &&
                   uploadResult.map((item, index) => {
-                    const hierarchyNodes = item["hierarchy"]?.split(";").filter(Boolean) ?? [];
-                    const changes = getMainRowChanges(item);
-                    let acceptedId = item["acceptedId"] && item["acceptedId"].includes("#")?item["acceptedId"].split("#")[1]:item["acceptedId"]
-                    const status = item["status"].includes("#")?item["status"].split("#")[1]:item["status"]
-                    if (item["status"].split("#").length>2){
+                    const hierarchyNodes = parseHierarchy(item["hierarchy"]);
+                    // Position changes on taxa in the hierarchy, all shown on one
+                    // "Position changes" line below the breadcrumb.
+                    const positionChanges = getRowPositionChanges(item);
+                    // Changes are shown inside the tags only while the row is set to
+                    // Update; switching it to "No change" shows the current values.
+                    const changes =
+                      item["action"] === "UPDATE" ? getMainRowChanges(item) : [];
+                    const nameChange = findChange(changes, "Name");
+                    const statusChange = findChange(changes, "Status");
+                    const positionChange = findChange(changes, "Position");
+                    const acceptedIdChange = findChange(changes, "AcceptedId");
+                    let acceptedId =
+                      item["acceptedId"] && item["acceptedId"].includes("#")
+                        ? item["acceptedId"].split("#")[1]
+                        : item["acceptedId"];
+                    const status = item["status"].includes("#")
+                      ? item["status"].split("#")[1]
+                      : item["status"];
+                    if (item["status"].split("#").length > 2) {
                       acceptedId = item["status"].split("#")[2];
                     }
 
@@ -859,58 +1260,45 @@ export default function TaxonomyBatchUploadComponent() {
                         <Flex justify="space-between" align="flex-start" gap={3}>
                           <Box>
                             <Text fontWeight="medium">
-                              {canCreateSpecies(item) && (
-                                <Checkbox
-                                  mr={2}
-                                  checked={isSpeciesSelected(item)}
-                                  onCheckedChange={() => {
-                                    if (selectAll) {
-                                      setExcludedIds((prev) => {
-                                        const next = new Set(prev);
-                                        if (next.has(item["id"])) {
-                                          next.delete(item["id"]);
-                                        } else {
-                                          next.add(item["id"]);
-                                        }
-                                        return next;
-                                      });
-                                    } else {
-                                      setUploadResult((prev) =>
-                                        prev.map((row, i) =>
-                                          i === index
-                                            ? {
-                                                ...row,
-                                                speciesId:
-                                                  row["speciesId"] === "CREATE" ? null : "CREATE"
-                                              }
-                                            : row
-                                        )
-                                      );
-                                    }
-                                  }}
-                                  colorPalette="blue"
-                                  aria-label={`Select ${item["scientificName"]} for page creation`}
-                                />
+                              {nameChange ? (
+                                <>
+                                  <Text
+                                    as="span"
+                                    textDecoration="line-through"
+                                    color="gray.400"
+                                    fontWeight="normal"
+                                  >
+                                    {nameChange.oldValue}
+                                  </Text>
+                                  <Icon
+                                    as={LuArrowRight}
+                                    boxSize={3}
+                                    mx={1}
+                                    color="gray.500"
+                                    verticalAlign="middle"
+                                  />
+                                  {nameChange.newValue}
+                                </>
+                              ) : (
+                                item["scientificName"].split("#")[0]
+                              )}{" "}
+                              <ValueBadge
+                                value={item["status"].split("#")[0]}
+                                change={statusChange}
+                              />
+                              <ValueBadge
+                                value={item["position"].split("#")[0]}
+                                change={positionChange}
+                              />
+                              {acceptedIdChange && (
+                                <ValueBadge label="Accepted ID" change={acceptedIdChange} />
                               )}
-                              {item["scientificName"].split("#")[0]}{" "}
-                              <Badge
-                                mr={2}
-                                colorPalette={TAXON_BADGE_COLORS[item["status"].split("#")[0]]}
-                              >
-                                {item["status"].split("#")[0]}
-                              </Badge>
-                              <Badge
-                                colorPalette={TAXON_BADGE_COLORS[item["position"].split("#")[0]]}
-                              >
-                                {item["position"].split("#")[0]}
-                              </Badge>
                             </Text>
                           </Box>
                           <HStack gap={1.5} flexShrink={0}>
                             <ActionDropdown
                               action={item["action"]}
                               baseAction={item["originalAction"] ?? item["action"]}
-                              changes={changes}
                               error={item["error"]}
                               onChange={(value) => {
                                 setUploadResult((prev) =>
@@ -931,31 +1319,53 @@ export default function TaxonomyBatchUploadComponent() {
 
                         {hierarchyNodes.length > 0 && (
                           <HStack gap={0} wrap="wrap" fontSize="sm" color="gray.500">
-                            {hierarchyNodes.map((node, i, arr) => {
-                              const [rank, rest] = node.split(":");
-                              const [name, id] = rest?.split("#") ?? [];
-                              return (
-                                <Fragment key={i}>
-                                  <Tooltip.Root>
-                                    <Tooltip.Trigger asChild>
-                                      <Text as="span" cursor="default">
-                                        {name}
-                                      </Text>
-                                    </Tooltip.Trigger>
-                                    <Tooltip.Positioner>
-                                      <Tooltip.Content>
-                                        {rank}: {name} #{id}
-                                      </Tooltip.Content>
-                                    </Tooltip.Positioner>
-                                  </Tooltip.Root>
-                                  {i < arr.length - 1 && (
-                                    <Icon as={LuChevronRight} boxSize={3} mx={1} />
-                                  )}
-                                </Fragment>
-                              );
-                            })}
+                            {hierarchyNodes.map((node, i, arr) => (
+                              <Fragment key={i}>
+                                <Tooltip.Root>
+                                  <Tooltip.Trigger asChild>
+                                    <Text as="span" cursor="default">
+                                      {node.name}
+                                    </Text>
+                                  </Tooltip.Trigger>
+                                  <Tooltip.Positioner>
+                                    <Tooltip.Content>
+                                      {node.rank}: {node.name} #{node.id}
+                                    </Tooltip.Content>
+                                  </Tooltip.Positioner>
+                                </Tooltip.Root>
+                                {i < arr.length - 1 && (
+                                  <Icon as={LuChevronRight} boxSize={3} mx={1} />
+                                )}
+                              </Fragment>
+                            ))}
                           </HStack>
                         )}
+
+                        {positionChanges.length > 0 && (
+                          <HStack gap={1} wrap="wrap" fontSize="sm" color="gray.500" mt={1}>
+                            <Text as="span">Position changes:</Text>
+                            {positionChanges.map((c) => (
+                              <HStack key={c.id} gap={1}>
+                                <Text as="span">{c.name}</Text>
+                                <ValueBadge
+                                  change={{
+                                    field: "Position",
+                                    oldValue: c.oldValue,
+                                    newValue: c.newValue
+                                  }}
+                                />
+                              </HStack>
+                            ))}
+                          </HStack>
+                        )}
+
+                        <Box mt={2}>
+                          <SpeciesPageToggle
+                            item={item}
+                            checked={isSpeciesSelected(item)}
+                            onToggle={() => toggleSpecies(index, item["id"])}
+                          />
+                        </Box>
 
                         {item["synonyms"] && item["synonyms"].length > 0 && (
                           <SubRowGroup
@@ -963,7 +1373,7 @@ export default function TaxonomyBatchUploadComponent() {
                             icon={LuRepeat}
                             items={item["synonyms"]}
                             synonym={true}
-                            acceptedId={status=="ACCEPTED"?item["taxonId"]:acceptedId}
+                            acceptedId={status == "ACCEPTED" ? item["taxonId"] : acceptedId}
                             parentError={item["action"] === "ERROR"}
                           />
                         )}
@@ -1008,6 +1418,8 @@ export default function TaxonomyBatchUploadComponent() {
                 open={confirmOpen}
                 onOpenChange={setConfirmOpen}
                 summary={changeSummary}
+                hierarchyUpdates={hierarchyUpdates}
+                positionUpdates={positionUpdates}
                 isSubmitting={isSubmitting}
                 onConfirm={handleSubmit}
               />
