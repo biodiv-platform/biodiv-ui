@@ -36,6 +36,7 @@
   "show_page": "ડેટેટેબલ વિગતો",
   "summary": "સારાંશ",
   "table": {
+    "associated_media": "સંબંધિત મીડિયા",
     "geo_privacy": "જીઓ ગોપનીયતા",
     "id": "ID",
     "observed_at": "સ્થળનું નામ",

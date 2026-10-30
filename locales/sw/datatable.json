@@ -36,6 +36,7 @@
   "show_page": "Maelezo ya data",
   "summary": "Muhtasari",
   "table": {
+    "associated_media": "Vyombo vya habari vinavyohusika",
     "geo_privacy": "Geo Faragha",
     "id": "ID",
     "observed_at": "Weka Jina",

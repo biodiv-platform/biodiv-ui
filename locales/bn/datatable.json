@@ -36,6 +36,7 @@
   "show_page": "Datatable বিবরণ",
   "summary": "সারসংক্ষেপ",
   "table": {
+    "associated_media": "সম্পর্কিত মিডিয়া",
     "geo_privacy": "জিও গোপনীয়তা",
     "id": "আইডি",
     "observed_at": "স্থানের নাম",

@@ -36,6 +36,7 @@
   "show_page": "ഡാറ്റാടേബിൾ വിശദാംശങ്ങൾ",
   "summary": "സംഗഹം",
   "table": {
+    "associated_media": "അനുബന്ധ മീഡിയ",
     "geo_privacy": "ജിയോ സ്വകാര്യത",
     "id": "ഐഡി",
     "observed_at": "സ്ഥലനാമം",

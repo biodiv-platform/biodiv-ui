@@ -36,6 +36,7 @@
   "show_page": "ಡೇಟಾಟೇಬಲ್ ವಿವರಗಳು",
   "summary": "ಸಾರಾಂಶ",
   "table": {
+    "associated_media": "ಸಂಬಂಧಿತ ಮಾಧ್ಯಮ",
     "geo_privacy": "ಭೂಗೌಪ್ಯತೆ",
     "id": "ಐಡಿ",
     "observed_at": "ಸ್ಥಳದ ಹೆಸರು",
