@@ -36,6 +36,7 @@
   "show_page": "Informations sur la table de données",
   "summary": "Résumé",
   "table": {
+    "associated_media": "Médias associés",
     "geo_privacy": "Confidentialité géographique",
     "id": "identifiant",
     "observed_at": "Nom de lieu",

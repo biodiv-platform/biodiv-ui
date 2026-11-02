@@ -36,6 +36,7 @@
   "show_page": "Datatable వివరాలు",
   "summary": "సారాంశం",
   "table": {
+    "associated_media": "సంబంధిత మీడియా",
     "geo_privacy": "జియో గోప్యత",
     "id": "Id.",
     "observed_at": "స్థలం పేరు",

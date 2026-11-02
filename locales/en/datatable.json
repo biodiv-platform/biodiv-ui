@@ -36,6 +36,7 @@
   "show_page": "Datatable Details",
   "summary": "Summary",
   "table": {
+    "associated_media": "Associated Media",
     "geo_privacy": "Geo Privacy",
     "id": "ID",
     "observed_at": "Place Name",

@@ -36,6 +36,7 @@
   "show_page": "डेटाटेबल तपशील",
   "summary": "सारांश",
   "table": {
+    "associated_media": "संबंधित मीडिया",
     "geo_privacy": "भौगोलिक गोपनीयता",
     "id": "आयडी",
     "observed_at": "ठिकाणाचे नाव",

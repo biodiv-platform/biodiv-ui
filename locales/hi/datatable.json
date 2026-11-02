@@ -36,6 +36,7 @@
   "show_page": "डेटाटेबल विवरण",
   "summary": "सारांश",
   "table": {
+    "associated_media": "संबंधित मीडिया",
     "geo_privacy": "भू गोपनीयता",
     "id": "ईद",
     "observed_at": "स्थान का नाम",
