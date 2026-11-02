@@ -21,6 +21,10 @@ interface TaxonFilterContextProps {
   isLoading?;
   selectedTaxons?;
   setSelectedTaxons?;
+  onSelectionChange?;
+  selectAll?: boolean;
+  excludedTaxons?: any[];
+  selectedCount?: number;
 
   modalTaxon?;
   setModalTaxon?;
@@ -45,7 +49,16 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
   const [taxonListData, setTaxonListData] = useImmer<any>({ l: [], count: 0, hasMore: true });
   const [isLoading, setIsLoading] = useState<boolean>();
 
-  const [selectedTaxons, setSelectedTaxons] = useState([]);
+  const [selectedTaxons, setSelectedTaxons] = useState<any[]>([]);
+  // `selectAll` = every taxon matching the current filter, minus `excludedTaxons`
+  const [selectAll, setSelectAll] = useState(false);
+  const [excludedTaxons, setExcludedTaxons] = useState<any[]>([]);
+
+  const onSelectionChange = (rows, { selectAll = false, excludedRows = [] }: any = {}) => {
+    setSelectedTaxons(rows);
+    setSelectAll(selectAll);
+    setExcludedTaxons(excludedRows);
+  };
   const { open, onOpen, onClose } = useDisclosure();
 
   const [modalTaxon, setModalTaxonI] = useState<any>();
@@ -178,6 +191,14 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
         // for table multiple taxon selections
         selectedTaxons,
         setSelectedTaxons,
+        onSelectionChange,
+        selectAll,
+        excludedTaxons,
+        // falls back to the loaded selection if the list API doesn't return a total `count`
+        selectedCount:
+          selectAll && taxonListData?.count
+            ? Math.max(taxonListData.count - excludedTaxons.length, 0)
+            : selectedTaxons.length,
 
         // Stores just clicked taxon ID
         showTaxon,

@@ -45,7 +45,17 @@ import useTaxonFilter from "../use-taxon";
 export default function BulkMapperModal() {
   const isSmall = useBreakpointValue({ base: true, md: false });
   const { t } = useTranslation();
-  const { onClose, isOpen, onOpen, selectedTaxons, setSelectedTaxons } = useTaxonFilter();
+  const {
+    onClose,
+    isOpen,
+    onOpen,
+    selectedTaxons,
+    setSelectedTaxons,
+    selectAll,
+    excludedTaxons,
+    selectedCount = 0,
+    filter
+  } = useTaxonFilter();
   const [tabIndex, setTabIndex] = useState<string | null>("taxon:position.title");
   const [selectedRanks, setSelectedRanks] = useState<any[]>([]);
   const [accepted, setAccepted] = useState(true);
@@ -61,10 +71,11 @@ export default function BulkMapperModal() {
     defaultOpen: false
   });
   useEffect(() => {
-    if (selectedTaxons && selectedTaxons?.length > 0 && !isOpen) {
+    const hasSelection = selectAll || selectedCount > 0;
+    if (hasSelection && !isOpen) {
       onOpen();
     }
-    if (selectedTaxons && selectedTaxons?.length == 0 && isOpen) {
+    if (!hasSelection && isOpen) {
       onClose();
     }
     const distinctRanks = [...new Set(selectedTaxons.map((item) => item.rank))];
@@ -80,7 +91,7 @@ export default function BulkMapperModal() {
         ensureSpeciesId(t.id);
       }
     });
-  }, [selectedTaxons]);
+  }, [selectedTaxons, selectedCount, selectAll]);
 
   const hForm = useForm<any>({
     mode: "onChange",
@@ -106,12 +117,23 @@ export default function BulkMapperModal() {
   const draggedTaxon = useRef<string | null>(null);
 
   const handleOnSubmit = async (values) => {
-    const params = {
-      bulkPosition: values.position,
-      bulkAction: "position",
-      bulkTaxonIds: selectedTaxons.map((item) => item.id).join(","),
-      selectAll: false
-    };
+    const { offsetPath, offsetId, ...listFilter } = filter || {};
+    const params = selectAll
+      ? {
+          // apply to every taxon matching the current list filter, except the unticked ones
+          ...listFilter,
+          bulkPosition: values.position,
+          bulkAction: "position",
+          bulkTaxonIds: "",
+          selectAll: true,
+          excludeIds: (excludedTaxons || []).map((item) => item.id).join(",")
+        }
+      : {
+          bulkPosition: values.position,
+          bulkAction: "position",
+          bulkTaxonIds: selectedTaxons.map((item) => item.id).join(","),
+          selectAll: false
+        };
 
     const { success } = await axTaxonomyBulkAction(params);
 
@@ -203,7 +225,7 @@ export default function BulkMapperModal() {
                 </Text>
                 <Box alignItems="end" ml="auto" justifyContent={"flex-end"}>
                   <ActionBar.SelectionTrigger m={2}>
-                    {selectedTaxons?.length} {t("taxon:bulk_actions_selected")}
+                    {selectedCount} {t("taxon:bulk_actions_selected")}
                   </ActionBar.SelectionTrigger>
                   <ButtonGroup size="sm" variant="outline">
                     {!isSmall && (

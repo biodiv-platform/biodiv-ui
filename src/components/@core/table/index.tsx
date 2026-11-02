@@ -1,7 +1,7 @@
 import { Box, chakra, Table } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
 import * as React from "react";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { LuMoveDown, LuMoveUp } from "react-icons/lu";
 import { useRowSelect, useSortBy, useTable } from "react-table";
 
@@ -21,6 +21,10 @@ interface BasicTableProps {
   getCheckboxProps?: any;
   isSelectable?;
   onSelectionChange?;
+  /** Start in "select all" mode: every row, including rows loaded later (e.g. infinite scroll),
+   * is selected. Unticking a row keeps "select all" on and reports it in `excludedRows`;
+   * unticking the header turns "select all" off */
+  defaultSelectAll?: boolean;
 }
 
 const IndeterminateCheckbox = React.forwardRef(({ indeterminate, ...rest }: any, ref) => {
@@ -44,9 +48,19 @@ export function BasicTable({
   translateHeader,
   isSelectable,
   onSelectionChange,
-  getCheckboxProps
+  getCheckboxProps,
+  defaultSelectAll
 }: BasicTableProps) {
   const { t } = useTranslation();
+
+  // `true` while "select all" is active, so newly loaded rows get selected as well
+  const selectAllMode = useRef<boolean>(!!defaultSelectAll);
+
+  // Keep existing selections when rows are only appended (infinite scroll),
+  // reset them when the list is replaced (e.g. filter change)
+  const dataLength = data?.length || 0;
+  const prevDataLength = useRef(0);
+  const isAppend = prevDataLength.current > 0 && dataLength >= prevDataLength.current;
 
   const tableProps = useMemo(
     () =>
@@ -57,12 +71,20 @@ export function BasicTable({
               hooks.visibleColumns.push((columns) => [
                 {
                   id: "selection",
-                  Header: (props) => (
-                    <IndeterminateCheckbox
-                      {...props.getToggleAllRowsSelectedProps()}
-                      {...getCheckboxProps?.("header")}
-                    />
-                  ),
+                  disableSortBy: true,
+                  Header: (props) => {
+                    const toggleProps = props.getToggleAllRowsSelectedProps();
+                    return (
+                      <IndeterminateCheckbox
+                        {...toggleProps}
+                        {...getCheckboxProps?.("header")}
+                        onChange={(e) => {
+                          selectAllMode.current = e.target.checked;
+                          toggleProps.onChange(e);
+                        }}
+                      />
+                    );
+                  },
                   Cell: ({ row }) => <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />,
                   style: { width: "16px" }
                 },
@@ -74,17 +96,42 @@ export function BasicTable({
     []
   );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state } = useTable(
-    { columns, data, getCheckboxProps },
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    state,
+    toggleAllRowsSelected,
+    toggleRowSelected
+  }: any = useTable(
+    { columns, data, getCheckboxProps, autoResetSelectedRows: !isAppend },
     useSortBy,
     ...tableProps
   );
 
+  // While select-all mode is on, select newly loaded rows (leaving rows the user unticked alone)
+  useEffect(() => {
+    const prev = prevDataLength.current;
+    prevDataLength.current = dataLength;
+    if (!isSelectable || !selectAllMode.current || !dataLength) return;
+
+    if (prev > 0 && dataLength > prev) {
+      for (let i = prev; i < dataLength; i++) toggleRowSelected(String(i), true);
+    } else if (!(prev > 0 && dataLength >= prev)) {
+      toggleAllRowsSelected(true);
+    }
+  }, [dataLength]);
+
   useEffect(() => {
     if (isSelectable) {
-      const selectedRows: any = [];
-      Object.keys(state.selectedRowIds).map((index) => selectedRows.push(data[index]));
-      onSelectionChange(selectedRows);
+      const selectedRows = Object.keys(state.selectedRowIds)
+        .map((index) => data[index])
+        .filter(Boolean);
+      const selectAll = selectAllMode.current;
+      const excludedRows = selectAll ? data.filter((_, i) => !state.selectedRowIds[i]) : [];
+      onSelectionChange(selectedRows, { selectAll, excludedRows });
     }
   }, [state.selectedRowIds]);
 
