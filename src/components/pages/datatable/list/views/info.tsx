@@ -11,6 +11,7 @@ import { formatDateReadableFromUTC } from "@utils/date";
 import { getUserImage } from "@utils/media";
 import { getInjectableHTML } from "@utils/text";
 import useTranslation from "next-translate/useTranslation";
+import { useMemo } from "react";
 
 import { Avatar } from "@/components/ui/avatar";
 
@@ -48,6 +49,14 @@ export default function InfoTab({ datatable }: InfoTabInterface) {
   const { t } = useTranslation();
   const { species } = useDataTableList();
   const { currentGroup } = useGlobalState();
+
+  const groupOptions = useMemo(
+    () =>
+      species
+        ?.filter((g) => g.name !== undefined && g.id !== undefined)
+        .map((g) => ({ label: g.name as string, value: g.id as number })),
+    [species]
+  );
 
   return (
     <Flex
@@ -110,7 +119,7 @@ export default function InfoTab({ datatable }: InfoTabInterface) {
                     <SpeciesGroupBox
                       id={parseInt(datatable?.taxonomicCoverageGroupIds)}
                       canEdit={false}
-                      speciesGroups={species}
+                      speciesGroups={groupOptions}
                       observationId={datatable?.id}
                     />
                   ) : null
