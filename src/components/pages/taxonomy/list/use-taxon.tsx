@@ -33,7 +33,9 @@ interface TaxonFilterContextProps {
   onClose?;
 }
 
-const TaxonFilterContext = createContext<TaxonFilterContextProps>({} as TaxonFilterContextProps);
+export const TaxonFilterContext = createContext<TaxonFilterContextProps>(
+  {} as TaxonFilterContextProps
+);
 
 export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
   const initialOffsetPath = props?.filter?.offsetPath || "";
