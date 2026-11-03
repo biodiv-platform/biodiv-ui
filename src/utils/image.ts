@@ -85,9 +85,19 @@ export const getAssetObject = (file, meta?) => {
   const hashKey = `${LOCAL_ASSET_PREFIX}${nanoid()}`;
   const finalMeta = meta || { blob: file };
   const fileName = normalizeFileName(file.name);
+  const blob = finalMeta.blob || file;
+  let blobURL: string | undefined;
+  if (typeof window !== "undefined" && blob) {
+    try {
+      blobURL = window.URL.createObjectURL(blob);
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   return {
     ...finalMeta,
+    blobURL,
     hashKey,
     fileName,
     url: null,
