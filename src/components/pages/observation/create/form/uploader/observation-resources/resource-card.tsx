@@ -46,24 +46,28 @@ export const getImageThumb = (resource, userID) => {
 
   if (resource.blobURL) return resource.blobURL;
 
-  if (resource.status === AssetStatus.Uploaded) {
-    return resource.type.match(ASSET_TYPES.VIDEO) && resource.url
-      ? getYoutubeImage(resource.url)
-      : resource.path.match(LOCAL_ASSET_PREFIX)
-      ? getResourceThumbnail(
-          RESOURCE_CTX.MY_UPLOADS,
-          userID + resource.path,
-          RESOURCE_SIZE.RECENT_THUMBNAIL
-        ) // MyUploads
-      : getResourceThumbnail(resource.context, resource.path, RESOURCE_SIZE.DEFAULT);
-  }
-
   try {
-    if (resource.type.match(ASSET_TYPES.IMAGE) && resource.blob) {
+    if (resource.blob) {
       return window.URL.createObjectURL(resource.blob);
     }
   } catch (e) {
     console.error(e);
+  }
+
+  if (resource.type?.match(ASSET_TYPES.VIDEO) && resource.url) {
+    return getYoutubeImage(resource.url);
+  }
+
+  if (resource.status === AssetStatus.Uploaded) {
+    return resource.path?.match(LOCAL_ASSET_PREFIX)
+      ? getResourceThumbnail(
+          RESOURCE_CTX.MY_UPLOADS,
+          (userID || "") + resource.path,
+          RESOURCE_SIZE.RECENT_THUMBNAIL
+        ) // MyUploads
+      : resource.path
+      ? getResourceThumbnail(resource.context, resource.path, RESOURCE_SIZE.DEFAULT)
+      : undefined;
   }
 
   return undefined;
@@ -74,7 +78,10 @@ export default function ResourceCard({ resource, index }: IResourceCardProps) {
     useObservationCreate();
   const { user } = useGlobalState();
 
-  const imageURL = useMemo(() => getImageThumb(resource, user?.id), []);
+  const imageURL = useMemo(
+    () => getImageThumb(resource, user?.id),
+    [resource.blobURL, resource.blob, resource.path, resource.status, resource.url, user?.id]
+  );
 
   return (
     <Flex

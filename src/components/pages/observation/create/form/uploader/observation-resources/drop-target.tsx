@@ -32,7 +32,7 @@ export default function DropTarget({ assetsSize }) {
         setIsProcessing(true);
         try {
           const resizedAssets = await resizeMultiple(acceptedFiles);
-          addAssets(resizedAssets, true);
+          await addAssets(resizedAssets, true);
         } catch (error) {
           console.error(error);
         } finally {
