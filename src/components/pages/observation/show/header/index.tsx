@@ -113,7 +113,10 @@ function Header({ o, following = false }: IHeaderProps) {
 
       <PageHeading actions={<PageActions />} size={"4xl"}>
         <>
-          <Flex direction={{ base: "column", md: "row" }}>
+          <Flex
+            direction={{ base: "column", md: "row" }}
+            alignItems={{ base: "flex-start", md: "center" }}
+          >
             <Box mr={2}>
               <ScientificName value={o.recoIbp?.scientificName || t("common:unknown")} />
             </Box>
