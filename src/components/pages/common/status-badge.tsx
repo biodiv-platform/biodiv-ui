@@ -3,6 +3,7 @@ import TaxonShowModal from "@components/pages/taxonomy/list/table/taxon-modal";
 import { TAXON_BADGE_COLORS } from "@static/constants";
 import useTranslation from "next-translate/useTranslation";
 import { useState } from "react";
+import { LuInfo } from "react-icons/lu";
 
 interface TaxonStatusBadgeProps {
   reco;
@@ -25,6 +26,7 @@ function TaxonStatusBadge({ reco, taxonId, crumbs, name }: TaxonStatusBadgeProps
             colorPalette={TAXON_BADGE_COLORS.ACCEPTED}
             cursor={taxonId != null ? "pointer" : "default"}
             h="fit-content"
+            variant="outline"
             onClick={
               taxonId != null
                 ? (e) => {
@@ -34,8 +36,12 @@ function TaxonStatusBadge({ reco, taxonId, crumbs, name }: TaxonStatusBadgeProps
                   }
                 : undefined
             }
+            _hover={{
+              bg: `${TAXON_BADGE_COLORS.ACCEPTED}.subtle`
+            }}
           >
             {t("common:accepted")}
+            <LuInfo />
           </Badge>
         );
 
@@ -46,6 +52,7 @@ function TaxonStatusBadge({ reco, taxonId, crumbs, name }: TaxonStatusBadgeProps
           <Badge
             colorPalette={TAXON_BADGE_COLORS.SYNONYM}
             cursor={targetId != null ? "pointer" : "default"}
+            variant="outline"
             h="fit-content"
             onClick={
               targetId != null
@@ -65,7 +72,7 @@ function TaxonStatusBadge({ reco, taxonId, crumbs, name }: TaxonStatusBadgeProps
 
       default:
         return !reco?.scientificName ? (
-          <Badge colorPalette="red" h="fit-content">
+          <Badge colorPalette="red" h="fit-content" variant="outline">
             {t("observation:help_identify")}
           </Badge>
         ) : null;
