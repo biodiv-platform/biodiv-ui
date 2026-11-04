@@ -1,5 +1,7 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Button, Menu } from "@chakra-ui/react";
+import { MenuContent, MenuRadioItemGroup, MenuRoot, MenuTrigger } from "@components/ui/menu";
 import SITE_CONFIG from "@configs/site-config";
+import { axGetGBIFTaxonGrid } from "@services/external-occurrences.service";
 import { axGetObservationMapData } from "@services/observation.service";
 import { ENDPOINT, mapStyles } from "@static/constants";
 import { getMapCenter } from "@utils/location";
@@ -7,6 +9,7 @@ import { toPng } from "html-to-image";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
+import { LuCheck, LuChevronDown, LuLayers } from "react-icons/lu";
 import LazyLoad from "react-lazyload";
 
 import useSpecies from "../../../use-species";
@@ -23,6 +26,13 @@ const onObservationGridHover = ({ feature }: any) => (
   <div>{feature?.properties?.count} Observations</div>
 );
 
+/** Where the grid counts come from; "all" adds IBP and GBIF counts per cell */
+const OCCURRENCE_SOURCES = [
+  { value: "all", label: "All", color: "blue.500" },
+  { value: "ibp", label: "IBP", color: "green.500" },
+  { value: "gbif", label: "GBIF", color: "purple.500" }
+];
+
 interface OccuranceRecoardSpeciesFieldProps {
   valueCallback: (loaded: boolean) => void;
 }
@@ -34,6 +44,7 @@ const OccuranceRecoardSpeciesField = forwardRef(
     const { lang } = useTranslation();
     const mapContainerRef = useRef<HTMLDivElement>(null);
     const [forceLoad, setForceLoad] = useState(false);
+    const [source, setSource] = useState("all");
 
     const handleLoadMap = () => {
       setForceLoad(true);
@@ -57,7 +68,9 @@ const OccuranceRecoardSpeciesField = forwardRef(
 
           try {
             const dataUrl = await toPng(mapContainerRef.current, {
-              backgroundColor: "#FFFFFF"
+              backgroundColor: "#FFFFFF",
+              // leave the source dropdown out of the image
+              filter: (node) => !(node instanceof HTMLElement && node.dataset.captureIgnore)
             });
             const parts = dataUrl.split(",");
             const pureBase64 = parts[1];
@@ -95,6 +108,28 @@ const OccuranceRecoardSpeciesField = forwardRef(
       return data;
     };
 
+    const fetchGBIFGridData = async (geoProps) => {
+      const { data } = await axGetGBIFTaxonGrid(species.taxonomyDefinition.id, geoProps);
+      return data;
+    };
+
+    const fetchAllGridData = async (geoProps) => {
+      const [ibp, gbif] = await Promise.all([fetchGridData(geoProps), fetchGBIFGridData(geoProps)]);
+      const counts = { ...ibp };
+      for (const [geohash, count] of Object.entries(gbif || {})) {
+        counts[geohash] = (counts[geohash] || 0) + (count as number);
+      }
+      return counts;
+    };
+
+    const gridFetchers = {
+      all: fetchAllGridData,
+      ibp: fetchGridData,
+      gbif: fetchGBIFGridData
+    };
+
+    const selectedSource = OCCURRENCE_SOURCES.find((s) => s.value === source);
+
     const MapContent = (
       <Box
         ref={mapContainerRef}
@@ -105,6 +140,30 @@ const OccuranceRecoardSpeciesField = forwardRef(
         bg="gray.300"
         mb={4}
       >
+        <Box position="absolute" top={2} left={2} zIndex={1} data-capture-ignore="true">
+          <MenuRoot positioning={{ placement: "bottom-start" }}>
+            <MenuTrigger asChild>
+              <Button size="xs" variant="outline" bg="white" boxShadow="sm">
+                <LuLayers />
+                {selectedSource?.label}
+                <LuChevronDown />
+              </Button>
+            </MenuTrigger>
+            <MenuContent minW="140px">
+              <MenuRadioItemGroup value={source} onValueChange={(e) => setSource(e.value)}>
+                {OCCURRENCE_SOURCES.map(({ value, label, color }) => (
+                  <Menu.RadioItem key={value} value={value}>
+                    <Box boxSize={2} borderRadius="full" bg={color} />
+                    <Menu.ItemText flex={1}>{label}</Menu.ItemText>
+                    <Menu.ItemIndicator>
+                      <LuCheck />
+                    </Menu.ItemIndicator>
+                  </Menu.RadioItem>
+                ))}
+              </MenuRadioItemGroup>
+            </MenuContent>
+          </MenuRoot>
+        </Box>
         <NakshaMaplibreLayers
           defaultViewState={defaultViewState}
           loadToC={false}
@@ -117,22 +176,20 @@ const OccuranceRecoardSpeciesField = forwardRef(
             store: SITE_CONFIG.GEOSERVER.STORE,
             workspace: SITE_CONFIG.GEOSERVER.WORKSPACE
           }}
-          selectedLayers={["species-observations"]}
-          layers={[
-            {
-              id: "species-observations",
-              title: "Species Observations",
-              source: { type: "grid", fetcher: fetchGridData },
-              onHover: onObservationGridHover,
-              data: {
-                index: "extended_observation",
-                type: "extended_records",
-                geoField: "location",
-                summaryColumn: ["count"],
-                propertyMap: { count: "Count" }
-              }
+          selectedLayers={[`occurrences-${source}`]}
+          layers={OCCURRENCE_SOURCES.map(({ value, label }) => ({
+            id: `occurrences-${value}`,
+            title: `${label} Occurrences`,
+            source: { type: "grid", fetcher: gridFetchers[value] },
+            onHover: onObservationGridHover,
+            data: {
+              index: "extended_observation",
+              type: "extended_records",
+              geoField: "location",
+              summaryColumn: ["count"],
+              propertyMap: { count: "Count" }
             }
-          ]}
+          }))}
         />
       </Box>
     );
