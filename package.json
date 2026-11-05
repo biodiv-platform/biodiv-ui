@@ -66,7 +66,7 @@
     "local-storage-json": "^1.1.0",
     "maplibre-gl": "^5.6.2",
     "mq-styled-components": "^2.1.2",
-    "naksha-components-react": "5.0.3",
+    "naksha-components-react": "5.0.8-beta.1",
     "nanoid": "^6.0.1",
     "next": "16.3.0",
     "next-seo": "^5.8.0",
