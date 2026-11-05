@@ -6,6 +6,7 @@ settings:
 
 overrides:
   uuid: '>=11.1.1'
+  colorbrewer: 1.5.9
 
 importers:
 
@@ -2309,8 +2310,8 @@ packages:
   color2k@2.0.4:
     resolution: {integrity: sha512-OXAPGFRNeLFnUfqDtloYdxkwsJoIdXe28+bjbpJiPqyei2HPa3VHmMCWa0Qe62+U4Ftf9Hj7hRssOkxz7WiWbg==}
 
-  colorbrewer@1.7.0:
-    resolution: {integrity: sha512-hctXi+S4uPJFnzLS/v8LJqe9WQjOITs9Wo9sGQMHpB5kapFDMB28PUY2zKG54LkxF7qzME3BEbTzRloFM241hQ==}
+  colorbrewer@1.5.9:
+    resolution: {integrity: sha512-OMPR9u+1iD+67ftqGm7IKZic50fCjDH7gAoZi4hzDuunCzUzlT3P+eSHRoGcEZnGePzY8w+cumMUuABFI4qc2g==}
 
   combine-errors@3.0.3:
     resolution: {integrity: sha512-C8ikRNRMygCwaTx+Ek3Yr+OuZzgZjduCOfSQBjbM8V3MfgcjSTeto/GXP6PAwKvJz/v15b7GHZvx5rOlczFw/Q==}
@@ -5003,7 +5004,7 @@ snapshots:
       '@turf/bbox': 7.4.0
       boundingbox: 1.4.0
       clsx: 2.1.1
-      colorbrewer: 1.7.0
+      colorbrewer: 1.5.9
       geohash: 0.0.1
       highlight-search-result: 1.0.4
       immer: 11.2.9
@@ -7718,7 +7719,7 @@ snapshots:
 
   color2k@2.0.4: {}
 
-  colorbrewer@1.7.0: {}
+  colorbrewer@1.5.9: {}
 
   combine-errors@3.0.3:
     dependencies:

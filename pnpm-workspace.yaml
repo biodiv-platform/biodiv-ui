@@ -14,3 +14,4 @@ minimumReleaseAgeExclude:
   - "@biodiv-platform/naksha-maplibre-view@5.0.6-beta.0"
 overrides:
   uuid: ">=11.1.1"
+  colorbrewer: "1.5.9"
