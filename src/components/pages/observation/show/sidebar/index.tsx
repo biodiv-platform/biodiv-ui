@@ -18,6 +18,7 @@ export default function Sidebar({ observation, authorInfo, taxon }: ISidebarProp
         filter={taxon && { taxon }}
         latitude={observation?.latitude}
         longitude={observation?.longitude}
+        showGBIF={true}
       />
     </Box>
   );

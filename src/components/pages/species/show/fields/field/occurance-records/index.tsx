@@ -1,7 +1,10 @@
-import { Box, Button, Menu } from "@chakra-ui/react";
-import { MenuContent, MenuRadioItemGroup, MenuRoot, MenuTrigger } from "@components/ui/menu";
+import { Box } from "@chakra-ui/react";
+import OccurrenceSourceMenu, {
+  getOccurrenceGridFetchers,
+  getOccurrenceLayerId,
+  OCCURRENCE_SOURCES
+} from "@components/pages/common/occurrence-source-menu";
 import SITE_CONFIG from "@configs/site-config";
-import { axGetGBIFTaxonGrid } from "@services/external-occurrences.service";
 import { axGetObservationMapData } from "@services/observation.service";
 import { ENDPOINT, mapStyles } from "@static/constants";
 import { getMapCenter } from "@utils/location";
@@ -9,7 +12,6 @@ import { toPng } from "html-to-image";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
 import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
-import { LuCheck, LuChevronDown, LuLayers } from "react-icons/lu";
 import LazyLoad from "react-lazyload";
 
 import useSpecies from "../../../use-species";
@@ -25,13 +27,6 @@ const NakshaMaplibreLayers: any = dynamic(
 const onObservationGridHover = ({ feature }: any) => (
   <div>{feature?.properties?.count} Observations</div>
 );
-
-/** Where the grid counts come from; "all" adds IBP and GBIF counts per cell */
-const OCCURRENCE_SOURCES = [
-  { value: "all", label: "All", color: "blue.500" },
-  { value: "ibp", label: "IBP", color: "green.500" },
-  { value: "gbif", label: "GBIF", color: "purple.500" }
-];
 
 interface OccuranceRecoardSpeciesFieldProps {
   valueCallback: (loaded: boolean) => void;
@@ -108,27 +103,7 @@ const OccuranceRecoardSpeciesField = forwardRef(
       return data;
     };
 
-    const fetchGBIFGridData = async (geoProps) => {
-      const { data } = await axGetGBIFTaxonGrid(species.taxonomyDefinition.id, geoProps);
-      return data;
-    };
-
-    const fetchAllGridData = async (geoProps) => {
-      const [ibp, gbif] = await Promise.all([fetchGridData(geoProps), fetchGBIFGridData(geoProps)]);
-      const counts = { ...ibp };
-      for (const [geohash, count] of Object.entries(gbif || {})) {
-        counts[geohash] = (counts[geohash] || 0) + (count as number);
-      }
-      return counts;
-    };
-
-    const gridFetchers = {
-      all: fetchAllGridData,
-      ibp: fetchGridData,
-      gbif: fetchGBIFGridData
-    };
-
-    const selectedSource = OCCURRENCE_SOURCES.find((s) => s.value === source);
+    const gridFetchers = getOccurrenceGridFetchers(species.taxonomyDefinition.id, fetchGridData);
 
     const MapContent = (
       <Box
@@ -140,30 +115,7 @@ const OccuranceRecoardSpeciesField = forwardRef(
         bg="gray.300"
         mb={4}
       >
-        <Box position="absolute" top={2} left={2} zIndex={1} data-capture-ignore="true">
-          <MenuRoot positioning={{ placement: "bottom-start" }}>
-            <MenuTrigger asChild>
-              <Button size="xs" variant="outline" bg="white" boxShadow="sm">
-                <LuLayers />
-                {selectedSource?.label}
-                <LuChevronDown />
-              </Button>
-            </MenuTrigger>
-            <MenuContent minW="140px">
-              <MenuRadioItemGroup value={source} onValueChange={(e) => setSource(e.value)}>
-                {OCCURRENCE_SOURCES.map(({ value, label, color }) => (
-                  <Menu.RadioItem key={value} value={value}>
-                    <Box boxSize={2} borderRadius="full" bg={color} />
-                    <Menu.ItemText flex={1}>{label}</Menu.ItemText>
-                    <Menu.ItemIndicator>
-                      <LuCheck />
-                    </Menu.ItemIndicator>
-                  </Menu.RadioItem>
-                ))}
-              </MenuRadioItemGroup>
-            </MenuContent>
-          </MenuRoot>
-        </Box>
+        <OccurrenceSourceMenu value={source} onChange={setSource} />
         <NakshaMaplibreLayers
           defaultViewState={defaultViewState}
           loadToC={false}
@@ -176,9 +128,9 @@ const OccuranceRecoardSpeciesField = forwardRef(
             store: SITE_CONFIG.GEOSERVER.STORE,
             workspace: SITE_CONFIG.GEOSERVER.WORKSPACE
           }}
-          selectedLayers={[`occurrences-${source}`]}
+          selectedLayers={[getOccurrenceLayerId(source)]}
           layers={OCCURRENCE_SOURCES.map(({ value, label }) => ({
-            id: `occurrences-${value}`,
+            id: getOccurrenceLayerId(value),
             title: `${label} Occurrences`,
             source: { type: "grid", fetcher: gridFetchers[value] },
             onHover: onObservationGridHover,
