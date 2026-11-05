@@ -46,7 +46,7 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
   const offsetId = useRef(initialOffsetId);
 
   const [filter, setFilter] = useImmer<{ f: any }>({ f: props.filter });
-  const [taxonListData, setTaxonListData] = useImmer<any>({ l: [], count: 0, hasMore: true });
+  const [taxonListData, setTaxonListData] = useImmer<any>({ l: [], count: -1, hasMore: true });
   const [isLoading, setIsLoading] = useState<boolean>();
 
   const [selectedTaxons, setSelectedTaxons] = useState<any[]>([]);
@@ -81,35 +81,60 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
     }
   }, [filter, modalTaxon]);
 
+  // guards against an older (slower) request overwriting the result of a newer one
+  const latestRequest = useRef(0);
+  const isFetching = useRef(false);
+
   const fetchListData = async () => {
+    const requestId = ++latestRequest.current;
+    isFetching.current = true;
+    const isFirstPage = !filter.f?.offsetPath && Number(filter.f?.offsetId) === -1;
+
     try {
       NProgress.start();
       setIsLoading(true);
 
       // Reset list data if params are changed
-      if (filter.f?.offsetPath === "" && filter.f?.offsetId === -1) {
+      if (isFirstPage) {
+        // forget the previous list's cursor and stop infinite scroll until the new first page lands,
+        // otherwise emptying the list fires a scroll event that loads "page 2" of the old list
+        offsetPath.current = "";
+        offsetId.current = -1;
         setTaxonListData((_draft) => {
           _draft.l = [];
-          _draft.count = 0;
+          _draft.count = -1;
+          _draft.ag = undefined;
+          _draft.hasMore = false;
         });
       }
 
       //const { data } = await axGetTaxonListData(filter.f);
       const { data } = await axTaxonomyList(filter.f);
+      if (requestId !== latestRequest.current) return;
+
+      const items = data?.taxonomyNameListItems || [];
       setTaxonListData((_draft) => {
-        if (data?.taxonomyNameListItems) {
-          _draft.l.push(...(data?.taxonomyNameListItems || []));
-          _draft.count = data.count;
-          _draft.hasMore = data?.taxonomyNameListItems.length > LIST_PAGINATION_LIMIT;
+        _draft.l.push(...items);
+        _draft.count = typeof data?.count === "number" ? data.count : -1;
+        // per-option filter counts, e.g. { groupRank: { species: 120 }, groupStatus: { ACCEPTED: 90 } }
+        if (data?.aggregationData && isFirstPage) {
+          _draft.ag = data.aggregationData;
         }
+        _draft.hasMore = items.length > LIST_PAGINATION_LIMIT;
       });
-      offsetPath.current = data?.acceptedPath;
-      offsetId.current = data?.taxonomyNameListItems[data?.taxonomyNameListItems.length - 1].id;
+      if (items.length) {
+        offsetPath.current = data?.acceptedPath;
+        offsetId.current = items[items.length - 1].id;
+      }
     } catch (e) {
       console.error(e);
+    } finally {
+      if (requestId === latestRequest.current) {
+        isFetching.current = false;
+        NProgress.done();
+        setIsLoading(false);
+      }
     }
-    NProgress.done();
-    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -131,6 +156,8 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
   };
 
   const nextPage = () => {
+    // ignore scroll triggers while a page is loading or before a cursor exists
+    if (isFetching.current || offsetId.current === -1) return;
     setFilter((_draft) => {
       _draft.f.offsetPath = offsetPath.current;
       _draft.f.offsetId = offsetId.current;
@@ -196,7 +223,7 @@ export const TaxonFilterProvider = (props: TaxonFilterContextProps) => {
         excludedTaxons,
         // falls back to the loaded selection if the list API doesn't return a total `count`
         selectedCount:
-          selectAll && taxonListData?.count
+          selectAll && taxonListData?.count > 0
             ? Math.max(taxonListData.count - excludedTaxons.length, 0)
             : selectedTaxons.length,
 

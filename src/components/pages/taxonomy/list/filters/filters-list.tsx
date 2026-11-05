@@ -33,18 +33,21 @@ export function FiltersList() {
       </AccordionItem>
       <CheckboxFilterPanel
         filterKey="rankList"
+        statKey="groupRank"
         translateKey="taxon:rank."
         options={taxonRanks}
         skipOptionsTranslation={true}
       />
       <CheckboxFilterPanel
         filterKey="statusList"
+        statKey="groupStatus"
         translateKey="taxon:status."
         options={TAXON_STATUS}
         skipOptionsTranslation={true}
       />
       <CheckboxFilterPanel
         filterKey="positionList"
+        statKey="groupPosition"
         translateKey="taxon:position."
         options={TAXON_POSITION}
         skipOptionsTranslation={true}

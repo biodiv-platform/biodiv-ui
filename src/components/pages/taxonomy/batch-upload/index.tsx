@@ -356,9 +356,10 @@ function findChange(changes: FieldChange[], field: string): FieldChange | undefi
 }
 
 // A tag that shows its value, or — when `change` is given — the change itself
-// inside the tag: "ACCEPTED → SYNONYM", with the old value struck through.
-// Status / position tags take their colour from TAXON_BADGE_COLORS (using the
-// new value when it changes); labelled tags like "Accepted ID" stay gray.
+// as a split tag: [ACCEPTED | → SYNONYM]. Each half takes its own colour from
+// TAXON_BADGE_COLORS, so the old value keeps its old colour (struck through)
+// and the new value shows its new colour. Labelled tags like "Accepted ID"
+// stay gray on both sides.
 function ValueBadge({
   value,
   change,
@@ -368,36 +369,67 @@ function ValueBadge({
   change?: FieldChange;
   label?: string;
 }) {
-  const shown = change ? change.newValue : value;
-  const colorPalette = label ? "gray" : TAXON_BADGE_COLORS[shown ?? ""];
+  const colorFor = (v?: string) => (label ? "gray" : TAXON_BADGE_COLORS[v ?? ""]);
+
+  const labelText = label && (
+    <Text as="span" fontWeight="normal" opacity={0.8}>
+      {label}
+    </Text>
+  );
+
+  if (!change) {
+    return (
+      <Badge
+        colorPalette={colorFor(value)}
+        mr={2}
+        maxW="full"
+        whiteSpace="normal"
+        overflowWrap="anywhere"
+      >
+        {labelText}
+        {value || "—"}
+      </Badge>
+    );
+  }
 
   return (
-    <Badge
-      colorPalette={colorPalette}
+    <Box
+      as="span"
+      display="inline-flex"
+      alignItems="stretch"
+      verticalAlign="middle"
       mr={2}
       maxW="full"
-      whiteSpace="normal"
-      overflowWrap="anywhere"
-      borderWidth={change ? "1px" : undefined}
-      borderStyle={change ? "dashed" : undefined}
-      borderColor={change ? "currentColor" : undefined}
-      title={change ? `${change.field}: ${change.oldValue || "—"} → ${change.newValue || "—"}` : undefined}
+      borderWidth="1px"
+      borderStyle="dashed"
+      borderColor="gray.400"
+      borderRadius="sm"
+      overflow="hidden"
+      title={`${change.field}: ${change.oldValue || "—"} → ${change.newValue || "—"}`}
     >
-      {label && (
-        <Text as="span" fontWeight="normal" opacity={0.8}>
-          {label}
+      {/* Old value, in the old value's colour */}
+      <Badge
+        colorPalette={colorFor(change.oldValue)}
+        borderRadius={0}
+        whiteSpace="normal"
+        overflowWrap="anywhere"
+      >
+        {labelText}
+        <Text as="span" textDecoration="line-through" opacity={0.7}>
+          {change.oldValue || "—"}
         </Text>
-      )}
-      {change && (
-        <>
-          <Text as="span" textDecoration="line-through" opacity={0.6}>
-            {change.oldValue || "—"}
-          </Text>
-          <Icon as={LuArrowRight} boxSize={3} flexShrink={0} />
-        </>
-      )}
-      {shown || "—"}
-    </Badge>
+      </Badge>
+      {/* New value, in the new value's colour */}
+      <Badge
+        colorPalette={colorFor(change.newValue)}
+        borderRadius={0}
+        whiteSpace="normal"
+        overflowWrap="anywhere"
+      >
+        <Icon as={LuArrowRight} boxSize={3} flexShrink={0} />
+        {change.newValue || "—"}
+      </Badge>
+    </Box>
   );
 }
 

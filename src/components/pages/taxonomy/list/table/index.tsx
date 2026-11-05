@@ -1,4 +1,6 @@
+import { Box, Text } from "@chakra-ui/react";
 import { BasicTable } from "@components/@core/table";
+import { format } from "indian-number-format";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -31,6 +33,12 @@ export default function TaxonListTable() {
       scrollableTarget="items-container"
     >
       {fieldData && (
+        <>
+        {taxonListData.count!=-1 && <Box>
+          <Text color="gray.600">
+            {format(taxonListData.count)} {"Taxonomy Found"}
+          </Text>
+      </Box>}
         <BasicTable
           data={fieldData || []}
           columns={tableMeta}
@@ -41,6 +49,7 @@ export default function TaxonListTable() {
             onSelectionChange
           })}
         />
+        </>
       )}
     </InfiniteScroll>
   );
