@@ -11,7 +11,6 @@ import {
 } from "@chakra-ui/react";
 import UploadIcon from "@components/pages/observation/create-next/media-picker/upload-icon";
 import ColumnMapper from "@components/pages/traits/common/column-mapper";
-import { axCheckSpecies } from "@services/species.service";
 import { axUploadTaxonFile } from "@services/taxonomy.service";
 import notification from "@utils/notification";
 import ExcelJS from "exceljs";
@@ -31,6 +30,8 @@ type TaxonData = {
   rank: string;
   status: string;
   position: string;
+  // Species page id for this taxon, filled in by the backend (null if none)
+  speciesId?: number | null;
 };
 
 type ResultRow = [string, TaxonData, any | null, boolean, number];
@@ -494,46 +495,30 @@ export default function NameMatchingComponent({ ranks }) {
       setCnameResult(Object.entries(data.cname));
       setHierResult(Object.entries(data.hierarchy));
       setHeaders(data.headers);
-      (async () => {
-        const processedData = await Promise.all(
-          data.data.flatMap((obj, objindex) =>
-            Object.entries(obj).map(async ([key, value]: [string, TaxonData[]]) => {
-              const { success, data } = await axCheckSpecies(value[0]?.id);
-              if (success) {
-                return [key, value[0], data, false, objindex];
-              }
-              return [key, value[0], null, false, objindex];
-            })
-          )
-        );
-        const synonymData = await Promise.all(
-          Object.entries(data.synonym).map(
-            async ([key, value]: [string, TaxonData[]], objindex): Promise<ResultRow> => {
-              const { success, data } = await axCheckSpecies(value[0]?.id);
-              if (success) {
-                return [key, value[0], data, false, objindex];
-              }
-              return [key, value[0], null, false, objindex];
-            }
-          )
-        );
-        const hierData = await Promise.all(
-          Object.entries(data.hierarchy).map(
-            async ([key, value]: [string, TaxonData[]], objindex): Promise<ResultRow> => {
-              const { success, data } = await axCheckSpecies(value[0]?.id);
-              if (success) {
-                return [key, value[0], data, false, objindex];
-              }
-              return [key, value[0], null, false, objindex];
-            }
-          )
-        );
-        setFinalResult(processedData as ResultRow[]);
-        setFinalSynonymResult(synonymData);
-        setFinalHierResult(hierData);
-        setLoading(false);
-        setCurrentStep(2);
-      })();
+      // Species id now comes with each match from the backend — no per-row calls
+      const toResultRow = (key: string, value: TaxonData[], objindex: number): ResultRow => [
+        key,
+        value[0],
+        value[0]?.speciesId ?? null,
+        false,
+        objindex
+      ];
+      const processedData = data.data.flatMap((obj, objindex) =>
+        Object.entries(obj).map(([key, value]: [string, TaxonData[]]) =>
+          toResultRow(key, value, objindex)
+        )
+      );
+      const synonymData = Object.entries(data.synonym).map(
+        ([key, value]: [string, TaxonData[]], objindex) => toResultRow(key, value, objindex)
+      );
+      const hierData = Object.entries(data.hierarchy).map(
+        ([key, value]: [string, TaxonData[]], objindex) => toResultRow(key, value, objindex)
+      );
+      setFinalResult(processedData);
+      setFinalSynonymResult(synonymData);
+      setFinalHierResult(hierData);
+      setLoading(false);
+      setCurrentStep(2);
     } else {
       setLoading(false);
       notification(error?.message || "Something went wrong!");
