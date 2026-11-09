@@ -11,8 +11,8 @@ import {
 } from "@chakra-ui/react";
 import UploadIcon from "@components/pages/observation/create-next/media-picker/upload-icon";
 import ColumnMapper from "@components/pages/traits/common/column-mapper";
-import { axUploadTaxonFile } from "@services/taxonomy.service";
-import notification from "@utils/notification";
+import { axGetNameMatchingResultsFromFile, axUploadTaxonFile } from "@services/taxonomy.service";
+import notification, { NotificationType } from "@utils/notification";
 import ExcelJS from "exceljs";
 import useTranslation from "next-translate/useTranslation";
 import { useCallback, useMemo, useState } from "react";
@@ -87,6 +87,9 @@ const buildHeaderMatchMap = (ranks: { name: string }[]) => {
   return map;
 };
 
+// Strips the "|<index>" suffix that is added to headers read from the uploaded file
+const stripHeaderIndex = (header: string) => header.replace(/\|\d+$/, "");
+
 const hasStatus = (value: TaxonData | undefined, status: string) =>
   (value?.status ?? "").toUpperCase() === status;
 
@@ -146,6 +149,12 @@ export default function NameMatchingComponent({ ranks }) {
   const [statusFilter, setStatusFilter] = useState<string>("All");
   // Per-record action for Given Names, keyed by upload index + row key
   const [rowActions, setRowActions] = useState<Record<string, MatchAction>>({});
+  // Upload stage on step 1:
+  //  "submit"    -> original file is sent for async matching; result is emailed to the user
+  //  "processed" -> the emailed (processed) file is uploaded and the results are shown
+  const [uploadStage, setUploadStage] = useState<"submit" | "processed">("submit");
+  // True once the original file has been accepted for async processing
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const { t } = useTranslation();
 
   const matchStats = useMemo(() => {
@@ -473,7 +482,6 @@ export default function NameMatchingComponent({ ranks }) {
     let rankMap = "";
     columnMapping.map(([colIndex, label]) => {
       if (label === "Scientific name") {
-        setSelectedColumn(colIndex);
         formData.append("column", colIndex.toString());
       } else if (label === "Synonyms") {
         formData.append("synonym", colIndex.toString());
@@ -484,18 +492,65 @@ export default function NameMatchingComponent({ ranks }) {
       }
     });
     formData.append("hierarchy", rankMap.slice(1));
-    setRowActions({});
 
     setLoading(true);
 
-    const { success, data, error } = await axUploadTaxonFile(formData);
+    // Matching now runs asynchronously; the processed file is emailed to the user
+    const { success, error } = await axUploadTaxonFile(formData);
+    setLoading(false);
     if (success) {
-      setUploadResult(data.data.flatMap((obj) => Object.entries(obj)));
-      setSynonymResult(Object.entries(data.synonym));
-      setCnameResult(Object.entries(data.cname));
-      setHierResult(Object.entries(data.hierarchy));
-      setHeaders(data.headers);
-      // Species id now comes with each match from the backend — no per-row calls
+      setIsSubmitted(true);
+      notification(
+        t("taxon:name_matching.submit_success", {}, {
+          default: "File submitted. The processed file will be emailed to you."
+        }),
+        NotificationType.Success
+      );
+    } else {
+      notification(error?.message || "Something went wrong!");
+    }
+  };
+
+  // Scientific name column of the processed file: taken from the response (the backend
+  // reads it from the processed file), otherwise detected from the headers, falling
+  // back to the first column
+  const resolveScientificNameColumn = useCallback(
+    (data, responseHeaders: string[]): number => {
+      if (typeof data?.column === "number") return data.column;
+
+      const normalized = responseHeaders.map((h) => stripHeaderIndex(h).toLowerCase().trim());
+
+      // Exact match first ("scientific name", "sci name")
+      const exact = normalized.findIndex((h) => headerMatchMap.get(h) === "Scientific name");
+      if (exact !== -1) return exact;
+
+      // Then any header that contains it ("species scientific name")
+      const partial = normalized.findIndex(
+        (h) => h.includes("scientific name") || h.includes("sci name")
+      );
+      return partial !== -1 ? partial : 0;
+    },
+    [headerMatchMap]
+  );
+
+  // Loads the match results returned for a processed file into the results view
+  const applyMatchResult = useCallback(
+    (data) => {
+      const rows: Record<string, TaxonData[]>[] = data?.data ?? [];
+      const synonyms: Record<string, TaxonData[]> = data?.synonym ?? {};
+      const cnames: Record<string, TaxonData[]> = data?.cname ?? {};
+      const hierarchy: Record<string, TaxonData[]> = data?.hierarchy ?? {};
+      const responseHeaders: string[] = data?.headers ?? [];
+
+      setUploadResult(rows.flatMap((obj) => Object.entries(obj)));
+      setSynonymResult(Object.entries(synonyms));
+      setCnameResult(Object.entries(cnames));
+      setHierResult(Object.entries(hierarchy));
+      setHeaders(responseHeaders);
+      setSelectedColumn(resolveScientificNameColumn(data, responseHeaders));
+      setRowActions({});
+
+      // Species id comes with each match from the backend — no per-row calls
       const toResultRow = (key: string, value: TaxonData[], objindex: number): ResultRow => [
         key,
         value[0],
@@ -503,28 +558,65 @@ export default function NameMatchingComponent({ ranks }) {
         false,
         objindex
       ];
-      const processedData = data.data.flatMap((obj, objindex) =>
-        Object.entries(obj).map(([key, value]: [string, TaxonData[]]) =>
-          toResultRow(key, value, objindex)
+      setFinalResult(
+        rows.flatMap((obj, objindex) =>
+          Object.entries(obj).map(([key, value]) => toResultRow(key, value, objindex))
         )
       );
-      const synonymData = Object.entries(data.synonym).map(
-        ([key, value]: [string, TaxonData[]], objindex) => toResultRow(key, value, objindex)
+      setFinalSynonymResult(
+        Object.entries(synonyms).map(([key, value], objindex) => toResultRow(key, value, objindex))
       );
-      const hierData = Object.entries(data.hierarchy).map(
-        ([key, value]: [string, TaxonData[]], objindex) => toResultRow(key, value, objindex)
+      setFinalHierResult(
+        Object.entries(hierarchy).map(([key, value], objindex) => toResultRow(key, value, objindex))
       );
-      setFinalResult(processedData);
-      setFinalSynonymResult(synonymData);
-      setFinalHierResult(hierData);
-      setLoading(false);
+
+      setActiveTab("names");
+      setFilter("All");
+      setStatusFilter("All");
       setCurrentStep(2);
-    } else {
+    },
+    [resolveScientificNameColumn]
+  );
+
+  // Stage 2: upload the processed file received by email and show the results
+  const handleProcessedFileChange = useCallback(
+    async (details: { acceptedFiles: File[]; rejectedFiles: any[] }) => {
+      if (details.rejectedFiles && details.rejectedFiles.length > 0) {
+        notification("Format not supported. Please drop an Excel file (.xls, .xlsx)");
+        return;
+      }
+
+      const targetFile = details.acceptedFiles[0];
+      if (!targetFile) {
+        notification("No file selected!");
+        return;
+      }
+
+      // Pass the File itself; the service builds the FormData
+      setLoading(true);
+      const { success, data } = await axGetNameMatchingResultsFromFile(targetFile);
       setLoading(false);
-      notification(error?.message || "Something went wrong!");
-    }
+
+      if (success) {
+        applyMatchResult(data);
+      } else {
+        notification(
+          t("taxon:name_matching.processed_upload_error", {}, {
+            default: "Could not read the processed file. Please upload the file you received by email."
+          })
+        );
+      }
+    },
+    [applyMatchResult, t]
+  );
+
+  // Back to the upload screen from the results view
+  const startOver = () => {
+    setCurrentStep(1);
+    setIsSubmitted(false);
   };
 
+  // Stage 1: read headers from the original file and open the column mapper
   const handleFileChange = useCallback(
     async (details: { acceptedFiles: File[]; rejectedFiles: any[] }) => {
       const targetFile = details.acceptedFiles[0];
@@ -536,6 +628,8 @@ export default function NameMatchingComponent({ ranks }) {
 
       if (targetFile) {
         setFile(targetFile);
+        // Mapping from a previously selected file doesn't apply to this one
+        setColumnMapping([]);
 
         try {
           const workbook = new ExcelJS.Workbook();
@@ -571,6 +665,61 @@ export default function NameMatchingComponent({ ranks }) {
     [onOpen1, headerMatchMap]
   );
 
+  // Shared dropzone for both upload stages
+  const renderDropzone = (
+    onFileChange: (details: { acceptedFiles: File[]; rejectedFiles: any[] }) => void,
+    description: string,
+    buttonLabel: string
+  ) => (
+    <FileUpload.Root
+      accept={ACCEPT_STRING}
+      onFileChange={onFileChange}
+      maxFiles={1}
+      width="full"
+    >
+      <FileUpload.HiddenInput />
+
+      <FileUpload.Context>
+        {(fileUpload) => (
+          <FileUpload.Dropzone
+            bg={fileUpload.dragging ? "blue.100" : "transparent"}
+            border="none"
+            p={0}
+            minH="calc(100vh - var(--heading-height))"
+            id="dropzone"
+            cursor="inherit"
+            width="full"
+          >
+            <Box width="full" height="full" onClick={(e) => e.stopPropagation()}>
+              <Flex
+                minH="calc(100vh - var(--heading-height))"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Flex flexDir="column" alignItems="center" p={4}>
+                  <UploadIcon size={100} />
+                  <Heading
+                    size="lg"
+                    fontWeight="normal"
+                    color="gray.400"
+                    mt={8}
+                    mb={4}
+                    textAlign="center"
+                  >
+                    {description}
+                  </Heading>
+                  <Button colorPalette="blue" onClick={() => fileUpload.openFilePicker()} mb={8}>
+                    {buttonLabel}
+                  </Button>
+                </Flex>
+              </Flex>
+            </Box>
+          </FileUpload.Dropzone>
+        )}
+      </FileUpload.Context>
+    </FileUpload.Root>
+  );
+
   return (
     <Box p={4}>
       <Alert status="info" borderRadius="md" mb={4} alignItems="top">
@@ -581,50 +730,78 @@ export default function NameMatchingComponent({ ranks }) {
       <Box mt={6} p={4} borderWidth={1} borderRadius="md" bg="gray.50">
         {isLoading && <Spinner></Spinner>}
         {currentStep == 1 && !isLoading && (
-          <FileUpload.Root
-            accept={ACCEPT_STRING}
-            onFileChange={handleFileChange}
-            maxFiles={1}
-            width="full"
+          <Tabs.Root
+            value={uploadStage}
+            onValueChange={(details) => setUploadStage(details.value as "submit" | "processed")}
+            variant="enclosed"
+            fitted
           >
-            <FileUpload.HiddenInput />
+            <Tabs.List>
+              <Tabs.Trigger value="submit">
+                {t("taxon:name_matching.stage_submit", {}, { default: "1. Submit file for matching" })}
+              </Tabs.Trigger>
+              <Tabs.Trigger value="processed">
+                {t("taxon:name_matching.stage_processed", {}, {
+                  default: "2. Upload processed file"
+                })}
+              </Tabs.Trigger>
+            </Tabs.List>
 
-            <FileUpload.Context>
-              {(fileUpload) => (
-                <FileUpload.Dropzone
-                  bg={fileUpload.dragging ? "blue.100" : "transparent"}
-                  border="none"
-                  p={0}
+            <Tabs.Content value="submit">
+              {isSubmitted ? (
+                <Flex
                   minH="calc(100vh - var(--heading-height))"
-                  id="dropzone"
-                  cursor="inherit"
-                  width="full"
+                  alignItems="center"
+                  justifyContent="center"
                 >
-                  <Box width="full" height="full" onClick={(e) => e.stopPropagation()}>
-                    <Flex
-                      minH="calc(100vh - var(--heading-height))"
-                      alignItems="center"
-                      justifyContent="center"
+                  <Flex flexDir="column" alignItems="center" gap={6} maxW="xl" textAlign="center">
+                    <Alert
+                      status="success"
+                      borderRadius="md"
+                      title={t("taxon:name_matching.submitted_title", {}, {
+                        default: "Your file is being processed"
+                      })}
                     >
-                      <Flex flexDir="column" alignItems="center" p={4}>
-                        <UploadIcon size={100} />
-                        <Heading size="lg" fontWeight="normal" color="gray.400" mt={8}>
-                          {t("taxon:name_matching.upload_description")}
-                        </Heading>
-                        <Button
-                          colorPalette="blue"
-                          onClick={() => fileUpload.openFilePicker()}
-                          mb={8}
-                        >
-                          {t("taxon:name_matching.upload_button")}
-                        </Button>
-                      </Flex>
+                      {t("taxon:name_matching.submitted_description", {}, {
+                        default:
+                          "Name matching runs in the background. Once it is done, the processed Excel file will be emailed to you. Upload that file in step 2 to review the results."
+                      })}
+                    </Alert>
+                    <Flex gap={3}>
+                      <Button colorPalette="blue" onClick={() => setUploadStage("processed")}>
+                        {t("taxon:name_matching.go_to_processed", {}, {
+                          default: "Upload processed file"
+                        })}
+                      </Button>
+                      <Button variant="outline" onClick={() => setIsSubmitted(false)}>
+                        {t("taxon:name_matching.submit_another", {}, {
+                          default: "Submit another file"
+                        })}
+                      </Button>
                     </Flex>
-                  </Box>
-                </FileUpload.Dropzone>
+                  </Flex>
+                </Flex>
+              ) : (
+                renderDropzone(
+                  handleFileChange,
+                  t("taxon:name_matching.upload_description"),
+                  t("taxon:name_matching.upload_button")
+                )
               )}
-            </FileUpload.Context>
-          </FileUpload.Root>
+            </Tabs.Content>
+
+            <Tabs.Content value="processed">
+              {renderDropzone(
+                handleProcessedFileChange,
+                t("taxon:name_matching.processed_upload_description", {}, {
+                  default: "Upload the processed file you received by email to view the results"
+                }),
+                t("taxon:name_matching.processed_upload_button", {}, {
+                  default: "Upload processed file"
+                })
+              )}
+            </Tabs.Content>
+          </Tabs.Root>
         )}
 
         <ColumnMapper
@@ -654,7 +831,10 @@ export default function NameMatchingComponent({ ranks }) {
                 names matched successfully.
               </Text>
 
-              <Flex justifyContent="flex-end">
+              <Flex justifyContent="flex-end" gap={2}>
+                <Button variant="outline" onClick={startOver}>
+                  {t("taxon:name_matching.start_over", {}, { default: "Upload another file" })}
+                </Button>
                 <MenuRoot>
                   <MenuTrigger asChild>
                     <Button>

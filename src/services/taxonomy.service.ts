@@ -273,3 +273,20 @@ export const axBatchUpload = async (payload) => {
     return { success: false, data: {}, error: e };
   }
 };
+
+export const axGetNameMatchingResultsFromFile = async (file) => {
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const { data } = await http.post(
+      `${ENDPOINT.TAXONOMY}/v1/taxonomy/namematching/results`,
+      formData,
+      { headers: { "Content-Type": "multipart/form-data" } }
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};
