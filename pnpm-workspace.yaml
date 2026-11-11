@@ -4,11 +4,14 @@ allowBuilds:
   styled-components: true
   unrs-resolver: true
 minimumReleaseAgeExclude:
-  - '@biodiv-platform/naksha-maplibre-layers@5.0.7'
-  - '@biodiv-platform/naksha-maplibre-draw@5.0.12'
-  - "@biodiv-platform/naksha-maplibre-view@5.0.4"
-  - naksha-components-react@5.0.5
+  - "@biodiv-platform/naksha-maplibre-layers@5.0.9"
+  - "@biodiv-platform/naksha-maplibre-draw@5.0.15"
+  - "@biodiv-platform/naksha-maplibre-view5.0.6"
+  - naksha-components-react@5.0.9
   - qs@6.17.1
+  - "@biodiv-platform/naksha-commons@5.0.0"
+  - "@biodiv-platform/naksha-gmaps-draw@4.5.5"
+  - "@biodiv-platform/naksha-gmaps-view@4.5.1"
 overrides:
   uuid: ">=11.1.1"
   undici: ">=8.12.3"
