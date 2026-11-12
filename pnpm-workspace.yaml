@@ -5,9 +5,9 @@ allowBuilds:
   unrs-resolver: true
 minimumReleaseAgeExclude:
   - "@biodiv-platform/naksha-maplibre-layers@5.0.9"
-  - "@biodiv-platform/naksha-maplibre-draw@5.0.15"
+  - '@biodiv-platform/naksha-maplibre-draw@5.0.16'
   - "@biodiv-platform/naksha-maplibre-view@5.0.6"
-  - naksha-components-react@5.0.9
+  - naksha-components-react@5.0.10
   - qs@6.17.1
   - "@biodiv-platform/naksha-commons@5.0.0"
   - "@biodiv-platform/naksha-gmaps-draw@4.5.5"
