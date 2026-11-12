@@ -1,9 +1,10 @@
 import { Box } from "@chakra-ui/react";
-import OccurrenceSourceMenu, {
-  getOccurrenceGridFetchers,
-  getOccurrenceLayerId,
-  OCCURRENCE_SOURCES
-} from "@components/pages/common/occurrence-source-menu";
+import {
+  DensityLegend,
+  OccurrenceSourceMenu,
+  OccurrenceTotalsPanel
+} from "@components/pages/common/occurrence-map/overlays";
+import useOccurrenceGrid from "@components/pages/common/occurrence-map/use-occurrence-grid";
 import SITE_CONFIG from "@configs/site-config";
 import { axGetObservationMapData } from "@services/observation.service";
 import { ENDPOINT, mapStyles } from "@static/constants";
@@ -24,10 +25,6 @@ const NakshaMaplibreLayers: any = dynamic(
   }
 );
 
-const onObservationGridHover = ({ feature }: any) => (
-  <div>{feature?.properties?.count} Observations</div>
-);
-
 interface OccuranceRecoardSpeciesFieldProps {
   valueCallback: (loaded: boolean) => void;
 }
@@ -39,7 +36,6 @@ const OccuranceRecoardSpeciesField = forwardRef(
     const { lang } = useTranslation();
     const mapContainerRef = useRef<HTMLDivElement>(null);
     const [forceLoad, setForceLoad] = useState(false);
-    const [source, setSource] = useState("all");
 
     const handleLoadMap = () => {
       setForceLoad(true);
@@ -103,7 +99,7 @@ const OccuranceRecoardSpeciesField = forwardRef(
       return data;
     };
 
-    const gridFetchers = getOccurrenceGridFetchers(species.taxonomyDefinition.id, fetchGridData);
+    const occurrenceGrid = useOccurrenceGrid(species.taxonomyDefinition.id, fetchGridData);
 
     const MapContent = (
       <Box
@@ -115,7 +111,9 @@ const OccuranceRecoardSpeciesField = forwardRef(
         bg="gray.300"
         mb={4}
       >
-        <OccurrenceSourceMenu value={source} onChange={setSource} />
+        <OccurrenceSourceMenu value={occurrenceGrid.source} onChange={occurrenceGrid.setSource} />
+        <OccurrenceTotalsPanel totals={occurrenceGrid.totals} />
+        <DensityLegend />
         <NakshaMaplibreLayers
           defaultViewState={defaultViewState}
           loadToC={false}
@@ -128,20 +126,10 @@ const OccuranceRecoardSpeciesField = forwardRef(
             store: SITE_CONFIG.GEOSERVER.STORE,
             workspace: SITE_CONFIG.GEOSERVER.WORKSPACE
           }}
-          selectedLayers={[getOccurrenceLayerId(source)]}
-          layers={OCCURRENCE_SOURCES.map(({ value, label }) => ({
-            id: getOccurrenceLayerId(value),
-            title: `${label} Occurrences`,
-            source: { type: "grid", fetcher: gridFetchers[value] },
-            onHover: onObservationGridHover,
-            data: {
-              index: "extended_observation",
-              type: "extended_records",
-              geoField: "location",
-              summaryColumn: ["count"],
-              propertyMap: { count: "Count" }
-            }
-          }))}
+          showScaleControl={true}
+          showResetControl={true}
+          selectedLayers={occurrenceGrid.selectedLayers}
+          layers={occurrenceGrid.layers}
         />
       </Box>
     );

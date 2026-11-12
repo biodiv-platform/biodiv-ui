@@ -1,14 +1,15 @@
 import { Box } from "@chakra-ui/react";
-import OccurrenceSourceMenu, {
-  getOccurrenceGridFetchers,
-  getOccurrenceLayerId,
-  OCCURRENCE_SOURCES
-} from "@components/pages/common/occurrence-source-menu";
+import {
+  DensityLegend,
+  OccurrenceSourceMenu,
+  OccurrenceTotalsPanel
+} from "@components/pages/common/occurrence-map/overlays";
+import useOccurrenceGrid from "@components/pages/common/occurrence-map/use-occurrence-grid";
 import { axGetObservationMapData } from "@services/observation.service";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
 import useTranslation from "next-translate/useTranslation";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import LazyLoad from "react-lazyload";
 
 import { mapStyles } from "@/static/constants";
@@ -21,9 +22,6 @@ const NakshaMaplibreLayers: any = dynamic(
   }
 );
 
-// TODO: observation map on click component
-const onObservationGridClick = () => <Box maxH="250px" overflow="auto" fontSize="sm"></Box>;
-
 const onObservationGridHover = ({ feature }) => (
   <div>{feature?.properties?.count} Observations</div>
 );
@@ -35,7 +33,7 @@ interface ClusterMapProps {
   k?;
   colorHex?;
   borderRadius?;
-  /** adds the All/IBP/GBIF source dropdown; needs `filter.taxon` */
+  /** adds IBP/GBIF sources: dropdown, totals, density legend; needs `filter.taxon` */
   showGBIF?: boolean;
 }
 
@@ -66,22 +64,9 @@ export default function ClusterMap({
     return data;
   };
 
-  const gridLayer = {
-    onHover: onObservationGridHover,
-    onClick: onObservationGridClick,
-    data: {
-      index: "extended_observation",
-      type: "extended_records",
-      geoField: "location",
-      summaryColumn: ["count"],
-      propertyMap: { count: "Count" }
-    }
-  };
-
   // GBIF occurrences are matched to IBP taxa, so the sources need a taxon
   const withSources = showGBIF && !!filter?.taxon;
-  const [source, setSource] = useState("all");
-  const gridFetchers = getOccurrenceGridFetchers(filter?.taxon, fetchGridData);
+  const occurrenceGrid = useOccurrenceGrid(filter?.taxon, fetchGridData);
 
   return (
     <Box
@@ -92,31 +77,41 @@ export default function ClusterMap({
       display="block"
       position="relative"
     >
-      {withSources && <OccurrenceSourceMenu value={source} onChange={setSource} />}
+      {withSources && (
+        <>
+          <OccurrenceSourceMenu value={occurrenceGrid.source} onChange={occurrenceGrid.setSource} />
+          <OccurrenceTotalsPanel totals={occurrenceGrid.totals} />
+          <DensityLegend />
+        </>
+      )}
       <LazyLoad height={422} once={true}>
         <NakshaMaplibreLayers
           defaultViewState={defaultViewState}
           key={k}
           lang={lang}
           selectedLayers={
-            !filter ? [] : withSources ? [getOccurrenceLayerId(source)] : ["species-observations"]
+            !filter ? [] : withSources ? occurrenceGrid.selectedLayers : ["species-observations"]
           }
           showFullscreenControl={true}
+          showScaleControl={withSources}
+          showResetControl={withSources}
           mapStyles={mapStyles}
           layers={
             withSources
-              ? OCCURRENCE_SOURCES.map(({ value, label }) => ({
-                  ...gridLayer,
-                  id: getOccurrenceLayerId(value),
-                  title: `${label} Occurrences`,
-                  source: { type: "grid", fetcher: gridFetchers[value] }
-                }))
+              ? occurrenceGrid.layers
               : [
                   {
-                    ...gridLayer,
                     id: "species-observations",
                     title: "Species Observations",
-                    source: { type: "grid", fetcher: fetchGridData }
+                    source: { type: "grid", fetcher: fetchGridData },
+                    onHover: onObservationGridHover,
+                    data: {
+                      index: "extended_observation",
+                      type: "extended_records",
+                      geoField: "location",
+                      summaryColumn: ["count"],
+                      propertyMap: { count: "Count" }
+                    }
                   }
                 ]
           }
