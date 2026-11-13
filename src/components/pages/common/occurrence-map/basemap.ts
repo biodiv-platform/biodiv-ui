@@ -1,8 +1,11 @@
 import { mapStyles } from "@static/constants";
 import { useEffect, useState } from "react";
 
-/** OpenFreeMap Positron, a light background that lets the density grid stand out */
-const POSITRON_STYLE_URL = "https://tiles.openfreemap.org/styles/positron";
+/**
+ * OpenFreeMap basemap for the occurrence maps. Styles: positron (light), fiord (dark),
+ * bright, liberty; the India boundary fix below works for any of them.
+ */
+const BASEMAP = { name: "Fiord", url: "https://tiles.openfreemap.org/styles/fiord" };
 
 /**
  * OpenStreetMap India community border lines, the same file the India OSM basemap uses:
@@ -13,23 +16,39 @@ const INDIA_BOUNDARY_URL =
 
 const INDIA_BOUNDARY_SOURCE = "india-boundary";
 
-/** Positron layer that draws disputed borders; matched by filter too in case the id changes */
+const isBoundaryLayer = (layer) => layer["source-layer"] === "boundary";
+
+/** Layer that only draws disputed borders (Positron's boundary_disputed) */
 const isDisputedBoundaryLayer = (layer) =>
-  layer.id === "boundary_disputed" ||
-  (layer["source-layer"] === "boundary" &&
-    JSON.stringify(layer.filter || []).includes('["==",["get","disputed"],1]'));
+  isBoundaryLayer(layer) &&
+  JSON.stringify(layer.filter || []).includes('["==",["get","disputed"],1]');
+
+/** Country border layer (admin_level 2), whose look India's border copies */
+const isCountryBoundaryLayer = (layer) =>
+  isBoundaryLayer(layer) &&
+  JSON.stringify(layer.filter || []).includes('["==",["get","admin_level"],2]');
+
+const NOT_DISPUTED = ["!=", ["get", "disputed"], 1];
+
+/** Keeps disputed borders out of a border layer that draws them along with the rest (e.g. Fiord) */
+const withoutDisputed = (layer) =>
+  isBoundaryLayer(layer) && (!layer.filter || JSON.stringify(layer.filter).includes('["get",')) // expression filters only
+    ? { ...layer, filter: layer.filter ? ["all", layer.filter, NOT_DISPUTED] : NOT_DISPUTED }
+    : layer;
 
 /**
- * Positron with India's boundaries: drops the disputed borders, covers borders India disputes
- * with the background colour and draws India's claimed border like any other country border
+ * OpenFreeMap style with India's boundaries: drops disputed borders, covers borders India
+ * disputes with the background colour and draws India's claimed border like any other country border
  */
 const toIndiaStyle = (style) => {
-  const countryBorder = style.layers.find((layer) => layer.id === "boundary_2");
+  const countryBorder = style.layers.find(isCountryBoundaryLayer);
   const background =
     style.layers.find((layer) => layer.type === "background")?.paint?.["background-color"] ||
     "rgb(242,243,240)";
 
-  const layers = style.layers.filter((layer) => !isDisputedBoundaryLayer(layer));
+  const layers = style.layers
+    .filter((layer) => !isDisputedBoundaryLayer(layer))
+    .map(withoutDisputed);
   // India's lines go right after the map's own borders, below the labels
   const lastBoundaryIndex = layers.reduce(
     (last, layer, index) => (layer["source-layer"] === "boundary" ? index : last),
@@ -70,14 +89,14 @@ const toIndiaStyle = (style) => {
 
 let occurrenceMapStyles: Promise<any[]> | undefined;
 
-/** naksha map styles for the occurrence maps, loaded once; the India OSM basemap if Positron fails */
+/** naksha map styles for the occurrence maps, loaded once; the India OSM basemap if BASEMAP fails */
 const loadOccurrenceMapStyles = () => {
-  occurrenceMapStyles ??= fetch(POSITRON_STYLE_URL)
+  occurrenceMapStyles ??= fetch(BASEMAP.url)
     .then((response) => {
-      if (!response.ok) throw new Error(`Positron style: HTTP ${response.status}`);
+      if (!response.ok) throw new Error(`${BASEMAP.name} style: HTTP ${response.status}`);
       return response.json();
     })
-    .then((style) => [{ text: "Positron", key: "0", style: toIndiaStyle(style) }])
+    .then((style) => [{ text: BASEMAP.name, key: "0", style: toIndiaStyle(style) }])
     .catch((error) => {
       console.error(error);
       return mapStyles;
