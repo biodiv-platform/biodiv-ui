@@ -4,10 +4,11 @@ import {
   OccurrenceSourceMenu,
   OccurrenceTotalsPanel
 } from "@components/pages/common/occurrence-map/overlays";
+import useOccurrenceMapStyles from "@components/pages/common/occurrence-map/basemap";
 import useOccurrenceGrid from "@components/pages/common/occurrence-map/use-occurrence-grid";
 import SITE_CONFIG from "@configs/site-config";
 import { axGetObservationMapData } from "@services/observation.service";
-import { ENDPOINT, mapStyles } from "@static/constants";
+import { ENDPOINT } from "@static/constants";
 import { getMapCenter } from "@utils/location";
 import { toPng } from "html-to-image";
 import dynamic from "next/dynamic";
@@ -100,6 +101,7 @@ const OccuranceRecoardSpeciesField = forwardRef(
     };
 
     const occurrenceGrid = useOccurrenceGrid(species.taxonomyDefinition.id, fetchGridData);
+    const occurrenceMapStyles = useOccurrenceMapStyles();
 
     const MapContent = (
       <Box
@@ -114,23 +116,25 @@ const OccuranceRecoardSpeciesField = forwardRef(
         <OccurrenceSourceMenu value={occurrenceGrid.source} onChange={occurrenceGrid.setSource} />
         <OccurrenceTotalsPanel totals={occurrenceGrid.totals} />
         <DensityLegend />
-        <NakshaMaplibreLayers
-          defaultViewState={defaultViewState}
-          loadToC={false}
-          showToC={false}
-          lang={lang}
-          mapstyles={mapStyles}
-          nakshaApiEndpoint={ENDPOINT.NAKSHA}
-          geoserver={{
-            endpoint: ENDPOINT.GEOSERVER,
-            store: SITE_CONFIG.GEOSERVER.STORE,
-            workspace: SITE_CONFIG.GEOSERVER.WORKSPACE
-          }}
-          showScaleControl={true}
-          showResetControl={true}
-          selectedLayers={occurrenceGrid.selectedLayers}
-          layers={occurrenceGrid.layers}
-        />
+        {occurrenceMapStyles && (
+          <NakshaMaplibreLayers
+            defaultViewState={defaultViewState}
+            loadToC={false}
+            showToC={false}
+            lang={lang}
+            mapStyles={occurrenceMapStyles}
+            nakshaApiEndpoint={ENDPOINT.NAKSHA}
+            geoserver={{
+              endpoint: ENDPOINT.GEOSERVER,
+              store: SITE_CONFIG.GEOSERVER.STORE,
+              workspace: SITE_CONFIG.GEOSERVER.WORKSPACE
+            }}
+            showScaleControl={true}
+            showResetControl={true}
+            selectedLayers={occurrenceGrid.selectedLayers}
+            layers={occurrenceGrid.layers}
+          />
+        )}
       </Box>
     );
 

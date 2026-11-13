@@ -4,6 +4,7 @@ import {
   OccurrenceSourceMenu,
   OccurrenceTotalsPanel
 } from "@components/pages/common/occurrence-map/overlays";
+import useOccurrenceMapStyles from "@components/pages/common/occurrence-map/basemap";
 import useOccurrenceGrid from "@components/pages/common/occurrence-map/use-occurrence-grid";
 import { axGetObservationMapData } from "@services/observation.service";
 import { getMapCenter } from "@utils/location";
@@ -67,6 +68,8 @@ export default function ClusterMap({
   // GBIF occurrences are matched to IBP taxa, so the sources need a taxon
   const withSources = showGBIF && !!filter?.taxon;
   const occurrenceGrid = useOccurrenceGrid(filter?.taxon, fetchGridData);
+  const occurrenceMapStyles = useOccurrenceMapStyles(withSources);
+  const basemapStyles = withSources ? occurrenceMapStyles : mapStyles;
 
   return (
     <Box
@@ -85,38 +88,40 @@ export default function ClusterMap({
         </>
       )}
       <LazyLoad height={422} once={true}>
-        <NakshaMaplibreLayers
-          defaultViewState={defaultViewState}
-          key={k}
-          lang={lang}
-          selectedLayers={
-            !filter ? [] : withSources ? occurrenceGrid.selectedLayers : ["species-observations"]
-          }
-          showFullscreenControl={true}
-          showScaleControl={withSources}
-          showResetControl={withSources}
-          mapStyles={mapStyles}
-          layers={
-            withSources
-              ? occurrenceGrid.layers
-              : [
-                  {
-                    id: "species-observations",
-                    title: "Species Observations",
-                    source: { type: "grid", fetcher: fetchGridData },
-                    onHover: onObservationGridHover,
-                    data: {
-                      index: "extended_observation",
-                      type: "extended_records",
-                      geoField: "location",
-                      summaryColumn: ["count"],
-                      propertyMap: { count: "Count" }
+        {basemapStyles && (
+          <NakshaMaplibreLayers
+            defaultViewState={defaultViewState}
+            key={k}
+            lang={lang}
+            selectedLayers={
+              !filter ? [] : withSources ? occurrenceGrid.selectedLayers : ["species-observations"]
+            }
+            showFullscreenControl={true}
+            showScaleControl={withSources}
+            showResetControl={withSources}
+            mapStyles={basemapStyles}
+            layers={
+              withSources
+                ? occurrenceGrid.layers
+                : [
+                    {
+                      id: "species-observations",
+                      title: "Species Observations",
+                      source: { type: "grid", fetcher: fetchGridData },
+                      onHover: onObservationGridHover,
+                      data: {
+                        index: "extended_observation",
+                        type: "extended_records",
+                        geoField: "location",
+                        summaryColumn: ["count"],
+                        propertyMap: { count: "Count" }
+                      }
                     }
-                  }
-                ]
-          }
-          markers={latitude ? [{ latitude, longitude, colorHex }] : []}
-        />
+                  ]
+            }
+            markers={latitude ? [{ latitude, longitude, colorHex }] : []}
+          />
+        )}
       </LazyLoad>
     </Box>
   );
