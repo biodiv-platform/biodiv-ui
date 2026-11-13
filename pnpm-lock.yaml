@@ -171,8 +171,8 @@ importers:
         specifier: ^2.1.2
         version: 2.1.2
       naksha-components-react:
-        specifier: 5.0.10
-        version: 5.0.10(@dnd-kit/core@6.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@dnd-kit/sortable@10.0.0(@dnd-kit/core@6.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7))(@dnd-kit/utilities@3.2.2(react@19.2.7))(@react-google-maps/api@2.20.8(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@6.0.3)
+        specifier: 5.0.11
+        version: 5.0.11(@dnd-kit/core@6.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@dnd-kit/sortable@10.0.0(@dnd-kit/core@6.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7))(@dnd-kit/utilities@3.2.2(react@19.2.7))(@react-google-maps/api@2.20.8(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@6.0.3)
       nanoid:
         specifier: ^6.0.1
         version: 6.0.1
@@ -477,8 +477,8 @@ packages:
     peerDependencies:
       react: '>=18.0.0'
 
-  '@biodiv-platform/naksha-gmaps-draw@4.5.5':
-    resolution: {integrity: sha512-gzJX36hpe1FJ3o5ETGVEiswItzxeaTsglCp/JaL/UZlzlWawIKfliveQE2un8l3QZebA5PQNTeXhLCh3kZwrdg==}
+  '@biodiv-platform/naksha-gmaps-draw@4.5.6':
+    resolution: {integrity: sha512-/S82/giu7fyGWYIPxoLpEqlrlh5JN4Rwv3jsb7aII70oG12N9+4DLw7JwhuxEfFCMpBTUs6FR2kee8466YUJjg==}
     peerDependencies:
       '@react-google-maps/api': '>=2.12.0'
       react: '>=18.2.0'
@@ -491,15 +491,15 @@ packages:
       react: '>=18.2.0'
       react-map-gl: '>=7.0.15'
 
-  '@biodiv-platform/naksha-maplibre-draw@5.0.16':
-    resolution: {integrity: sha512-W5yqYP6vkQjZDeH3rF/BuvBmuIEGiNzqUS7z0Y5Ub1scLCYkI6resZAeKgQKaL94JRJJxoJ49pKjpe2YPXafUA==}
+  '@biodiv-platform/naksha-maplibre-draw@5.0.17':
+    resolution: {integrity: sha512-pIoeoZkgXCqu413shcAxwUEdTcE6dqPqlHCjlPnCV5Qh4EFJ1z3CQwcsR+XoAI+OyO2PqlsyOBJoJfqT2Zk3cQ==}
     peerDependencies:
       maplibre-gl: '>=4.0.0'
       react: '>=18.0.0'
       react-map-gl: '>=7.0.0'
 
-  '@biodiv-platform/naksha-maplibre-layers@5.0.9':
-    resolution: {integrity: sha512-k9YlHNRLKfLYSKQoO0nEbdEaw4zvG0TTQt1K++ULx21XFhQc5nRGuqZ77LHkzYhuPOc3hPUBQyANjM8rjKt4GQ==}
+  '@biodiv-platform/naksha-maplibre-layers@5.0.10':
+    resolution: {integrity: sha512-gBs0p8Zd5+lnsNrioY26FvIzQjOVC6qBuX62kzhJH2S1VfY0L9VeOp3qgfccuQl9CbXnrKtft5AelGKonO+1vw==}
     peerDependencies:
       '@dnd-kit/core': '>=6.0.0'
       '@dnd-kit/sortable': '>=8.0.0'
@@ -508,8 +508,8 @@ packages:
       react: '>=18.0.0'
       react-map-gl: '>=7.0.0'
 
-  '@biodiv-platform/naksha-maplibre-view@5.0.6':
-    resolution: {integrity: sha512-+2kJ92J0XHua6U2ILlnQ31sLQQ9SfF30Qxbx5WIB4q7gFkvDP7zyJRglIT9Vg8nhTZ7UPyjK/0aL787rIA/Rmw==}
+  '@biodiv-platform/naksha-maplibre-view@5.0.7':
+    resolution: {integrity: sha512-i198zyHb2B1+aijOY8lTetfzJah9t7mywf5kdGxt33+S4Y1//HX1r9+/PRdQScPvIUwGquYM8IB1dvgAmNx/Eg==}
     peerDependencies:
       maplibre-gl: '>=4.0.0'
       react: '>=18.0.0'
@@ -3129,8 +3129,8 @@ packages:
   immediate@3.0.6:
     resolution: {integrity: sha512-XXOFtyqDjNDAQxVfYxuF7g9Il/IbWmmlQg2MYKOH8ExIT1qg6xc4zyS3HaEEATgs1btfzxq15ciUiY7gjSXRGQ==}
 
-  immer@11.2.9:
-    resolution: {integrity: sha512-IQ4UEtXjZjyefyWjtLEDXUSrF6T2hwjKPi6BIJl3bY/2XXW24d6cNGdXJSBOA/+KNnuiXkZY6DR0C3efolhitA==}
+  immer@11.2.10:
+    resolution: {integrity: sha512-pzANBj+0A9u+prdhBJ14DVi44vCvVUQzBa8DKt6I0AMCokPHtt722BK9IX5bFC70xUSU9TnzLRIJLTGqIzjEFw==}
 
   immer@9.0.21:
     resolution: {integrity: sha512-bc4NBHqOqSfRW7POMkHd51LvClaeMXpm8dx0e8oE2GORbq5aRK7Bxl4FyzVLdGtLmvLKL7BTDBG5ACQm4HWjTA==}
@@ -3565,8 +3565,8 @@ packages:
   murmurhash-js@1.0.0:
     resolution: {integrity: sha512-TvmkNhkv8yct0SVBSy+o8wYzXjE4Zz3PCesbfs8HiCXXdcTuocApFv11UWlNFWKYsP2okqrhb7JNlSm9InBhIw==}
 
-  naksha-components-react@5.0.10:
-    resolution: {integrity: sha512-NXwePPsKwXE0ed3ZMxxnWHRmpBjHtcI2jQ29AWaHA+0ghl26+tCui0I9RxlHkolUvb9w/RHizSrbEhIVt//0pQ==}
+  naksha-components-react@5.0.11:
+    resolution: {integrity: sha512-fay0Rmq+PAZzDrEfKarHfbK4CXlDhFdBO5xByyvfpf7g0A9cJElwf5IYXqd5JR4FdCAPL9fzZRKQTyIyrA6DzA==}
     peerDependencies:
       react: '>=18.2.0'
 
@@ -4915,7 +4915,7 @@ snapshots:
     dependencies:
       react: 19.2.7
 
-  '@biodiv-platform/naksha-gmaps-draw@4.5.5(@react-google-maps/api@2.20.8(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)':
+  '@biodiv-platform/naksha-gmaps-draw@4.5.6(@react-google-maps/api@2.20.8(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)':
     dependencies:
       '@biodiv-platform/naksha-commons': 5.0.0(react@19.2.7)
       '@react-google-maps/api': 2.20.8(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -4932,7 +4932,7 @@ snapshots:
       react: 19.2.7
       react-map-gl: 8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
 
-  '@biodiv-platform/naksha-maplibre-draw@5.0.16(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@6.0.3)':
+  '@biodiv-platform/naksha-maplibre-draw@5.0.17(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@6.0.3)':
     dependencies:
       '@biodiv-platform/naksha-commons': 5.0.0(react@19.2.7)
       '@turf/bbox': 7.4.0
@@ -4948,7 +4948,7 @@ snapshots:
       - react-dom
       - typescript
 
-  '@biodiv-platform/naksha-maplibre-layers@5.0.9(@dnd-kit/core@6.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@dnd-kit/sortable@10.0.0(@dnd-kit/core@6.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7))(@dnd-kit/utilities@3.2.2(react@19.2.7))(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@6.0.3)':
+  '@biodiv-platform/naksha-maplibre-layers@5.0.10(@dnd-kit/core@6.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@dnd-kit/sortable@10.0.0(@dnd-kit/core@6.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7))(@dnd-kit/utilities@3.2.2(react@19.2.7))(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@6.0.3)':
     dependencies:
       '@biodiv-platform/naksha-commons': 5.0.0(react@19.2.7)
       '@bumaga/tabs': 0.2.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -4961,7 +4961,7 @@ snapshots:
       colorbrewer: 1.5.9
       geohash: 0.0.1
       highlight-search-result: 1.0.4
-      immer: 11.2.9
+      immer: 11.2.10
       maplibre-gl: 6.16.0
       react: 19.2.7
       react-map-gl: 8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -4975,7 +4975,7 @@ snapshots:
       - react-dom
       - typescript
 
-  '@biodiv-platform/naksha-maplibre-view@5.0.6(maplibre-gl@6.16.0)(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)':
+  '@biodiv-platform/naksha-maplibre-view@5.0.7(maplibre-gl@6.16.0)(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)':
     dependencies:
       '@biodiv-platform/naksha-commons': 5.0.0(react@19.2.7)
       '@turf/bbox': 7.4.0
@@ -8724,7 +8724,7 @@ snapshots:
 
   immediate@3.0.6: {}
 
-  immer@11.2.9: {}
+  immer@11.2.10: {}
 
   immer@9.0.21: {}
 
@@ -9135,14 +9135,14 @@ snapshots:
 
   murmurhash-js@1.0.0: {}
 
-  naksha-components-react@5.0.10(@dnd-kit/core@6.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@dnd-kit/sortable@10.0.0(@dnd-kit/core@6.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7))(@dnd-kit/utilities@3.2.2(react@19.2.7))(@react-google-maps/api@2.20.8(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@6.0.3):
+  naksha-components-react@5.0.11(@dnd-kit/core@6.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@dnd-kit/sortable@10.0.0(@dnd-kit/core@6.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7))(@dnd-kit/utilities@3.2.2(react@19.2.7))(@react-google-maps/api@2.20.8(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@6.0.3):
     dependencies:
       '@biodiv-platform/naksha-commons': 5.0.0(react@19.2.7)
-      '@biodiv-platform/naksha-gmaps-draw': 4.5.5(@react-google-maps/api@2.20.8(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
+      '@biodiv-platform/naksha-gmaps-draw': 4.5.6(@react-google-maps/api@2.20.8(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
       '@biodiv-platform/naksha-gmaps-view': 4.5.1(@react-google-maps/api@2.20.8(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
-      '@biodiv-platform/naksha-maplibre-draw': 5.0.16(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@6.0.3)
-      '@biodiv-platform/naksha-maplibre-layers': 5.0.9(@dnd-kit/core@6.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@dnd-kit/sortable@10.0.0(@dnd-kit/core@6.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7))(@dnd-kit/utilities@3.2.2(react@19.2.7))(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@6.0.3)
-      '@biodiv-platform/naksha-maplibre-view': 5.0.6(maplibre-gl@6.16.0)(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
+      '@biodiv-platform/naksha-maplibre-draw': 5.0.17(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@6.0.3)
+      '@biodiv-platform/naksha-maplibre-layers': 5.0.10(@dnd-kit/core@6.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@dnd-kit/sortable@10.0.0(@dnd-kit/core@6.3.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7))(@dnd-kit/utilities@3.2.2(react@19.2.7))(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(typescript@6.0.3)
+      '@biodiv-platform/naksha-maplibre-view': 5.0.7(maplibre-gl@6.16.0)(react-map-gl@8.1.2(maplibre-gl@6.16.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
       react: 19.2.7
     transitivePeerDependencies:
       - '@dnd-kit/core'
