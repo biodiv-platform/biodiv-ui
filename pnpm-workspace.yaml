@@ -9,6 +9,8 @@ minimumReleaseAgeExclude:
   - "@biodiv-platform/naksha-gmaps-draw@4.5.6"
   - "@biodiv-platform/naksha-maplibre-draw@5.0.17"
   - "@biodiv-platform/naksha-maplibre-view@5.0.7"
+  - naksha-components-react@5.0.12-beta.0
+  - "@biodiv-platform/naksha-maplibre-layers@5.0.11-beta.0"
 overrides:
   colorbrewer: "1.5.9"
   uuid: ">=11.1.1"
