@@ -87,6 +87,36 @@ const toIndiaStyle = (style) => {
   };
 };
 
+/**
+ * GBIF's recommended citation for the occurrence download the GBIF data comes from
+ * (64,752,522 records from 2,556 datasets, CC BY-NC 4.0)
+ */
+const GBIF_ATTRIBUTION =
+  '<a href="https://doi.org/10.15468/dl.48c69g" target="_blank" rel="noopener noreferrer">' +
+  "GBIF.org (20 October 2026) GBIF Occurrence Download https://doi.org/10.15468/dl.48c69g</a>";
+
+const GBIF_ATTRIBUTION_SOURCE = "gbif-attribution";
+
+/**
+ * Adds the GBIF citation to the map's attribution (the (i) at the bottom-right). MapLibre lists
+ * the attribution of sources in use, so it gets an empty source and an invisible layer on it.
+ */
+const withGBIFAttribution = (style) => ({
+  ...style,
+  sources: {
+    ...style.sources,
+    [GBIF_ATTRIBUTION_SOURCE]: {
+      type: "geojson",
+      data: { type: "FeatureCollection", features: [] },
+      attribution: GBIF_ATTRIBUTION
+    }
+  },
+  layers: [
+    ...style.layers,
+    { id: "gbif-attribution", type: "line", source: GBIF_ATTRIBUTION_SOURCE }
+  ]
+});
+
 let occurrenceMapStyles: Promise<any[]> | undefined;
 
 /** naksha map styles for the occurrence maps, loaded once; the India OSM basemap if BASEMAP fails */
@@ -96,7 +126,9 @@ const loadOccurrenceMapStyles = () => {
       if (!response.ok) throw new Error(`${BASEMAP.name} style: HTTP ${response.status}`);
       return response.json();
     })
-    .then((style) => [{ text: BASEMAP.name, key: "0", style: toIndiaStyle(style) }])
+    .then((style) => [
+      { text: BASEMAP.name, key: "0", style: withGBIFAttribution(toIndiaStyle(style)) }
+    ])
     .catch((error) => {
       console.error(error);
       return mapStyles;
