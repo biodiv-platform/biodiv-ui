@@ -1,4 +1,4 @@
-import { Badge, Box, Button, IconButton, Image, Text, useDisclosure } from "@chakra-ui/react";
+import { Badge, Box, Button, IconButton, Image, Text } from "@chakra-ui/react";
 import SimpleActionButton from "@components/@core/action-buttons/simple";
 import { axCheckSpecies } from "@services/species.service";
 import { TAXON_BADGE_COLORS } from "@static/constants";
@@ -27,12 +27,15 @@ const ACTION_OPTIONS: { value: MatchAction; label: string }[] = [
   { value: "create", label: "Create" }
 ];
 
+// Rows rendered at a time; large files can have thousands of names
+const PAGE_SIZE = 100;
+
 const NameTable = ({
   finalResult,
   selectedColumn,
   uploadResult,
-  setFinalResult,
-  setUploadResult,
+  onDeleteRow,
+  onUpdateRow,
   synonym = false,
   cname = false,
   hierarchy = false,
@@ -41,11 +44,14 @@ const NameTable = ({
   canUpdate = undefined,
   canCreate = undefined
 }: {
+  /** Rows to show (may be a filtered subset of the full list) */
   finalResult: any[];
   selectedColumn: number | null;
   uploadResult: any[];
-  setFinalResult: (value: any) => void;
-  setUploadResult: (value: any) => void;
+  /** Removes this row from the full list */
+  onDeleteRow: (row: any) => void;
+  /** Replaces this row with `next` in the full list */
+  onUpdateRow: (row: any, next: any) => void;
   synonym?: boolean;
   cname?: boolean;
   hierarchy?: boolean;
@@ -54,12 +60,14 @@ const NameTable = ({
   canUpdate?: (row: any) => boolean;
   canCreate?: (row: any) => boolean;
 }) => {
-  const [currentIndex, setCurrentIndex] = useState<number>();
-  const { open, onClose, onOpen } = useDisclosure();
+  const [rowToDelete, setRowToDelete] = useState<any | null>(null);
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const { t } = useTranslation();
 
   // Action column only shows when the parent passes both handlers (Given Names tab)
   const showAction = Boolean(getAction && onActionChange);
+
+  const getMatches = (item): any[] => uploadResult[item[4]]?.[1] ?? [];
 
   // Options available for a row; "match" is always available
   const getAvailableActions = (item) =>
@@ -77,31 +85,55 @@ const NameTable = ({
     }
     // Rows marked "create" are treated as unmatched
     if (isMarkedCreate(item)) return "red.50";
-    const matchCount = uploadResult[item[4]]?.[1]?.length ?? 0;
+    const matchCount = getMatches(item).length;
     if (matchCount === 0) return "red.50";
     if (matchCount === 1) return "green.50";
     return "yellow.50"; // multiple matches / ambiguous
   };
+
+  // Picks one of several matches. The backend sends speciesId with each match;
+  // only call the species service if it is missing.
+  const selectOption = async (item, option) => {
+    let speciesId = option?.speciesId;
+    if (speciesId === undefined) {
+      const { success, data } = await axCheckSpecies(option["id"]);
+      speciesId = success ? data : null;
+    }
+    onUpdateRow(item, [item[0], option, speciesId ?? null, false, item[4]]);
+  };
+
+  const confirmDelete = () => {
+    if (rowToDelete) {
+      onDeleteRow(rowToDelete);
+    }
+    setRowToDelete(null);
+  };
+
+  const visibleRows = finalResult ? finalResult.slice(0, visibleCount) : [];
+  const remaining = (finalResult?.length ?? 0) - visibleRows.length;
+
   return (
-    <table className="table table-bordered">
-      <thead>
-        <tr>
-          {!hierarchy && <th>{t("taxon:name_matching.species_name")}</th>}
-          {(synonym || cname || hierarchy) && <th>Source</th>}
-          {cname && <th>Language</th>}
-          {hierarchy && <th>Rank</th>}
-          {hierarchy && <th>Name</th>}
-          <th>{t("taxon:name_matching.name_matches")}</th>
-          {showAction && <th>Action</th>}
-        </tr>
-      </thead>
-      <tbody>
-        {finalResult &&
-          finalResult.map((item, index) => {
+    <>
+      <table className="table table-bordered">
+        <thead>
+          <tr>
+            {!hierarchy && <th>{t("taxon:name_matching.species_name")}</th>}
+            {(synonym || cname || hierarchy) && <th>Source</th>}
+            {cname && <th>Language</th>}
+            {hierarchy && <th>Rank</th>}
+            {hierarchy && <th>Name</th>}
+            <th>{t("taxon:name_matching.name_matches")}</th>
+            {showAction && <th>Action</th>}
+          </tr>
+        </thead>
+        <tbody>
+          {visibleRows.map((item) => {
             const availableActions = showAction ? getAvailableActions(item) : [];
+            const matches = getMatches(item);
+            const keyParts = item[0].split("#");
             return (
               <tr
-                key={`${item[0]}-${index}`}
+                key={`${item[0]}-${item[4]}`}
                 style={{
                   backgroundColor: `var(--chakra-colors-${getRowBg(item).replace(".", "-")})`
                 }}
@@ -109,57 +141,20 @@ const NameTable = ({
                 {!hierarchy && (
                   <td>
                     <SimpleActionButton
-                      onClick={() => {
-                        setCurrentIndex(index);
-                        onOpen();
-                      }}
+                      onClick={() => setRowToDelete(item)}
                       icon={<LuDelete />}
                       title={"Delete Scientific Name"}
                       colorPalette="red"
                     />
-                    <DialogRoot open={open} onOpenChange={onClose}>
-                      <DialogBackdrop>
-                        <DialogContent>
-                          <DialogHeader fontSize="lg" fontWeight="bold">
-                            🗑️ {t("taxon:name_matching.delete_title")}
-                          </DialogHeader>
-                          <DialogBody>{t("taxon:name_matching.delete_description")}</DialogBody>
-
-                          <DialogFooter>
-                            <Button onClick={onClose}>{t("taxon:name_matching.cancel")}</Button>
-                            <Button
-                              colorPalette="red"
-                              onClick={() => {
-                                if (currentIndex != undefined) {
-                                  {
-                                    !cname &&
-                                      setUploadResult(
-                                        uploadResult.filter(
-                                          (_, i) => i != finalResult[currentIndex][4]
-                                        )
-                                      );
-                                  }
-                                  setFinalResult(finalResult.filter((_, i) => i !== currentIndex));
-                                  onClose();
-                                }
-                              }}
-                              ml={3}
-                            >
-                              {t("taxon:name_matching.delete")}
-                            </Button>
-                          </DialogFooter>
-                        </DialogContent>
-                      </DialogBackdrop>
-                    </DialogRoot>
                     {selectedColumn !== null && (synonym || cname)
-                      ? item[0].split("#")[0]
+                      ? keyParts[0]
                       : item[0]?.slice(0, -1).split("#")[selectedColumn ? selectedColumn : 0]}
                   </td>
                 )}
-                {(synonym || cname || hierarchy) && <td>{item[0].split("#")[1]}</td>}
-                {cname && <td>{item[0].split("#")[2]}</td>}
-                {hierarchy && <td>{item[0].split("#")[2]}</td>}
-                {hierarchy && <td>{item[0].split("#")[0]}</td>}
+                {(synonym || cname || hierarchy) && <td>{keyParts[1]}</td>}
+                {cname && <td>{keyParts[2]}</td>}
+                {hierarchy && <td>{keyParts[2]}</td>}
+                {hierarchy && <td>{keyParts[0]}</td>}
                 <td>
                   {!cname && item[3] == false && (
                     <>
@@ -169,6 +164,7 @@ const NameTable = ({
                           objectFit="contain"
                           src={getLocalIcon(item[1]?.group_name)}
                           alt={item[1]?.group_name}
+                          loading="lazy"
                         />
                         {item[1]?.name}
                         <Badge ml={2}>{item[1]?.rank}</Badge>
@@ -178,38 +174,35 @@ const NameTable = ({
                         <Badge ml={2} colorPalette={TAXON_BADGE_COLORS[item[1]?.position]}>
                           {item[1]?.position}
                         </Badge>
-                        {uploadResult[item[4]][1].length > 1 && (
+                        {matches.length > 1 && (
                           <Text float="right" color="green.700" fontWeight="bold">
-                            {`${uploadResult[item[4]][1].length}  ${t(
-                              "taxon:name_matching.multiple_matches"
-                            )}`}
+                            {`${matches.length}  ${t("taxon:name_matching.multiple_matches")}`}
                             <IconButton
                               ml={2}
                               color="teal"
                               cursor="pointer"
-                              onClick={() => {
-                                const updatedMatching = [...finalResult];
-                                updatedMatching[index][3] = true;
-                                setFinalResult(updatedMatching);
-                              }}
+                              aria-label="Choose a different match"
+                              onClick={() =>
+                                onUpdateRow(item, [item[0], item[1], item[2], true, item[4]])
+                              }
                             >
                               <LuPencil />
                             </IconButton>
                           </Text>
                         )}
-                        {uploadResult[item[4]][1].length == 1 && (
+                        {matches.length == 1 && (
                           <Text float="right" color="green.700" fontWeight="bold">
                             {t("taxon:name_matching.one_match")}
                           </Text>
                         )}
-                        {uploadResult[item[4]][1].length == 0 && (
+                        {matches.length == 0 && (
                           <Text float="right" color="red.700" fontWeight="bold">
                             {t("taxon:name_matching.no_match")}
                           </Text>
                         )}
                       </Text>
                       {item[1]?.hierarchy && (
-                        <Box p={2} px={4} mb={4} className="white-box fadeInUp delay-2">
+                        <Box p={2} px={4} mb={4} className="white-box">
                           <Text maxWidth="100%">
                             {item[1]?.hierarchy.map((name) => name["taxon_name"]).join(" / ")}
                           </Text>
@@ -227,53 +220,38 @@ const NameTable = ({
                       <Text>{t("taxon:name_matching.species_page_exist")}</Text>
                     </Alert>
                   )}
-                  {!cname &&
-                    !item[2] &&
-                    item[3] == false &&
-                    uploadResult[item[4]][1].length != 0 && (
-                      <Alert bg="red.500" color="white">
-                        <Text>{t("taxon:name_matching.no_species_page")}</Text>
-                      </Alert>
-                    )}
+                  {!cname && !item[2] && item[3] == false && matches.length != 0 && (
+                    <Alert bg="red.500" color="white">
+                      <Text>{t("taxon:name_matching.no_species_page")}</Text>
+                    </Alert>
+                  )}
                   {!cname && item[3] == true && (
                     <Box>
-                      {uploadResult &&
-                        uploadResult[item[4]][1].map((option) => (
-                          <Box
-                            key={option["id"]}
-                            padding={4}
-                            _hover={{
-                              bg: "lightgrey"
-                            }}
-                            cursor="pointer"
-                            onClick={async () => {
-                              const updatedMatching = [...finalResult];
-                              updatedMatching[index][1] = option;
-                              const { success, data } = await axCheckSpecies(option["id"]);
-                              if (success) {
-                                updatedMatching[index][2] = data;
-                              } else {
-                                updatedMatching[index][2] = null;
-                              }
-                              updatedMatching[index][3] = false;
-                              setFinalResult(updatedMatching);
-                            }}
-                          >
-                            {option["name"]}
-                            <Badge ml={2}>{option["rank"]}</Badge>
-                            <Badge ml={2} colorPalette={TAXON_BADGE_COLORS[option["status"]]}>
-                              {option["status"]}
+                      {matches.map((option) => (
+                        <Box
+                          key={option["id"]}
+                          padding={4}
+                          _hover={{
+                            bg: "lightgrey"
+                          }}
+                          cursor="pointer"
+                          onClick={() => selectOption(item, option)}
+                        >
+                          {option["name"]}
+                          <Badge ml={2}>{option["rank"]}</Badge>
+                          <Badge ml={2} colorPalette={TAXON_BADGE_COLORS[option["status"]]}>
+                            {option["status"]}
+                          </Badge>
+                          <Badge ml={2} colorPalette={TAXON_BADGE_COLORS[option["position"]]}>
+                            {option["position"]}
+                          </Badge>
+                          {option["id"] == item[1]?.id && (
+                            <Badge ml={2} colorPalette="blue">
+                              {"Selected"}
                             </Badge>
-                            <Badge ml={2} colorPalette={TAXON_BADGE_COLORS[option["position"]]}>
-                              {option["position"]}
-                            </Badge>
-                            {option["id"] == item[1]?.id && (
-                              <Badge ml={2} colorPalette="blue">
-                                {"Selected"}
-                              </Badge>
-                            )}
-                          </Box>
-                        ))}
+                          )}
+                        </Box>
+                      ))}
                     </Box>
                   )}
                   {cname && (
@@ -315,8 +293,44 @@ const NameTable = ({
               </tr>
             );
           })}
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+
+      {remaining > 0 && (
+        <Box textAlign="center" my={4}>
+          <Text fontSize="sm" color="gray.600" mb={2}>
+            {`Showing ${visibleRows.length} of ${finalResult.length}`}
+          </Text>
+          <Button variant="outline" onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}>
+            {`Show ${Math.min(PAGE_SIZE, remaining)} more`}
+          </Button>
+        </Box>
+      )}
+
+      {/* One dialog for the whole table instead of one per row */}
+      <DialogRoot
+        open={rowToDelete !== null}
+        onOpenChange={(e) => !e.open && setRowToDelete(null)}
+      >
+        <DialogBackdrop>
+          <DialogContent>
+            <DialogHeader fontSize="lg" fontWeight="bold">
+              🗑️ {t("taxon:name_matching.delete_title")}
+            </DialogHeader>
+            <DialogBody>{t("taxon:name_matching.delete_description")}</DialogBody>
+
+            <DialogFooter>
+              <Button onClick={() => setRowToDelete(null)}>
+                {t("taxon:name_matching.cancel")}
+              </Button>
+              <Button colorPalette="red" onClick={confirmDelete} ml={3}>
+                {t("taxon:name_matching.delete")}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </DialogBackdrop>
+      </DialogRoot>
+    </>
   );
 };
 

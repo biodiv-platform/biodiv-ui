@@ -22,6 +22,7 @@ import BusProvider from "react-gbus";
 import Announcement from "@/components/@core/announcements";
 import { Toaster } from "@/components/ui/toaster";
 import { customTheme } from "@/configs/theme";
+import { axGetLatestNameMatchingFile } from "@/services/taxonomy.service";
 import { axGetActiveAnnouncement } from "@/services/utility.service";
 
 const AuthWall = dynamic(() => import("@components/@core/container/authwall"), {
@@ -38,6 +39,7 @@ interface AppProps {
   pages;
   languageId;
   announcement;
+  nameMatchingFile;
 }
 
 function MainApp({
@@ -48,6 +50,7 @@ function MainApp({
   user,
   languageId,
   announcement,
+  nameMatchingFile,
   pageProps
 }: AppProps) {
   const config = { header: true, footer: true, ...Component?.config };
@@ -82,7 +85,15 @@ function MainApp({
         <ChakraProvider value={customTheme}>
           <Toaster />
           <GlobalStateProvider
-            initialState={{ user, domain, groups, currentGroup, languageId, announcement }}
+            initialState={{
+              user,
+              domain,
+              groups,
+              currentGroup,
+              languageId,
+              announcement,
+              nameMatchingFile
+            }}
           >
             <Metadata />
             <div className="content">
@@ -120,7 +131,13 @@ MainApp.getInitialProps = async (appContext: AppContext) => {
     appContext.ctx.locale
   );
 
-  const { data: announcement } = await axGetActiveAnnouncement();
+  // Latest name-matching result is only looked up for logged-in users
+  const [{ data: announcement }, { data: nameMatchingFile }] = await Promise.all([
+    axGetActiveAnnouncement(),
+    user?.id
+      ? axGetLatestNameMatchingFile(user.id, appContext.ctx)
+      : Promise.resolve({ data: null })
+  ]);
 
   return {
     pageProps,
@@ -129,7 +146,8 @@ MainApp.getInitialProps = async (appContext: AppContext) => {
     domain,
     user,
     languageId,
-    announcement
+    announcement,
+    nameMatchingFile
   };
 };
 

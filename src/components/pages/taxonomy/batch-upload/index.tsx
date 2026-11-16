@@ -12,9 +12,8 @@ import {
   Icon,
   Portal,
   Select,
+  Spinner,
   Text,
-  Tooltip,
-  useDisclosure,
   VStack
 } from "@chakra-ui/react";
 import { Collapsible } from "@chakra-ui/react";
@@ -22,7 +21,7 @@ import UploadIcon from "@components/pages/observation/create-next/media-picker/u
 import { TAXON_BADGE_COLORS } from "@static/constants";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import { Fragment, useCallback, useMemo, useState } from "react";
+import { Fragment, memo, useCallback, useMemo, useState } from "react";
 import {
   LuArrowRight,
   LuChevronDown,
@@ -44,6 +43,9 @@ import { axBatchUpload, axUploadBatchFile } from "@/services/taxonomy.service";
 
 const ACCEPT_STRING =
   "application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+// Names rendered at a time; large files can have thousands of rows
+const PAGE_SIZE = 50;
 
 // Central mapping so the action badge looks identical everywhere it's used
 // (main row, synonyms, common names, confirm dialog).
@@ -100,8 +102,22 @@ type UploadRow = {
   updateHier?: Record<string, string> | null;
   // Position changes on taxa in the row's hierarchy: "Name|id|OLD#NEW"
   positionHier?: string[] | null;
+  // From the Given Names sheet TargetNameSourceId / TargetViaDatasource columns
+  targetNameSourceId?: string | null;
+  targetViaDatasource?: string | null;
+  // From the Given Names sheet TargetMatchId / TargetMatchDatabaseName columns
+  targetMatchId?: string | null;
+  targetMatchDatabaseName?: string | null;
   [key: string]: any;
 };
+
+// Source / match values read from the Given Names sheet, in display order
+const TARGET_SOURCE_FIELDS: { key: string; label: string }[] = [
+  { key: "targetViaDatasource", label: "Data source" },
+  { key: "targetNameSourceId", label: "Source ID" },
+  { key: "targetMatchDatabaseName", label: "Match database" },
+  { key: "targetMatchId", label: "Match ID" }
+];
 
 // One parsed positionHier entry. `raw` is the original string, sent back as-is.
 type PositionChange = {
@@ -639,7 +655,13 @@ function SubRowGroup({
   }, [items, synonym, acceptedId, parentError]);
 
   return (
-    <Collapsible.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
+    // lazyMount/unmountOnExit: closed lists (the default) render nothing
+    <Collapsible.Root
+      open={open}
+      onOpenChange={(e) => setOpen(e.open)}
+      lazyMount
+      unmountOnExit
+    >
       <Collapsible.Trigger asChild>
         <HStack gap={1} fontSize="xs" color="blue.600" cursor="pointer" mt={1}>
           <Icon as={icon} boxSize={3} />
@@ -721,10 +743,18 @@ function SubRowGroup({
   );
 }
 
-// Breadcrumb of the new parent path; hovering a node shows its rank and id.
-function HierarchyBreadcrumb({ nodes }: { nodes: HierarchyNode[] }) {
+// Breadcrumb of a hierarchy path; hovering a node shows its rank and id.
+// Uses the native `title` tooltip: a Tooltip component per node is far too heavy
+// when there are thousands of rows with ~10 nodes each.
+function HierarchyBreadcrumb({
+  nodes,
+  fontSize = "xs"
+}: {
+  nodes: HierarchyNode[];
+  fontSize?: string;
+}) {
   return (
-    <Flex wrap="wrap" align="center" columnGap={1} rowGap={0.5} fontSize="xs" color="gray.500">
+    <Flex wrap="wrap" align="center" columnGap={1} rowGap={0.5} fontSize={fontSize} color="gray.500">
       {nodes.map((n, j, arr) => (
         <Fragment key={j}>
           <Text
@@ -968,9 +998,150 @@ function ConfirmUploadDialog({
   );
 }
 
+// One given name with its hierarchy, species page toggle, synonyms and common names.
+// Memoised: callbacks from the parent are stable, so changing one row re-renders only
+// that row instead of the whole list.
+const BatchRow = memo(function BatchRow({
+  item,
+  index,
+  speciesChecked,
+  onToggleSpecies,
+  onActionChange
+}: {
+  item: UploadRow;
+  index: number;
+  speciesChecked: boolean;
+  onToggleSpecies: (index: number, id: any) => void;
+  onActionChange: (index: number, value: string) => void;
+}) {
+  const hierarchyNodes = useMemo(() => parseHierarchy(item["hierarchy"]), [item]);
+  // Position changes on taxa in the hierarchy, all shown on one
+  // "Position changes" line below the breadcrumb.
+  const positionChanges = useMemo(() => getRowPositionChanges(item), [item]);
+  // Changes are shown inside the tags only while the row is set to
+  // Update; switching it to "No change" shows the current values.
+  const changes = item["action"] === "UPDATE" ? getMainRowChanges(item) : [];
+  const nameChange = findChange(changes, "Name");
+  const statusChange = findChange(changes, "Status");
+  const positionChange = findChange(changes, "Position");
+  const acceptedIdChange = findChange(changes, "AcceptedId");
+  let acceptedId =
+    item["acceptedId"] && item["acceptedId"].includes("#")
+      ? item["acceptedId"].split("#")[1]
+      : item["acceptedId"];
+  const status = item["status"].includes("#") ? item["status"].split("#")[1] : item["status"];
+  if (item["status"].split("#").length > 2) {
+    acceptedId = item["status"].split("#")[2];
+  }
+  const isError = item["action"] === "ERROR";
+
+  return (
+    <Box borderWidth="1px" borderColor={isError ? "red.200" : "gray.200"} borderRadius="lg" p={4}>
+      <Flex justify="space-between" align="flex-start" gap={3}>
+        <Box>
+          <Text fontWeight="medium">
+            {nameChange ? (
+              <>
+                <Text as="span" textDecoration="line-through" color="gray.400" fontWeight="normal">
+                  {nameChange.oldValue}
+                </Text>
+                <Icon
+                  as={LuArrowRight}
+                  boxSize={3}
+                  mx={1}
+                  color="gray.500"
+                  verticalAlign="middle"
+                />
+                {nameChange.newValue}
+              </>
+            ) : (
+              item["scientificName"].split("#")[0]
+            )}{" "}
+            <ValueBadge value={item["status"].split("#")[0]} change={statusChange} />
+            <ValueBadge value={item["position"].split("#")[0]} change={positionChange} />
+            {acceptedIdChange && <ValueBadge label="Accepted ID" change={acceptedIdChange} />}
+          </Text>
+        </Box>
+        <HStack gap={1.5} flexShrink={0}>
+          <ActionDropdown
+            action={item["action"]}
+            baseAction={item["originalAction"] ?? item["action"]}
+            error={item["error"]}
+            onChange={(value) => onActionChange(index, value)}
+          />
+        </HStack>
+      </Flex>
+
+      {hierarchyNodes.length > 0 && <HierarchyBreadcrumb nodes={hierarchyNodes} fontSize="sm" />}
+
+      {TARGET_SOURCE_FIELDS.some(({ key }) => item[key]) && (
+        <HStack gap={2} wrap="wrap" fontSize="sm" color="gray.600" mt={1}>
+          {TARGET_SOURCE_FIELDS.filter(({ key }) => item[key]).map(({ key, label }) => (
+            <HStack key={key} gap={1}>
+              <Text as="span">{label}:</Text>
+              <Badge variant="subtle" colorPalette="purple">
+                {item[key]}
+              </Badge>
+            </HStack>
+          ))}
+        </HStack>
+      )}
+
+      {positionChanges.length > 0 && (
+        <HStack gap={1} wrap="wrap" fontSize="sm" color="gray.500" mt={1}>
+          <Text as="span">Position changes:</Text>
+          {positionChanges.map((c) => (
+            <HStack key={c.id} gap={1}>
+              <Text as="span">{c.name}</Text>
+              <ValueBadge
+                change={{
+                  field: "Position",
+                  oldValue: c.oldValue,
+                  newValue: c.newValue
+                }}
+              />
+            </HStack>
+          ))}
+        </HStack>
+      )}
+
+      <Box mt={2}>
+        <SpeciesPageToggle
+          item={item}
+          checked={speciesChecked}
+          onToggle={() => onToggleSpecies(index, item["id"])}
+        />
+      </Box>
+
+      {item["synonyms"] && item["synonyms"].length > 0 && (
+        <SubRowGroup
+          label="Synonyms"
+          icon={LuRepeat}
+          items={item["synonyms"]}
+          synonym={true}
+          acceptedId={status == "ACCEPTED" ? item["taxonId"] : acceptedId}
+          parentError={isError}
+        />
+      )}
+      {item["commonNames"] && item["commonNames"].length > 0 && (
+        <SubRowGroup
+          label="Common names"
+          icon={LuTag}
+          items={item["commonNames"]}
+          synonym={false}
+          acceptedId={item["taxonId"]}
+          parentError={isError}
+        />
+      )}
+    </Box>
+  );
+});
+
 export default function TaxonomyBatchUploadComponent() {
   const [uploadResult, setUploadResult] = useState<UploadRow[]>([]);
-  const [excludedIds, setExcludedIds] = useState<Set<bigint>>(new Set());
+  const [excludedIds, setExcludedIds] = useState<Set<any>>(new Set());
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [isUploading, setIsUploading] = useState(false);
   const [selectAll, setSelectAll] = useState<boolean>(false);
 
   // Single source of truth for "will a species page be created for this row?"
@@ -1009,6 +1180,30 @@ export default function TaxonomyBatchUploadComponent() {
     },
     [selectAll]
   );
+
+  // Changes one row's action. Stable (no deps) so memoised rows don't re-render.
+  const changeAction = useCallback((index: number, value: string) => {
+    setUploadResult((prev) =>
+      prev.map((row, i) =>
+        i === index
+          ? {
+              ...row,
+              originalAction: row["originalAction"] ?? row["action"],
+              action: value
+            }
+          : row
+      )
+    );
+  }, []);
+
+  // Totals by action, shown above the list
+  const actionCounts = useMemo(() => {
+    const counts = { CREATE: 0, UPDATE: 0, NOOP: 0, ERROR: 0 };
+    uploadResult.forEach((r) => {
+      if (r.action in counts) counts[r.action as keyof typeof counts]++;
+    });
+    return counts;
+  }, [uploadResult]);
 
   // Rows that could get a species page (no page yet, not in error) and how
   // many of them are currently selected — shown in the toolbar.
@@ -1078,7 +1273,6 @@ export default function TaxonomyBatchUploadComponent() {
     () => (confirmOpen ? getPositionUpdates(uploadResult) : []),
     [confirmOpen, uploadResult]
   );
-  const { onOpen: onOpen1 } = useDisclosure();
   const [currentStep, setCurrentStep] = useState(1);
 
   const { t } = useTranslation();
@@ -1093,23 +1287,38 @@ export default function TaxonomyBatchUploadComponent() {
       }
 
       if (targetFile) {
+        setIsUploading(true);
         try {
           const formData = new FormData();
           formData.append("file", targetFile);
 
-          const { success, data } = await axUploadBatchFile(formData);
+          const { success, data, error } = await axUploadBatchFile(formData);
           if (success) {
-            setUploadResult(data);
+            setUploadResult(Array.isArray(data) ? data : []);
+            setVisibleCount(PAGE_SIZE);
+            setSelectAll(false);
+            setExcludedIds(new Set());
             setCurrentStep(2);
+          } else {
+            // The backend sends the reason as plain text on 400 (e.g. unreadable file)
+            const reason = (error as any)?.response?.data;
+            notification(
+              typeof reason === "string" && reason
+                ? reason
+                : t("traits:trait_matching.excel_file_error")
+            );
           }
         } catch (error) {
           console.error(t("traits:trait_matching.excel_file_error"), error);
+          notification(t("traits:trait_matching.excel_file_error"));
+        } finally {
+          setIsUploading(false);
         }
       } else {
-        alert(t("traits:trait_matching.no_file_error"));
+        notification(t("traits:trait_matching.no_file_error"));
       }
     },
-    [onOpen1, t]
+    [t]
   );
 
   const buildAcceptedPayload = useCallback(() => {
@@ -1146,6 +1355,10 @@ export default function TaxonomyBatchUploadComponent() {
           (cn: string) => cn.split("|")[1] === "CREATE"
         ),
         taxonId: item["taxonId"],
+        targetNameSourceId: item["targetNameSourceId"] ?? null,
+        targetViaDatasource: item["targetViaDatasource"] ?? null,
+        targetMatchId: item["targetMatchId"] ?? null,
+        targetMatchDatabaseName: item["targetMatchDatabaseName"] ?? null,
         speciesId: canCreateSpecies(item)
           ? isSpeciesSelected(item)
             ? "CREATE"
@@ -1165,6 +1378,7 @@ export default function TaxonomyBatchUploadComponent() {
         setConfirmOpen(false);
         setCurrentStep(1);
         setUploadResult([]);
+        setVisibleCount(PAGE_SIZE);
         setSelectAll(false);
         setExcludedIds(new Set());
         setFile(null);
@@ -1183,7 +1397,22 @@ export default function TaxonomyBatchUploadComponent() {
       <Alert status="info" borderRadius="md" mb={4} alignItems="top">
         {t("taxon:batch_upload.description")}
       </Alert>
-      {currentStep == 1 && (
+      {currentStep == 1 && isUploading && (
+        <Flex
+          minH="calc(100vh - var(--heading-height))"
+          direction="column"
+          align="center"
+          justify="center"
+          gap={4}
+        >
+          <Spinner size="xl" color="blue.500" />
+          <Text color="gray.600">
+            {t("taxon:batch_upload.reading_file", {}, { default: "Reading your file…" })}
+          </Text>
+        </Flex>
+      )}
+
+      {currentStep == 1 && !isUploading && (
         <FileUpload.Root
           accept={ACCEPT_STRING}
           onFileChange={handleFileChange}
@@ -1235,6 +1464,26 @@ export default function TaxonomyBatchUploadComponent() {
           <Box mb={4}>
             <Box mb={4} width="100%">
               <HStack justify="space-between" wrap="wrap" gap={2} mb={3}>
+                <HStack gap={2} wrap="wrap" fontSize="sm" color="gray.600">
+                  <Text fontWeight="medium">{uploadResult.length} names:</Text>
+                  {actionCounts.CREATE > 0 && (
+                    <Badge colorPalette="green">{actionCounts.CREATE} create</Badge>
+                  )}
+                  {actionCounts.UPDATE > 0 && (
+                    <Badge colorPalette="blue">{actionCounts.UPDATE} update</Badge>
+                  )}
+                  {actionCounts.NOOP > 0 && (
+                    <Badge colorPalette="gray">{actionCounts.NOOP} no change</Badge>
+                  )}
+                  {actionCounts.ERROR > 0 && (
+                    <Badge colorPalette="red">{actionCounts.ERROR} error</Badge>
+                  )}
+                </HStack>
+                <Button variant="outline" size="xs" onClick={() => setCurrentStep(1)}>
+                  {t("taxon:batch_upload.upload_another", {}, { default: "Upload another file" })}
+                </Button>
+              </HStack>
+              <HStack justify="space-between" wrap="wrap" gap={2} mb={3}>
                 <HStack gap={1.5} fontSize="sm" color="gray.600">
                   <Icon as={LuFilePlus} boxSize={4} />
                   <Text>
@@ -1256,173 +1505,27 @@ export default function TaxonomyBatchUploadComponent() {
                 </Button>
               </HStack>
               <VStack align="stretch" gap={3}>
-                {uploadResult &&
-                  uploadResult.map((item, index) => {
-                    const hierarchyNodes = parseHierarchy(item["hierarchy"]);
-                    // Position changes on taxa in the hierarchy, all shown on one
-                    // "Position changes" line below the breadcrumb.
-                    const positionChanges = getRowPositionChanges(item);
-                    // Changes are shown inside the tags only while the row is set to
-                    // Update; switching it to "No change" shows the current values.
-                    const changes =
-                      item["action"] === "UPDATE" ? getMainRowChanges(item) : [];
-                    const nameChange = findChange(changes, "Name");
-                    const statusChange = findChange(changes, "Status");
-                    const positionChange = findChange(changes, "Position");
-                    const acceptedIdChange = findChange(changes, "AcceptedId");
-                    let acceptedId =
-                      item["acceptedId"] && item["acceptedId"].includes("#")
-                        ? item["acceptedId"].split("#")[1]
-                        : item["acceptedId"];
-                    const status = item["status"].includes("#")
-                      ? item["status"].split("#")[1]
-                      : item["status"];
-                    if (item["status"].split("#").length > 2) {
-                      acceptedId = item["status"].split("#")[2];
-                    }
-
-                    return (
-                      <Box
-                        key={index}
-                        borderWidth="1px"
-                        borderColor="gray.200"
-                        borderRadius="lg"
-                        p={4}
-                      >
-                        <Flex justify="space-between" align="flex-start" gap={3}>
-                          <Box>
-                            <Text fontWeight="medium">
-                              {nameChange ? (
-                                <>
-                                  <Text
-                                    as="span"
-                                    textDecoration="line-through"
-                                    color="gray.400"
-                                    fontWeight="normal"
-                                  >
-                                    {nameChange.oldValue}
-                                  </Text>
-                                  <Icon
-                                    as={LuArrowRight}
-                                    boxSize={3}
-                                    mx={1}
-                                    color="gray.500"
-                                    verticalAlign="middle"
-                                  />
-                                  {nameChange.newValue}
-                                </>
-                              ) : (
-                                item["scientificName"].split("#")[0]
-                              )}{" "}
-                              <ValueBadge
-                                value={item["status"].split("#")[0]}
-                                change={statusChange}
-                              />
-                              <ValueBadge
-                                value={item["position"].split("#")[0]}
-                                change={positionChange}
-                              />
-                              {acceptedIdChange && (
-                                <ValueBadge label="Accepted ID" change={acceptedIdChange} />
-                              )}
-                            </Text>
-                          </Box>
-                          <HStack gap={1.5} flexShrink={0}>
-                            <ActionDropdown
-                              action={item["action"]}
-                              baseAction={item["originalAction"] ?? item["action"]}
-                              error={item["error"]}
-                              onChange={(value) => {
-                                setUploadResult((prev) =>
-                                  prev.map((row, i) =>
-                                    i === index
-                                      ? {
-                                          ...row,
-                                          originalAction: row["originalAction"] ?? row["action"],
-                                          action: value
-                                        }
-                                      : row
-                                  )
-                                );
-                              }}
-                            />
-                          </HStack>
-                        </Flex>
-
-                        {hierarchyNodes.length > 0 && (
-                          <HStack gap={0} wrap="wrap" fontSize="sm" color="gray.500">
-                            {hierarchyNodes.map((node, i, arr) => (
-                              <Fragment key={i}>
-                                <Tooltip.Root>
-                                  <Tooltip.Trigger asChild>
-                                    <Text as="span" cursor="default">
-                                      {node.name}
-                                    </Text>
-                                  </Tooltip.Trigger>
-                                  <Tooltip.Positioner>
-                                    <Tooltip.Content>
-                                      {node.rank}: {node.name} #{node.id}
-                                    </Tooltip.Content>
-                                  </Tooltip.Positioner>
-                                </Tooltip.Root>
-                                {i < arr.length - 1 && (
-                                  <Icon as={LuChevronRight} boxSize={3} mx={1} />
-                                )}
-                              </Fragment>
-                            ))}
-                          </HStack>
-                        )}
-
-                        {positionChanges.length > 0 && (
-                          <HStack gap={1} wrap="wrap" fontSize="sm" color="gray.500" mt={1}>
-                            <Text as="span">Position changes:</Text>
-                            {positionChanges.map((c) => (
-                              <HStack key={c.id} gap={1}>
-                                <Text as="span">{c.name}</Text>
-                                <ValueBadge
-                                  change={{
-                                    field: "Position",
-                                    oldValue: c.oldValue,
-                                    newValue: c.newValue
-                                  }}
-                                />
-                              </HStack>
-                            ))}
-                          </HStack>
-                        )}
-
-                        <Box mt={2}>
-                          <SpeciesPageToggle
-                            item={item}
-                            checked={isSpeciesSelected(item)}
-                            onToggle={() => toggleSpecies(index, item["id"])}
-                          />
-                        </Box>
-
-                        {item["synonyms"] && item["synonyms"].length > 0 && (
-                          <SubRowGroup
-                            label="Synonyms"
-                            icon={LuRepeat}
-                            items={item["synonyms"]}
-                            synonym={true}
-                            acceptedId={status == "ACCEPTED" ? item["taxonId"] : acceptedId}
-                            parentError={item["action"] === "ERROR"}
-                          />
-                        )}
-                        {item["commonNames"] && item["commonNames"].length > 0 && (
-                          <SubRowGroup
-                            label="Common names"
-                            icon={LuTag}
-                            items={item["commonNames"]}
-                            synonym={false}
-                            acceptedId={item["taxonId"]}
-                            parentError={item["action"] === "ERROR"}
-                          />
-                        )}
-                      </Box>
-                    );
-                  })}
+                {uploadResult.slice(0, visibleCount).map((item, index) => (
+                  <BatchRow
+                    key={index}
+                    item={item}
+                    index={index}
+                    speciesChecked={isSpeciesSelected(item)}
+                    onToggleSpecies={toggleSpecies}
+                    onActionChange={changeAction}
+                  />
+                ))}
               </VStack>
+              {uploadResult.length > visibleCount && (
+                <Box textAlign="center" mt={4}>
+                  <Text fontSize="sm" color="gray.600" mb={2}>
+                    {`Showing ${visibleCount} of ${uploadResult.length}. All names are submitted, including the ones not shown.`}
+                  </Text>
+                  <Button variant="outline" onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}>
+                    {`Show ${Math.min(PAGE_SIZE, uploadResult.length - visibleCount)} more`}
+                  </Button>
+                </Box>
+              )}
               <Box mt={4}>
                 <Checkbox
                   checked={termsAccepted}

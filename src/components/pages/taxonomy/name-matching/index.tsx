@@ -11,12 +11,13 @@ import {
 } from "@chakra-ui/react";
 import UploadIcon from "@components/pages/observation/create-next/media-picker/upload-icon";
 import ColumnMapper from "@components/pages/traits/common/column-mapper";
+import useGlobalState from "@hooks/use-global-state";
 import { axGetNameMatchingResultsFromFile, axUploadTaxonFile } from "@services/taxonomy.service";
+import { ENDPOINT } from "@static/constants";
 import notification, { NotificationType } from "@utils/notification";
-import ExcelJS from "exceljs";
 import useTranslation from "next-translate/useTranslation";
 import { useCallback, useMemo, useState } from "react";
-import { LuChevronDown } from "react-icons/lu";
+import { LuChevronDown, LuDownload } from "react-icons/lu";
 
 import { Alert } from "@/components/ui/alert";
 import { MenuContent, MenuItem, MenuRoot, MenuTrigger } from "@/components/ui/menu";
@@ -41,6 +42,26 @@ export type MatchAction = "match" | "update" | "create";
 
 const ACCEPT_STRING =
   "application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+const XLSX_MIME = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+// ExcelJS is large (~1 MB); load it only when a file is read or exported
+const newWorkbook = async () => {
+  const { Workbook } = await import("exceljs");
+  return new Workbook();
+};
+
+// Returns a setter-based remover / replacer that works on the FULL list by row identity,
+// so editing or deleting while a filter is active never drops the hidden rows
+const removeRowFrom =
+  <T,>(setter: React.Dispatch<React.SetStateAction<T[]>>) =>
+  (row: T) =>
+    setter((prev) => prev.filter((r) => r !== row));
+
+const replaceRowIn =
+  <T,>(setter: React.Dispatch<React.SetStateAction<T[]>>) =>
+  (row: T, next: T) =>
+    setter((prev) => prev.map((r) => (r === row ? next : r)));
 
 // Key used for the Source column in the Given Names sheet.
 // Prefixed so it never collides with an uploaded column that is also named "Source".
@@ -156,58 +177,48 @@ export default function NameMatchingComponent({ ranks }) {
   // True once the original file has been accepted for async processing
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { t } = useTranslation();
+  const { nameMatchingFile } = useGlobalState();
 
+  // Counts come from the rows currently in the table, so deleted rows are not counted
   const matchStats = useMemo(() => {
-    const extractName = ([key]: [string, any]) =>
-      activeTab == "names"
-        ? key.slice(0, -1).split("#")[selectedColumn ? selectedColumn : 0]
-        : key.split("#")[0];
-    const dedupe = (arr: [string, any][]) =>
-      arr
-        .map((item) => [item[0], extractName(item)] as [string, string])
-        .filter(([, name], index, all) => all.findIndex(([, n]) => n === name) === index);
+    const countRows = (rows: ResultRow[], raw: [string, TaxonData[]][]) => ({
+      matched: rows.filter((row) => (raw[row[4]]?.[1]?.length ?? 0) > 0).length,
+      total: rows.length
+    });
     switch (activeTab) {
       case "names":
-        return {
-          matched: uploadResult.filter(([, value]) => value.length != 0).length,
-          total: uploadResult.length,
-          unmatched: dedupe(uploadResult.filter(([, value]) => value.length === 0))
-        };
+        return countRows(finalResult, uploadResult);
       case "synonyms":
-        return {
-          matched: synonymResult.filter(([, value]) => value.length != 0).length,
-          total: synonymResult.length,
-          unmatched: dedupe(synonymResult.filter(([, value]) => value.length === 0))
-        };
+        return countRows(finalSynonymResult, synonymResult);
+      case "hierarchy":
+        return countRows(finalHierResult, hierResult);
       case "common":
         return {
-          matched: cnameResult.filter(([, value]) => Object.keys(value).length != 0).length,
-          total: cnameResult.length,
-          unmatched: dedupe(cnameResult.filter(([, value]) => Object.keys(value).length === 0))
-        };
-      case "hierarchy":
-        return {
-          matched: hierResult.filter(([, value]) => value.length != 0).length,
-          total: hierResult.length,
-          unmatched: dedupe(hierResult.filter(([, value]) => value.length === 0))
+          matched: cnameResult.filter(([, value]) => value && Object.keys(value).length != 0)
+            .length,
+          total: cnameResult.length
         };
       default:
-        return { matched: 0, total: 0, unmatched: [] };
+        return { matched: 0, total: 0 };
     }
-  }, [activeTab, uploadResult, synonymResult, cnameResult, hierResult, selectedColumn]);
+  }, [
+    activeTab,
+    finalResult,
+    uploadResult,
+    finalSynonymResult,
+    synonymResult,
+    finalHierResult,
+    hierResult,
+    cnameResult
+  ]);
 
-  const baseOptions = ["Scientific name", "Synonyms", "Common Name"];
-
-  const rankOptions = ranks
-    .map((rank) => rank.name.charAt(0).toUpperCase() + rank.name.slice(1))
-    .sort((a, b) => {
-      // preserve rankValue order (high to low, matching taxonomic hierarchy)
-      const rankA = ranks.find((r) => r.name.toLowerCase() === a.toLowerCase())?.rankValue ?? 0;
-      const rankB = ranks.find((r) => r.name.toLowerCase() === b.toLowerCase())?.rankValue ?? 0;
-      return rankB - rankA;
-    });
-
-  const options = [...baseOptions, ...rankOptions];
+  // Column mapper options: base fields, then ranks high to low (taxonomic hierarchy order)
+  const options = useMemo(() => {
+    const rankOptions = [...ranks]
+      .sort((a, b) => (b.rankValue ?? 0) - (a.rankValue ?? 0))
+      .map((rank) => rank.name.charAt(0).toUpperCase() + rank.name.slice(1));
+    return ["Scientific name", "Synonyms", "Common Name", ...rankOptions];
+  }, [ranks]);
   const headerMatchMap = useMemo(() => buildHeaderMatchMap(ranks), [ranks]);
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -249,6 +260,41 @@ export default function NameMatchingComponent({ ranks }) {
     []
   );
 
+  // Filtered rows per tab, recomputed only when their inputs change
+  const filteredNames = useMemo(
+    () => filterByStatus(filterTaxonRows(finalResult, uploadResult, filter), statusFilter),
+    [finalResult, uploadResult, filter, statusFilter]
+  );
+  const filteredSynonyms = useMemo(
+    () => filterByStatus(filterTaxonRows(finalSynonymResult, synonymResult, filter), statusFilter),
+    [finalSynonymResult, synonymResult, filter, statusFilter]
+  );
+  const filteredCnames = useMemo(() => filterCnameRows(cnameResult, filter), [cnameResult, filter]);
+  const filteredHier = useMemo(
+    () => filterByStatus(filterTaxonRows(finalHierResult, hierResult, filter), statusFilter),
+    [finalHierResult, hierResult, filter, statusFilter]
+  );
+
+  // Row delete / update handlers for each tab, applied to the full (unfiltered) lists
+  const rowHandlers = useMemo(
+    () => ({
+      names: { onDeleteRow: removeRowFrom(setFinalResult), onUpdateRow: replaceRowIn(setFinalResult) },
+      synonyms: {
+        onDeleteRow: removeRowFrom(setFinalSynonymResult),
+        onUpdateRow: replaceRowIn(setFinalSynonymResult)
+      },
+      common: {
+        onDeleteRow: removeRowFrom<any>(setCnameResult),
+        onUpdateRow: replaceRowIn<any>(setCnameResult)
+      },
+      hierarchy: {
+        onDeleteRow: removeRowFrom(setFinalHierResult),
+        onUpdateRow: replaceRowIn(setFinalHierResult)
+      }
+    }),
+    []
+  );
+
   const handleTabChange = (value: string) => {
     setActiveTab(value);
     // Common names don't support the taxon-only filters
@@ -258,7 +304,7 @@ export default function NameMatchingComponent({ ranks }) {
   };
 
   const importAsExcel = async () => {
-    const workbook = new ExcelJS.Workbook();
+    const workbook = await newWorkbook();
 
     // Given Names only: Source holds the uploaded name when the record's action is Update
     const getSourceValue = (name) => (getRowAction(name) === "update" ? getUploadedName(name) : "");
@@ -316,6 +362,14 @@ export default function NameMatchingComponent({ ranks }) {
                     { header: "TargetPosition", key: "TargetPosition" },
                     { header: "TargetRank", key: "TargetRank" },
                     { header: "TargetAcceptedId", key: "TargetAcceptedId" },
+                    // Batch upload (assignUpload) reads this sheet by column position
+                    // (0-based): these four are 14–17 and NameAction is 18. Keep in step
+                    // with the GIVEN_*_COL constants in TaxonomyDefinitionServiceImpl.
+                    // Left blank for the user to fill in, like the other Target* columns.
+                    { header: "TargetNameSourceId", key: "TargetNameSourceId" },
+                    { header: "TargetViaDatasource", key: "TargetViaDatasource" },
+                    { header: "TargetMatchId", key: "TargetMatchId" },
+                    { header: "TargetMatchDatabaseName", key: "TargetMatchDatabaseName" },
                     { header: "NameAction", key: "NameAction" }
                   ]
                 : [{ header: "TargetPosition", key: "TargetPosition" }])
@@ -610,6 +664,33 @@ export default function NameMatchingComponent({ ranks }) {
     [applyMatchResult, t]
   );
 
+  // Loads the user's latest processed file straight from storage, so they don't have to
+  // download it from the email and upload it again
+  const loadLatestResult = async () => {
+    if (!nameMatchingFile?.filePath) return;
+    setLoading(true);
+    let latestFile: File | null = null;
+    try {
+      const response = await fetch(`${ENDPOINT.RAW}${nameMatchingFile.filePath}`);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const blob = await response.blob();
+      latestFile = new File([blob], nameMatchingFile.fileName, { type: XLSX_MIME });
+    } catch (e) {
+      console.error("Could not fetch latest name-matching file:", e);
+    }
+    setLoading(false);
+
+    if (latestFile) {
+      await handleProcessedFileChange({ acceptedFiles: [latestFile], rejectedFiles: [] });
+    } else {
+      notification(
+        t("taxon:name_matching.latest_result_error", {}, {
+          default: "Could not load your latest result. Please upload the file from your email."
+        })
+      );
+    }
+  };
+
   // Back to the upload screen from the results view
   const startOver = () => {
     setCurrentStep(1);
@@ -632,7 +713,7 @@ export default function NameMatchingComponent({ ranks }) {
         setColumnMapping([]);
 
         try {
-          const workbook = new ExcelJS.Workbook();
+          const workbook = await newWorkbook();
           const arrayBuffer = await targetFile.arrayBuffer();
           await workbook.xlsx.load(arrayBuffer);
 
@@ -791,6 +872,47 @@ export default function NameMatchingComponent({ ranks }) {
             </Tabs.Content>
 
             <Tabs.Content value="processed">
+              {nameMatchingFile?.filePath && (
+                <Flex
+                  align="center"
+                  justify="space-between"
+                  gap={4}
+                  wrap="wrap"
+                  bg="green.50"
+                  borderWidth={1}
+                  borderColor="green.200"
+                  borderRadius="md"
+                  p={4}
+                  mb={4}
+                >
+                  <Text>
+                    {t("taxon:name_matching.latest_result_ready", {}, {
+                      default: "Your latest result is ready:"
+                    })}{" "}
+                    <b>{nameMatchingFile.fileName}</b>
+                    {nameMatchingFile.lastModified && (
+                      <Text as="span" color="gray.600">
+                        {` (${new Date(nameMatchingFile.lastModified).toLocaleString()})`}
+                      </Text>
+                    )}
+                  </Text>
+                  <Flex gap={2}>
+                    <Button colorPalette="green" onClick={loadLatestResult}>
+                      {t("taxon:name_matching.load_latest_result", {}, {
+                        default: "Load my latest result"
+                      })}
+                    </Button>
+                    <Button variant="outline" asChild>
+                      <a href={`${ENDPOINT.RAW}${nameMatchingFile.filePath}`} download>
+                        <LuDownload />
+                        {t("taxon:name_matching.download_latest_result", {}, {
+                          default: "Download"
+                        })}
+                      </a>
+                    </Button>
+                  </Flex>
+                </Flex>
+              )}
               {renderDropzone(
                 handleProcessedFileChange,
                 t("taxon:name_matching.processed_upload_description", {}, {
@@ -901,14 +1023,10 @@ export default function NameMatchingComponent({ ranks }) {
                   <Tabs.Content value="names">
                     <NameTable
                       key={`${filter}|${statusFilter}`}
-                      finalResult={filterByStatus(
-                        filterTaxonRows(finalResult, uploadResult, filter),
-                        statusFilter
-                      )}
+                      finalResult={filteredNames}
                       selectedColumn={selectedColumn}
                       uploadResult={uploadResult}
-                      setFinalResult={setFinalResult}
-                      setUploadResult={setUploadResult}
+                      {...rowHandlers.names}
                       getAction={getRowAction}
                       onActionChange={setRowAction}
                       canUpdate={canUpdate}
@@ -918,39 +1036,30 @@ export default function NameMatchingComponent({ ranks }) {
                   <Tabs.Content value="synonyms">
                     <NameTable
                       key={`${filter}|${statusFilter}`}
-                      finalResult={filterByStatus(
-                        filterTaxonRows(finalSynonymResult, synonymResult, filter),
-                        statusFilter
-                      )}
+                      finalResult={filteredSynonyms}
                       selectedColumn={selectedColumn}
                       uploadResult={synonymResult}
-                      setFinalResult={setFinalSynonymResult}
-                      setUploadResult={setSynonymResult}
+                      {...rowHandlers.synonyms}
                       synonym={true}
                     />
                   </Tabs.Content>
                   <Tabs.Content value="common">
                     <NameTable
                       key={filter}
-                      finalResult={filterCnameRows(cnameResult, filter)}
+                      finalResult={filteredCnames}
                       selectedColumn={selectedColumn}
                       uploadResult={uploadResult}
-                      setFinalResult={setCnameResult}
-                      setUploadResult={setUploadResult}
+                      {...rowHandlers.common}
                       cname={true}
                     />
                   </Tabs.Content>
                   <Tabs.Content value="hierarchy">
                     <NameTable
                       key={`${filter}|${statusFilter}`}
-                      finalResult={filterByStatus(
-                        filterTaxonRows(finalHierResult, hierResult, filter),
-                        statusFilter
-                      )}
+                      finalResult={filteredHier}
                       selectedColumn={selectedColumn}
                       uploadResult={hierResult}
-                      setFinalResult={setFinalHierResult}
-                      setUploadResult={setHierResult}
+                      {...rowHandlers.hierarchy}
                       hierarchy={true}
                     />
                   </Tabs.Content>

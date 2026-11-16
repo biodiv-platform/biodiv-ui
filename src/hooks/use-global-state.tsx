@@ -27,6 +27,9 @@ interface GlobalStateContextProps {
   announcement?;
   setAnnouncement?;
 
+  nameMatchingFile?;
+  setNameMatchingFile?;
+
   pages?;
   setPages?;
   getPageTree?;
@@ -48,9 +51,15 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
   const [isCurrentGroupMember, setIsCurrentGroupMember] = useState<boolean>();
   const [open, setOpen] = useState(true);
   const [announcement, setAnnouncement] = useState(initialState.announcement || {});
+  const [nameMatchingFile, setNameMatchingFile] = useState(initialState.nameMatchingFile || null);
   const [siteInfo, setSiteInfo] = useState(initialState.siteInfo || {});
 
   const isLoggedIn = useMemo(() => !!user.id, [user]);
+
+  // _app refetches the latest name-matching file on every navigation; keep state in step with it
+  useEffect(() => {
+    setNameMatchingFile(initialState.nameMatchingFile || null);
+  }, [initialState.nameMatchingFile?.fileName]);
 
   const fetchIsCurrentGroupMember = async () => {
     if (!isLoggedIn) return;
@@ -125,6 +134,9 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
       announcement,
       setAnnouncement,
 
+      nameMatchingFile,
+      setNameMatchingFile,
+
       siteInfo,
       setSiteInfo
     }),
@@ -138,6 +150,7 @@ export const GlobalStateProvider = ({ initialState, children }: GlobalStateProvi
       isCurrentGroupMember,
       open,
       announcement,
+      nameMatchingFile,
       siteInfo
     ]
   );

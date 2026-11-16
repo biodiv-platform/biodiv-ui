@@ -22,7 +22,7 @@ export const axRequestTaxonPermission = async (payload) => {
 
 export const axUploadTaxonFile = async (formData) => {
   try {
-    const { data } = await plainHttp.post(
+    const { data } = await http.post(
       `${ENDPOINT.TAXONOMY}/v1/taxonomy/upload/search`,
       formData,
       {
@@ -288,5 +288,24 @@ export const axGetNameMatchingResultsFromFile = async (file) => {
   } catch (e) {
     console.error(e);
     return { success: false, data: {} };
+  }
+};
+
+/**
+ * Latest name-matching result file for a user: { fileName, filePath, lastModified }
+ *
+ * @param userId
+ * @param ctx pass the Next.js context when calling from getInitialProps (SSR) so the token is read from its cookies
+ */
+export const axGetLatestNameMatchingFile = async (userId, ctx?) => {
+  try {
+    const { data } = await http.get(
+      `${ENDPOINT.TAXONOMY}/v1/taxonomy/namematching/latest/${userId}`,
+      { params: { ctx } }
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: null };
   }
 };
