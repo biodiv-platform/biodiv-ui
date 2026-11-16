@@ -90,10 +90,10 @@ export function OccurrenceTotalsPanel({ totals }: { totals?: OccurrenceTotals })
   );
 }
 
-/** Six-step density legend at the bottom-left of an occurrence map */
+/** Six-step density legend at the bottom-left of an occurrence map, above the map attribution */
 export function DensityLegend() {
   return (
-    <Box {...PANEL_PROPS} bottom={2} left={2} px={3} py={2}>
+    <Box {...PANEL_PROPS} bottom={14} left={2} px={3} py={2}>
       <Text fontSize="xs" fontWeight="semibold" mb={1}>
         Observation density{" "}
         <Text as="span" fontWeight="normal" color="gray.500">
