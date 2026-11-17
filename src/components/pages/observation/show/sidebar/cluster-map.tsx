@@ -99,6 +99,7 @@ export default function ClusterMap({
             showFullscreenControl={true}
             showScaleControl={withSources}
             showResetControl={withSources}
+            collapseAttribution={withSources}
             mapStyles={basemapStyles}
             layers={
               withSources

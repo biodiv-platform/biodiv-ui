@@ -131,6 +131,7 @@ const OccuranceRecoardSpeciesField = forwardRef(
             }}
             showScaleControl={true}
             showResetControl={true}
+            collapseAttribution={true}
             selectedLayers={occurrenceGrid.selectedLayers}
             layers={occurrenceGrid.layers}
           />

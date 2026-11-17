@@ -93,7 +93,7 @@ const toIndiaStyle = (style) => {
  */
 const GBIF_ATTRIBUTION =
   '<a href="https://doi.org/10.15468/dl.48c69g" target="_blank" rel="noopener noreferrer">' +
-  "GBIF.org (20 October 2026) GBIF Occurrence Download https://doi.org/10.15468/dl.48c69g</a>";
+  "GBIF occurrences</a>";
 
 const GBIF_ATTRIBUTION_SOURCE = "gbif-attribution";
 
