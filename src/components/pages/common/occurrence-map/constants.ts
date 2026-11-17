@@ -37,8 +37,6 @@ export const DENSITY_PALETTE = DENSITY_PALETTES.ylOrRd;
 /** Lowest count of each density step after the first */
 export const DENSITY_BREAKS = [11, 51, 201, 1001, 5001];
 
-export const DENSITY_LABELS = ["1–10", "11–50", "51–200", "201–1k", "1k–5k", "5k+"];
-
 /** Thin dark cell borders keep neighbouring cells apart on the dark basemap */
 export const DENSITY_CELL_OUTLINE = "rgba(20, 24, 36, 0.5)";
 

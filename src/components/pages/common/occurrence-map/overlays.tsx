@@ -2,7 +2,7 @@ import { Box, Button, HStack, Menu, Stack, Text } from "@chakra-ui/react";
 import { MenuContent, MenuRadioItemGroup, MenuRoot, MenuTrigger } from "@components/ui/menu";
 import { LuCheck, LuChevronDown, LuLayers } from "react-icons/lu";
 
-import { DENSITY_LABELS, DENSITY_PALETTE, OCCURRENCE_SOURCES, OccurrenceSource } from "./constants";
+import { DENSITY_BREAKS, DENSITY_PALETTE, OCCURRENCE_SOURCES, OccurrenceSource } from "./constants";
 import { OccurrenceTotals } from "./use-occurrence-grid";
 
 const PANEL_PROPS = {
@@ -90,26 +90,46 @@ export function OccurrenceTotalsPanel({ totals }: { totals?: OccurrenceTotals })
   );
 }
 
-/** Six-step density legend at the bottom-left of an occurrence map, above the map attribution */
+/** 1000 -> "1k" */
+const formatCount = (count: number) => (count >= 1000 ? `${count / 1000}k` : `${count}`);
+
+/** Tick under each colour boundary: 1, then the highest count of each step but the last */
+const DENSITY_TICKS = ["1", ...DENSITY_BREAKS.map((start) => formatCount(start - 1))];
+
+/**
+ * Density legend at the bottom-left of an occurrence map: one
+ * segmented colour bar, each colour running between the ticks under it (the last is 5k+)
+ */
 export function DensityLegend() {
+  const segment = 100 / DENSITY_PALETTE.length;
+
   return (
-    <Box {...PANEL_PROPS} bottom={14} left={2} px={3} py={2}>
-      <Text fontSize="xs" fontWeight="semibold" mb={1}>
-        Observation density{" "}
-        <Text as="span" fontWeight="normal" color="gray.500">
-          (per grid cell)
-        </Text>
+    <Box {...PANEL_PROPS} bottom={2} left={2} px={2.5} py={1.5}>
+      <Text fontSize="2xs" fontWeight="semibold" color="gray.700" mb={1}>
+        Observations per cell
       </Text>
-      <HStack gap={1} align="start">
-        {DENSITY_PALETTE.map((color, index) => (
-          <Stack key={color} gap={0.5} align="center">
-            <Box w={{ base: "28px", md: "36px" }} h="12px" borderRadius="sm" bg={color} />
-            <Text fontSize="2xs" color="gray.600" whiteSpace="nowrap">
-              {DENSITY_LABELS[index]}
+      <Box w={{ base: "150px", md: "168px" }}>
+        <HStack gap={0} h="8px" borderRadius="sm" overflow="hidden">
+          {DENSITY_PALETTE.map((color) => (
+            <Box key={color} flex={1} h="full" bg={color} />
+          ))}
+        </HStack>
+        <Box position="relative" h="12px" mt={0.5}>
+          {DENSITY_TICKS.map((tick, index) => (
+            <Text
+              key={tick}
+              position="absolute"
+              left={`${index * segment}%`}
+              transform={index ? "translateX(-50%)" : undefined}
+              fontSize="2xs"
+              lineHeight="12px"
+              color="gray.600"
+            >
+              {tick}
             </Text>
-          </Stack>
-        ))}
-      </HStack>
+          ))}
+        </Box>
+      </Box>
     </Box>
   );
 }
