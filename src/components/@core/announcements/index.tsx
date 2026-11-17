@@ -10,31 +10,15 @@ import { getInjectableHTML } from "@/utils/text";
 
 /** Id used for the "name matching file is ready" item so it never clashes with a real announcement */
 const NAME_MATCHING_ID = -1;
-/** localStorage key holding the file name of the last name-matching notice the user closed */
-const NAME_MATCHING_DISMISSED_KEY = "nameMatchingDismissedFile";
 
 type AnnouncementItem = AnnouncementType & { fileName?: string; fileUrl?: string };
 
-const getDismissedNameMatchingFile = () => {
-  try {
-    return localStorage.getItem(NAME_MATCHING_DISMISSED_KEY);
-  } catch (e) {
-    return null;
-  }
-};
-
-const setDismissedNameMatchingFile = (fileName) => {
-  try {
-    localStorage.setItem(NAME_MATCHING_DISMISSED_KEY, fileName);
-  } catch (e) {
-    // storage unavailable; the notice will just show again next time
-  }
-};
-
-/** Builds the banner item for the user's latest name-matching result, or null if there is none / it was closed */
+/**
+ * Builds the banner item for the user's latest name-matching result, or null if there is none.
+ * Like the other announcements, closing it only hides it until the next visit (page load).
+ */
 const buildNameMatchingItem = (nameMatchingFile): AnnouncementItem | null => {
   if (!nameMatchingFile?.filePath) return null;
-  if (getDismissedNameMatchingFile() === nameMatchingFile.fileName) return null;
 
   return {
     id: NAME_MATCHING_ID,
@@ -95,12 +79,6 @@ export default function Announcement() {
   };
 
   const handleCloseCurrent = () => {
-    const closing = filteredAnnouncements[currentIndex];
-    if (closing?.id === NAME_MATCHING_ID && closing.fileName) {
-      // Don't show the notice for this file again; a newer file will show a new notice
-      setDismissedNameMatchingFile(closing.fileName);
-    }
-
     if (filteredAnnouncements.length === 1) {
       // If this is the last announcement, close the entire banner
       setOpen(false);

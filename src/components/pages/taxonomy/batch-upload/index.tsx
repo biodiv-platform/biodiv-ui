@@ -1261,6 +1261,10 @@ export default function TaxonomyBatchUploadComponent() {
   const [, setFile] = useState<File | null>(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // Set once the server has accepted a batch upload; the upload itself keeps
+  // running in the background (TaxonomyBatchUploadThread), so there is no
+  // final result to show here.
+  const [startedUpload, setStartedUpload] = useState<{ rows: number; at: Date } | null>(null);
   const changeSummary = useMemo(
     () => (confirmOpen ? getChangeSummary() : null),
     [confirmOpen, getChangeSummary]
@@ -1374,7 +1378,12 @@ export default function TaxonomyBatchUploadComponent() {
     try {
       const { success } = await axBatchUpload(payload);
       if (success) {
-        notification("Taxonomy created successfully", NotificationType.Success);
+        // The server only starts the job and returns straight away.
+        notification(
+          `Batch upload of ${payload.length} rows started. It runs in the background; changes will show up as it finishes.`,
+          NotificationType.Info
+        );
+        setStartedUpload({ rows: payload.length, at: new Date() });
         setConfirmOpen(false);
         setCurrentStep(1);
         setUploadResult([]);
@@ -1383,10 +1392,10 @@ export default function TaxonomyBatchUploadComponent() {
         setExcludedIds(new Set());
         setFile(null);
       } else {
-        notification("Error while creating taxonomy");
+        notification("Could not start the batch upload");
       }
     } catch (error) {
-      notification("Error while creating taxonomy");
+      notification("Could not start the batch upload");
     } finally {
       setIsSubmitting(false);
     }
@@ -1397,6 +1406,18 @@ export default function TaxonomyBatchUploadComponent() {
       <Alert status="info" borderRadius="md" mb={4} alignItems="top">
         {t("taxon:batch_upload.description")}
       </Alert>
+      {startedUpload && currentStep == 1 && (
+        <Alert
+          status="success"
+          borderRadius="md"
+          mb={4}
+          title="Batch upload started"
+          closable
+          onClose={() => setStartedUpload(null)}
+        >
+          {`${startedUpload.rows} rows were sent at ${startedUpload.at.toLocaleTimeString()} and are being processed in the background. Large files can take several minutes; you can leave this page or upload another file meanwhile.`}
+        </Alert>
+      )}
       {currentStep == 1 && isUploading && (
         <Flex
           minH="calc(100vh - var(--heading-height))"
@@ -1487,7 +1508,7 @@ export default function TaxonomyBatchUploadComponent() {
                 <HStack gap={1.5} fontSize="sm" color="gray.600">
                   <Icon as={LuFilePlus} boxSize={4} />
                   <Text>
-                    {speciesSelectedCount} of {speciesEligible.length} species pages selected
+                    {speciesSelectedCount} of {speciesEligible.length} names without species pages selected
                   </Text>
                 </HStack>
                 <Button

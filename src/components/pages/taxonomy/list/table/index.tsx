@@ -36,7 +36,7 @@ export default function TaxonListTable() {
         <>
         {taxonListData.count!=-1 && <Box>
           <Text color="gray.600">
-            {format(taxonListData.count)} {"Taxonomy Found"}
+            {format(taxonListData.count)} {"Taxon Names Found"}
           </Text>
       </Box>}
         <BasicTable
