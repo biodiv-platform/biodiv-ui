@@ -52,7 +52,7 @@ async function tusUploadFile(
       },
       onSuccess: async () => {
         try {
-          resolve(await pollForResult(upload.url!));
+          resolve(await pollForResult(upload.url!, 300, 1000));
         } catch (err) {
           reject(err);
         }
@@ -68,14 +68,14 @@ async function tusUploadFile(
   });
 }
 
-async function pollForResult(uploadUrl: string, attempts = 20): Promise<any> {
+async function pollForResult(uploadUrl: string, attempts = 60, intervalMs = 1000): Promise<any> {
   for (let i = 0; i < attempts; i++) {
     const { data } = await http.get(`${uploadUrl}/result`);
     if (data.complete) {
       if (data.result?.error) throw new Error(data.result.error);
       return data.result;
     }
-    await new Promise((r) => setTimeout(r, 500));
+    await new Promise((r) => setTimeout(r, intervalMs));
   }
   throw new Error("Upload finalization timed out");
 }
@@ -239,5 +239,5 @@ export const axFinalizeLayerUpload = async (
   const finalizeUrl = `${ENDPOINT.NAKSHA}/layer/upload/${hash}`;
   await http.post(finalizeUrl, metadata);
   onStatus?.("Importing layer\u2026 this can take a while for large files");
-  return pollForResult(finalizeUrl, 600); // up to ~5 min at 500ms/poll
+  return pollForResult(finalizeUrl, 1800, 1000); // up to ~30 min at 1s/poll
 };
