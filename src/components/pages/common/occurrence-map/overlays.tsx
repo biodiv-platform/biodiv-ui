@@ -1,6 +1,7 @@
-import { Box, Button, HStack, Menu, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, HStack, IconButton, Menu, Stack, Text } from "@chakra-ui/react";
 import { MenuContent, MenuRadioItemGroup, MenuRoot, MenuTrigger } from "@components/ui/menu";
-import { LuCheck, LuChevronDown, LuLayers } from "react-icons/lu";
+import { useState } from "react";
+import { LuCheck, LuChevronDown, LuChevronUp, LuLayers } from "react-icons/lu";
 
 import { DENSITY_BREAKS, DENSITY_PALETTE, OCCURRENCE_SOURCES, OccurrenceSource } from "./constants";
 import { OccurrenceTotals } from "./use-occurrence-grid";
@@ -53,9 +54,35 @@ export function OccurrenceSourceMenu({ value, onChange }: OccurrenceSourceMenuPr
   );
 }
 
-/** Records in the current view: total, then per source when there is more than one */
+/**
+ * Records in the current view: total, then per source when there is more than one.
+ * Starts collapsed to a small button showing the total, so it does not cover the map
+ */
 export function OccurrenceTotalsPanel({ totals }: { totals?: OccurrenceTotals }) {
+  const [isOpen, setIsOpen] = useState(false);
+
   if (!totals) return null;
+
+  if (!isOpen) {
+    return (
+      <Box position="absolute" top={2} right={2} zIndex={1}>
+        <Button
+          size="xs"
+          variant="outline"
+          bg="white"
+          boxShadow="sm"
+          aria-expanded={false}
+          onClick={() => setIsOpen(true)}
+        >
+          <Text as="span" fontWeight="bold">
+            {totals.count.toLocaleString()}
+          </Text>
+          in view
+          <LuChevronDown />
+        </Button>
+      </Box>
+    );
+  }
 
   const sources = OCCURRENCE_SOURCES.filter(
     ({ value }) => value !== "all" && totals[value] !== undefined
@@ -63,12 +90,23 @@ export function OccurrenceTotalsPanel({ totals }: { totals?: OccurrenceTotals })
 
   return (
     <Box {...PANEL_PROPS} top={2} right={2} px={3} py={2}>
-      <Text fontSize="sm" color="gray.600">
-        <Text as="span" fontSize="lg" fontWeight="bold" color="gray.800">
-          {totals.count.toLocaleString()}
-        </Text>{" "}
-        observations in view
-      </Text>
+      <HStack gap={2} justify="space-between">
+        <Text fontSize="sm" color="gray.600">
+          <Text as="span" fontSize="lg" fontWeight="bold" color="gray.800">
+            {totals.count.toLocaleString()}
+          </Text>{" "}
+          observations in view
+        </Text>
+        <IconButton
+          size="2xs"
+          variant="ghost"
+          aria-label="Collapse"
+          aria-expanded={true}
+          onClick={() => setIsOpen(false)}
+        >
+          <LuChevronUp />
+        </IconButton>
+      </HStack>
       {sources.length > 1 && (
         <HStack gap={4} mt={1} pt={1} borderTopWidth="1px" borderColor="gray.100">
           {sources.map(({ value, label, color }) => (
