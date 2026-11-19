@@ -4,7 +4,6 @@ import useTranslation from "next-translate/useTranslation";
 import { useEffect, useState } from "react";
 
 import {
-  DialogBackdrop,
   DialogBody,
   DialogCloseTrigger,
   DialogContent,
@@ -77,17 +76,25 @@ export default function TaxonShowModal({
         if (!e.open) handleOnClose();
       }}
       size="xl"
+      scrollBehavior="inside"
     >
-      <DialogBackdrop />
-      <DialogContent>
-        <DialogHeader fontSize={"2xl"} fontWeight={"bold"}>
+      <DialogContent
+        maxH={{ base: "calc(100dvh - 2rem)", md: "calc(100% - 7.5rem)" }}
+        m={{ base: 2, sm: "auto" }}
+      >
+        <DialogHeader
+          fontSize={{ base: "xl", md: "2xl" }}
+          fontWeight={"bold"}
+          px={{ base: 4, md: 6 }}
+          pt={{ base: 4, md: 6 }}
+        >
           {t("taxon:modal.title")}
         </DialogHeader>
-        <DialogCloseTrigger />
-        <DialogBody>
+        <DialogCloseTrigger top={{ base: 3, md: 2 }} insetEnd={{ base: 3, md: 2 }} />
+        <DialogBody px={{ base: 4, md: 6 }} pb={{ base: 4, md: 6 }} overflowX="hidden">
           <TaxonModalTabs />
         </DialogBody>
-        <DialogFooter>
+        <DialogFooter px={{ base: 4, md: 6 }} pb={{ base: 4, md: 6 }}>
           <Button colorPalette="blue" onClick={handleOnClose}>
             {t("common:close")}
           </Button>
