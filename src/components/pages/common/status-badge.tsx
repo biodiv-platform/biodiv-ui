@@ -27,6 +27,7 @@ function TaxonStatusBadge({ reco, taxonId, crumbs, name }: TaxonStatusBadgeProps
             cursor={taxonId != null ? "pointer" : "default"}
             h="fit-content"
             variant="outline"
+            userSelect="none"
             onClick={
               taxonId != null
                 ? (e) => {
@@ -47,13 +48,15 @@ function TaxonStatusBadge({ reco, taxonId, crumbs, name }: TaxonStatusBadgeProps
 
       case "SYNONYM": {
         const [lastCrumb] = crumbs?.slice(-1) || [{ name: null }];
-        const targetId = lastCrumb?.id;
+        const targetId = reco.acceptedNameId ? reco.acceptedNameId : lastCrumb?.id;
+
         return (
           <Badge
             colorPalette={TAXON_BADGE_COLORS.SYNONYM}
             cursor={targetId != null ? "pointer" : "default"}
             variant="outline"
             h="fit-content"
+            userSelect="none"
             onClick={
               targetId != null
                 ? (e) => {
@@ -63,9 +66,13 @@ function TaxonStatusBadge({ reco, taxonId, crumbs, name }: TaxonStatusBadgeProps
                   }
                 : undefined
             }
+            _hover={{
+              bg: `${TAXON_BADGE_COLORS.SYNONYM}.subtle`
+            }}
           >
             {t("observation:synonym") + " " + name}
             {lastCrumb?.name && ` ${lastCrumb.name}`}
+            <LuInfo />
           </Badge>
         );
       }
@@ -86,7 +93,7 @@ function TaxonStatusBadge({ reco, taxonId, crumbs, name }: TaxonStatusBadgeProps
 
   return (
     <>
-      <Box as="span" display="inline-flex" alignItems="center">
+      <Box as="span" display="inline-flex" alignItems="center" flexShrink={0}>
         {badge}
       </Box>
       {selectedTaxonId != null && (

@@ -11,11 +11,27 @@ export function TaxonModalTabs() {
 
   return (
     <Tabs.Root className="nospace" lazyMount defaultValue={"attributes"}>
-      <Tabs.List>
-        <Tabs.Trigger value="attributes">{t("taxon:modal.attributes.title")}</Tabs.Trigger>
-        <Tabs.Trigger value="synonyms">{t("taxon:modal.synonyms")}</Tabs.Trigger>
-        <Tabs.Trigger value="commonNames">{t("taxon:modal.common_names")}</Tabs.Trigger>
-        <Tabs.Trigger value="activity">{t("taxon:modal.activity")}</Tabs.Trigger>
+      <Tabs.List
+        overflowX="auto"
+        whiteSpace="nowrap"
+        maxW="100%"
+        css={{
+          scrollbarWidth: "none",
+          "&::-webkit-scrollbar": { display: "none" }
+        }}
+      >
+        <Tabs.Trigger flexShrink={0} value="attributes">
+          {t("taxon:modal.attributes.title")}
+        </Tabs.Trigger>
+        <Tabs.Trigger flexShrink={0} value="synonyms">
+          {t("taxon:modal.synonyms")}
+        </Tabs.Trigger>
+        <Tabs.Trigger flexShrink={0} value="commonNames">
+          {t("taxon:modal.common_names")}
+        </Tabs.Trigger>
+        <Tabs.Trigger flexShrink={0} value="activity">
+          {t("taxon:modal.activity")}
+        </Tabs.Trigger>
       </Tabs.List>
       <Tabs.Content value="attributes">
         <TaxonAttributesTab />
