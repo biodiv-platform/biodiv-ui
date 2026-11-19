@@ -1,7 +1,14 @@
 import { Box } from "@chakra-ui/react";
+import {
+  DensityLegend,
+  OccurrenceSourceMenu,
+  OccurrenceTotalsPanel
+} from "@components/pages/common/occurrence-map/overlays";
+import useOccurrenceMapStyles from "@components/pages/common/occurrence-map/basemap";
+import useOccurrenceGrid from "@components/pages/common/occurrence-map/use-occurrence-grid";
 import SITE_CONFIG from "@configs/site-config";
 import { axGetObservationMapData } from "@services/observation.service";
-import { ENDPOINT, mapStyles } from "@static/constants";
+import { ENDPOINT } from "@static/constants";
 import { getMapCenter } from "@utils/location";
 import { toPng } from "html-to-image";
 import dynamic from "next/dynamic";
@@ -17,10 +24,6 @@ const NakshaMaplibreLayers: any = dynamic(
     ssr: false,
     loading: () => <p>Loading...</p>
   }
-);
-
-const onObservationGridHover = ({ feature }: any) => (
-  <div>{feature?.properties?.count} Observations</div>
 );
 
 interface OccuranceRecoardSpeciesFieldProps {
@@ -57,7 +60,9 @@ const OccuranceRecoardSpeciesField = forwardRef(
 
           try {
             const dataUrl = await toPng(mapContainerRef.current, {
-              backgroundColor: "#FFFFFF"
+              backgroundColor: "#FFFFFF",
+              // leave the source dropdown out of the image
+              filter: (node) => !(node instanceof HTMLElement && node.dataset.captureIgnore)
             });
             const parts = dataUrl.split(",");
             const pureBase64 = parts[1];
@@ -95,6 +100,9 @@ const OccuranceRecoardSpeciesField = forwardRef(
       return data;
     };
 
+    const occurrenceGrid = useOccurrenceGrid(species.taxonomyDefinition.id, fetchGridData);
+    const occurrenceMapStyles = useOccurrenceMapStyles();
+
     const MapContent = (
       <Box
         ref={mapContainerRef}
@@ -105,35 +113,28 @@ const OccuranceRecoardSpeciesField = forwardRef(
         bg="gray.300"
         mb={4}
       >
-        <NakshaMaplibreLayers
-          defaultViewState={defaultViewState}
-          loadToC={false}
-          showToC={false}
-          lang={lang}
-          mapstyles={mapStyles}
-          nakshaApiEndpoint={ENDPOINT.NAKSHA}
-          geoserver={{
-            endpoint: ENDPOINT.GEOSERVER,
-            store: SITE_CONFIG.GEOSERVER.STORE,
-            workspace: SITE_CONFIG.GEOSERVER.WORKSPACE
-          }}
-          selectedLayers={["species-observations"]}
-          layers={[
-            {
-              id: "species-observations",
-              title: "Species Observations",
-              source: { type: "grid", fetcher: fetchGridData },
-              onHover: onObservationGridHover,
-              data: {
-                index: "extended_observation",
-                type: "extended_records",
-                geoField: "location",
-                summaryColumn: ["count"],
-                propertyMap: { count: "Count" }
-              }
-            }
-          ]}
-        />
+        <OccurrenceSourceMenu value={occurrenceGrid.source} onChange={occurrenceGrid.setSource} />
+        <OccurrenceTotalsPanel totals={occurrenceGrid.totals} />
+        <DensityLegend />
+        {occurrenceMapStyles && (
+          <NakshaMaplibreLayers
+            defaultViewState={defaultViewState}
+            loadToC={false}
+            showToC={false}
+            lang={lang}
+            mapStyles={occurrenceMapStyles}
+            nakshaApiEndpoint={ENDPOINT.NAKSHA}
+            geoserver={{
+              endpoint: ENDPOINT.GEOSERVER,
+              store: SITE_CONFIG.GEOSERVER.STORE,
+              workspace: SITE_CONFIG.GEOSERVER.WORKSPACE
+            }}
+            showScaleControl={true}
+            showResetControl={true}
+            selectedLayers={occurrenceGrid.selectedLayers}
+            layers={occurrenceGrid.layers}
+          />
+        )}
       </Box>
     );
 

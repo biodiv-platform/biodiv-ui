@@ -1,4 +1,11 @@
 import { Box } from "@chakra-ui/react";
+import {
+  DensityLegend,
+  OccurrenceSourceMenu,
+  OccurrenceTotalsPanel
+} from "@components/pages/common/occurrence-map/overlays";
+import useOccurrenceMapStyles from "@components/pages/common/occurrence-map/basemap";
+import useOccurrenceGrid from "@components/pages/common/occurrence-map/use-occurrence-grid";
 import { axGetObservationMapData } from "@services/observation.service";
 import { getMapCenter } from "@utils/location";
 import dynamic from "next/dynamic";
@@ -16,9 +23,6 @@ const NakshaMaplibreLayers: any = dynamic(
   }
 );
 
-// TODO: observation map on click component
-const onObservationGridClick = () => <Box maxH="250px" overflow="auto" fontSize="sm"></Box>;
-
 const onObservationGridHover = ({ feature }) => (
   <div>{feature?.properties?.count} Observations</div>
 );
@@ -30,6 +34,8 @@ interface ClusterMapProps {
   k?;
   colorHex?;
   borderRadius?;
+  /** adds IBP/GBIF sources: dropdown, totals, density legend; needs `filter.taxon` */
+  showGBIF?: boolean;
 }
 
 export default function ClusterMap({
@@ -38,7 +44,8 @@ export default function ClusterMap({
   longitude,
   k,
   colorHex = "E53E3E",
-  borderRadius = "md"
+  borderRadius = "md",
+  showGBIF = false
 }: ClusterMapProps) {
   const { lang } = useTranslation();
   const defaultViewState = useMemo(
@@ -58,6 +65,12 @@ export default function ClusterMap({
     return data;
   };
 
+  // GBIF occurrences are matched to IBP taxa, so the sources need a taxon
+  const withSources = showGBIF && !!filter?.taxon;
+  const occurrenceGrid = useOccurrenceGrid(filter?.taxon, fetchGridData);
+  const occurrenceMapStyles = useOccurrenceMapStyles(withSources);
+  const basemapStyles = withSources ? occurrenceMapStyles : mapStyles;
+
   return (
     <Box
       h="422px"
@@ -65,33 +78,50 @@ export default function ClusterMap({
       overflow="hidden"
       className="gray-box"
       display="block"
+      position="relative"
     >
+      {withSources && (
+        <>
+          <OccurrenceSourceMenu value={occurrenceGrid.source} onChange={occurrenceGrid.setSource} />
+          <OccurrenceTotalsPanel totals={occurrenceGrid.totals} />
+          <DensityLegend />
+        </>
+      )}
       <LazyLoad height={422} once={true}>
-        <NakshaMaplibreLayers
-          defaultViewState={defaultViewState}
-          key={k}
-          lang={lang}
-          selectedLayers={filter ? ["species-observations"] : []}
-          showFullscreenControl={true}
-          mapStyles={mapStyles}
-          layers={[
-            {
-              id: "species-observations",
-              title: "Species Observations",
-              source: { type: "grid", fetcher: fetchGridData },
-              onHover: onObservationGridHover,
-              onClick: onObservationGridClick,
-              data: {
-                index: "extended_observation",
-                type: "extended_records",
-                geoField: "location",
-                summaryColumn: ["count"],
-                propertyMap: { count: "Count" }
-              }
+        {basemapStyles && (
+          <NakshaMaplibreLayers
+            defaultViewState={defaultViewState}
+            key={k}
+            lang={lang}
+            selectedLayers={
+              !filter ? [] : withSources ? occurrenceGrid.selectedLayers : ["species-observations"]
             }
-          ]}
-          markers={latitude ? [{ latitude, longitude, colorHex }] : []}
-        />
+            showFullscreenControl={true}
+            showScaleControl={withSources}
+            showResetControl={withSources}
+            mapStyles={basemapStyles}
+            layers={
+              withSources
+                ? occurrenceGrid.layers
+                : [
+                    {
+                      id: "species-observations",
+                      title: "Species Observations",
+                      source: { type: "grid", fetcher: fetchGridData },
+                      onHover: onObservationGridHover,
+                      data: {
+                        index: "extended_observation",
+                        type: "extended_records",
+                        geoField: "location",
+                        summaryColumn: ["count"],
+                        propertyMap: { count: "Count" }
+                      }
+                    }
+                  ]
+            }
+            markers={latitude ? [{ latitude, longitude, colorHex }] : []}
+          />
+        )}
       </LazyLoad>
     </Box>
   );

@@ -14,6 +14,7 @@ export const ENDPOINT = {
   DATATABLE: `${API_ENDPOINT}dataTable-api/api`,
   DOCUMENT: `${API_ENDPOINT}document-api/api`,
   ESMODULE: `${API_ENDPOINT}esmodule-api/api`,
+  EXTERNAL_OCCURRENCES: `${API_ENDPOINT}externalOccurrences-api/api`,
   FILES: `${SITE_CONFIG.SITE.API_ENDPOINT}files-api/api`,
   GEOENTITIES: `${API_ENDPOINT}geoentities-api/api`,
   GEOSERVER: `${SITE_CONFIG.GEOSERVER_BASE_PATH}/geoserver`,
