@@ -114,7 +114,8 @@ const scanBlob = async (
     return null;
   }
 
-  const tailStart = (blob.size - CHUNK) & ~1;
+  const rawTail = Math.max(0, blob.size - CHUNK);
+  const tailStart = Math.floor(rawTail / 2) * 2;
   return (
     test(decoder.decode(await readBytes(blob, 0, CHUNK))) ??
     test(decoder.decode(await readBytes(blob, tailStart, blob.size)))
