@@ -15,6 +15,7 @@ export default function SpeciesSidebar({ temporalObservedRef, traitsPerMonthRef 
       <TaxonTable />
       <TemporalObservedOn
         ref={temporalObservedRef}
+        showGBIF={true}
         filter={{
           view: "stats",
           max: 8,

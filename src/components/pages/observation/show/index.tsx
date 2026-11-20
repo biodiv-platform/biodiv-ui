@@ -143,6 +143,7 @@ export default function ObservationShowPageComponent({
           {o.recoIbp?.taxonId && (
             <>
               <TemporalObservedOn
+                showGBIF={true}
                 filter={{
                   view: "stats",
                   max: 8,

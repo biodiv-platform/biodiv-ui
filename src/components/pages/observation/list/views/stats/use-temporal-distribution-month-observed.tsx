@@ -7,6 +7,8 @@ export default function useTemporalDistributionMonthObserved({ filter }) {
   const [temporalDistributionData, setTemporalDistributionData] = useImmer({
     list: [],
     isLoading: true,
+    /** false when the filter matches no observations with a date */
+    hasData: false,
     maxDate: "2025",
     minDate: "2025"
   });
@@ -19,19 +21,27 @@ export default function useTemporalDistributionMonthObserved({ filter }) {
       statsFilter: "min|from_date"
     });
 
-    if (success && data.aggregateStatsData) {
-      const maxYear = data.aggregateStatsData?.maxDate?.split("-")[0];
-      const minYear = data.aggregateStatsData?.minDate?.split("-")[0];
+    const maxYear = data?.aggregateStatsData?.maxDate?.split("-")[0];
+    const minYear = data?.aggregateStatsData?.minDate?.split("-")[0];
 
+    if (!success || !maxYear || !minYear) {
+      // nothing to chart: stop loading instead of waiting forever
       setTemporalDistributionData((_draft) => {
-        _draft.maxDate = maxYear;
-        _draft.minDate = minYear;
+        _draft.isLoading = false;
+        _draft.hasData = false;
       });
-
-      fetchTemporalDistributionData(
-        (parseInt(maxYear, 10) - 49 > 0 ? parseInt(maxYear, 10) - 49 : 0).toString() + "-" + maxYear
-      );
+      return;
     }
+
+    setTemporalDistributionData((_draft) => {
+      _draft.maxDate = maxYear;
+      _draft.minDate = minYear;
+      _draft.hasData = true;
+    });
+
+    fetchTemporalDistributionData(
+      (parseInt(maxYear, 10) - 49 > 0 ? parseInt(maxYear, 10) - 49 : 0).toString() + "-" + maxYear
+    );
   };
 
   const fetchTemporalDistributionData = async (year) => {
