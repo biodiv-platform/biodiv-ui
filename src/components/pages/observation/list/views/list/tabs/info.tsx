@@ -31,22 +31,28 @@ export default function InfoTab({ o, recoUpdated, setTab }: IInfoTabProps) {
     <Box boxSize="full" display="flex" flexDir="column" justifyContent="space-between">
       <SimpleGrid columns={[1, 1, 3, 3]} px={4} pt={1}>
         <div style={{ gridColumn: "1/3" }}>
-          <Heading
-            size="xl"
+          <Flex
+            direction={{ base: "column", md: "row" }}
+            alignItems={{ base: "flex-start", md: "center" }}
+            gap={{ base: 1, md: 2 }}
             mb={1}
-            className="elipsis-2"
-            title={stripTags(o?.recoShow?.recoIbp?.scientificName)}
           >
-            <Box mr={2}>
+            <Heading
+              size="xl"
+              className="elipsis"
+              title={stripTags(o?.recoShow?.recoIbp?.scientificName)}
+              maxW="full"
+              minW={0}
+            >
               <ScientificName value={o?.recoShow?.recoIbp?.scientificName || t("common:unknown")} />
-            </Box>
+            </Heading>
             <ObservationStatusBadge
               reco={o.recoShow?.recoIbp}
               crumbs={o.recoShow?.recoIbp?.breadCrumbs}
               taxonId={o.recoShow?.recoIbp?.taxonId}
               name={o?.recoShow?.recoIbp?.acceptedName}
             />
-          </Heading>
+          </Flex>
           <Text mb={1}>{o?.recoShow?.recoIbp?.commonName}</Text>
           <Box color="gray.600">
             <Text className="elipsis" title={t("observation:list.location")}>
