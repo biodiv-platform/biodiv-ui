@@ -22,7 +22,11 @@ const ColumnMapper = ({
   columnMapping,
   setColumnMapping,
   optionDisabled,
-  onSubmit
+  onSubmit,
+  // Label for each group in manyOptions; traits pages use the default
+  groupLabel = (category: string) => "Traits (" + category + ")",
+  // Marks each row as required; pages where mapping is optional pass false
+  required = true
 }) => {
   const { t } = useTranslation();
   return (
@@ -36,10 +40,10 @@ const ColumnMapper = ({
             const selectedValue =
               columnMapping.find(([i]) => i === parseInt(column.split("|")[1]))?.[1] || "";
             return (
-              <Box borderWidth={"thin"} m={2} borderRadius="md">
+              <Box key={column} borderWidth={"thin"} m={2} borderRadius="md">
                 <SimpleGrid columns={2} m={2}>
                   <Text>{column.split("|")[0]}</Text>
-                  <Field required>
+                  <Field required={required}>
                     <NativeSelectRoot
                       id="dataType"
                       // name="dataType"
@@ -78,6 +82,7 @@ const ColumnMapper = ({
                         </option>
                         {options.map((field) => (
                           <option
+                            key={field}
                             value={field.toString()}
                             style={{ cursor: "pointer" }}
                             disabled={columnMapping.some(([, i]) => i === field)}
@@ -86,7 +91,7 @@ const ColumnMapper = ({
                           </option>
                         ))}
                         {manyOptions.map((traitsCat) => (
-                          <optgroup label={"Traits (" + traitsCat[0] + ")"}>
+                          <optgroup key={traitsCat[0]} label={groupLabel(traitsCat[0])}>
                             {traitsCat[1].map((trait) => (
                               <option
                                 key={trait}

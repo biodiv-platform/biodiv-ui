@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { Collapsible } from "@chakra-ui/react";
 import UploadIcon from "@components/pages/observation/create-next/media-picker/upload-icon";
+import ColumnMapper from "@components/pages/traits/common/column-mapper";
 import { TAXON_BADGE_COLORS } from "@static/constants";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
@@ -46,6 +47,36 @@ const ACCEPT_STRING =
 
 // Names rendered at a time; large files can have thousands of rows
 const PAGE_SIZE = 50;
+
+// Source fields the user can map to a column of the Given Names sheet before upload.
+// `param` is the form field sent with the file (0-based column index); `aliases` are
+// normalized header names (lowercase, letters/digits only) that are mapped automatically.
+const SOURCE_COLUMN_FIELDS: { label: string; param: string; aliases: string[] }[] = [
+  {
+    label: "Name source ID",
+    param: "nameSourceIdColumn",
+    aliases: ["targetnamesourceid", "namesourceid", "sourceid"]
+  },
+  {
+    label: "Via datasource",
+    param: "viaDatasourceColumn",
+    aliases: ["targetviadatasource", "viadatasource", "datasource"]
+  },
+  { label: "Match ID", param: "matchIdColumn", aliases: ["targetmatchid", "matchid"] },
+  {
+    label: "Match database name",
+    param: "matchDatabaseNameColumn",
+    aliases: ["targetmatchdatabasename", "matchdatabasename", "matchdatabase"]
+  }
+];
+
+const normalizeHeader = (header: string) => header.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+// ExcelJS is large; load it only when a file is picked
+const newWorkbook = async () => {
+  const { Workbook } = await import("exceljs");
+  return new Workbook();
+};
 
 // Central mapping so the action badge looks identical everywhere it's used
 // (main row, synonyms, common names, confirm dialog).
@@ -102,10 +133,10 @@ type UploadRow = {
   updateHier?: Record<string, string> | null;
   // Position changes on taxa in the row's hierarchy: "Name|id|OLD#NEW"
   positionHier?: string[] | null;
-  // From the Given Names sheet TargetNameSourceId / TargetViaDatasource columns
+  // From the Given Names columns mapped on upload (optional)
   targetNameSourceId?: string | null;
   targetViaDatasource?: string | null;
-  // From the Given Names sheet TargetMatchId / TargetMatchDatabaseName columns
+  // From the Given Names columns mapped on upload (optional)
   targetMatchId?: string | null;
   targetMatchDatabaseName?: string | null;
   [key: string]: any;
@@ -1281,6 +1312,65 @@ export default function TaxonomyBatchUploadComponent() {
 
   const { t } = useTranslation();
 
+  // Column mapping step: headers of the Given Names sheet ("<name>|<index>") and
+  // the user's choice of column for each source field
+  const [pendingFile, setPendingFile] = useState<File | null>(null);
+  const [mapperHeaders, setMapperHeaders] = useState<string[]>([]);
+  const [columnMapping, setColumnMapping] = useState<[number, string][]>([]);
+
+  const closeMapper = useCallback(() => {
+    setPendingFile(null);
+    setMapperHeaders([]);
+    setColumnMapping([]);
+  }, []);
+
+  // Sends the file (and the mapped source columns) for assignment
+  const uploadFile = useCallback(
+    async (targetFile: File, mapping: [number, string][]) => {
+      setIsUploading(true);
+      try {
+        const formData = new FormData();
+        formData.append("file", targetFile);
+        SOURCE_COLUMN_FIELDS.forEach(({ label, param }) => {
+          const mapped = mapping.find(([, value]) => value === label);
+          if (mapped) formData.append(param, mapped[0].toString());
+        });
+
+        const { success, data, error } = await axUploadBatchFile(formData);
+        if (success) {
+          setUploadResult(Array.isArray(data) ? data : []);
+          setVisibleCount(PAGE_SIZE);
+          setSelectAll(false);
+          setExcludedIds(new Set());
+          setCurrentStep(2);
+        } else {
+          // The backend sends the reason as plain text on 400 (e.g. unreadable file)
+          const reason = (error as any)?.response?.data;
+          notification(
+            typeof reason === "string" && reason
+              ? reason
+              : t("traits:trait_matching.excel_file_error")
+          );
+        }
+      } catch (error) {
+        console.error(t("traits:trait_matching.excel_file_error"), error);
+        notification(t("traits:trait_matching.excel_file_error"));
+      } finally {
+        setIsUploading(false);
+      }
+    },
+    [t]
+  );
+
+  const submitMapping = useCallback(() => {
+    const targetFile = pendingFile;
+    const mapping = columnMapping.filter(([, value]) => value);
+    closeMapper();
+    if (targetFile) uploadFile(targetFile, mapping);
+  }, [pendingFile, columnMapping, closeMapper, uploadFile]);
+
+  // Reads the Given Names sheet headers and opens the column mapper. Columns whose
+  // header matches a source field are mapped automatically.
   const handleFileChange = useCallback(
     async (details: { acceptedFiles: File[]; rejectedFiles: any[] }) => {
       const targetFile = details.acceptedFiles[0];
@@ -1290,39 +1380,48 @@ export default function TaxonomyBatchUploadComponent() {
         return;
       }
 
-      if (targetFile) {
-        setIsUploading(true);
-        try {
-          const formData = new FormData();
-          formData.append("file", targetFile);
-
-          const { success, data, error } = await axUploadBatchFile(formData);
-          if (success) {
-            setUploadResult(Array.isArray(data) ? data : []);
-            setVisibleCount(PAGE_SIZE);
-            setSelectAll(false);
-            setExcludedIds(new Set());
-            setCurrentStep(2);
-          } else {
-            // The backend sends the reason as plain text on 400 (e.g. unreadable file)
-            const reason = (error as any)?.response?.data;
-            notification(
-              typeof reason === "string" && reason
-                ? reason
-                : t("traits:trait_matching.excel_file_error")
-            );
-          }
-        } catch (error) {
-          console.error(t("traits:trait_matching.excel_file_error"), error);
-          notification(t("traits:trait_matching.excel_file_error"));
-        } finally {
-          setIsUploading(false);
-        }
-      } else {
+      if (!targetFile) {
         notification(t("traits:trait_matching.no_file_error"));
+        return;
+      }
+
+      try {
+        const workbook = await newWorkbook();
+        await workbook.xlsx.load(await targetFile.arrayBuffer());
+        // The backend reads the first sheet as Given Names, so map its headers
+        const sheet = workbook.worksheets[0];
+
+        const headers: string[] = [];
+        const autoMapping: [number, string][] = [];
+        sheet?.getRow(1).eachCell((cell, colNumber) => {
+          const value = cell.value?.toString().trim();
+          if (!value) return;
+          const colIndex = colNumber - 1;
+          headers.push(`${value}|${colIndex}`);
+          const field = SOURCE_COLUMN_FIELDS.find(
+            ({ label, aliases }) =>
+              aliases.includes(normalizeHeader(value)) &&
+              !autoMapping.some(([, mapped]) => mapped === label)
+          );
+          if (field) autoMapping.push([colIndex, field.label]);
+        });
+
+        if (headers.length === 0) {
+          // Nothing to map; let the backend read the file as before
+          await uploadFile(targetFile, []);
+          return;
+        }
+
+        setPendingFile(targetFile);
+        setColumnMapping(autoMapping);
+        setMapperHeaders(headers);
+      } catch (error) {
+        // ExcelJS can't read some files (e.g. old .xls); the backend still can
+        console.error("Could not read headers for column mapping:", error);
+        await uploadFile(targetFile, []);
       }
     },
-    [t]
+    [t, uploadFile]
   );
 
   const buildAcceptedPayload = useCallback(() => {
@@ -1418,6 +1517,22 @@ export default function TaxonomyBatchUploadComponent() {
           {`${startedUpload.rows} rows were sent at ${startedUpload.at.toLocaleTimeString()} and are being processed in the background. Large files can take several minutes; you can leave this page or upload another file meanwhile.`}
         </Alert>
       )}
+      <ColumnMapper
+        options={SOURCE_COLUMN_FIELDS.map(({ label }) => label)}
+        manyOptions={[]}
+        isOpen={pendingFile !== null}
+        onClose={closeMapper}
+        description={t("taxon:batch_upload.column_mapping_description", {}, {
+          default:
+            "Optional: choose which columns of the Given Names sheet hold the name source ID, via datasource, match ID and match database name. Leave a column unselected to skip it."
+        })}
+        headers={mapperHeaders}
+        columnMapping={columnMapping}
+        setColumnMapping={setColumnMapping}
+        optionDisabled={false}
+        required={false}
+        onSubmit={submitMapping}
+      />
       {currentStep == 1 && isUploading && (
         <Flex
           minH="calc(100vh - var(--heading-height))"

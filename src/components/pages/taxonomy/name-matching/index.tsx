@@ -275,6 +275,19 @@ export default function NameMatchingComponent({ ranks }) {
     [finalHierResult, hierResult, filter, statusFilter]
   );
 
+  // Given Names rows (in the current filter) that can be switched to Update
+  const updatableNames = useMemo(() => filteredNames.filter(canUpdate), [filteredNames, canUpdate]);
+
+  // Sets the action to Update for every eligible row in the current filter
+  const setAllToUpdate = () =>
+    setRowActions((prev) => {
+      const next = { ...prev };
+      updatableNames.forEach((row) => {
+        next[getRowActionKey(row)] = "update";
+      });
+      return next;
+    });
+
   // Row delete / update handlers for each tab, applied to the full (unfiltered) lists
   const rowHandlers = useMemo(
     () => ({
@@ -363,13 +376,8 @@ export default function NameMatchingComponent({ ranks }) {
                     { header: "TargetRank", key: "TargetRank" },
                     { header: "TargetAcceptedId", key: "TargetAcceptedId" },
                     // Batch upload (assignUpload) reads this sheet by column position
-                    // (0-based): these four are 14–17 and NameAction is 18. Keep in step
-                    // with the GIVEN_*_COL constants in TaxonomyDefinitionServiceImpl.
-                    // Left blank for the user to fill in, like the other Target* columns.
-                    { header: "TargetNameSourceId", key: "TargetNameSourceId" },
-                    { header: "TargetViaDatasource", key: "TargetViaDatasource" },
-                    { header: "TargetMatchId", key: "TargetMatchId" },
-                    { header: "TargetMatchDatabaseName", key: "TargetMatchDatabaseName" },
+                    // (0-based): NameAction is 14. Keep in step with GIVEN_NAME_ACTION_COL
+                    // in TaxonomyDefinitionServiceImpl.
                     { header: "NameAction", key: "NameAction" }
                   ]
                 : [{ header: "TargetPosition", key: "TargetPosition" }])
@@ -975,6 +983,17 @@ export default function NameMatchingComponent({ ranks }) {
             <Box mb={4}>
               <Box mb={4} width="100%">
                 <Flex justifyContent="flex-end" gap={2}>
+                  {activeTab == "names" && (
+                    <Button
+                      variant="outline"
+                      colorPalette="blue"
+                      onClick={setAllToUpdate}
+                      disabled={updatableNames.length === 0}
+                      title="Set the action to Update for every name in the current filter that can be updated"
+                    >
+                      {`Set all to Update (${updatableNames.length})`}
+                    </Button>
+                  )}
                   {activeTab != "common" && (
                     <NativeSelectRoot maxW="10rem">
                       <NativeSelectField
