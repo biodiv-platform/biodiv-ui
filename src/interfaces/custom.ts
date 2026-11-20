@@ -126,6 +126,7 @@ export interface IDBObservationAsset {
   latitude?: number;
   longitude?: number;
   blob?: any;
+  blobURL?: string;
   isUsed?: number;
   dateCreated?: number;
   dateUploaded?: number;

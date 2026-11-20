@@ -6,7 +6,7 @@ import { STORE } from "@static/observation-create";
 import { setupDB } from "@utils/db";
 import notification, { NotificationType } from "@utils/notification";
 import useTranslation from "next-translate/useTranslation";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { emit } from "react-gbus";
 import { useImmer } from "use-immer";
 import { useIndexedDBStore } from "use-indexeddb";
@@ -44,6 +44,7 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
   const [resourcesSortBy, setResourcesSortBy] = useState(MY_UPLOADS_SORT[0].value);
 
   const [uploadProgress, setUploadProgress] = useState<Record<string, number>>({});
+  const inFlightUploadsRef = useRef<Set<string>>(new Set());
   const { t } = useTranslation();
   const { add, getOneByKey, getManyByKey, deleteByID, update } =
     useIndexedDBStore<IDBObservationAsset>(STORE.ASSETS);
@@ -185,21 +186,35 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
       );
 
       if (r.success && noSave) {
-        const { hashKey, fileName, path, url, fileSize, dateUploaded } = r.data ?? {};
-        const serverFields = { hashKey, fileName, path, url, fileSize, dateUploaded };
+        const rawServerData = r.data?.data ?? r.data ?? {};
+        const serverData: any = {};
+        for (const [k, v] of Object.entries(rawServerData)) {
+          if (v !== undefined) {
+            serverData[k] = v;
+          }
+        }
+        const hashKey = serverData.hashKey || pendingResource.hashKey;
 
-        await update({
+        const updatedAsset = {
           ...pendingResource,
-          ...serverFields,
+          ...serverData,
+          hashKey,
           status: AssetStatus.Uploaded
+        };
+
+        await update(updatedAsset);
+        await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.Uploaded, {
+          ...serverData,
+          hashKey
         });
-        await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.Uploaded, serverFields);
       } else if (!r.success && noSave) {
+        await update({ ...pendingResource, status: AssetStatus.Pending });
         await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.Pending);
       }
     } catch (e) {
       console.error(e);
       if (noSave) {
+        await update({ ...pendingResource, status: AssetStatus.Pending });
         await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.Pending);
       }
     } finally {
@@ -212,6 +227,7 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
   const uploadPendingResource = async (pendingResource, noSave = true) => {
     if (noSave) {
       await updateLocalAssetStatus(pendingResource.hashKey, AssetStatus.InProgress);
+      await update({ ...pendingResource, status: AssetStatus.InProgress });
     }
 
     if (["application/zip", "application/x-zip-compressed"].includes(pendingResource.type)) {
@@ -224,7 +240,13 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
   const tryResourceSync = async () => {
     const pendingResources = await getManyByKey("status", AssetStatus.Pending);
     for (const pendingResource of pendingResources) {
-      await uploadPendingResource(pendingResource);
+      if (inFlightUploadsRef.current.has(pendingResource.hashKey)) continue;
+      inFlightUploadsRef.current.add(pendingResource.hashKey);
+      try {
+        await uploadPendingResource(pendingResource);
+      } finally {
+        inFlightUploadsRef.current.delete(pendingResource.hashKey);
+      }
     }
   };
 
@@ -236,6 +258,7 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
 
   const addToObservationAssets = async (hashKey) => {
     const a = await getOneByKey("hashKey", hashKey);
+    if (!a) return;
 
     if (a?.dateCreated) {
       emit(FORM_DATEPICKER_CHANGE + "observedOn", a?.dateCreated);
@@ -245,7 +268,10 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
     }
 
     setObservationAssets((_draft) => {
-      _draft.a.push(a);
+      const exists = _draft.a.some((o) => o.hashKey === hashKey);
+      if (!exists) {
+        _draft.a.push(a);
+      }
     });
   };
 
@@ -253,7 +279,9 @@ export const ObservationCreateProvider = (props: ObservationCreateContextProps) 
     await Promise.all(newAssets.map((o) => add(o)));
     await reFetchAssets();
     if (addToObservation) {
-      newAssets.forEach(({ hashKey }) => addToObservationAssets(hashKey));
+      for (const { hashKey } of newAssets) {
+        await addToObservationAssets(hashKey);
+      }
     }
   };
 

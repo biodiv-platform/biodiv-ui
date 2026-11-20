@@ -98,7 +98,8 @@ export const axTusUploadObservationResource = async (
       onProgress
     );
 
-    const data = unwrapSingle(rawData);
+    const singleRes = unwrapSingle(rawData);
+    const data = singleRes?.data ?? singleRes;
     return { success: true, data };
   } catch (e) {
     console.error(e);

@@ -15,7 +15,7 @@ export function TaxonCommonNamesTab() {
   return loading ? (
     <Loading />
   ) : (
-    <Box pt={4}>
+    <Box pt={4} overflowX="auto">
       {modalTaxon?.id && (
         <CommonNamesList
           commonNames={modalTaxon?.commonNames || []}
