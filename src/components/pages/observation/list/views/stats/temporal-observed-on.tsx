@@ -165,7 +165,8 @@ const TemporalObservedOn = forwardRef(({ filter, showGBIF }: TemporalObservedOnP
     <NativeSelectRoot
       key={source}
       fontSize="13px"
-      maxW="7rem"
+      maxW={withGBIF ? "8.5rem" : "7rem"}
+      flexShrink={0}
       defaultValue={currentIndex}
       onChange={handleOnChange}
     >
@@ -189,8 +190,13 @@ const TemporalObservedOn = forwardRef(({ filter, showGBIF }: TemporalObservedOnP
       </BoxHeading>
       <Box p={4}>
         {withGBIF ? (
-          <HStack justify="flex-end" gap={2} flexWrap="wrap" py="25px">
-            <NativeSelectRoot fontSize="13px" maxW="8rem" onChange={handleSourceChange}>
+          <HStack justify="space-between" align="center" gap={2} flexWrap="wrap" py="25px">
+            <NativeSelectRoot
+              fontSize="13px"
+              w="10.5rem"
+              flexShrink={0}
+              onChange={handleSourceChange}
+            >
               <NativeSelectField value={source}>
                 {OCCURRENCE_SOURCES.map(({ value, label }) => (
                   <option key={value} value={value}>
