@@ -97,6 +97,7 @@
     "download_button": "Télécharger comme",
     "download_csv": "Valeurs de virgule séparées (.csv)",
     "download_excel": "Microsoft Excel (.xlsx)",
+    "format": "Format des synonymes : séparez plusieurs noms par | \n(par exemple, Felis tigris | Tigris regalis) , Format des noms communs : Utiliser la langue : Nom, séparé par | \n(par exemple, anglais : Tiger | Hindi : Bagh)",
     "matched_filter": "Assorti",
     "multiple_matches": "Matchs trouvés",
     "name_matches": "Nom correspond",

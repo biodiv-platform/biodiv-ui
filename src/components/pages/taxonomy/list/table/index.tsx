@@ -1,4 +1,6 @@
+import { Box, Text } from "@chakra-ui/react";
 import { BasicTable } from "@components/@core/table";
+import { format } from "indian-number-format";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -10,7 +12,7 @@ import useTaxonFilter from "../use-taxon";
 import { taxonTableMetaData } from "./table-metadata";
 
 export default function TaxonListTable() {
-  const { taxonListData, setSelectedTaxons, nextPage } = useTaxonFilter();
+  const { taxonListData, onSelectionChange, nextPage } = useTaxonFilter();
   const [fieldData, setFieldData] = useState<any[]>(taxonListData?.l);
 
   const [tableMeta, setTableMeta] = useState(taxonTableMetaData(taxonListData?.l));
@@ -31,17 +33,23 @@ export default function TaxonListTable() {
       scrollableTarget="items-container"
     >
       {fieldData && (
+        <>
+        {taxonListData.count!=-1 && <Box>
+          <Text color="gray.600">
+            {format(taxonListData.count)} {"Taxon Names Found"}
+          </Text>
+      </Box>}
         <BasicTable
-          getCheckboxProps={(row) => (row === "header" ? { disabled: true } : {})}
           data={fieldData || []}
           columns={tableMeta}
           translateHeader
           size="sm"
           {...(canEdit && {
             isSelectable: true,
-            onSelectionChange: setSelectedTaxons
+            onSelectionChange
           })}
         />
+        </>
       )}
     </InfiniteScroll>
   );

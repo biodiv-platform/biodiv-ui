@@ -22,7 +22,7 @@ export const axRequestTaxonPermission = async (payload) => {
 
 export const axUploadTaxonFile = async (formData) => {
   try {
-    const { data } = await plainHttp.post(
+    const { data } = await http.post(
       `${ENDPOINT.TAXONOMY}/v1/taxonomy/upload/search`,
       formData,
       {
@@ -237,5 +237,75 @@ export const axTaxonomyList = async (params) => {
   } catch (e) {
     console.error(e);
     return { success: false, data: {} };
+  }
+};
+
+export const axUploadBatchFile = async (formData) => {
+  try {
+    const { data } = await plainHttp.post(
+      `${ENDPOINT.TAXONOMY}/v1/taxonomy/upload/assign`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data" // Important for file uploads
+        }
+      }
+    );
+    return { success: true, data, error: null };
+  } catch (e) {
+    return { success: false, data: {}, error: e };
+  }
+};
+
+export const axBatchUpload = async (payload) => {
+  try {
+    const { data } = await http.post(
+      `${ENDPOINT.TAXONOMY}/v1/taxonomy/batchUpload`,
+      payload,
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    );
+    return { success: true, data, error: null };
+  } catch (e) {
+    return { success: false, data: {}, error: e };
+  }
+};
+
+export const axGetNameMatchingResultsFromFile = async (file) => {
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const { data } = await http.post(
+      `${ENDPOINT.TAXONOMY}/v1/taxonomy/namematching/results`,
+      formData,
+      { headers: { "Content-Type": "multipart/form-data" } }
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: {} };
+  }
+};
+
+/**
+ * Latest name-matching result file for a user: { fileName, filePath, lastModified }
+ *
+ * @param userId
+ * @param ctx pass the Next.js context when calling from getInitialProps (SSR) so the token is read from its cookies
+ */
+export const axGetLatestNameMatchingFile = async (userId, ctx?) => {
+  try {
+    const { data } = await http.get(
+      `${ENDPOINT.TAXONOMY}/v1/taxonomy/namematching/latest/${userId}`,
+      { params: { ctx } }
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: null };
   }
 };

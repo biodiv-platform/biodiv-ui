@@ -1,5 +1,6 @@
 import { Box, CheckboxGroup, Image, Stack } from "@chakra-ui/react";
 import { getTraitIcon } from "@utils/media";
+import { toHumanString } from "human-readable-numbers";
 import useTranslation from "next-translate/useTranslation";
 
 import { Checkbox } from "@/components/ui/checkbox";
@@ -12,15 +13,18 @@ export interface FilterCheckboxesProps {
   translateKey?;
   options;
   skipOptionsTranslation?: boolean;
+  statKey?: string;
 }
 
 export function FilterCheckboxes({
   filterKey,
   translateKey,
   options,
-  skipOptionsTranslation
+  skipOptionsTranslation,
+  statKey
 }: FilterCheckboxesProps) {
-  const { filter, addFilter, removeFilter } = useTaxonFilter();
+  const { filter, addFilter, removeFilter, taxonListData } = useTaxonFilter();
+  const stats = statKey ? taxonListData?.ag?.[statKey] : undefined;
   const defaultValue = filter?.[filterKey] ? filter?.[filterKey]?.split(",") : [];
   const { t } = useTranslation();
 
@@ -56,6 +60,11 @@ export function FilterCheckboxes({
                 />
               )}
               {skipOptionsTranslation ? label || value : t(translateKey + label)}
+              {stats && (
+                <Box as="span" color="gray.500" title={stats[value] || 0}>
+                  {` - ${toHumanString(stats[value] || 0)}`}
+                </Box>
+              )}
             </Checkbox>
           ))}
         </Stack>
