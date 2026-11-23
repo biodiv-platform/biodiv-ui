@@ -13,7 +13,8 @@ import useSpeciesFields from "./use-species-field";
 export default function FieldGroupPanel({
   parentField,
   childField,
-  observationsMap
+  observationsMap,
+  temporalObservedRef
 }: SpeciesField) {
   const { showHiddenFields, toggleHiddenFields } = useSpeciesFields();
   const { t } = useTranslation();
@@ -47,6 +48,7 @@ export default function FieldGroupPanel({
           level={0}
           valueCallback={setChildFieldsHasValue}
           observationsMap={observationsMap}
+          temporalObservedRef={temporalObservedRef}
         />
 
         {!childFieldsHasValue && !showHiddenFields && <Box mb={4}>{t("common:no_data")}</Box>}

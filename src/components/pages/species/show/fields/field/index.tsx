@@ -10,7 +10,7 @@ import SpeciesTraitView from "../traits";
 import useSpeciesFields from "../use-species-field";
 import DocumentsField from "./documents";
 import SpeciesFieldHeading from "./heading";
-import OccuranceRecoardSpeciesField from "./occurance-records";
+import OccurrenceDistribution from "./occurance-records/distribution";
 import SpeciesFieldSimple from "./simple";
 import SpeciesFieldSimpleCreate from "./simple/create";
 
@@ -18,6 +18,7 @@ interface SpeciesFieldGroupProps extends SpeciesField {
   valueCallback;
   level: number;
   observationsMap;
+  temporalObservedRef?;
 }
 
 export default function SpeciesFieldGroup({
@@ -25,7 +26,8 @@ export default function SpeciesFieldGroup({
   childField,
   valueCallback,
   level,
-  observationsMap
+  observationsMap,
+  temporalObservedRef
 }: SpeciesFieldGroupProps) {
   const { showHiddenFields } = useSpeciesFields();
   const [childFieldsHasValue, setChildFieldsHasValue] = useState<boolean>();
@@ -79,12 +81,13 @@ export default function SpeciesFieldGroup({
   }, [currentField, childFieldsHasValue]);
 
   switch (parentField.id) {
-    // ParentField
+    // Occurrence Records
     case 65: {
       return (
-        <OccuranceRecoardSpeciesField
+        <OccurrenceDistribution
           valueCallback={setChildFieldsHasValue}
-          ref={observationsMap}
+          observationsMap={observationsMap}
+          temporalObservedRef={temporalObservedRef}
         />
       );
     }
@@ -137,6 +140,7 @@ export default function SpeciesFieldGroup({
               {...field}
               level={level + 1}
               observationsMap={observationsMap}
+              temporalObservedRef={temporalObservedRef}
             />
           ))}
         </div>

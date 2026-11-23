@@ -3,7 +3,7 @@ import SpeciesFieldSimpleEdit from "./field/edit";
 import FieldGroupPanel from "./field-group-panel";
 import { SpeciesFieldsProvider } from "./use-species-field";
 
-export default function SpeciesFields({ observationsMap }) {
+export default function SpeciesFields({ observationsMap, temporalObservedRef }) {
   const { species, permissions } = useSpecies();
   return (
     <div>
@@ -14,6 +14,7 @@ export default function SpeciesFields({ observationsMap }) {
             key={fieldGroup.parentField.id}
             {...fieldGroup}
             observationsMap={observationsMap}
+            temporalObservedRef={temporalObservedRef}
           />
         </SpeciesFieldsProvider>
       ))}

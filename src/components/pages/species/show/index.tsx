@@ -432,7 +432,10 @@ export default function SpeciesShowPageComponent({
             <SpeciesNavigation />
             <SpeciesSynonymsContainer />
             <SpeciesCommonNamesContainer />
-            <SpeciesFields observationsMap={observationsMap} />
+            <SpeciesFields
+              observationsMap={observationsMap}
+              temporalObservedRef={temporalObservedRef}
+            />
 
             <ToggleablePanel id="123" icon="📚" title="References">
               <Box margin={3}>
@@ -569,10 +572,7 @@ export default function SpeciesShowPageComponent({
             </ToggleablePanel>
           </GridItem>
           <GridItem colSpan={2}>
-            <SpeciesSidebar
-              temporalObservedRef={temporalObservedRef}
-              traitsPerMonthRef={traitsPerMonthRef}
-            />
+            <SpeciesSidebar traitsPerMonthRef={traitsPerMonthRef} />
           </GridItem>
         </Grid>
 

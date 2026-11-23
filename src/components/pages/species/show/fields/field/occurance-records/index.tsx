@@ -109,12 +109,11 @@ const OccuranceRecoardSpeciesField = forwardRef(
     const MapContent = (
       <Box
         ref={mapContainerRef}
-        h="500px"
+        h="450px"
         overflow="hidden"
         position="relative"
         borderRadius="md"
         bg="gray.300"
-        mb={4}
       >
         <OccurrenceSourceMenu value={occurrenceGrid.source} onChange={occurrenceGrid.setSource} />
         <OccurrenceTotalsPanel totals={occurrenceGrid.totals} />
@@ -145,7 +144,7 @@ const OccuranceRecoardSpeciesField = forwardRef(
     return forceLoad ? (
       MapContent
     ) : (
-      <LazyLoad once={true} height={500}>
+      <LazyLoad once={true} height={450}>
         {MapContent}
       </LazyLoad>
     );

@@ -164,6 +164,7 @@ export interface SpeciesField {
   parentField: SpeciesParentField;
   childField: SpeciesField[];
   observationsMap;
+  temporalObservedRef?;
 }
 
 export interface UserGroupIbpExtended extends UserGroupIbp {
