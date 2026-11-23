@@ -21,3 +21,21 @@ export const axGetGBIFTaxonGrid = async (
     return { success: false, data: {} };
   }
 };
+
+/**
+ * GBIF occurrences matched to an IBP taxon, counted per year and month (records with both)
+ *
+ * @returns {minYear, maxYear, counts: [{year, month (1-12), count}]}; all years when none given
+ */
+export const axGetGBIFTaxonMonthYear = async (taxonId, params: { minYear?; maxYear? } = {}) => {
+  try {
+    const { data } = await plainHttp.get(
+      `${ENDPOINT.EXTERNAL_OCCURRENCES}/v1/gbif/taxon/${taxonId}/month-year`,
+      { params }
+    );
+    return { success: true, data };
+  } catch (e) {
+    console.error(e);
+    return { success: false, data: { counts: [] } };
+  }
+};

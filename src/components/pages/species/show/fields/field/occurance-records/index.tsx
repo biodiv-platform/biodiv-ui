@@ -1,10 +1,10 @@
 import { Box } from "@chakra-ui/react";
+import useOccurrenceMapStyles from "@components/pages/common/occurrence-map/basemap";
 import {
   DensityLegend,
   OccurrenceSourceMenu,
   OccurrenceTotalsPanel
 } from "@components/pages/common/occurrence-map/overlays";
-import useOccurrenceMapStyles from "@components/pages/common/occurrence-map/basemap";
 import useOccurrenceGrid from "@components/pages/common/occurrence-map/use-occurrence-grid";
 import SITE_CONFIG from "@configs/site-config";
 import { axGetObservationMapData } from "@services/observation.service";
@@ -85,8 +85,11 @@ const OccuranceRecoardSpeciesField = forwardRef(
       })
     }));
 
+    // report once, on mount, that this field has a value; the ref keeps a new callback
+    // passed on a later render from re-running it
+    const valueCallbackRef = useRef(valueCallback);
     useEffect(() => {
-      valueCallback(true);
+      valueCallbackRef.current(true);
     }, []);
 
     const fetchGridData = async (geoProps) => {
@@ -106,12 +109,11 @@ const OccuranceRecoardSpeciesField = forwardRef(
     const MapContent = (
       <Box
         ref={mapContainerRef}
-        h="500px"
+        h="450px"
         overflow="hidden"
         position="relative"
         borderRadius="md"
         bg="gray.300"
-        mb={4}
       >
         <OccurrenceSourceMenu value={occurrenceGrid.source} onChange={occurrenceGrid.setSource} />
         <OccurrenceTotalsPanel totals={occurrenceGrid.totals} />
@@ -131,6 +133,7 @@ const OccuranceRecoardSpeciesField = forwardRef(
             }}
             showScaleControl={true}
             showResetControl={true}
+            collapseAttribution={true}
             selectedLayers={occurrenceGrid.selectedLayers}
             layers={occurrenceGrid.layers}
           />
@@ -141,7 +144,7 @@ const OccuranceRecoardSpeciesField = forwardRef(
     return forceLoad ? (
       MapContent
     ) : (
-      <LazyLoad once={true} height={500}>
+      <LazyLoad once={true} height={450}>
         {MapContent}
       </LazyLoad>
     );

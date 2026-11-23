@@ -93,7 +93,7 @@ const toIndiaStyle = (style) => {
  */
 const GBIF_ATTRIBUTION =
   '<a href="https://doi.org/10.15468/dl.48c69g" target="_blank" rel="noopener noreferrer">' +
-  "GBIF.org (20 October 2026) GBIF Occurrence Download https://doi.org/10.15468/dl.48c69g</a>";
+  "GBIF occurrences</a>";
 
 const GBIF_ATTRIBUTION_SOURCE = "gbif-attribution";
 
@@ -117,36 +117,50 @@ const withGBIFAttribution = (style) => ({
   ]
 });
 
-let occurrenceMapStyles: Promise<any[]> | undefined;
+let indiaBasemapStyle: Promise<any> | undefined;
+const occurrenceMapStyles: { withGBIF?: Promise<any[]>; withoutGBIF?: Promise<any[]> } = {};
 
-/** naksha map styles for the occurrence maps, loaded once; the India OSM basemap if BASEMAP fails */
-const loadOccurrenceMapStyles = () => {
-  occurrenceMapStyles ??= fetch(BASEMAP.url)
+/** BASEMAP with India's boundaries, fetched once */
+const loadIndiaBasemapStyle = () => {
+  indiaBasemapStyle ??= fetch(BASEMAP.url)
     .then((response) => {
       if (!response.ok) throw new Error(`${BASEMAP.name} style: HTTP ${response.status}`);
       return response.json();
     })
+    .then(toIndiaStyle);
+  return indiaBasemapStyle;
+};
+
+/**
+ * naksha map styles for the occurrence maps, loaded once; the India OSM basemap if BASEMAP fails
+ *
+ * @param withGBIF adds the GBIF citation, for maps that show GBIF records
+ */
+const loadOccurrenceMapStyles = (withGBIF: boolean) => {
+  const key = withGBIF ? "withGBIF" : "withoutGBIF";
+  occurrenceMapStyles[key] ??= loadIndiaBasemapStyle()
     .then((style) => [
-      { text: BASEMAP.name, key: "0", style: withGBIFAttribution(toIndiaStyle(style)) }
+      { text: BASEMAP.name, key: "0", style: withGBIF ? withGBIFAttribution(style) : style }
     ])
     .catch((error) => {
       console.error(error);
       return mapStyles;
     });
-  return occurrenceMapStyles;
+  return occurrenceMapStyles[key];
 };
 
 /**
  * Map styles for an occurrence map; undefined until loaded, so the map waits for its basemap
  *
  * @param enabled false skips loading, for maps that keep the default basemap
+ * @param withGBIF false leaves the GBIF citation out, for maps without GBIF records
  */
-export default function useOccurrenceMapStyles(enabled = true) {
+export default function useOccurrenceMapStyles(enabled = true, withGBIF = true) {
   const [styles, setStyles] = useState<any[]>();
 
   useEffect(() => {
-    if (enabled) loadOccurrenceMapStyles().then(setStyles);
-  }, [enabled]);
+    if (enabled) loadOccurrenceMapStyles(withGBIF).then(setStyles);
+  }, [enabled, withGBIF]);
 
   return styles;
 }
