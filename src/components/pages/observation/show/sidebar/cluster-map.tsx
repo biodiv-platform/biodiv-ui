@@ -1,10 +1,10 @@
 import { Box } from "@chakra-ui/react";
+import useOccurrenceMapStyles from "@components/pages/common/occurrence-map/basemap";
 import {
   DensityLegend,
   OccurrenceSourceMenu,
   OccurrenceTotalsPanel
 } from "@components/pages/common/occurrence-map/overlays";
-import useOccurrenceMapStyles from "@components/pages/common/occurrence-map/basemap";
 import useOccurrenceGrid from "@components/pages/common/occurrence-map/use-occurrence-grid";
 import { axGetObservationMapData } from "@services/observation.service";
 import { getMapCenter } from "@utils/location";
@@ -34,7 +34,10 @@ interface ClusterMapProps {
   k?;
   colorHex?;
   borderRadius?;
-  /** adds IBP/GBIF sources: dropdown, totals, density legend; needs `filter.taxon` */
+  /**
+   * occurrence map look (basemap, scale and reset controls), plus IBP/GBIF sources (dropdown,
+   * totals, density legend) when there is a `filter.taxon`
+   */
   showGBIF?: boolean;
 }
 
@@ -68,8 +71,10 @@ export default function ClusterMap({
   // GBIF occurrences are matched to IBP taxa, so the sources need a taxon
   const withSources = showGBIF && !!filter?.taxon;
   const occurrenceGrid = useOccurrenceGrid(filter?.taxon, fetchGridData);
-  const occurrenceMapStyles = useOccurrenceMapStyles(withSources);
-  const basemapStyles = withSources ? occurrenceMapStyles : mapStyles;
+  // an unidentified observation has no grid, but keeps the same basemap and controls; with no
+  // GBIF records on the map it leaves out the GBIF citation
+  const occurrenceMapStyles = useOccurrenceMapStyles(showGBIF, withSources);
+  const basemapStyles = showGBIF ? occurrenceMapStyles : mapStyles;
 
   return (
     <Box
@@ -97,9 +102,9 @@ export default function ClusterMap({
               !filter ? [] : withSources ? occurrenceGrid.selectedLayers : ["species-observations"]
             }
             showFullscreenControl={true}
-            showScaleControl={withSources}
-            showResetControl={withSources}
-            collapseAttribution={withSources}
+            showScaleControl={showGBIF}
+            showResetControl={showGBIF}
+            collapseAttribution={showGBIF}
             mapStyles={basemapStyles}
             layers={
               withSources
