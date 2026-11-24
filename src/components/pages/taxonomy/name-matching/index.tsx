@@ -316,7 +316,21 @@ export default function NameMatchingComponent({ ranks }) {
     }
   };
 
+  // Wraps the export so a failure shows a message instead of silently doing nothing
   const importAsExcel = async () => {
+    try {
+      await buildAndDownloadExcel();
+    } catch (e) {
+      console.error("Name matching export failed:", e);
+      notification(
+        t("taxon:name_matching.download_error", {}, {
+          default: "Could not create the Excel file. Please try again."
+        })
+      );
+    }
+  };
+
+  const buildAndDownloadExcel = async () => {
     const workbook = await newWorkbook();
 
     // Given Names only: Source holds the uploaded name when the record's action is Update
@@ -509,7 +523,16 @@ export default function NameMatchingComponent({ ranks }) {
             row["Index"] = synonym ? name[0].split("#")[2] : name[0].split("#")[3];
             row["TaxonConceptId"] = "CREATE";
             if (synonym) {
-              row["AcceptedId"] = finalResult[name[0].split("#")[2] - 1][1]["id"];
+              // Accepted id = the matched taxon of the given name on the same upload row.
+              // Look it up by upload index (not array position, which shifts when rows are
+              // deleted), and leave it blank when that given name is unmatched or was set
+              // to "create" — otherwise this threw and the whole export silently failed.
+              const uploadIndex = Number(name[0].split("#")[2]) - 1;
+              const givenName = finalResult.find((r) => r[4] === uploadIndex);
+              row["AcceptedId"] =
+                givenName && givenName[1] && getRowAction(givenName) !== "create"
+                  ? givenName[1]["id"] ?? ""
+                  : "";
             }
           }
           worksheet.addRow(row);
