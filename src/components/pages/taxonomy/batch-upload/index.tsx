@@ -1391,12 +1391,24 @@ export default function TaxonomyBatchUploadComponent() {
         // The backend reads the first sheet as Given Names, so map its headers
         const sheet = workbook.worksheets[0];
 
+        // Columns up to and including NameAction are the fixed name-matching export
+        // columns; only the additional columns after it are offered for mapping.
+        // If there is no NameAction header, every column is offered.
+        const headerRow = sheet?.getRow(1);
+        let nameActionIndex = -1;
+        headerRow?.eachCell((cell, colNumber) => {
+          if (normalizeHeader(cell.value?.toString() ?? "") === "nameaction") {
+            nameActionIndex = colNumber - 1;
+          }
+        });
+
         const headers: string[] = [];
         const autoMapping: [number, string][] = [];
-        sheet?.getRow(1).eachCell((cell, colNumber) => {
+        headerRow?.eachCell((cell, colNumber) => {
           const value = cell.value?.toString().trim();
           if (!value) return;
           const colIndex = colNumber - 1;
+          if (colIndex <= nameActionIndex) return;
           headers.push(`${value}|${colIndex}`);
           const field = SOURCE_COLUMN_FIELDS.find(
             ({ label, aliases }) =>
@@ -1407,7 +1419,7 @@ export default function TaxonomyBatchUploadComponent() {
         });
 
         if (headers.length === 0) {
-          // Nothing to map; let the backend read the file as before
+          // No additional columns to map; upload without a mapping
           await uploadFile(targetFile, []);
           return;
         }
