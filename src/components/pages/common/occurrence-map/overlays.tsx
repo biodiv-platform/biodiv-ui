@@ -17,14 +17,22 @@ const PANEL_PROPS = {
 interface OccurrenceSourceMenuProps {
   value: OccurrenceSource;
   onChange: (value: OccurrenceSource) => void;
+  /** distance from the map's top and left edges, to make room for other map buttons */
+  top?: string | number;
+  left?: string | number;
 }
 
 /** "Source: All / IBP / GBIF" dropdown at the top-left of an occurrence map */
-export function OccurrenceSourceMenu({ value, onChange }: OccurrenceSourceMenuProps) {
+export function OccurrenceSourceMenu({
+  value,
+  onChange,
+  top = 2,
+  left = 2
+}: OccurrenceSourceMenuProps) {
   const selected = OCCURRENCE_SOURCES.find((s) => s.value === value);
 
   return (
-    <Box position="absolute" top={2} left={2} zIndex={1} data-capture-ignore="true">
+    <Box position="absolute" top={top} left={left} zIndex={1} data-capture-ignore="true">
       <MenuRoot positioning={{ placement: "bottom-start" }}>
         <MenuTrigger asChild>
           <Button size="xs" variant="outline" bg="white" boxShadow="sm">
@@ -58,14 +66,23 @@ export function OccurrenceSourceMenu({ value, onChange }: OccurrenceSourceMenuPr
  * Records in the current view: total, then per source when there is more than one.
  * Starts collapsed to a small button showing the total, so it does not cover the map
  */
-export function OccurrenceTotalsPanel({ totals }: { totals?: OccurrenceTotals }) {
+export function OccurrenceTotalsPanel({
+  totals,
+  top = 2,
+  right = 2
+}: {
+  totals?: OccurrenceTotals;
+  /** distance from the map's top and right edges, to make room for other map buttons */
+  top?: string | number;
+  right?: string | number;
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   if (!totals) return null;
 
   if (!isOpen) {
     return (
-      <Box position="absolute" top={2} right={2} zIndex={1}>
+      <Box position="absolute" top={top} right={right} zIndex={1}>
         <Button
           size="xs"
           variant="outline"
@@ -89,7 +106,7 @@ export function OccurrenceTotalsPanel({ totals }: { totals?: OccurrenceTotals })
   );
 
   return (
-    <Box {...PANEL_PROPS} top={2} right={2} px={3} py={2}>
+    <Box {...PANEL_PROPS} top={top} right={right} px={3} py={2}>
       <HStack gap={2} justify="space-between">
         <Text fontSize="sm" color="gray.600">
           <Text as="span" fontSize="lg" fontWeight="bold" color="gray.800">

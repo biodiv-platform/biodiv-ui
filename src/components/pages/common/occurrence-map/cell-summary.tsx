@@ -7,8 +7,9 @@ import { OCCURRENCE_SOURCES } from "./constants";
 interface OccurrenceCellSummaryProps {
   /** grid cell properties: `count` plus a count per source that was fetched */
   properties: Record<string, number>;
-  /** cell [minLon, minLat, maxLon, maxLat]; with `taxonId` adds a link to the observation list */
+  /** cell [minLon, minLat, maxLon, maxLat]; adds a link to the cell's IBP observations */
   bbox?: number[];
+  /** limits that link to a taxon */
   taxonId?: number;
 }
 
@@ -43,11 +44,11 @@ export default function OccurrenceCellSummary({
             </Text>
           </HStack>
         ))}
-      {bbox && taxonId && properties?.ibp ? (
+      {bbox && properties?.ibp ? (
         <LocalLink
           href="/observation/list"
           params={{
-            taxon: taxonId,
+            ...(taxonId && { taxon: taxonId }),
             location: toLocationFilter(bbox),
             geoShapeFilterField: "location"
           }}

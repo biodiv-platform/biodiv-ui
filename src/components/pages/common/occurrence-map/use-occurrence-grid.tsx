@@ -1,4 +1,4 @@
-import { axGetGBIFTaxonGrid } from "@services/external-occurrences.service";
+import { axGetGBIFGrid, axGetGBIFTaxonGrid } from "@services/external-occurrences.service";
 import { useMemo, useState } from "react";
 
 import OccurrenceCellSummary from "./cell-summary";
@@ -47,10 +47,10 @@ const sumCells = (cells: Record<string, OccurrenceCell>, present: string[]) =>
   );
 
 /**
- * naksha grid layers for IBP observations and GBIF occurrences of a taxon, one per source,
- * plus the selected source and the record totals of the last fetched view
+ * naksha grid layers for IBP observations and GBIF occurrences, one per source, plus the
+ * selected source and the record totals of the last fetched view
  *
- * @param taxonId IBP taxon whose records are shown
+ * @param taxonId IBP taxon whose records are shown; all records when undefined
  * @param fetchIbpGridData fetcher for the IBP observation grid ({geohash: count})
  */
 export default function useOccurrenceGrid(taxonId, fetchIbpGridData) {
@@ -60,7 +60,9 @@ export default function useOccurrenceGrid(taxonId, fetchIbpGridData) {
   // naksha keeps the layers it was first given, so they are built once per taxon
   const layers = useMemo(() => {
     const fetchGBIFGridData = async (geoProps) => {
-      const { data } = await axGetGBIFTaxonGrid(taxonId, geoProps);
+      const { data } = taxonId
+        ? await axGetGBIFTaxonGrid(taxonId, geoProps)
+        : await axGetGBIFGrid(geoProps);
       return data;
     };
 
